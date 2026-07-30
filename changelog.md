@@ -1,3 +1,8 @@
+### 1.1.1
+
+- Fixed repeated current-character review failing after version 1.1.0 by preserving NVDA's
+  `speech.spellTextInfo` keyword-argument contract.
+
 ### 1.1.0
 
 - Relicensed Polyglot and its first-party dictionary resources under GPL-3.0-or-later, with cary-rowen
