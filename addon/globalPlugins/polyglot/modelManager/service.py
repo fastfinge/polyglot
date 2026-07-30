@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-# A part of the Polyglot add-on for NVDA.
-# Copyright (C) 2025 Cary-rowen <manchen_0528@outlook.com>
-# This file is covered by the GNU General Public License.
+# Copyright (C) 2025-2026 cary-rowen <manchen_0528@outlook.com>
+# This file is covered by the GNU General Public License version 3 or later.
 # See the file COPYING.txt for more details.
 
 """Shared model manager service used by ChromeAI and the Tools menu dialog."""
@@ -51,7 +50,7 @@ class _ActiveMissingModelRequest:
 	done: threading.Event = field(default_factory=threading.Event)
 	dialogReady: threading.Event = field(default_factory=threading.Event)
 	dialog: gui.message.MessageDialog | None = None
-	result: bool = False
+	shouldContinue: bool = False
 	error: Exception | None = None
 
 
@@ -83,6 +82,7 @@ class ModelManagerService:
 	"""Coordinates catalog lookup and on-demand model installation."""
 
 	def __init__(self) -> None:
+		"""Initialize catalog state and missing-model request coordination."""
 		super().__init__()
 		self.installer = ModelInstaller()
 		self._catalog: ModelCatalog | None = None
@@ -113,10 +113,10 @@ class ModelManagerService:
 			self._catalogUrl = catalogUrl
 			self._catalog = catalog
 			return catalog
-		except Exception:
+		except Exception as exc:
 			log.warning(
-				"Failed to load remote ChromeAI model catalog; using bundled fallback.",
-				exc_info=True,
+				"Failed to load remote ChromeAI model catalog (%s); using bundled fallback.",
+				type(exc).__name__,
 			)
 			catalog = ModelCatalog.loadBundled()
 			self._catalogUrl = ""
@@ -176,18 +176,18 @@ class ModelManagerService:
 			request.done.wait()
 			if request.error is not None:
 				raise request.error
-			return request.result
+			return request.shouldContinue
 		try:
 			decision = self._promptForMissingModels(packages, request)
 			if decision == EnsureModelDecision.USE_CHROME:
 				for package in packages:
 					self._chromeFallbackPackageKeys.add(package.key)
-				request.result = True
+				request.shouldContinue = True
 			elif decision == EnsureModelDecision.CANCEL:
-				request.result = False
+				request.shouldContinue = False
 			else:
-				request.result = self._installPackagesWithUi(catalog, packages)
-			return request.result
+				request.shouldContinue = self._installPackagesWithUi(catalog, packages)
+			return request.shouldContinue
 		except Exception as exc:
 			request.error = exc
 			raise
@@ -285,7 +285,7 @@ class ModelManagerService:
 
 	def _showInstallFailure(self, error: Exception) -> None:
 		"""Report an on-demand model install failure to the user."""
-		log.error("ChromeAI model install failed.", exc_info=True)
+		log.error("ChromeAI model install failed (%s).", type(error).__name__)
 		wxCallOnMain(
 			gui.messageBox,
 			str(error),

@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+# Copyright (C) 2025-2026 cary-rowen <manchen_0528@outlook.com>
+# This file is covered by the GNU General Public License version 3 or later.
+# See the file COPYING.txt for more details.
+
 import wx
 from gui import guiHelper
 import api
@@ -13,11 +17,10 @@ addonHandler.initTranslation()
 
 
 class InteractiveTranslationDialog(DPIScaledDialog):
-	"""
-	A standalone modal dialog for interactive translation.
-	"""
+	"""A standalone modal dialog for interactive translation."""
 
 	def __init__(self, parent, manager):
+		"""Initialize controls from the enabled engines and current configuration."""
 		super().__init__(
 			parent,
 			title=_("Polyglot Interactive Translation"),
@@ -135,15 +138,18 @@ class InteractiveTranslationDialog(DPIScaledDialog):
 			self.resultTextCtrl.SetFocus()
 
 	def onSourceTextChar(self, event):
+		"""Translate when Ctrl+Enter is pressed in the source field."""
 		if event.GetKeyCode() == wx.WXK_RETURN and event.ControlDown():
 			self.onTranslate(None)
 		else:
 			event.Skip()
 
 	def getSelectedEngine(self):
+		"""Return the engine selected in the dialog."""
 		return self.allEngines[self.engineCombo.GetSelection()]
 
 	def updateEngineUI(self, event):
+		"""Populate language and model controls for the selected engine."""
 		if not self.hasEnabledEngines:
 			return
 		engine = self.getSelectedEngine()
@@ -237,6 +243,7 @@ class InteractiveTranslationDialog(DPIScaledDialog):
 		self.resultTextCtrl.SetValue(_("No enabled translation engines available."))
 
 	def onPromptModeChanged(self, event):
+		"""Update prompt fields for the selected prompt mode."""
 		if not self.hasEnabledEngines:
 			return
 		engine = self.getSelectedEngine()
@@ -267,6 +274,7 @@ class InteractiveTranslationDialog(DPIScaledDialog):
 			self.userPromptCtrl.Disable()
 
 	def onTranslate(self, event):
+		"""Persist dialog choices and submit the source text for translation."""
 		if not self.hasEnabledEngines:
 			self.resultTextCtrl.SetValue(_("No enabled translation engines available."))
 			self.resultTextCtrl.SetFocus()
@@ -315,30 +323,35 @@ class InteractiveTranslationDialog(DPIScaledDialog):
 			text,
 			onSuccess=onSuccess,
 			onError=onError,
-			showStatus=True,
+			shouldShowStatus=True,
 		)
 
 	def onTranslationDone(self, resultText):
+		"""Display a completed translation and restore dialog controls."""
 		if self.hasEnabledEngines:
 			self.translateBtn.Enable()
 		self.resultTextCtrl.SetValue(resultText)
 		self.resultTextCtrl.SetFocus()
 
 	def onTranslationError(self, errorMessage: str) -> None:
+		"""Display a translation error and restore dialog controls."""
 		if self.hasEnabledEngines:
 			self.translateBtn.Enable()
 		self.resultTextCtrl.SetValue(errorMessage)
 		self.resultTextCtrl.SetFocus()
 
 	def onCopy(self, event):
+		"""Copy the displayed translation to the clipboard."""
 		translation = self.resultTextCtrl.GetValue()
 		if translation:
 			api.copyToClip(translation)
 
 	def onClear(self, event):
+		"""Clear source and result fields and focus the source field."""
 		self.sourceTextCtrl.Clear()
 		self.resultTextCtrl.Clear()
 		self.sourceTextCtrl.SetFocus()
 
 	def onClose(self, event):
+		"""Close the modal translation dialog."""
 		self.EndModal(wx.ID_CLOSE)

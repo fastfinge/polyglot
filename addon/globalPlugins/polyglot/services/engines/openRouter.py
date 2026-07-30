@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+# Copyright (C) 2025-2026 cary-rowen <manchen_0528@outlook.com>
+# This file is covered by the GNU General Public License version 3 or later.
+# See the file COPYING.txt for more details.
+
 import json
 from typing import Any
 
@@ -15,9 +19,7 @@ addonHandler.initTranslation()
 
 
 class OpenRouterTranslateEngine(BaseHttpEngine):
-	"""
-	An engine for the OpenRouter API, which is compatible with the OpenAI API format.
-	"""
+	"""An engine for the OpenRouter API, which is compatible with the OpenAI API format."""
 
 	id = "openrouter"
 	name = _("OpenRouter")
@@ -58,7 +60,7 @@ class OpenRouterTranslateEngine(BaseHttpEngine):
 		return "en"
 
 	@property
-	def reportsDetectedLanguage(self) -> bool:
+	def doesReportDetectedLanguage(self) -> bool:
 		return True
 
 	def getSupportedLanguages(self) -> dict[str, str]:
@@ -215,9 +217,9 @@ class OpenRouterTranslateEngine(BaseHttpEngine):
 	def _parseResponse(self, responseBody: str) -> dict[str, Any]:
 		try:
 			outerData = json.loads(responseBody)
-		except json.JSONDecodeError as e:
+		except json.JSONDecodeError:
 			log.error(f"Failed to parse outer JSON response from '{self.id}'.", exc_info=True)
-			raise ApiResponseError(_("Failed to parse API response.")) from e
+			raise ApiResponseError(_("Failed to parse API response.")) from None
 
 		if "error" in outerData:
 			errorMessage = outerData["error"].get("message", "Unknown API error")
@@ -253,12 +255,12 @@ class OpenRouterTranslateEngine(BaseHttpEngine):
 						"translation": str(translatedText).strip(),
 						"langDetected": str(detectedLang).strip() if detectedLang else None,
 					}
-				except (json.JSONDecodeError, KeyError, TypeError) as e:
+				except (json.JSONDecodeError, KeyError, TypeError):
 					log.warning(
-						f"Could not parse model's response as JSON for '{self.id}'. Treating as plain text. Error: {e}",
+						f"Could not parse model response as JSON for '{self.id}'; treating it as plain text.",
 					)
 					return {"translation": modelResponseStr.strip(), "langDetected": None}
 			return {"translation": modelResponseStr.strip(), "langDetected": None}
-		except (KeyError, IndexError) as e:
+		except (KeyError, IndexError):
 			log.error(f"Could not extract message content from '{self.id}' response.", exc_info=True)
-			raise ApiResponseError(_("Invalid API response structure.")) from e
+			raise ApiResponseError(_("Invalid API response structure.")) from None

@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+# Copyright (C) 2025-2026 cary-rowen <manchen_0528@outlook.com>
+# This file is covered by the GNU General Public License version 3 or later.
+# See the file COPYING.txt for more details.
+
 """Build and validate the versioned local word dictionary data."""
 
 import pickle
@@ -22,7 +26,7 @@ _DICTIONARY_FIELDS = frozenset(
 		"casefoldAliases",
 		"normalizedAliases",
 		"inflectionAliases",
-	)
+	),
 )
 _MIN_WORD_LENGTH = 2
 _MAX_WORD_LENGTH = 64
@@ -46,7 +50,7 @@ _WORD_TRANSLATION = str.maketrans(
 		"\u2212": "-",
 		"\ufe58": "-",
 		"\ufe63": "-",
-	}
+	},
 )
 
 DictionaryEntries = dict[str, str]
@@ -180,7 +184,7 @@ def _validateAliasTarget(value: object, entries: DictionaryEntries) -> tuple[str
 	if not 2 <= len(targets) <= _MAX_ALIAS_TARGETS:
 		raise ValueError("Ambiguous dictionary aliases must contain two or three targets.")
 	if any(type(target) is not str or target not in entries for target in targets) or len(
-		set(targets)
+		set(targets),
 	) != len(targets):
 		raise ValueError("Dictionary alias target is invalid.")
 	typedTargets = cast(tuple[str, ...], targets)

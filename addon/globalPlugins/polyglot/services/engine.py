@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+# Copyright (C) 2025-2026 cary-rowen <manchen_0528@outlook.com>
+# This file is covered by the GNU General Public License version 3 or later.
+# See the file COPYING.txt for more details.
+
 import json
 import random
 import time
@@ -19,46 +23,47 @@ addonHandler.initTranslation()
 
 
 class TranslationEngine(ABC):
-	"""
-	Defines the abstract interface that all translation engines must implement.
-	"""
+	"""Defines the abstract interface that all translation engines must implement."""
 
 	@property
 	@abstractmethod
 	def id(self) -> str:
+		"""Return the stable internal engine identifier."""
 		pass
 
 	@property
 	@abstractmethod
 	def name(self) -> str:
+		"""Return the translated engine name shown to users."""
 		pass
 
 	@property
 	@abstractmethod
 	def autoDetectCode(self) -> str | None:
 		"""
-		Returns the language code this engine uses for "auto-detect".
+		Return the language code this engine uses for automatic detection.
+
 		Subclasses must return None if not supported.
 		"""
 		pass
 
 	@property
-	def supportsLanguageDetection(self) -> bool:
-		"""A convenience property for readability, its behavior is derived from autoDetectCode."""
+	def doesSupportLanguageDetection(self) -> bool:
+		"""Return whether the engine accepts an automatic-detection source code."""
 		return self.autoDetectCode is not None
 
 	@property
-	def reportsDetectedLanguage(self) -> bool:
-		"""Reports the ability to detect the source language. Defaults to whether language detection is supported."""
-		return self.supportsLanguageDetection
+	def doesReportDetectedLanguage(self) -> bool:
+		"""Return whether translation results include the detected source language."""
+		return self.doesSupportLanguageDetection
 
 	@property
 	def enabledConfigLabel(self) -> str:
-		"""Returns the label for the common engine enable checkbox."""
+		"""Return the label for the common engine enable checkbox."""
 		return _("Enable this engine")
 
 	def getEnabledConfigSpec(self) -> dict[str, Any]:
-		"""Returns the common configuration item that controls whether this engine is usable."""
+		"""Return the common configuration item controlling engine availability."""
 		return {
 			"id": "enabled",
 			"label": self.enabledConfigLabel,
@@ -67,15 +72,17 @@ class TranslationEngine(ABC):
 		}
 
 	def isEnabled(self, engineConfig: dict[str, Any]) -> bool:
-		"""Returns whether this engine is enabled by its configuration."""
+		"""Return whether the engine is enabled by its configuration."""
 		return engineConfig.get("enabled", True) is not False
 
 	@abstractmethod
 	def getConfigSpec(self) -> list[dict[str, Any]]:
+		"""Return configuration-control specifications for this engine."""
 		pass
 
 	@abstractmethod
 	def getSupportedLanguages(self) -> dict[str, str]:
+		"""Return supported language codes mapped to translated names."""
 		pass
 
 	@abstractmethod
@@ -87,9 +94,11 @@ class TranslationEngine(ABC):
 		config: dict[str, Any],
 		isCancelled: Callable[[], bool] | None = None,
 	) -> dict[str, Any]:
+		"""Translate text and return a common translation-result dictionary."""
 		pass
 
 	def getUiStates(self, allConfigs: dict[str, Any]) -> dict[str, Any]:
+		"""Return dynamic control properties derived from current configuration."""
 		return {}
 
 
@@ -102,7 +111,8 @@ class ChunkedTranslationMixin(TranslationEngine):
 	@property
 	def maxRequestLength(self) -> int:
 		"""
-		Returns the maximum number of characters allowed per request.
+		Return the maximum number of characters allowed per request.
+
 		Returns 0 or less if there is no limit.
 		"""
 		return 0
@@ -110,7 +120,8 @@ class ChunkedTranslationMixin(TranslationEngine):
 	@property
 	def requestDelayRange(self) -> tuple[float, float] | None:
 		"""
-		Defines a range of random delay (in seconds) between chunked requests.
+		Return the random delay range between chunked requests.
+
 		Returns (min, max) or None to disable. Default is a gentle range.
 		"""
 		return (0.4, 1.2)
@@ -133,6 +144,7 @@ class ChunkedTranslationMixin(TranslationEngine):
 		config: dict[str, Any],
 		isCancelled: Callable[[], bool] | None = None,
 	) -> dict[str, Any]:
+		"""Translate text sequentially in bounded chunks while preserving whitespace."""
 		limit = self.maxRequestLength
 		if limit <= 0 or len(text) <= limit:
 			return self._translateChunk(text, langFrom, langTo, config)
@@ -143,7 +155,7 @@ class ChunkedTranslationMixin(TranslationEngine):
 
 		translatedChunks = []
 		detectedLang = None
-		for i, chunk in enumerate(chunks):
+		for chunkIndex, chunk in enumerate(chunks):
 			if isCancelled and isCancelled():
 				log.debug("Chunked translation cancelled mid-way.")
 				break
@@ -152,30 +164,30 @@ class ChunkedTranslationMixin(TranslationEngine):
 				translatedChunks.append(chunk)
 				continue
 
-			if i > 0 and delayRange:
+			if chunkIndex > 0 and delayRange:
 				time.sleep(random.uniform(*delayRange))
 
-			leadingWs = len(chunk) - len(chunk.lstrip())
-			trailingWs = len(chunk) - len(chunk.rstrip())
+			leadingWhitespaceLength = len(chunk) - len(chunk.lstrip())
+			trailingWhitespaceLength = len(chunk) - len(chunk.rstrip())
 
-			leadingStr = chunk[:leadingWs] if leadingWs > 0 else ""
-			trailingStr = chunk[-trailingWs:] if trailingWs > 0 else ""
+			leadingWhitespace = chunk[:leadingWhitespaceLength] if leadingWhitespaceLength > 0 else ""
+			trailingWhitespace = chunk[-trailingWhitespaceLength:] if trailingWhitespaceLength > 0 else ""
 
 			strippedChunk = chunk.strip()
 			if not strippedChunk:
 				translatedChunks.append(chunk)
 				continue
 
-			res = self._translateChunk(strippedChunk, langFrom, langTo, config)
-			translatedText = res.get("translation", "").strip()
+			chunkResult = self._translateChunk(strippedChunk, langFrom, langTo, config)
+			translatedText = chunkResult.get("translation", "").strip()
 
-			translatedChunks.append(leadingStr + translatedText + trailingStr)
+			translatedChunks.append(leadingWhitespace + translatedText + trailingWhitespace)
 
 			if totalChunks > 1:
-				Beep.reportProgress(i + 1, totalChunks)
+				Beep.reportProgress(chunkIndex + 1, totalChunks)
 
-			if detectedLang is None and "langDetected" in res:
-				detectedLang = res["langDetected"]
+			if detectedLang is None and "langDetected" in chunkResult:
+				detectedLang = chunkResult["langDetected"]
 
 		return {
 			"translation": "".join(translatedChunks),
@@ -184,9 +196,7 @@ class ChunkedTranslationMixin(TranslationEngine):
 
 
 class BaseHttpEngine(ChunkedTranslationMixin):
-	"""
-	Provides a common framework and rules for HTTP-based engines.
-	"""
+	"""Provides a common framework and rules for HTTP-based engines."""
 
 	@property
 	@abstractmethod
@@ -207,7 +217,7 @@ class BaseHttpEngine(ChunkedTranslationMixin):
 		- If not, the subclass is forced to override this property and provide a specific language.
 		"""
 		autoCode = self.autoDetectCode
-		if self.supportsLanguageDetection and autoCode is not None:
+		if self.doesSupportLanguageDetection and autoCode is not None:
 			return autoCode
 		raise NotImplementedError(
 			f"""Translation engine '{self.id}' does not support auto language detection, and must therefore explicitly override the 'defaultSourceLanguage' property in a subclass.""",
@@ -216,19 +226,18 @@ class BaseHttpEngine(ChunkedTranslationMixin):
 	@property
 	@abstractmethod
 	def defaultTargetLanguage(self) -> str:
-		"""
-		Forces all concrete HTTP engines to explicitly define their default target language.
-		"""
+		"""Forces all concrete HTTP engines to explicitly define their default target language."""
 		raise NotImplementedError(
 			f"Translation engine '{self.id}' must explicitly implement the 'defaultTargetLanguage' property.",
 		)
 
 	def getConfigSpec(self) -> list[dict[str, Any]]:
+		"""Return common HTTP, language, and auto-swap configuration controls."""
 		allLangs = self.getSupportedLanguages()
 		autoCode = self.autoDetectCode
 
 		fromChoices = allLangs.copy()
-		if not self.supportsLanguageDetection and autoCode:
+		if not self.doesSupportLanguageDetection and autoCode:
 			_unused = fromChoices.pop(autoCode, None)
 
 		toChoices = allLangs.copy()
@@ -276,7 +285,7 @@ class BaseHttpEngine(ChunkedTranslationMixin):
 			],
 		)
 
-		if self.reportsDetectedLanguage:
+		if self.doesReportDetectedLanguage:
 			swapChoices = toChoices.copy()
 			spec.extend(
 				[
@@ -303,17 +312,18 @@ class BaseHttpEngine(ChunkedTranslationMixin):
 		self,
 		allLangs: dict[str, str],
 		excludeCode: str | None = None,
-		removeAuto: bool = False,
+		shouldRemoveAuto: bool = False,
 	) -> dict[str, str]:
-		"""A helper function to create a filtered dictionary of language options based on rules."""
+		"""Filter language choices according to the supplied inclusion rules."""
 		choices = allLangs.copy()
-		if removeAuto and self.autoDetectCode is not None:
+		if shouldRemoveAuto and self.autoDetectCode is not None:
 			_unused = choices.pop(self.autoDetectCode, None)
 		if excludeCode:
 			_unused = choices.pop(excludeCode, None)
 		return choices
 
 	def getUiStates(self, allConfigs: dict[str, Any]) -> dict[str, dict[str, Any]]:
+		"""Return language and auto-swap choices valid for the current selections."""
 		states = super().getUiStates(allConfigs)
 		allLangs = self.getSupportedLanguages()
 		autoCode = self.autoDetectCode
@@ -321,16 +331,20 @@ class BaseHttpEngine(ChunkedTranslationMixin):
 		selectedTo = allConfigs.get("langTo")
 		# --- Generate language lists using the helper function ---
 		# Target language (langTo): Always remove "auto-detect" and exclude the currently selected source language.
-		validToLangs = self._getFilteredChoices(allLangs, excludeCode=selectedFrom, removeAuto=True)
+		validToLangs = self._getFilteredChoices(
+			allLangs,
+			excludeCode=selectedFrom,
+			shouldRemoveAuto=True,
+		)
 		# Source language (langFrom): Exclude the currently selected target language.
 		validFromLangs = self._getFilteredChoices(allLangs, excludeCode=selectedTo)
 		# Special handling for the source list: only remove "auto-detect" if the engine does not support it.
-		if not self.supportsLanguageDetection and autoCode:
+		if not self.doesSupportLanguageDetection and autoCode:
 			_unused = validFromLangs.pop(autoCode, None)
 		states["langFrom"] = {"choices": validFromLangs}
 		states["langTo"] = {"choices": validToLangs}
 		# --- Logic for auto-swap related controls ---
-		if self.reportsDetectedLanguage:
+		if self.doesReportDetectedLanguage:
 			isAutoFrom = selectedFrom == autoCode
 			states["enableAutoSwap"] = {"visible": isAutoFrom}
 			isSwapLangVisible = isAutoFrom and allConfigs.get("enableAutoSwap", False)
@@ -338,7 +352,7 @@ class BaseHttpEngine(ChunkedTranslationMixin):
 			validSwapLangs = self._getFilteredChoices(
 				allLangs,
 				excludeCode=selectedTo,
-				removeAuto=True,
+				shouldRemoveAuto=True,
 			)
 			states["swapLanguage"] = {"visible": isSwapLangVisible, "choices": validSwapLangs}
 		return states
@@ -366,7 +380,7 @@ class BaseHttpEngine(ChunkedTranslationMixin):
 	) -> dict[str, Any]:
 		try:
 			params = self._buildRequestParams(text, langFrom, langTo, config)
-			log.debug(f"Engine '{self.id}' built request params: {params.get('method')} {params.get('url')}")
+			log.debug("Engine '%s' is sending a %s request.", self.id, params.get("method", "GET"))
 			proxyMode = config.get("proxyMode", "system")
 			proxiesDict: dict[str, str | None] | None = (
 				None  # Default is None, which makes requests use system proxy settings.
@@ -382,13 +396,12 @@ class BaseHttpEngine(ChunkedTranslationMixin):
 				timeout=timeoutInt,
 				proxies=proxiesDict,
 			)
-			log.debug(f"Engine '{self.id}' raw response: {responseBody}")
 			return self._parseResponse(responseBody)
 		except json.JSONDecodeError as e:
-			log.error(f"Failed to parse JSON response from '{self.id}'.", exc_info=True)
+			log.exception("Failed to parse JSON response from '%s'.", self.id)
 			raise ResponseParsingError(_("Failed to parse response from translation service.")) from e
 		except EngineError:
 			raise
 		except Exception as e:
-			log.error(f"An unexpected error occurred in '{self.id}' engine.", exc_info=True)
+			log.exception("An unexpected error occurred in '%s' engine.", self.id)
 			raise EngineError(_("An unknown error occurred during translation.")) from e

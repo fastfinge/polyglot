@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+# Copyright (C) 2025-2026 cary-rowen <manchen_0528@outlook.com>
+# This file is covered by the GNU General Public License version 3 or later.
+# See the file COPYING.txt for more details.
+
 import json
 
 import addonHandler
@@ -52,7 +56,7 @@ class CaiyunTranslateEngine(BaseHttpEngine):
 		return languages.getLanguageDictForCodes(supportedCodes)
 
 	def getConfigSpec(self) -> list[dict]:
-		"""Defines the configuration options for this engine."""
+		"""Define the configuration options for this engine."""
 		spec = super().getConfigSpec()
 		spec.extend(
 			[
@@ -62,7 +66,7 @@ class CaiyunTranslateEngine(BaseHttpEngine):
 		return spec
 
 	def _buildRequestParams(self, text: str, langFrom: str, langTo: str, config: dict) -> dict:
-		"""Builds the request dictionary for the Caiyun API call."""
+		"""Build request parameters for the Caiyun API."""
 		token = config.get("token", "").strip()
 		if not token:
 			raise AuthenticationError(_("Authentication Token for Caiyun is not configured."))
@@ -81,7 +85,7 @@ class CaiyunTranslateEngine(BaseHttpEngine):
 		return {"method": "POST", "url": url, "headers": headers, "data": json.dumps(body).encode("utf-8")}
 
 	def _parseResponse(self, responseBody: str) -> dict:
-		"""Parses the JSON response from the Caiyun API."""
+		"""Parse a Caiyun API response into the common translation result."""
 		data = json.loads(responseBody)
 
 		# Check for business logic errors first

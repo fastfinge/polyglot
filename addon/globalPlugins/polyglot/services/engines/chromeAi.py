@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+# Copyright (C) 2025-2026 cary-rowen <manchen_0528@outlook.com>
+# This file is covered by the GNU General Public License version 3 or later.
+# See the file COPYING.txt for more details.
+
 """
 chromeAi - Chrome On-Device AI Translation Engine.
 
@@ -29,6 +33,8 @@ addonHandler.initTranslation()
 
 
 class ChromeAiEngine(ChunkedTranslationMixin):
+	"""Translate text offline with Chrome's on-device Translator API."""
+
 	id = "chrome_ai"
 	name = _("Chrome AI (Offline)")
 	_downloadLock = threading.Lock()
@@ -49,6 +55,7 @@ class ChromeAiEngine(ChunkedTranslationMixin):
 	)
 
 	def __init__(self) -> None:
+		"""Initialize CDP access and the supported Chrome AI language set."""
 		super().__init__()
 		self._bridge = CdpBridge.getInstance()
 		supportedCodes = [
@@ -161,7 +168,7 @@ class ChromeAiEngine(ChunkedTranslationMixin):
 		return (0, 0)
 
 	def _waitForModelPreparation(self, isCancelled: Callable[[], bool] | None) -> bool:
-		"""Waits for another request's model preparation to finish before translating."""
+		"""Wait for another request's model preparation before translating."""
 		with self._downloadLock:
 			isPreparing = ChromeAiEngine._isPreparingModel
 		if not isPreparing:
@@ -210,7 +217,7 @@ class ChromeAiEngine(ChunkedTranslationMixin):
 			return {}
 		if not self._waitForModelPreparation(isCancelled):
 			return {}
-		log.debug(f"Chrome AI: translate {len(text)} chars, {langFrom}->{langTo}")
+		log.debug("Chrome AI: translating %d characters (%s to %s).", len(text), langFrom, langTo)
 		try:
 			self._bridge.ensureConnection()
 		except CdpError as e:
@@ -220,7 +227,7 @@ class ChromeAiEngine(ChunkedTranslationMixin):
 		return super().translate(text, langFrom, langTo, config, isCancelled)
 
 	def _makeModelPreparationHandler(self, modelLabel: str) -> Callable[[str], None]:
-		"""Builds a console log handler for Chrome model preparation progress events."""
+		"""Build a handler for Chrome model-preparation progress events."""
 
 		def handler(logText: str) -> None:
 			if "[MODEL_PROGRESS]" in logText or "[DOWNLOAD_PROGRESS]" in logText:
@@ -232,7 +239,7 @@ class ChromeAiEngine(ChunkedTranslationMixin):
 					pass
 			elif logText in ("[MODEL_START]", "[DOWNLOAD_START]"):
 				cues.Beep.resetProgress()
-				log.info(f"Chrome AI: {modelLabel} preparation started")
+				log.debug("Chrome AI: %s preparation started.", modelLabel)
 				with self._downloadLock:
 					ChromeAiEngine._isPreparingModel = True
 				queueHandler.queueFunction(
@@ -242,9 +249,9 @@ class ChromeAiEngine(ChunkedTranslationMixin):
 					_("Preparing {model}...").format(model=modelLabel),
 				)
 			elif logText == "[MODEL_FINALIZING]":
-				log.info(f"Chrome AI: {modelLabel} preparation finalizing")
+				log.debug("Chrome AI: %s preparation finalizing.", modelLabel)
 			elif logText in ("[MODEL_END]", "[DOWNLOAD_END]"):
-				log.info(f"Chrome AI: {modelLabel} preparation complete")
+				log.debug("Chrome AI: %s preparation complete.", modelLabel)
 				with self._downloadLock:
 					ChromeAiEngine._isPreparingModel = False
 				queueHandler.queueFunction(
@@ -257,17 +264,17 @@ class ChromeAiEngine(ChunkedTranslationMixin):
 		return handler
 
 	def _toJsStringLiteral(self, value: str) -> str:
-		"""Converts text to a JavaScript string literal."""
+		"""Convert text to a JavaScript string literal."""
 		return json.dumps(value, ensure_ascii=False)
 
 	def _normalizeSourceTextForTranslation(self, text: str, sourceLang: str) -> str:
-		"""Normalizes narrow Chrome AI input quirks without changing non-English text."""
+		"""Normalize Chrome AI input quirks without changing non-English text."""
 		if sourceLang != "en" or "\u2014" not in text:
 			return text
 		return self._ENGLISH_EM_DASH_PATTERN.sub(" - ", text)
 
 	def _shouldRetryResult(self, result: dict[str, Any]) -> bool:
-		"""Returns whether a Chrome AI result looks like a transient failure."""
+		"""Return whether a Chrome AI result represents a transient failure."""
 		code = result.get("code")
 		if code in ("API_ERR_UNDEFINED", "PARSE_ERR"):
 			return True
@@ -282,7 +289,7 @@ class ChromeAiEngine(ChunkedTranslationMixin):
 		onConsoleLog: Callable[[str], None],
 		operationName: str,
 	) -> dict[str, Any]:
-		"""Evaluates a Chrome AI script with a bounded transient retry."""
+		"""Evaluate a Chrome AI script with bounded transient retries."""
 		lastResult: dict[str, Any] | None = None
 		for attempt in range(self._MAX_TRANSIENT_RETRIES + 1):
 			try:
@@ -290,13 +297,22 @@ class ChromeAiEngine(ChunkedTranslationMixin):
 			except CdpError as e:
 				if attempt >= self._MAX_TRANSIENT_RETRIES:
 					raise EngineError(str(e)) from e
-				log.warning(f"Chrome AI: {operationName} CDP error on transient attempt {attempt + 1}: {e}")
+				log.warning(
+					"Chrome AI: %s CDP error on transient attempt %d (%s).",
+					operationName,
+					attempt + 1,
+					type(e).__name__,
+				)
 				time.sleep(0.4 * (attempt + 1))
 				continue
 			lastResult = result
 			if not self._shouldRetryResult(result) or attempt >= self._MAX_TRANSIENT_RETRIES:
 				return result
-			log.warning(f"Chrome AI: retrying {operationName} after transient result: {result}")
+			log.warning(
+				"Chrome AI: retrying %s after transient result code %s.",
+				operationName,
+				result.get("code", "unknown"),
+			)
 			time.sleep(0.4 * (attempt + 1))
 		return lastResult or {"code": "PARSE_ERR", "raw": ""}
 
@@ -428,7 +444,7 @@ class ChromeAiEngine(ChunkedTranslationMixin):
 			)
 		elif code == "MODEL_STATE_NO":
 			pair = result.get("pair", "?->?")
-			log.info(f"Chrome AI: language pair {pair} is unsupported; returning original text.")
+			log.debug("Chrome AI: language pair %s is unsupported; returning original text.", pair)
 			return {
 				"translation": text,
 			}

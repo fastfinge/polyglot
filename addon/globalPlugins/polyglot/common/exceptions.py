@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 
-"""
-This module defines all custom exception types for the add-on.
-"""
+# Copyright (C) 2025-2026 cary-rowen <manchen_0528@outlook.com>
+# This file is covered by the GNU General Public License version 3 or later.
+# See the file COPYING.txt for more details.
+
+"""This module defines all custom exception types for the add-on."""
 
 
 class EngineError(Exception):
@@ -14,10 +16,12 @@ class EngineError(Exception):
 	message: str
 
 	def __init__(self, message: str) -> None:
+		"""Initialize the error with a user-facing description."""
 		self.message = message
 		super().__init__(self.message)
 
 	def __str__(self) -> str:
+		"""Return the user-facing error description."""
 		return str(self.message)
 
 
@@ -40,24 +44,18 @@ class ApiResponseError(EngineError):
 
 
 class ResponseParsingError(EngineError):
-	"""
-	Raised when the API's response cannot be parsed correctly (e.g., invalid JSON).
-	"""
+	"""Raised when the API's response cannot be parsed correctly (e.g., invalid JSON)."""
 
 	pass
 
 
 class SilentTranslationCancel(Exception):
-	"""
-	Raised when a translation task should stop without user-facing failure output.
-	"""
+	"""Raised when a translation task should stop without user-facing failure output."""
 
 	pass
 
 
 class AuthenticationError(ApiResponseError):
-	"""
-	A specific error for authentication failures.
-	"""
+	"""A specific error for authentication failures."""
 
 	pass

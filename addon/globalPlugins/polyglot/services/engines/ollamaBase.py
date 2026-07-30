@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+# Copyright (C) 2025-2026 cary-rowen <manchen_0528@outlook.com>
+# This file is covered by the GNU General Public License version 3 or later.
+# See the file COPYING.txt for more details.
+
 import json
 from typing import Any
 
@@ -45,7 +49,7 @@ class OllamaBaseEngine(BaseHttpEngine):
 		return 512
 
 	@property
-	def reportsDetectedLanguage(self) -> bool:
+	def doesReportDetectedLanguage(self) -> bool:
 		return True
 
 	def getSupportedLanguages(self) -> dict:
@@ -204,7 +208,5 @@ class OllamaBaseEngine(BaseHttpEngine):
 			return {"translation": cleanStr, "langDetected": None}
 
 		except (json.JSONDecodeError, KeyError, TypeError):
-			log.warning(
-				f"Could not parse model's response as JSON. Treating as plain text. Response: {modelResponseStr}",
-			)
+			log.warning("Could not parse model response as JSON; treating it as plain text.")
 			return {"translation": modelResponseStr.strip(), "langDetected": None}

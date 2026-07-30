@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
 
+# Copyright (C) 2025-2026 cary-rowen <manchen_0528@outlook.com>
+# This file is covered by the GNU General Public License version 3 or later.
+# See the file COPYING.txt for more details.
+
 
 def splitText(text: str, maxLength: int) -> list[str]:
 	"""
-	Splits text into chunks of at most maxLength characters using a recursive approach.
+	Split text recursively into chunks of at most maxLength characters.
 	Attempts to split at natural boundaries like paragraphs, sentences, and words.
 	"""
 	if maxLength <= 0 or len(text) <= maxLength:

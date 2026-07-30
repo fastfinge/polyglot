@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+# Copyright (C) 2025-2026 cary-rowen <manchen_0528@outlook.com>
+# This file is covered by the GNU General Public License version 3 or later.
+# See the file COPYING.txt for more details.
+
 """Prepare and apply reviewed additions to the local word dictionary."""
 
 import argparse
@@ -60,7 +64,7 @@ def _readJson(path: Path) -> object:
 		return json.load(sourceFile, object_pairs_hook=_objectWithoutDuplicateKeys)
 
 
-def _writeJsonAtomically(path: Path, value: object, *, pretty: bool) -> None:
+def _writeJsonAtomically(path: Path, value: object, *, shouldPrettyPrint: bool) -> None:
 	"""Write deterministic JSON through a temporary file in the target directory."""
 	temporaryPath: Path | None = None
 	try:
@@ -77,11 +81,11 @@ def _writeJsonAtomically(path: Path, value: object, *, pretty: bool) -> None:
 				value,
 				targetFile,
 				ensure_ascii=False,
-				indent=2 if pretty else None,
-				separators=None if pretty else (",", ":"),
-				sort_keys=not pretty,
+				indent=2 if shouldPrettyPrint else None,
+				separators=None if shouldPrettyPrint else (",", ":"),
+				sort_keys=not shouldPrettyPrint,
 			)
-			_ = targetFile.write("\n" if pretty else "")
+			_ = targetFile.write("\n" if shouldPrettyPrint else "")
 		_ = temporaryPath.replace(path)
 		temporaryPath = None
 	finally:
@@ -314,7 +318,7 @@ def _prepareCandidates() -> dict[str, int | str | None]:
 		},
 		"entries": orderedEntries,
 	}
-	_writeJsonAtomically(_CANDIDATES_PATH, review, pretty=True)
+	_writeJsonAtomically(_CANDIDATES_PATH, review, shouldPrettyPrint=True)
 	return {
 		"candidates": len(orderedEntries),
 		"duplicateSourceWords": len(duplicateWords),
@@ -395,8 +399,8 @@ def _applyCandidates() -> dict[str, object]:
 			temporaryDictionaryPath.unlink(missing_ok=True)
 
 	if addedWords:
-		_writeJsonAtomically(_DICTIONARY_PATH, updatedEntries, pretty=False)
-	_writeJsonAtomically(_INFLECTIONS_PATH, inflections, pretty=False)
+		_writeJsonAtomically(_DICTIONARY_PATH, updatedEntries, shouldPrettyPrint=False)
+	_writeJsonAtomically(_INFLECTIONS_PATH, inflections, shouldPrettyPrint=False)
 	return {
 		"addedEntries": len(addedWords),
 		"alreadyPresent": alreadyPresent,

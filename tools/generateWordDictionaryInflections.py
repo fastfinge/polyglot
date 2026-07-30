@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+# Copyright (C) 2025-2026 cary-rowen <manchen_0528@outlook.com>
+# This file is covered by the GNU General Public License version 3 or later.
+# See the file COPYING.txt for more details.
+
 """Compile high-confidence Polyglot inflection aliases for the update tool."""
 
 import csv
@@ -88,7 +92,7 @@ _O_TAKES_ES_WORDS = frozenset(
 		"veto",
 		"volcano",
 		"zero",
-	)
+	),
 )
 _MAN_TAKES_S_WORDS = frozenset(("german", "human", "ottoman", "roman", "shaman"))
 _DOUBLED_FINAL_CONSONANT_WORDS = frozenset(
@@ -124,7 +128,7 @@ _DOUBLED_FINAL_CONSONANT_WORDS = frozenset(
 		"transfer",
 		"transmit",
 		"up",
-	)
+	),
 )
 _OPTIONALLY_DOUBLED_WORDS = frozenset(
 	("benefit", "bias", "combat", "dial", "equal", "focus", "fuel", "target", "worship"),
@@ -293,7 +297,7 @@ _REJECTED_FORMS = frozenset(
 		"veing",
 		"widdleing",
 		"xixs",
-	)
+	),
 )
 
 

@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+# Copyright (C) 2025-2026 cary-rowen <manchen_0528@outlook.com>
+# This file is covered by the GNU General Public License version 3 or later.
+# See the file COPYING.txt for more details.
+
 import json
 import urllib.parse
 
@@ -13,6 +17,8 @@ addonHandler.initTranslation()
 
 
 class TencentWebTranslateEngine(BaseHttpEngine):
+	"""Translate text through the NVDACN-hosted Tencent web service."""
+
 	id = "tencentPolyglot"
 	name = _("Tencent Translate (Polyglot)")
 
@@ -27,10 +33,8 @@ class TencentWebTranslateEngine(BaseHttpEngine):
 		return "zh"
 
 	@property
-	def reportsDetectedLanguage(self) -> bool:
-		"""
-		This engine does not support source language detection.
-		"""
+	def doesReportDetectedLanguage(self) -> bool:
+		"""This engine does not support source language detection."""
 		return False
 
 	def getSupportedLanguages(self) -> dict:

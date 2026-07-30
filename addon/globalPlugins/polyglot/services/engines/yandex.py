@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+# Copyright (C) 2025-2026 cary-rowen <manchen_0528@outlook.com>
+# This file is covered by the GNU General Public License version 3 or later.
+# See the file COPYING.txt for more details.
+
 import json
 import urllib.parse
 import uuid
@@ -41,7 +45,7 @@ class YandexTranslateEngine(BaseHttpEngine):
 		return "zh"
 
 	@property
-	def reportsDetectedLanguage(self) -> bool:
+	def doesReportDetectedLanguage(self) -> bool:
 		# The API response does not include the detected source language.
 		return False
 
@@ -76,7 +80,7 @@ class YandexTranslateEngine(BaseHttpEngine):
 		return languages.getLanguageDictForCodes(supportedCodes)
 
 	def _buildRequestParams(self, text: str, langFrom: str, langTo: str, config: dict) -> dict:
-		"""Builds the request dictionary for the Yandex API call."""
+		"""Build request parameters for the Yandex API."""
 		baseUrl = "https://translate.yandex.net/api/v1/tr.json/translate"
 
 		# Build query parameters for the URL
@@ -101,7 +105,7 @@ class YandexTranslateEngine(BaseHttpEngine):
 		}
 
 	def _parseResponse(self, responseBody: str) -> dict:
-		"""Parses the JSON response from the Yandex API."""
+		"""Parse a Yandex API response into the common translation result."""
 		data = json.loads(responseBody)
 
 		translatedTextList = data.get("text")

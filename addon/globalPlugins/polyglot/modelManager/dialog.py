@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-# A part of the Polyglot add-on for NVDA.
-# Copyright (C) 2025 Cary-rowen <manchen_0528@outlook.com>
-# This file is covered by the GNU General Public License.
+# Copyright (C) 2025-2026 cary-rowen <manchen_0528@outlook.com>
+# This file is covered by the GNU General Public License version 3 or later.
 # See the file COPYING.txt for more details.
 
 """wx dialog for native ChromeAI model management."""
@@ -63,6 +62,7 @@ class ThrottledWxProgress:
 	"""Throttles worker-thread progress updates before posting them to wx."""
 
 	def __init__(self, callback: Callable[[InstallProgress], None]) -> None:
+		"""Initialize throttling for progress sent to the supplied UI callback."""
 		self._callback = callback
 		self._lastPostTime = 0.0
 		self._lastPercent = -1
@@ -71,11 +71,11 @@ class ThrottledWxProgress:
 		"""Post meaningful progress updates to the wx main thread."""
 		now = time.monotonic()
 		percent = progress.percent if progress.percent is not None else -1
-		important = progress.percent is None or percent in (0, 100)
-		percentMoved = percent >= 0 and abs(percent - self._lastPercent) >= 5
-		if not important and not percentMoved and now - self._lastPostTime < 0.25:
+		isImportant = progress.percent is None or percent in (0, 100)
+		hasPercentMoved = percent >= 0 and abs(percent - self._lastPercent) >= 5
+		if not isImportant and not hasPercentMoved and now - self._lastPostTime < 0.25:
 			return
-		if not important and now - self._lastPostTime < 0.1:
+		if not isImportant and now - self._lastPostTime < 0.1:
 			return
 		self._lastPostTime = now
 		self._lastPercent = percent
@@ -86,6 +86,7 @@ class ModelManagerDialog(nvdaControls.DPIScaledDialog):
 	"""Modeless dialog for selecting, installing, and removing ChromeAI models."""
 
 	def __init__(self, parent: wx.Window) -> None:
+		"""Initialize the model manager dialog and its persisted settings."""
 		super().__init__(
 			parent,
 			title=_("Polyglot ChromeAI Model Manager"),
@@ -99,8 +100,8 @@ class ModelManagerDialog(nvdaControls.DPIScaledDialog):
 		self.installedKeys: set[str] = set()
 		self.pendingOperationCount = 0
 		self.isBusy = False
-		self.updatingPackageChecks = False
-		self.advancedVisible = False
+		self.isUpdatingPackageChecks = False
+		self.isAdvancedVisible = False
 		self.isDestroyed = False
 		self.lastLogMessage = ""
 		self.logLineCount = 0
@@ -226,13 +227,13 @@ class ModelManagerDialog(nvdaControls.DPIScaledDialog):
 
 	def onPackageChecked(self, evt: wx.CommandEvent) -> None:
 		"""Update operation summary when a checklist item changes."""
-		if not self.updatingPackageChecks:
+		if not self.isUpdatingPackageChecks:
 			self.updateSelectionSummary()
 		evt.Skip()
 
 	def onToggleAdvanced(self, evt: wx.CommandEvent) -> None:
 		"""Show or hide advanced settings."""
-		self.setAdvancedVisible(not self.advancedVisible)
+		self.setAdvancedVisible(not self.isAdvancedVisible)
 
 	def onDefaultCatalog(self, evt: wx.CommandEvent) -> None:
 		"""Reset the catalog URL to the default channel and reload."""
@@ -428,7 +429,7 @@ class ModelManagerDialog(nvdaControls.DPIScaledDialog):
 		self.installedKeys = set(installed)
 		checkedKeys = installed
 		self.packages = list(self.catalog.packages)
-		self.updatingPackageChecks = True
+		self.isUpdatingPackageChecks = True
 		self.packageList.Freeze()
 		try:
 			self.packageList.DeleteAllItems()
@@ -444,7 +445,7 @@ class ModelManagerDialog(nvdaControls.DPIScaledDialog):
 				self.packageList.CheckItem(index, package.key in checkedKeys)
 		finally:
 			self.packageList.Thaw()
-			self.updatingPackageChecks = False
+			self.isUpdatingPackageChecks = False
 		self.selectFirstPackageListItem()
 		self.setStatus(_("{count} installed package(s) detected.").format(count=len(installed)))
 		self.updateSelectionSummary()
@@ -533,11 +534,11 @@ class ModelManagerDialog(nvdaControls.DPIScaledDialog):
 			cleanupCount += 1
 		return PendingOperations(installCount, removeCount, cleanupCount)
 
-	def setBusy(self, busy: bool) -> None:
+	def setBusy(self, isBusy: bool) -> None:
 		"""Enable or disable controls based on operation state."""
 		if self.isDestroyed:
 			return
-		self.isBusy = busy
+		self.isBusy = isBusy
 		for control in (
 			self.advancedButton,
 			self.catalogUrlBox,
@@ -548,9 +549,9 @@ class ModelManagerDialog(nvdaControls.DPIScaledDialog):
 			self.openTempButton,
 			self.packageList,
 		):
-			control.Enable(not busy)
-		self.progressGauge.Show(busy)
-		if busy:
+			control.Enable(not isBusy)
+		self.progressGauge.Show(isBusy)
+		if isBusy:
 			self.progressGauge.SetValue(0)
 		self.refreshApplyButton()
 		self.Layout()
@@ -562,11 +563,11 @@ class ModelManagerDialog(nvdaControls.DPIScaledDialog):
 			not self.isBusy and self.catalog is not None and self.pendingOperationCount > 0,
 		)
 
-	def setAdvancedVisible(self, visible: bool) -> None:
+	def setAdvancedVisible(self, isVisible: bool) -> None:
 		"""Set advanced settings visibility."""
-		self.advancedVisible = visible
-		self.advancedPanel.Show(visible)
-		self.advancedButton.SetLabel(_("Hide advanced") if visible else _("Advanced"))
+		self.isAdvancedVisible = isVisible
+		self.advancedPanel.Show(isVisible)
+		self.advancedButton.SetLabel(_("Hide advanced") if isVisible else _("Advanced"))
 		self.Layout()
 
 	def setStatus(self, message: str) -> None:
@@ -599,7 +600,7 @@ class ModelManagerDialog(nvdaControls.DPIScaledDialog):
 		"""Log and show an operation failure."""
 		self.setStatus(_("Failed."))
 		self.log(str(error))
-		log.error("ChromeAI model manager operation failed: %s", error)
+		log.error("ChromeAI model manager operation failed (%s).", type(error).__name__)
 		gui.messageBox(str(error), _("Polyglot ChromeAI Model Manager"), wx.OK | wx.ICON_ERROR, self)
 
 	def saveCatalogUrl(self, catalogUrl: str) -> None:

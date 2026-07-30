@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+# Copyright (C) 2025-2026 cary-rowen <manchen_0528@outlook.com>
+# This file is covered by the GNU General Public License version 3 or later.
+# See the file COPYING.txt for more details.
+
 import json
 import urllib.parse
 
@@ -40,7 +44,7 @@ class LingvaTranslateEngine(BaseHttpEngine):
 		return "zh"
 
 	@property
-	def reportsDetectedLanguage(self) -> bool:
+	def doesReportDetectedLanguage(self) -> bool:
 		# The API response does not include the detected source language.
 		return False
 
@@ -78,7 +82,7 @@ class LingvaTranslateEngine(BaseHttpEngine):
 		return languages.getLanguageDictForCodes(supportedCodes)
 
 	def _buildRequestParams(self, text: str, langFrom: str, langTo: str, config: dict) -> dict:
-		"""Builds the request dictionary for the Lingva API call."""
+		"""Build request parameters for the Lingva API."""
 		# The API has a quirk where forward slashes in the text cause issues.
 		# The JS code replaces them with '@@' before encoding.
 		processedText = text.replace("/", "@@")
@@ -93,7 +97,7 @@ class LingvaTranslateEngine(BaseHttpEngine):
 		}
 
 	def _parseResponse(self, responseBody: str) -> dict:
-		"""Parses the JSON response from the Lingva API."""
+		"""Parse a Lingva API response into the common translation result."""
 		try:
 			data = json.loads(responseBody)
 		except json.JSONDecodeError:

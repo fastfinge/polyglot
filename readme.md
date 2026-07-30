@@ -229,4 +229,7 @@ When adding a new engine:
 
 ## License
 
-This project is licensed under the GNU General Public License v2. See [COPYING.txt](COPYING.txt).
+Copyright (C) 2025-2026 cary-rowen.
+
+This project is licensed under the GNU General Public License version 3 or later
+(`GPL-3.0-or-later`). See the repository's [COPYING.txt](https://github.com/cary-rowen/polyglot/blob/master/COPYING.txt).

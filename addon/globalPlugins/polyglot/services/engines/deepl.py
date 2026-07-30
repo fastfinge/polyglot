@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+# Copyright (C) 2025-2026 cary-rowen <manchen_0528@outlook.com>
+# This file is covered by the GNU General Public License version 3 or later.
+# See the file COPYING.txt for more details.
+
 import json
 from typing import Any
 
@@ -13,6 +17,8 @@ addonHandler.initTranslation()
 
 
 class DeepLEngine(BaseHttpEngine):
+	"""Translate text through the configurable DeepL Free or Pro API."""
+
 	id = "deepl"
 	name = _("DeepL")
 

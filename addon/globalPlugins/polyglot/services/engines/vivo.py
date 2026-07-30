@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 
+# Copyright (C) 2025-2026 cary-rowen <manchen_0528@outlook.com>
+# This file is covered by the GNU General Public License version 3 or later.
+# See the file COPYING.txt for more details.
+
 import json
 import urllib.parse
 import uuid
 
 import addonHandler
-from logHandler import log
 
 from ...common import languages
 from ..engine import BaseHttpEngine
@@ -16,6 +19,8 @@ addonHandler.initTranslation()
 
 
 class VivoTranslateEngine(BaseHttpEngine):
+	"""Translate text through Vivo using signatures issued by NVDACN."""
+
 	id = "vivo"
 	name = _("VIVO Translate")
 
@@ -72,7 +77,6 @@ class VivoTranslateEngine(BaseHttpEngine):
 			headers = vivoAuth.genSignHeaders(nvdacnUser, nvdacnPass, "POST", uri, {})
 			headers["Content-Type"] = "application/x-www-form-urlencoded"
 		except NetworkConnectionError as e:
-			log.error("Failed to connect to NVDACN authentication server.", exc_info=True)
 			raise EngineError(
 				_(
 					"Could not connect to the NVDACN authentication server to get a signature. Please check your network connection or try again later.",

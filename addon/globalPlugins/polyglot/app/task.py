@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+# Copyright (C) 2025-2026 cary-rowen <manchen_0528@outlook.com>
+# This file is covered by the GNU General Public License version 3 or later.
+# See the file COPYING.txt for more details.
+
 import threading
 
 from collections.abc import Callable
@@ -13,6 +17,8 @@ from ..services import engineManager
 
 
 class TranslationTask(threading.Thread):
+	"""Run one cancellable translation request and cache its successful result."""
+
 	# Annotating instance variables at the class level
 	engineId: str
 	text: str
@@ -36,6 +42,7 @@ class TranslationTask(threading.Thread):
 		isManual: bool,
 		engineConfig: dict[str, Any],
 	) -> None:
+		"""Initialize a daemon task for one engine, language pair, and source text."""
 		super().__init__(daemon=True)
 		self.engineId = engineId
 		self.text = text
@@ -50,15 +57,18 @@ class TranslationTask(threading.Thread):
 		log.debug(f"TranslationTask created for engine '{self.engineId}', isManual={self.isManual}.")
 
 	def cancel(self) -> None:
+		"""Mark the task for cooperative cancellation."""
 		with self._lock:
-			log.info(f"Cancelling translation task for text: '{self.text[:50]}...'")
+			log.debug("Cancelling translation task.")
 			self._isCancelled = True
 
 	def isCancelled(self) -> bool:
+		"""Return whether cancellation has been requested."""
 		with self._lock:
 			return self._isCancelled
 
 	def run(self) -> None:
+		"""Execute translation, optional auto-swap, caching, and completion callback."""
 		result: dict[str, str | Exception | None] = {"translation": None, "error": None}
 		try:
 			if self.isCancelled():

@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-# A part of the Polyglot add-on for NVDA.
-# Copyright (C) 2025 Cary-rowen <manchen_0528@outlook.com>
-# This file is covered by the GNU General Public License.
+# Copyright (C) 2025-2026 cary-rowen <manchen_0528@outlook.com>
+# This file is covered by the GNU General Public License version 3 or later.
 # See the file COPYING.txt for more details.
 
 """Install, remove, and register ChromeAI model packages."""
@@ -46,6 +45,7 @@ class ModelInstaller:
 	"""Installs ChromeAI model archives into the Polyglot ChromeAI profile."""
 
 	def __init__(self, polyglotRoot: Path | None = None, tempDownloadDir: Path | None = None) -> None:
+		"""Initialize model storage and temporary download locations."""
 		self.polyglotRoot = polyglotRoot or getLocalAppData() / "Polyglot"
 		self.tempDownloadDir = (
 			tempDownloadDir or Path(tempfile.gettempdir()) / "PolyglotChromeAIModelDownloads"
@@ -313,20 +313,20 @@ class ModelInstaller:
 
 	def removePackageFiles(self, package: ModelPackage) -> bool:
 		"""Remove model directory and CRX cache file for a package."""
-		removed = False
+		wasRemoved = False
 		modelDir = self.pathFromRelative(package.modelRelativeDir)
 		if modelDir.is_dir():
 			shutil.rmtree(modelDir)
-			removed = True
+			wasRemoved = True
 		if package.crxRelativePath:
 			crxPath = self.pathFromRelative(package.crxRelativePath)
 			if crxPath.is_file():
 				crxPath.unlink()
-				removed = True
+				wasRemoved = True
 		removeEmptyDirectory(self.profileDir / "TranslateKit" / "models")
 		removeEmptyDirectory(self.profileDir / "TranslateKit")
 		removeEmptyDirectory(self.profileDir / "component_crx_cache")
-		return removed
+		return wasRemoved
 
 	def tryCleanupPackage(self, package: ModelPackage) -> None:
 		"""Best-effort cleanup after package install failure."""

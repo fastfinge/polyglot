@@ -218,4 +218,7 @@ NVDA 退出时，Polyglot 会关闭由插件启动的 Chrome 实例。
 
 ## 许可证
 
-本项目使用 GNU General Public License v2 授权，详见 [COPYING.txt](../../../COPYING.txt)。
+版权所有 (C) 2025-2026 cary-rowen。
+
+本项目使用 GNU General Public License 第 3 版或任何后续版本（`GPL-3.0-or-later`）授权。
+许可证正文随插件包提供，也可查看仓库中的 [COPYING.txt](https://github.com/cary-rowen/polyglot/blob/master/COPYING.txt)。

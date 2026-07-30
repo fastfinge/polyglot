@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+# Copyright (C) 2025-2026 cary-rowen <manchen_0528@outlook.com>
+# This file is covered by the GNU General Public License version 3 or later.
+# See the file COPYING.txt for more details.
+
 """
 A stateless, utility module for providing user feedback (cues).
 
@@ -25,6 +29,8 @@ addonHandler.initTranslation()
 
 
 class CueType:
+	"""Define names for the sound cues used by translation workflows."""
+
 	START = "start"
 	SUCCESS = "success"
 	ERROR = "error"
@@ -36,7 +42,7 @@ _soundsDir = os.path.join(globalVars.appArgs.configPath, "addons", "polyglot", "
 
 
 def _getSoundPath(name: str) -> str:
-	"""Internal helper to get the full path for a sound file."""
+	"""Return the full path for a bundled sound file."""
 	return os.path.join(_soundsDir, f"{name}.wav")
 
 
@@ -46,9 +52,7 @@ _stopEvent = threading.Event()
 
 
 def _startPeriodicCueInternal(cueFunction: Callable[[], None], intervalMs: int, delayMs: int) -> None:
-	"""
-	Internal implementation to start a periodic cue in a background thread.
-	"""
+	"""Start a periodic cue in a background thread."""
 	global _progressThread
 	stopPeriodicCue()  # Stop any existing cue first
 	_stopEvent.clear()
@@ -70,7 +74,8 @@ def _startPeriodicCueInternal(cueFunction: Callable[[], None], intervalMs: int, 
 
 def stopPeriodicCue() -> None:
 	"""
-	Signals the currently running periodic cue, if any, to stop.
+	Signal the currently running periodic cue, if any, to stop.
+
 	This function is safe to call even if no cue is running.
 	"""
 	global _progressThread
@@ -83,6 +88,7 @@ class Sound:
 
 	@staticmethod
 	def play(soundName: str) -> None:
+		"""Play a bundled sound cue when its file exists."""
 		soundPath = _getSoundPath(soundName)
 		if os.path.exists(soundPath):
 			nvwave.playWaveFile(soundPath)
@@ -90,21 +96,9 @@ class Sound:
 	@staticmethod
 	def startPeriodic(eventName: str, intervalMs: int, delayMs: int) -> None:
 		"""
-		Starts a periodic sound cue using asynchronous playback.
+		Start a periodic sound cue using asynchronous playback.
 
-		IMPORTANT: This method uses non-blocking (asynchronous) sound playback.
-		To prevent audio overlap and chaotic sound stacking, the caller MUST
-		ensure that the specified `intervalMs` is greater than the duration
-		of the audio file being played (e.g., 'waiting.wav').
-
-		For example, if 'waiting.wav' is 300ms long, `intervalMs` should be
-		set to a value significantly higher, like 800ms or more.
-
-		Args:
-		    eventName: The name of the sound file to play periodically
-		                (e.g., CueType.WAITING).
-		    intervalMs: The interval in milliseconds between each playback trigger.
-		    delayMs: The initial delay in milliseconds before the first trigger.
+		The interval must exceed the sound duration to prevent overlapping playback.
 		"""
 
 		def cueFunction():
@@ -126,13 +120,13 @@ class Beep:
 
 	@staticmethod
 	def play(eventName: str) -> None:
-		"""Plays a predefined beep pattern."""
+		"""Play a predefined beep pattern."""
 		freq, dur = Beep._BEEPS.get(eventName, (200, 50))
 		tones.beep(freq, dur)
 
 	@staticmethod
 	def startPeriodic(eventName: str, intervalMs: int, delayMs: int) -> None:
-		"""Starts a periodic beep cue."""
+		"""Start a periodic beep cue."""
 
 		def cueFunction():
 			Beep.play(eventName)
@@ -144,7 +138,7 @@ class Beep:
 
 	@classmethod
 	def reportProgress(cls, current: int, total: int) -> None:
-		"""Reports progress respecting NVDA's progressBarOutputMode setting.
+		"""Report progress according to NVDA's progress-bar output setting.
 
 		Beep feedback runs on any thread.
 		Speech feedback is scheduled to the main thread via queueHandler.
@@ -173,7 +167,7 @@ class Beep:
 
 	@classmethod
 	def resetProgress(cls) -> None:
-		"""Resets progress tracking. Call before starting a new tracked task."""
+		"""Reset progress tracking before a new tracked task."""
 		cls._lastBeepPct = -100
 		cls._lastSpeechPct = -100
 
@@ -199,15 +193,15 @@ class Speech:
 	"""A namespace for all speech-based cues."""
 
 	@staticmethod
-	def message(text: str, suppressCapture: bool = True) -> None:
+	def message(text: str, shouldSuppressCapture: bool = True) -> None:
 		"""Speaks text. MUST be called from the main NVDA thread.
 
 		Args:
 			text: The text to speak.
-			suppressCapture: If True, notifies the speech filter to skip
+			shouldSuppressCapture: If True, notifies the speech filter to skip
 				capturing this message as `lastSpokenText`.
 		"""
-		if suppressCapture and _onBeforeSpeech is not None:
+		if shouldSuppressCapture and _onBeforeSpeech is not None:
 			_onBeforeSpeech()
 		ui.message(text)
 
@@ -217,7 +211,7 @@ _onBeforeSpeech: Callable[[], None] | None = None
 
 
 def registerSpeechHook(callback: Callable[[], None]) -> None:
-	"""Registers a callback to be invoked before the cues module speaks."""
+	"""Register a callback to invoke before this module speaks."""
 	global _onBeforeSpeech
 	_onBeforeSpeech = callback
 

@@ -192,4 +192,7 @@ Khi thêm một bộ dịch mới:
 
 ## Giấy phép
 
-Dự án này được cấp phép theo Giấy phép Công cộng Toàn quyền GNU phiên bản 2 (GPL v2). Xem chi tiết tại [COPYING.txt](COPYING.txt).
+Bản quyền (C) 2025-2026 cary-rowen.
+
+Dự án này được cấp phép theo Giấy phép Công cộng GNU phiên bản 3 hoặc bất kỳ phiên bản nào sau đó
+(`GPL-3.0-or-later`). Giấy phép được kèm theo gói tiện ích; xem thêm [COPYING.txt](https://github.com/cary-rowen/polyglot/blob/master/COPYING.txt) trong kho mã nguồn.

@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+# Copyright (C) 2025-2026 cary-rowen <manchen_0528@outlook.com>
+# This file is covered by the GNU General Public License version 3 or later.
+# See the file COPYING.txt for more details.
+
 import time
 from typing import Any, Callable
 
@@ -74,12 +78,12 @@ _suppressAutoTranslationDepth = 0
 
 
 def _markStringsUntranslatable(sequence: list[Any]) -> list[Any]:
-	"""Marks all strings in a speech sequence as NVDA metadata."""
+	"""Mark all strings in a speech sequence as NVDA metadata."""
 	return [_UntranslatableString(s) if isinstance(s, str) else s for s in sequence]
 
 
 def _markGeneratedStringsUntranslatable(sequence):
-	"""Marks generated speech strings as NVDA metadata."""
+	"""Mark generated speech strings as NVDA metadata."""
 	for item in sequence:
 		yield _UntranslatableString(item) if isinstance(item, str) else item
 
@@ -99,13 +103,13 @@ def _hookedGetPropertiesSpeech(reason=speech.speech.OutputReason.QUERY, **kwargs
 
 
 def _hookedGetFormatFieldSpeech(*args, **kwargs):
-	"""Marks all format field output (font, color, line number, etc.) as untranslatable."""
+	"""Mark all format field output as untranslatable."""
 	result = _origGetFormatFieldSpeech(*args, **kwargs)
 	return [_UntranslatableString(s) if isinstance(s, str) else s for s in result]
 
 
 def _hookedGetControlFieldSpeech(attrs=None, *args, **kwargs):
-	"""Marks format/metadata strings (like item counts and coords) as untranslatable, preserving content."""
+	"""Mark format metadata as untranslatable while preserving content strings."""
 	# Forward attrs properly, handling cases where it might be passed as a kwarg
 	if attrs is None:
 		attrs = kwargs.get("attrs")
@@ -128,7 +132,7 @@ def _hookedGetControlFieldSpeech(attrs=None, *args, **kwargs):
 
 
 def _hookedGetSpellingSpeech(*args, **kwargs):
-	"""Marks spelling and character navigation speech as metadata."""
+	"""Mark spelling and character-navigation speech as metadata."""
 	return _markGeneratedStringsUntranslatable(_origGetSpellingSpeech(*args, **kwargs))
 
 
@@ -162,7 +166,7 @@ def _hookedSpeakText(
 
 
 def _hookedGetSelectionMessageSpeech(message: str, text: str | list[Any]) -> list[Any]:
-	"""Marks selection prefixes/suffixes as metadata while preserving selected text."""
+	"""Mark selection affixes as metadata while preserving selected text."""
 	prefix, sep, suffix = message.partition("%s")
 	if isinstance(text, list):
 		if not sep:
@@ -188,7 +192,7 @@ def _hookedGetSelectionMessageSpeech(message: str, text: str | list[Any]) -> lis
 
 
 def _hookedGetIndentationSpeech(indentation: str, formatConfig: dict[str, Any]) -> list[Any]:
-	"""Marks indentation reports as metadata."""
+	"""Mark indentation reports as metadata."""
 	return _markStringsUntranslatable(_origGetIndentationSpeech(indentation, formatConfig))
 
 
@@ -209,6 +213,7 @@ class SpeechFilter:
 	_hookedPackageSpellTextInfo: Callable[..., None] | None
 
 	def __init__(self, manager: TranslationManager) -> None:
+		"""Initialize speech filtering for the supplied translation manager."""
 		super().__init__()
 		self.manager = manager
 		self.lastSpokenText = ""
@@ -223,10 +228,10 @@ class SpeechFilter:
 		self._hookedPackageSpellTextInfo = None
 
 	def register(self) -> None:
-		"""Registers the speech filter, cue suppression hook, and speech hooks."""
+		"""Register the speech filter, cue suppression hook, and speech hooks."""
 		filter_speechSequence.register(self.onSpeechSequence)
 		cues.registerSpeechHook(self.suppressNextCapture)
-		config.localDictionarySettingsChanged.register(self._updateWordDefinitionHook)
+		config.post_localDictionarySettingsChanged.register(self._updateWordDefinitionHook)
 		nvdaConfig.post_configProfileSwitch.register(self._updateWordDefinitionHook)
 		nvdaConfig.post_configReset.register(self._updateWordDefinitionHook)
 		self._patchGetPropertiesSpeech()
@@ -241,7 +246,7 @@ class SpeechFilter:
 
 	def unregister(self) -> None:
 		"""Unregisters the speech filter, cue suppression hook, and restores speech hooks."""
-		config.localDictionarySettingsChanged.unregister(self._updateWordDefinitionHook)
+		config.post_localDictionarySettingsChanged.unregister(self._updateWordDefinitionHook)
 		nvdaConfig.post_configProfileSwitch.unregister(self._updateWordDefinitionHook)
 		nvdaConfig.post_configReset.unregister(self._updateWordDefinitionHook)
 		self._unpatchGetIndentationSpeech()
@@ -377,18 +382,18 @@ class SpeechFilter:
 
 		def hookedSpellTextInfo(
 			info: textInfos.TextInfo,
-			useCharacterDescriptions: bool = False,
+			shouldUseCharacterDescriptions: bool = False,
 			priority: speech.Spri | None = None,
 		) -> None:
 			"""Speak a local definition or delegate unchanged to NVDA's spelling implementation."""
-			if self._isWordDefinitionHookActive and useCharacterDescriptions:
+			if self._isWordDefinitionHookActive and shouldUseCharacterDescriptions:
 				lookupResult = self._wordDictionary.lookup(info.text)
 				if lookupResult is not None:
 					self._speakWordLookupResult(lookupResult, priority)
 					return
 			original(
 				info,
-				useCharacterDescriptions=useCharacterDescriptions,
+				useCharacterDescriptions=shouldUseCharacterDescriptions,
 				priority=priority,
 			)
 
@@ -501,14 +506,14 @@ class SpeechFilter:
 		self._gracePeriodEnd = time.monotonic() + durationMs / 1000.0
 
 	@staticmethod
-	def _extractText(sequence: list[Any], enableSmartFilter: bool) -> tuple[str, list[int]]:
-		"""Extracts translatable text from a speech sequence.
+	def _extractText(sequence: list[Any], isSmartFilterEnabled: bool) -> tuple[str, list[int]]:
+		"""Extract translatable text from a speech sequence.
 
 		Collects all ``str`` items that are NOT ``_UntranslatableString``,
 		which means:
 		- plain text content from ``getTextInfoSpeech`` — included
 		- ``TranslatableString`` (name, value, description) — included
-		- ``_UntranslatableString`` (role, state, level) — excluded (if enableSmartFilter is True)
+		- ``_UntranslatableString`` (role, state, level) — excluded when smart filtering is enabled
 
 		Returns ``(joinedText, indicesIntoSequence)``.
 		"""
@@ -516,7 +521,7 @@ class SpeechFilter:
 			(i, s)
 			for i, s in enumerate(sequence)
 			if isinstance(s, str)
-			and (not enableSmartFilter or not isinstance(s, _UntranslatableString))
+			and (not isSmartFilterEnabled or not isinstance(s, _UntranslatableString))
 			and s.strip()
 		]
 		indices = [i for i, _ in pairs]
@@ -524,9 +529,10 @@ class SpeechFilter:
 		return text, indices
 
 	def onSpeechSequence(self, sequence: list[Any]) -> list[Any]:
+		"""Capture translatable speech and replace it when automatic translation is enabled."""
 		# Extract translatable content, excluding roles/states.
-		enableSmartFilter = config.getConfig().get("enableSmartFilter", True)
-		textToSave, translatableIndices = self._extractText(sequence, enableSmartFilter)
+		isSmartFilterEnabled = config.getConfig().get("enableSmartFilter", True)
+		textToSave, translatableIndices = self._extractText(sequence, isSmartFilterEnabled)
 		# Save the text unless suppression was requested by the cues module.
 		# Suppressed speech is internal plugin messaging and should also
 		# bypass auto-translate interception to avoid being swallowed.
@@ -556,8 +562,8 @@ class SpeechFilter:
 			self.manager.requestTranslation(
 				textToSave,
 				isManual=False,
-				showStatus=False,
-				allowCopy=False,
+				shouldShowStatus=False,
+				shouldAllowCopy=False,
 				onSuccess=lambda translation: self._handleAutoTranslationResult(
 					translation,
 					sequence,
@@ -574,7 +580,7 @@ class SpeechFilter:
 		translatableIndices: list[int] | None = None,
 	) -> None:
 		"""
-		Callback for a successful auto-translation.
+		Handle a successful automatic translation.
 		Called by the TranslationManager on the main thread.
 		"""
 		# 1. Set a flag to prevent this result from being re-translated.

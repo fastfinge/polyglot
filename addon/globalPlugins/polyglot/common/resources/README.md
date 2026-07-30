@@ -1,15 +1,27 @@
-# Local dictionary notice
+# Local dictionary licensing and provenance
 
-The add-on ships the compiled `dictionary.pickle`. Its reviewable source
-files are kept in `tools/resource` in the source repository.
+Polyglot ships the compiled `dictionary.pickle`. Its reviewable source files
+are kept in `tools/resource` in the source repository.
 
-The dictionary combines selected data from:
+Copyright (C) 2025-2026 cary-rowen. The selection, filtering, corrections,
+new entries, build tooling, and compiled dictionary are distributed under the
+GNU General Public License version 3 or later (`GPL-3.0-or-later`). See
+`COPYING.txt` at the root of the add-on package. The corresponding source is
+available from <https://github.com/cary-rowen/polyglot>.
 
-- clipboardEnhancement `Dict.json`, commit `5f3ed93`, GPL-2.0;
-- ECDICT Basic `ecdict.csv`, commit `bc015ed`, MIT;
-- 39 individually reviewed entries from ECDICT-ultimate 1.0.0, MIT.
+The dictionary incorporates material under these original licenses:
 
-ECDICT copyright (c) 2017 Linwei. ECDICT-ultimate copyright (c) 2018 Linwei.
+- clipboardEnhancement `Dict.json`, authored by cary-rowen, commit
+  `5f3ed93ca13b0658dcb01d31968ad8dcac5bf16f`, GPL version 3 or later:
+  <https://github.com/nvdacn/clipboardEnhancement/commit/5f3ed93ca13b0658dcb01d31968ad8dcac5bf16f>;
+- ECDICT Basic `ecdict.csv`, commit
+  `bc015ed2e24a7abef49fc6dbbb7fe32c1dadaf8b`, MIT:
+  <https://github.com/skywind3000/ECDICT/commit/bc015ed2e24a7abef49fc6dbbb7fe32c1dadaf8b>;
+- 39 individually reviewed entries from ECDICT-ultimate 1.0.0, MIT:
+  <https://github.com/skywind3000/ECDICT-ultimate/releases/tag/1.0.0>.
+
+ECDICT Basic copyright (c) 2025 Linwei. ECDICT-ultimate copyright (c) 2018 Linwei.
+The following MIT notice applies to the ECDICT material:
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

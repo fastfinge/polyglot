@@ -1,9 +1,18 @@
+# Copyright (C) 2025-2026 cary-rowen <manchen_0528@outlook.com>
+# This file is covered by the GNU General Public License version 3 or later.
+# See the file COPYING.txt for more details.
+
 # Build customizations
 # Change this file instead of sconstruct or manifest files, whenever possible.
 
 import os
 
-from site_scons.site_tools.NVDATool.typings import AddonInfo, BrailleTables, SymbolDictionaries, SpeechDictionaries
+from site_scons.site_tools.NVDATool.typings import (
+	AddonInfo,
+	BrailleTables,
+	SymbolDictionaries,
+	SpeechDictionaries,
+)
 
 # Since some strings in `addon_info` are translatable,
 # we need to include them in the .po files.
@@ -39,9 +48,9 @@ addon_info = AddonInfo(
 	# Author(s)
 	addon_author="cary-rowen <manchen_0528@outlook.com>",
 	# URL for the add-on documentation support
-	addon_url=None,
+	addon_url="https://github.com/cary-rowen/polyglot",
 	# URL for the add-on repository where the source code can be found
-	addon_sourceURL=None,
+	addon_sourceURL="https://github.com/cary-rowen/polyglot",
 	# Documentation file name
 	addon_docFileName="readme.html",
 	# Minimum NVDA version supported (e.g. "2019.3.0", minor version is optional)
@@ -52,10 +61,10 @@ addon_info = AddonInfo(
 	# and for development releases, use "dev".)
 	# Do not change unless you know what you are doing!
 	addon_updateChannel=None,
-	# Add-on license such as GPL 2
-	addon_license=None,
+	# Add-on license such as GPL 3
+	addon_license="GNU General Public License version 3 or later",
 	# URL for the license document the ad-on is licensed under
-	addon_licenseURL=None,
+	addon_licenseURL="https://www.gnu.org/licenses/gpl-3.0.html",
 )
 
 # Define the python files that are the sources of your add-on.

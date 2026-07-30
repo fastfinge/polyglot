@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 
+# Copyright (C) 2025-2026 cary-rowen <manchen_0528@outlook.com>
+# This file is covered by the GNU General Public License version 3 or later.
+# See the file COPYING.txt for more details.
+
 import html
 import json
 
 import addonHandler
-from logHandler import log
 
 from ...common import languages
 from ..engine import BaseHttpEngine
@@ -14,6 +17,8 @@ addonHandler.initTranslation()
 
 
 class GoogleHQTranslateEngine(BaseHttpEngine):
+	"""Translate text through the authenticated Polyglot Google endpoint."""
+
 	id = "googlePolyglot"
 	name = _("Google Translate (Polyglot)")
 
@@ -184,14 +189,14 @@ class GoogleHQTranslateEngine(BaseHttpEngine):
 
 	def _parseResponse(self, responseBody: str) -> dict:
 		"""
-		Parses the simple, nested array response returned by the endpoint
+		Parse the nested array response returned by the endpoint
 		when receiving a protobuf-style request.
 		Expected format: [["Translated text..."], ["detected_lang_code"]]
 		"""
 		try:
 			data = json.loads(responseBody)
 		except json.JSONDecodeError:
-			raise ApiResponseError(_("Failed to parse API response."))
+			raise ApiResponseError(_("Failed to parse API response.")) from None
 		try:
 			rawTranslatedText = data[0][0]
 			translatedText = html.unescape(rawTranslatedText)
@@ -199,7 +204,6 @@ class GoogleHQTranslateEngine(BaseHttpEngine):
 			if isinstance(data, dict) and "error" in data:
 				errorMsg = data["error"].get("message", "Unknown API error")
 				raise ApiResponseError(errorMsg)
-			log.error(f"Could not parse Google HQ response. Raw: {responseBody}")
 			raise ApiResponseError(_("Invalid API response or no translation text included."))
 		detectedLang = None
 		if len(data) > 1 and isinstance(data[1], list) and data[1]:

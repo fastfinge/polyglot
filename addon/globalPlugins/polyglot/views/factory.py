@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+# Copyright (C) 2025-2026 cary-rowen <manchen_0528@outlook.com>
+# This file is covered by the GNU General Public License version 3 or later.
+# See the file COPYING.txt for more details.
+
 from collections import OrderedDict
 from collections.abc import Callable
 from typing import Any
@@ -13,11 +17,15 @@ ConfigSection = dict[str, Any]
 
 
 class ControlHandlerBase:
+	"""Define the configuration and wx-control conversion contract."""
+
 	@property
 	def configType(self) -> str:
+		"""Return the ConfigObj validator type handled by this adapter."""
 		raise NotImplementedError
 
 	def formatConfigDefault(self, value: Any) -> str:
+		"""Format a Python value for use in a ConfigObj specification."""
 		raise NotImplementedError
 
 	def createControlPair(
@@ -25,16 +33,19 @@ class ControlHandlerBase:
 		panel: wx.Window,
 		spec: ConfigSpec,
 	) -> tuple[wx.StaticText | None, wx.Control]:
+		"""Create the optional label and control described by spec."""
 		raise NotImplementedError
 
 	def getValueFromControl(self, control: wx.Control) -> Any:
+		"""Return the configuration value represented by control."""
 		raise NotImplementedError
 
 	def setValueToControl(self, control: wx.Control, value: Any, spec: ConfigSpec):
+		"""Apply a configuration value to control."""
 		raise NotImplementedError
 
 	def bindEvent(self, control: wx.Control, callback: Callable[[wx.Event], None]):
-		"""Binds the appropriate 'value changed' event to the control."""
+		"""Bind control's value-change event to callback."""
 		raise NotImplementedError
 
 	def updateControlState(
@@ -44,6 +55,7 @@ class ControlHandlerBase:
 		prop: str,
 		value: Any,
 	):
+		"""Apply a dynamic enabled or visible state to a control pair."""
 		if prop == "enabled":
 			if control.IsEnabled() != value:
 				control.Enable(bool(value))
@@ -57,22 +69,24 @@ class ControlHandlerBase:
 					labelControl.Show(bool(value))
 
 	def loadFromConfig(self, control: wx.Control, configSection: ConfigSection, spec: ConfigSpec):
-		"""Loads a value from the config dictionary and applies it to the control."""
+		"""Load a configuration value into the control."""
 		raise NotImplementedError
 
 	def saveToConfig(self, control: wx.Control, configSection: ConfigSection, spec: ConfigSpec):
-		"""Gets the value from the control and saves it to the config dictionary."""
+		"""Save the control's value to the configuration dictionary."""
 		raise NotImplementedError
 
 
 def getControlHandler(typeName: str) -> ControlHandlerBase:
-	"""Returns the registered control handler for the given config type name."""
+	"""Return the control handler registered for a configuration type."""
 	if typeName not in _controlHandlers:
 		raise ValueError(f"Unknown control type: '{typeName}'")
 	return _controlHandlers[typeName]
 
 
 class CheckboxHandler(ControlHandlerBase):
+	"""Adapt boolean configuration items to wx checkboxes."""
+
 	@property
 	def configType(self) -> str:
 		return "boolean"
@@ -111,6 +125,8 @@ class CheckboxHandler(ControlHandlerBase):
 
 
 class LabeledControlHandler(ControlHandlerBase):
+	"""Create controls whose labels are separate wx static-text controls."""
+
 	def createControlPair(
 		self,
 		panel: wx.Window,
@@ -122,10 +138,13 @@ class LabeledControlHandler(ControlHandlerBase):
 		return (label, control)
 
 	def getWxClassAndKwargs(self, spec: ConfigSpec) -> tuple[type[wx.Control], dict[str, Any]]:
+		"""Return the wx control class and constructor arguments for spec."""
 		raise NotImplementedError
 
 
 class TextHandler(LabeledControlHandler):
+	"""Adapt string and password configuration items to wx text controls."""
+
 	@property
 	def configType(self) -> str:
 		return "string"
@@ -160,6 +179,8 @@ class TextHandler(LabeledControlHandler):
 
 
 class ChoiceHandler(LabeledControlHandler):
+	"""Adapt enumerated string configuration items to wx choices."""
+
 	@property
 	def configType(self) -> str:
 		return "string"
@@ -199,6 +220,7 @@ class ChoiceHandler(LabeledControlHandler):
 		choicesDict: dict[str, str],
 		currentValueCode: Any = None,
 	) -> None:
+		"""Update choice items while retaining a valid current selection."""
 		currentChoices = OrderedDict()
 		for i in range(choiceCtrl.GetCount()):
 			currentChoices[choiceCtrl.GetClientData(i)] = choiceCtrl.GetString(i)
@@ -246,6 +268,8 @@ class ChoiceHandler(LabeledControlHandler):
 
 
 class SpinCtrlHandler(LabeledControlHandler):
+	"""Adapt bounded integer configuration items to wx spin controls."""
+
 	@property
 	def configType(self) -> str:
 		return "integer"

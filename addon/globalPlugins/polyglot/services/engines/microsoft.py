@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+# Copyright (C) 2025-2026 cary-rowen <manchen_0528@outlook.com>
+# This file is covered by the GNU General Public License version 3 or later.
+# See the file COPYING.txt for more details.
+
 import json
 import time
 import urllib.parse
@@ -69,14 +73,13 @@ class MicrosoftTranslateEngine(BaseHttpEngine):
 
 	def _getAuthToken(self, config: dict) -> str:
 		"""
-		Fetches or returns a cached authentication token from Microsoft's auth service.
+		Fetch or return a cached token from Microsoft's authentication service.
 		The token is typically valid for 10 minutes.
 		"""
 		# Check if we have a valid, non-expired token
 		if self._tokenCache["token"] and self._tokenCache["expiry"] > time.time():
 			return self._tokenCache["token"]
 
-		log.info("Microsoft Translator: Fetching new authentication token.")
 		url = "https://edge.microsoft.com/translate/auth"
 		headers = {
 			"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0",
@@ -97,16 +100,14 @@ class MicrosoftTranslateEngine(BaseHttpEngine):
 
 			return token
 		except Exception as e:
-			log.error("Failed to fetch Microsoft Translator auth token.", exc_info=True)
+			log.error("Failed to fetch Microsoft Translator auth token (%s).", type(e).__name__)
 			# Clear cache on failure
 			self._tokenCache["token"] = None
 			self._tokenCache["expiry"] = 0
-			raise AuthenticationError(_("Could not get Microsoft Translator authentication token.")) from e
+			raise AuthenticationError(_("Could not get Microsoft Translator authentication token.")) from None
 
 	def _translateChunk(self, text: str, langFrom: str, langTo: str, config: dict) -> dict:
-		"""
-		Overrides the base _translateChunk method to handle the two-step token authentication.
-		"""
+		"""Translate a chunk using Microsoft's two-step token authentication."""
 		try:
 			# Step 1: Get the authentication token
 			authToken = self._getAuthToken(config)
@@ -129,7 +130,6 @@ class MicrosoftTranslateEngine(BaseHttpEngine):
 			response.raise_for_status()
 			responseBody = response.text
 
-			log.debug(f"Engine '{self.id}' raw response: {responseBody}")
 			return self._parseResponse(responseBody)
 		except requests.exceptions.HTTPError as e:
 			# If the error is 401 Unauthorized, our token has likely expired. Clear it.
@@ -138,12 +138,12 @@ class MicrosoftTranslateEngine(BaseHttpEngine):
 				self._tokenCache["token"] = None
 				self._tokenCache["expiry"] = 0
 			# Re-raise as our custom exception type
-			raise ApiResponseError(f"HTTP Error: {e.response.status_code}") from e
+			raise ApiResponseError(f"HTTP Error: {e.response.status_code}") from None
+		except (ApiResponseError, EngineError):
+			raise
 		except Exception as e:
-			log.error(f"An unexpected error occurred in '{self.id}' engine.", exc_info=True)
-			if isinstance(e, (ApiResponseError, EngineError)):
-				raise
-			raise EngineError(_("An unknown error occurred during translation.")) from e
+			log.error("An unexpected error occurred in '%s' engine (%s).", self.id, type(e).__name__)
+			raise EngineError(_("An unknown error occurred during translation.")) from None
 
 	def _buildRequestParams(
 		self,
@@ -153,9 +153,7 @@ class MicrosoftTranslateEngine(BaseHttpEngine):
 		config: dict,
 		authToken: str,
 	) -> dict:
-		"""
-		Builds the request dictionary for the actual translation API call.
-		"""
+		"""Build request parameters for the Microsoft translation API."""
 		# Map our standard language codes to Microsoft's specific codes
 		langMap = {
 			"zh-CN": "zh-Hans",
@@ -178,11 +176,11 @@ class MicrosoftTranslateEngine(BaseHttpEngine):
 		return {"url": url, "headers": headers, "data": json.dumps(body).encode("utf-8")}
 
 	def _parseResponse(self, responseBody: str) -> dict:
-		"""Parses the JSON response from the Microsoft Translator API."""
+		"""Parse a Microsoft Translator response into the common result."""
 		try:
 			data = json.loads(responseBody)
 		except json.JSONDecodeError:
-			raise ApiResponseError(_("Failed to parse response from Microsoft Translator."))
+			raise ApiResponseError(_("Failed to parse response from Microsoft Translator.")) from None
 
 		try:
 			# The response is a list of translation results
@@ -202,5 +200,4 @@ class MicrosoftTranslateEngine(BaseHttpEngine):
 				errorMsg = data["error"].get("message", "Unknown API error")
 				raise ApiResponseError(errorMsg)
 
-			log.error(f"Could not parse Microsoft Translator response. Raw: {responseBody}")
 			raise ApiResponseError(_("Invalid API response or no translation result included."))

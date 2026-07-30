@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+# Copyright (C) 2025-2026 cary-rowen <manchen_0528@outlook.com>
+# This file is covered by the GNU General Public License version 3 or later.
+# See the file COPYING.txt for more details.
+
 import hashlib
 import hmac
 import json
@@ -7,7 +11,6 @@ import time
 from datetime import datetime
 
 import addonHandler
-from logHandler import log
 
 from ...common import languages
 from ..engine import BaseHttpEngine
@@ -17,6 +20,8 @@ addonHandler.initTranslation()
 
 
 class TencentTranslateEngine(BaseHttpEngine):
+	"""Translate text through Tencent Cloud's signed translation API."""
+
 	id = "tencent"
 	name = _("Tencent Translate")
 
@@ -160,8 +165,6 @@ class TencentTranslateEngine(BaseHttpEngine):
 			error = response["Error"]
 			errorCode = error.get("Code", "N/A")
 			errorMessage = error.get("Message", _("Unknown API error"))
-			log.error(f"Tencent API Error: Code={errorCode}, Message={errorMessage}")
-
 			if "AuthFailure" in errorCode:
 				raise AuthenticationError(
 					f"{_('Authentication failed')}: {errorMessage} (Code: {errorCode})",

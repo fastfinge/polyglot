@@ -1,5 +1,8 @@
-# --- FILE: globalPlugins/polyglot/services/engines/niutrans.py ---
 # -*- coding: utf-8 -*-
+
+# Copyright (C) 2025-2026 cary-rowen <manchen_0528@outlook.com>
+# This file is covered by the GNU General Public License version 3 or later.
+# See the file COPYING.txt for more details.
 
 import json
 import hashlib
@@ -62,7 +65,7 @@ class NiutransTranslateEngine(BaseHttpEngine):
 		return "en"
 
 	@property
-	def reportsDetectedLanguage(self) -> bool:
+	def doesReportDetectedLanguage(self) -> bool:
 		return False
 
 	def getSupportedLanguages(self) -> dict:
@@ -105,7 +108,7 @@ class NiutransTranslateEngine(BaseHttpEngine):
 		return spec
 
 	def getUiStates(self, allConfigs: dict[str, Any]) -> dict[str, Any]:
-		"""Controls the visibility of the bilingual order choice based on the checkbox."""
+		"""Control bilingual-order visibility from the bilingual-mode setting."""
 		states = super().getUiStates(allConfigs)
 		isBilingualEnabled = allConfigs.get("enableBilingual", False)
 		# The bilingual order dropdown is only visible if bilingual mode is enabled.
@@ -113,24 +116,22 @@ class NiutransTranslateEngine(BaseHttpEngine):
 		return states
 
 	def _generateAuthStr(self, params: dict, apikey: str) -> str:
-		"""Generates the authentication signature (authStr) as required by the v2.0 API."""
+		"""Generate the authentication signature required by the v2.0 API."""
 		paramsWithApikey = params.copy()
 		paramsWithApikey["apikey"] = apikey
 
 		sortedParams = sorted(paramsWithApikey.items(), key=lambda x: x[0])
 
 		paramStr = "&".join([f"{key}={value}" for key, value in sortedParams])
-		log.debug(f"Niutrans signing string: {paramStr}")
 
 		md5 = hashlib.md5()
 		md5.update(paramStr.encode("utf-8"))
 		authStr = md5.hexdigest()
-		log.debug(f"Niutrans generated authStr: {authStr}")
 
 		return authStr
 
 	def _buildRequestParams(self, text: str, langFrom: str, langTo: str, config: dict) -> dict:
-		"""Builds the request dictionary for the Niutrans v2.0 API call."""
+		"""Build request parameters for the Niutrans v2.0 API."""
 		appId = config.get("appId", "").strip()
 		apiKey = config.get("apikey", "").strip()
 		if not appId or not apiKey:
@@ -161,10 +162,10 @@ class NiutransTranslateEngine(BaseHttpEngine):
 		}
 
 	def _translateChunk(self, text: str, langFrom: str, langTo: str, config: dict) -> dict:
-		"""Overrides the base _translateChunk method to pass the config to the response parser."""
+		"""Translate a chunk while passing configuration to the response parser."""
 		try:
 			params = self._buildRequestParams(text, langFrom, langTo, config)
-			log.debug(f"Engine '{self.id}' built request params: {params.get('method')} {params.get('url')}")
+			log.debug("Engine '%s' is sending a %s request.", self.id, params.get("method", "GET"))
 
 			proxyMode = config.get("proxyMode", "system")
 			proxiesDict = None
@@ -182,19 +183,18 @@ class NiutransTranslateEngine(BaseHttpEngine):
 				timeout=timeoutInt,
 				proxies=proxiesDict,
 			)
-			log.debug(f"Engine '{self.id}' raw response: {responseBody}")
 			return self._parseResponse(responseBody, config)
 		except json.JSONDecodeError as e:
-			log.error(f"Failed to parse JSON response from '{self.id}'.", exc_info=True)
+			log.exception("Failed to parse JSON response from '%s'.", self.id)
 			raise ResponseParsingError(_("Failed to parse response from translation service.")) from e
 		except EngineError:
 			raise
 		except Exception as e:
-			log.error(f"An unexpected error occurred in '{self.id}' engine.", exc_info=True)
+			log.exception("An unexpected error occurred in '%s' engine.", self.id)
 			raise EngineError(_("An unknown error occurred during translation.")) from e
 
 	def _parseResponse(self, responseBody: str, config: dict) -> dict:
-		"""Parses the JSON response from the Niutrans v2.0 API."""
+		"""Parse a Niutrans v2.0 response into the common result."""
 		try:
 			data = json.loads(responseBody)
 		except json.JSONDecodeError:
@@ -237,5 +237,4 @@ class NiutransTranslateEngine(BaseHttpEngine):
 		if translatedText is not None:
 			return {"translation": translatedText.strip(), "langDetected": None}
 		else:
-			log.error(f"Niutrans response missing 'tgtText'. Raw response: {responseBody}")
 			raise ApiResponseError(_("Invalid API response or no translation result included."))

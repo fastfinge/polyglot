@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
 
+# Copyright (C) 2025-2026 cary-rowen <manchen_0528@outlook.com>
+# Copyright (C) 2025 WangFeng Huang <1398969445@qq.com>
+# This file is covered by the GNU General Public License version 3 or later.
+# See the file COPYING.txt for more details.
+
 from collections import OrderedDict
 from typing import Any
 
@@ -18,6 +23,8 @@ addonHandler.initTranslation()
 
 
 class TranslationSettingsPanel(SettingsPanel):
+	"""Present global and per-engine Polyglot settings in NVDA's settings dialog."""
+
 	title = _("Polyglot")
 
 	# Annotate instance variables with their known types
@@ -32,6 +39,7 @@ class TranslationSettingsPanel(SettingsPanel):
 	_engineSwitchTimer: wx.CallLater | None
 
 	def __init__(self, parent):
+		"""Initialize engine state and lazily created settings panels."""
 		self.engines = OrderedDict((e.id, e) for e in engineManager.getAllEngines())
 		# TranslationCache is a singleton, so getting an instance here is safe
 		# and will access the same cache used by the manager.
@@ -49,6 +57,7 @@ class TranslationSettingsPanel(SettingsPanel):
 		self.Bind(wx.EVT_WINDOW_DESTROY, self._onDestroy)
 
 	def makeSettings(self, sizer):
+		"""Create common settings and the per-engine panel container."""
 		sHelper = guiHelper.BoxSizerHelper(self, sizer=sizer)
 
 		self.engineChoice = sHelper.addLabeledControl(_("Translation &engine:"), wx.Choice)
@@ -111,6 +120,7 @@ class TranslationSettingsPanel(SettingsPanel):
 		event.Skip()
 
 	def onSave(self):
+		"""Persist the current common and per-engine settings."""
 		conf = config.getConfig()
 		self._syncModelFromUi()
 
@@ -131,7 +141,7 @@ class TranslationSettingsPanel(SettingsPanel):
 
 	def postSave(self) -> None:
 		"""Apply local dictionary hook changes after every settings panel saves successfully."""
-		config.localDictionarySettingsChanged.notify()
+		config.post_localDictionarySettingsChanged.notify()
 
 	def onEngineChanged(self, event: wx.Event) -> None:
 		"""Debounce the engine switch event to avoid stutter on rapid changes."""
@@ -143,7 +153,7 @@ class TranslationSettingsPanel(SettingsPanel):
 		self._engineSwitchTimer = wx.CallLater(200, self._performEngineSwitch)
 
 	def _performEngineSwitch(self):
-		"""The actual logic that switches the panel, called by the timer."""
+		"""Switch the active engine panel when the debounce timer fires."""
 		self.Freeze()
 		try:
 			self._switchEnginePanel()
@@ -152,6 +162,7 @@ class TranslationSettingsPanel(SettingsPanel):
 			self.Thaw()
 
 	def onAnyControlChanged(self, event: wx.Event | None = None):
+		"""Synchronize the UI model and apply engine-defined dynamic states."""
 		if event:
 			event.Skip()
 
@@ -298,6 +309,7 @@ class TranslationSettingsPanel(SettingsPanel):
 				self.uiModel[cid] = info["handler"].getValueFromControl(info["control"])
 
 	def onPanelActivated(self):
+		"""Refresh cache information when the panel becomes active."""
 		super().onPanelActivated()
 		self._updateCacheButton()
 
@@ -314,6 +326,7 @@ class TranslationSettingsPanel(SettingsPanel):
 		return self.engines.get(engineId)
 
 	def onClearCache(self, event: wx.Event):
+		"""Clear cached translations and refresh the cache button."""
 		self.cache.clear()
 		self._updateCacheButton()
 		wx.CallAfter(self.clearCacheButton.SetFocus)

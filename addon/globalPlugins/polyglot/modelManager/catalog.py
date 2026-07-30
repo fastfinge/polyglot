@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-# A part of the Polyglot add-on for NVDA.
-# Copyright (C) 2025 Cary-rowen <manchen_0528@outlook.com>
-# This file is covered by the GNU General Public License.
+# Copyright (C) 2025-2026 cary-rowen <manchen_0528@outlook.com>
+# This file is covered by the GNU General Public License version 3 or later.
 # See the file COPYING.txt for more details.
 
 """Catalog loading and language-pair metadata for ChromeAI model packages."""
@@ -24,8 +23,8 @@ from .settings import getString
 addonHandler.initTranslation()
 
 DEFAULT_CATALOG_URL = "https://dl.nvdacn.com/Polyglot/catalog.json"
-CATALOG_URL_ENV = "POLYGLOT_MODEL_CATALOG_URL"
-BASE_LANGUAGE = "en"
+_CATALOG_URL_ENV = "POLYGLOT_MODEL_CATALOG_URL"
+_BASE_LANGUAGE = "en"
 
 
 @dataclass(frozen=True)
@@ -224,10 +223,13 @@ class ModelCatalog:
 			return []
 		if package := self.findPackageForPair(sourceLanguage, targetLanguage):
 			return [package]
-		if sourceLanguage == BASE_LANGUAGE or targetLanguage == BASE_LANGUAGE:
+		if sourceLanguage == _BASE_LANGUAGE or targetLanguage == _BASE_LANGUAGE:
 			return []
 		required: list[ModelPackage] = []
-		for pairSource, pairTarget in ((sourceLanguage, BASE_LANGUAGE), (BASE_LANGUAGE, targetLanguage)):
+		for pairSource, pairTarget in (
+			(sourceLanguage, _BASE_LANGUAGE),
+			(_BASE_LANGUAGE, targetLanguage),
+		):
 			package = self.findPackageForPair(pairSource, pairTarget)
 			if package is not None and package.key not in {item.key for item in required}:
 				required.append(package)
@@ -247,7 +249,7 @@ def normalizeCatalogUrl(inputUrl: str | None) -> str:
 
 def resolveInitialCatalogUrl(savedCatalogUrl: str = "") -> str:
 	"""Resolve the catalog URL from environment, saved settings, or default."""
-	for value in (os.environ.get(CATALOG_URL_ENV), savedCatalogUrl, DEFAULT_CATALOG_URL):
+	for value in (os.environ.get(_CATALOG_URL_ENV), savedCatalogUrl, DEFAULT_CATALOG_URL):
 		try:
 			return normalizeCatalogUrl(value)
 		except RuntimeError:
@@ -272,7 +274,7 @@ def normalizeLanguageCode(code: str) -> str:
 
 def languageName(code: str) -> str:
 	"""Return a localized display name for a language code."""
-	return languages.ALL_LANGUAGES.get(code, code)
+	return languages.getLanguageName(code)
 
 
 def pairDisplayName(package: ModelPackage) -> str:
@@ -281,9 +283,9 @@ def pairDisplayName(package: ModelPackage) -> str:
 	targetLanguage = normalizeLanguageCode(package.targetLanguage)
 	if not sourceLanguage or not targetLanguage:
 		return package.displayName or package.key
-	if sourceLanguage == BASE_LANGUAGE and targetLanguage != BASE_LANGUAGE:
+	if sourceLanguage == _BASE_LANGUAGE and targetLanguage != _BASE_LANGUAGE:
 		return languageName(targetLanguage)
-	if targetLanguage == BASE_LANGUAGE and sourceLanguage != BASE_LANGUAGE:
+	if targetLanguage == _BASE_LANGUAGE and sourceLanguage != _BASE_LANGUAGE:
 		return languageName(sourceLanguage)
 	return _("{source} / {target}").format(
 		source=languageName(sourceLanguage),

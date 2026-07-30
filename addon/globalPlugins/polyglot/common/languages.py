@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+# Copyright (C) 2025-2026 cary-rowen <manchen_0528@outlook.com>
+# This file is covered by the GNU General Public License version 3 or later.
+# See the file COPYING.txt for more details.
+
 import addonHandler
 from logHandler import log
 
@@ -10,7 +14,7 @@ addonHandler.initTranslation()
 
 # All display names must be wrapped in _() for localization.
 
-ALL_LANGUAGES = {
+_ALL_LANGUAGES = {
 	# --- Special Codes ---
 	"auto": _("Auto-detect"),
 	"": _("Auto-detect"),  # Used by Microsoft and Yandex
@@ -158,7 +162,7 @@ ALL_LANGUAGES = {
 
 def getLanguageDictForCodes(codes: list[str]) -> dict[str, str]:
 	"""
-	Builds a language dictionary for a specific engine.
+	Build a language-name dictionary for the supplied engine codes.
 	If a code is not found in the central repository, it logs an error
 	and uses the code itself as the display name as a fallback.
 	:param codes: A list of language codes supported by the engine.
@@ -166,8 +170,8 @@ def getLanguageDictForCodes(codes: list[str]) -> dict[str, str]:
 	"""
 	langDict: dict[str, str] = {}
 	for code in codes:
-		if code in ALL_LANGUAGES:
-			langDict[code] = ALL_LANGUAGES[code]
+		if code in _ALL_LANGUAGES:
+			langDict[code] = _ALL_LANGUAGES[code]
 		else:
 			# Log an error for missing definitions and use the code as a fallback display name.
 			log.error(
@@ -175,3 +179,8 @@ def getLanguageDictForCodes(codes: list[str]) -> dict[str, str]:
 			)
 			langDict[code] = code
 	return langDict
+
+
+def getLanguageName(code: str) -> str:
+	"""Return the translated language name, falling back to the supplied code."""
+	return _ALL_LANGUAGES.get(code, code)

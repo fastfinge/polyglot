@@ -13,7 +13,7 @@ requires-python = ">=3.13,<3.14"
 classifiers = [
 	"Development Status :: 5 - Production/Stable",
 	"Intended Audience :: End Users/Desktop",
-	"License :: OSI Approved :: GNU General Public License v2 or later (GPLv2+)",
+	"License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
 	"Operating System :: Microsoft :: Windows",
 	"Programming Language :: Python :: 3",
 	"Topic :: Accessibility",
@@ -64,7 +64,10 @@ exclude = [
 	".git",
 	"__pycache__",
 	".venv",
-	"buildVars.py",
+	"addon/websocketClientRepo",
+	"site_scons",
+	"sconstruct",
+	"tools/resource/ECDICT",
 ]
 
 [tool.ruff.format]
@@ -82,9 +85,6 @@ ignore = [
 logger-objects = ["logHandler.log"]
 
 [tool.ruff.lint.per-file-ignores]
-# sconscripts contains many inbuilt functions not recognised by the lint,
-# so ignore F821.
-"sconstruct" = ["F821"]
 # Importing websocketClient is required.
 "addon/globalPlugins/polyglot/__init__.py" = ["E402"]
 

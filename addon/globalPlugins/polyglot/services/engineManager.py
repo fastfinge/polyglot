@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+# Copyright (C) 2025-2026 cary-rowen <manchen_0528@outlook.com>
+# This file is covered by the GNU General Public License version 3 or later.
+# See the file COPYING.txt for more details.
+
 import importlib
 import inspect
 import pkgutil
@@ -41,6 +45,7 @@ def _scanAndLoadEngines() -> None:
 
 
 def getAllEngines() -> list[TranslationEngine]:
+	"""Return all discovered concrete translation engines."""
 	global _engineInstances
 	if _engineInstances is None:
 		_scanAndLoadEngines()
@@ -49,7 +54,7 @@ def getAllEngines() -> list[TranslationEngine]:
 
 
 def _getEngineConfig(engineId: str) -> dict[str, Any]:
-	"""Returns the saved configuration section for the given engine."""
+	"""Return the saved configuration section for an engine."""
 	from ..common import config
 
 	conf = config.getConfig()
@@ -57,12 +62,12 @@ def _getEngineConfig(engineId: str) -> dict[str, Any]:
 
 
 def getEnabledEngines() -> list[TranslationEngine]:
-	"""Returns all loaded engines that are enabled in the current configuration."""
+	"""Return loaded engines enabled by the current configuration."""
 	return [engine for engine in getAllEngines() if engine.isEnabled(_getEngineConfig(engine.id))]
 
 
-def getNextEnabledEngine(currentId: str, forward: bool = True) -> TranslationEngine | None:
-	"""Returns the next enabled engine after the given engine ID, or None if none are enabled."""
+def getNextEnabledEngine(currentId: str, isForward: bool = True) -> TranslationEngine | None:
+	"""Return the next enabled engine, or None when none are enabled."""
 	allEngines = getAllEngines()
 	if not allEngines:
 		return None
@@ -70,8 +75,8 @@ def getNextEnabledEngine(currentId: str, forward: bool = True) -> TranslationEng
 	try:
 		currentIndex = engineIds.index(currentId)
 	except ValueError:
-		currentIndex = -1 if forward else 0
-	step = 1 if forward else -1
+		currentIndex = -1 if isForward else 0
+	step = 1 if isForward else -1
 	for offset in range(1, len(allEngines) + 1):
 		newIndex = (currentIndex + (step * offset)) % len(allEngines)
 		candidate = allEngines[newIndex]
@@ -81,6 +86,10 @@ def getNextEnabledEngine(currentId: str, forward: bool = True) -> TranslationEng
 
 
 def getEngineById(engineId: str) -> TranslationEngine:
+	"""Return the loaded engine matching engineId.
+
+	:raises ValueError: If no loaded engine uses the requested ID.
+	"""
 	allEngines = getAllEngines()
 	for engine in allEngines:
 		if engine.id == engineId:

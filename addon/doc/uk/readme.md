@@ -192,7 +192,10 @@
 
 ## Ліцензія
 
-Цей проект ліцензовано згідно з GNU General Public License v2. Перегляньте [COPYING.txt](COPYING.txt).
+Авторське право (C) 2025-2026 cary-rowen.
+
+Цей проект ліцензовано згідно з GNU General Public License версії 3 або будь-якої пізнішої версії
+(`GPL-3.0-or-later`). Текст ліцензії входить до пакета додатка; також дивіться [COPYING.txt](https://github.com/cary-rowen/polyglot/blob/master/COPYING.txt) у репозиторії.
 
 ---
 - Переклад: Георгій Галас.

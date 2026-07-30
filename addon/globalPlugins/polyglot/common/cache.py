@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+# Copyright (C) 2025-2026 cary-rowen <manchen_0528@outlook.com>
+# This file is covered by the GNU General Public License version 3 or later.
+# See the file COPYING.txt for more details.
+
 import hashlib
 import json
 import os
@@ -17,23 +21,25 @@ class TranslationCache:
 	cachePath: str
 	maxSize: int
 	_cache: dict[str, str]
-	_initialized: bool
+	_isInitialized: bool
 
 	def __new__(cls, *args: Any, **kwargs: Any) -> Self:
+		"""Return the process-wide translation cache instance."""
 		if not cls._instance:
 			cls._instance = super().__new__(cls)
 		return cls._instance
 
 	def __init__(self, filename: str = "translation_cache.json", maxSize: int = 10000) -> None:
+		"""Initialize the singleton cache from NVDA's configuration directory."""
 		super().__init__()
-		if hasattr(self, "_initialized"):
+		if hasattr(self, "_isInitialized"):
 			return
 		configPath = globalVars.appArgs.configPath
 		self.cachePath = os.path.join(configPath, filename)
 		self.maxSize = maxSize
 		self._cache = self._load()
-		self._initialized = True
-		log.info(f"TranslationCache initialized. Path: {self.cachePath}, Initial items: {len(self._cache)}")
+		self._isInitialized = True
+		log.debug("Translation cache initialized with %d items.", len(self._cache))
 
 	def _load(self) -> dict[str, str]:
 		try:
@@ -43,8 +49,7 @@ class TranslationCache:
 					if isinstance(loadedData, dict):
 						return loadedData
 		except (IOError, json.JSONDecodeError):
-			log.error(f"Failed to load translation cache from {self.cachePath}", exc_info=True)
-			pass
+			log.error("Failed to load the translation cache.", exc_info=True)
 		return {}
 
 	def _save(self) -> None:
@@ -53,35 +58,34 @@ class TranslationCache:
 				keysToDelete = list(self._cache.keys())[: len(self._cache) - self.maxSize]
 				for key in keysToDelete:
 					del self._cache[key]
-				log.info(f"Cache size exceeded {self.maxSize}. Pruned {len(keysToDelete)} items.")
+				log.debug("Translation cache pruned %d items.", len(keysToDelete))
 			with open(self.cachePath, "w", encoding="utf-8") as f:
 				json.dump(self._cache, f, ensure_ascii=False, indent=2)
 		except IOError:
-			log.error(f"Failed to save translation cache to {self.cachePath}", exc_info=True)
-			pass
+			log.error("Failed to save the translation cache.", exc_info=True)
 
 	def buildKey(self, langFrom: str, langTo: str, text: str) -> str:
-		"""Generates a unique cache key by hashing the language pair and text."""
+		"""Generate a cache key from the language pair and normalized text."""
 		# Normalize text by stripping whitespace to improve the cache hit rate.
 		normalizedText = text.strip()
 		keyString = f"{langFrom}:{langTo}:{normalizedText}"
 		return hashlib.md5(keyString.encode("utf-8")).hexdigest()
 
 	def get(self, key: str) -> str | None:
-		"""Retrieves a cached translation, or None if not found."""
+		"""Return a cached translation, or None when the key is absent."""
 		return self._cache.get(key)
 
 	def set(self, key: str, value: str) -> None:
-		"""Stores a translation result in the cache and persists to disk."""
+		"""Store a translation result and persist the cache."""
 		self._cache[key] = value
 		self._save()
 
 	def getItemCount(self) -> int:
-		"""Returns the number of entries in the cache."""
+		"""Return the number of cached entries."""
 		return len(self._cache)
 
 	def clear(self) -> None:
-		"""Removes all entries from the cache and persists the empty state."""
-		log.info("Translation cache cleared.")
+		"""Remove all entries and persist the empty cache."""
+		log.debug("Translation cache cleared.")
 		self._cache = {}
 		self._save()
