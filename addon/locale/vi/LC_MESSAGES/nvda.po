@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: polyglot 0.9.1\n"
 "Report-Msgid-Bugs-To: 'nvda-translations@groups.io'\n"
-"POT-Creation-Date: 2026-07-19 21:17+0800\n"
+"POT-Creation-Date: 2026-07-30 19:06+0800\n"
 "PO-Revision-Date: 2026-06-12 09:48+0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -21,738 +21,738 @@ msgstr ""
 #. Add-on summary/title, usually the user visible name of the add-on
 #. Translators: Summary/title for this add-on
 #. to be shown on installation and add-on information found in add-on store
-#: addon\globalPlugins\polyglot\__init__.py:75
-#: addon\globalPlugins\polyglot\views\settings.py:21 buildVars.py:23
+#: addon\globalPlugins\polyglot\__init__.py:81
+#: addon\globalPlugins\polyglot\views\settings.py:28 buildVars.py:32
 msgid "Polyglot"
 msgstr "Polyglot"
 
-#: addon\globalPlugins\polyglot\__init__.py:135
+#: addon\globalPlugins\polyglot\__init__.py:146
 msgid "Enter the translation command layer; press H for command layer help"
 msgstr "Vào lớp lệnh dịch thuật; nhấn H để xem trợ giúp về lớp lệnh"
 
-#: addon\globalPlugins\polyglot\__init__.py:150
+#: addon\globalPlugins\polyglot\__init__.py:161
 msgid "Nothing selected"
 msgstr "Chưa chọn nội dung nào"
 
-#: addon\globalPlugins\polyglot\__init__.py:155
+#: addon\globalPlugins\polyglot\__init__.py:166
 msgid "Cannot get selected text from the current object"
 msgstr "Không thể lấy văn bản được chọn từ đối tượng hiện tại"
 
-#: addon\globalPlugins\polyglot\__init__.py:187
+#: addon\globalPlugins\polyglot\__init__.py:199
 msgid "Next source language"
 msgstr "Ngôn ngữ nguồn tiếp theo"
 
-#: addon\globalPlugins\polyglot\__init__.py:193
+#: addon\globalPlugins\polyglot\__init__.py:205
 msgid "Previous source language"
 msgstr "Ngôn ngữ nguồn trước đó"
 
-#: addon\globalPlugins\polyglot\__init__.py:199
+#: addon\globalPlugins\polyglot\__init__.py:211
 msgid "Next target language"
 msgstr "Ngôn ngữ đích tiếp theo"
 
-#: addon\globalPlugins\polyglot\__init__.py:205
+#: addon\globalPlugins\polyglot\__init__.py:217
 msgid "Previous target language"
 msgstr "Ngôn ngữ đích trước đó"
 
-#: addon\globalPlugins\polyglot\__init__.py:217
+#: addon\globalPlugins\polyglot\__init__.py:230
 msgid "Next translation engine"
 msgstr "Bộ dịch tiếp theo"
 
-#: addon\globalPlugins\polyglot\__init__.py:223
+#: addon\globalPlugins\polyglot\__init__.py:236
 msgid "Previous translation engine"
 msgstr "Bộ dịch trước đó"
 
-#: addon\globalPlugins\polyglot\__init__.py:229
+#: addon\globalPlugins\polyglot\__init__.py:242
 msgid "Swap source and target languages"
 msgstr "Hoán đổi ngôn ngữ nguồn và đích"
 
-#: addon\globalPlugins\polyglot\__init__.py:238
+#: addon\globalPlugins\polyglot\__init__.py:251
 msgid "Announce current engine and languages"
 msgstr "Đọc bộ dịch và ngôn ngữ hiện tại"
 
-#: addon\globalPlugins\polyglot\__init__.py:245
+#: addon\globalPlugins\polyglot\__init__.py:258
 msgid "Copy last translation to clipboard"
 msgstr "Sao chép kết quả dịch gần nhất vào bộ nhớ tạm"
 
-#: addon\globalPlugins\polyglot\__init__.py:251
+#: addon\globalPlugins\polyglot\__init__.py:264
 msgid "No translation result to copy"
 msgstr "Không có kết quả dịch nào để sao chép"
 
-#: addon\globalPlugins\polyglot\__init__.py:253
+#: addon\globalPlugins\polyglot\__init__.py:266
 msgid "Open interactive translation dialog"
 msgstr "Mở hộp thoại dịch thuật tương tác"
 
-#: addon\globalPlugins\polyglot\__init__.py:266
+#: addon\globalPlugins\polyglot\__init__.py:279
 msgid "Open settings"
 msgstr "Mở cài đặt"
 
-#: addon\globalPlugins\polyglot\__init__.py:274
+#: addon\globalPlugins\polyglot\__init__.py:287
 msgid "Toggle auto-translation"
 msgstr "Bật/tắt dịch tự động"
 
-#: addon\globalPlugins\polyglot\__init__.py:277
+#: addon\globalPlugins\polyglot\__init__.py:290
 msgid "Auto-translation enabled"
 msgstr "Đã bật dịch tự động"
 
-#: addon\globalPlugins\polyglot\__init__.py:277
+#: addon\globalPlugins\polyglot\__init__.py:290
 msgid "Auto-translation disabled"
 msgstr "Đã tắt dịch tự động"
 
-#: addon\globalPlugins\polyglot\__init__.py:279
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:212
+#: addon\globalPlugins\polyglot\__init__.py:292
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:213
 msgid "Clear cache"
 msgstr "Xóa bộ nhớ đệm"
 
-#: addon\globalPlugins\polyglot\__init__.py:282
+#: addon\globalPlugins\polyglot\__init__.py:295
 msgid "Cache cleared"
 msgstr "Đã xóa bộ nhớ đệm"
 
-#: addon\globalPlugins\polyglot\__init__.py:284
+#: addon\globalPlugins\polyglot\__init__.py:297
 msgid "Translate selection"
 msgstr "Dịch nội dung đang chọn"
 
-#: addon\globalPlugins\polyglot\__init__.py:289
+#: addon\globalPlugins\polyglot\__init__.py:302
 msgid "Translate selection (reversed direction)"
 msgstr "Dịch nội dung đang chọn (theo chiều ngược lại)"
 
-#: addon\globalPlugins\polyglot\__init__.py:294
+#: addon\globalPlugins\polyglot\__init__.py:307
 msgid "Translate clipboard"
 msgstr "Dịch nội dung trong bộ nhớ tạm"
 
-#: addon\globalPlugins\polyglot\__init__.py:297
-#: addon\globalPlugins\polyglot\__init__.py:304
+#: addon\globalPlugins\polyglot\__init__.py:310
+#: addon\globalPlugins\polyglot\__init__.py:317
 msgid "Clipboard is empty"
 msgstr "Bộ nhớ tạm đang trống"
 
-#: addon\globalPlugins\polyglot\__init__.py:301
+#: addon\globalPlugins\polyglot\__init__.py:314
 msgid "Translate clipboard (reversed direction)"
 msgstr "Dịch nội dung trong bộ nhớ tạm (theo chiều ngược lại)"
 
-#: addon\globalPlugins\polyglot\__init__.py:308
+#: addon\globalPlugins\polyglot\__init__.py:321
 msgid "Translate last spoken text"
 msgstr "Dịch nội dung vừa được đọc gần nhất"
 
-#: addon\globalPlugins\polyglot\__init__.py:311
-#: addon\globalPlugins\polyglot\__init__.py:318
+#: addon\globalPlugins\polyglot\__init__.py:324
+#: addon\globalPlugins\polyglot\__init__.py:331
 msgid "No last spoken text"
 msgstr "Không có nội dung được đọc gần nhất"
 
-#: addon\globalPlugins\polyglot\__init__.py:315
+#: addon\globalPlugins\polyglot\__init__.py:328
 msgid "Translate last spoken text (reversed direction)"
 msgstr "Dịch nội dung vừa được đọc gần nhất (theo chiều ngược lại)"
 
-#: addon\globalPlugins\polyglot\__init__.py:322
+#: addon\globalPlugins\polyglot\__init__.py:335
 msgid "Show command layer help"
 msgstr "Hiển thị trợ giúp về lớp lệnh"
 
-#: addon\globalPlugins\polyglot\__init__.py:326
+#: addon\globalPlugins\polyglot\__init__.py:339
 msgid "Polyglot Help"
 msgstr "Trợ giúp Polyglot"
 
-#: addon\globalPlugins\polyglot\__init__.py:335
+#: addon\globalPlugins\polyglot\__init__.py:348
 msgid "Translation Actions"
 msgstr "Hành động dịch"
 
-#: addon\globalPlugins\polyglot\__init__.py:346
+#: addon\globalPlugins\polyglot\__init__.py:359
 msgid "Configuration & Switching"
 msgstr "Cấu hình & Chuyển đổi"
 
-#: addon\globalPlugins\polyglot\__init__.py:359
+#: addon\globalPlugins\polyglot\__init__.py:372
 msgid "Tools & System"
 msgstr "Công cụ & Hệ thống"
 
-#: addon\globalPlugins\polyglot\__init__.py:381
+#: addon\globalPlugins\polyglot\__init__.py:394
 msgid "Key"
 msgstr "Khóa"
 
-#: addon\globalPlugins\polyglot\__init__.py:381
+#: addon\globalPlugins\polyglot\__init__.py:394
 msgid "Action"
 msgstr "Hành động"
 
-#: addon\globalPlugins\polyglot\app\manager.py:105
-#: addon\globalPlugins\polyglot\app\manager.py:145
+#: addon\globalPlugins\polyglot\app\manager.py:111
+#: addon\globalPlugins\polyglot\app\manager.py:149
 msgid "Invalid engine configuration."
 msgstr "Cấu hình bộ dịch không hợp lệ."
 
-#: addon\globalPlugins\polyglot\app\manager.py:114
+#: addon\globalPlugins\polyglot\app\manager.py:120
 msgid "Swap failed: 'Auto-detect' cannot be the target language."
 msgstr ""
 "Hoán đổi thất bại: Không thể chọn 'Tự động phát hiện' làm ngôn ngữ đích."
 
 #. Translators: A message indicating that the source and target languages have been swapped. {source} is the new source language, {target} is the new target language.
-#: addon\globalPlugins\polyglot\app\manager.py:121
+#: addon\globalPlugins\polyglot\app\manager.py:125
 #, python-brace-format
 msgid "Languages swapped: from {source} to {target}"
 msgstr "Đã hoán đổi ngôn ngữ: từ {source} sang {target}"
 
-#: addon\globalPlugins\polyglot\app\manager.py:165
+#: addon\globalPlugins\polyglot\app\manager.py:169
 msgid "No languages available for cycling."
 msgstr "Không có ngôn ngữ nào khả dụng để xoay vòng chuyển đổi."
 
-#: addon\globalPlugins\polyglot\app\manager.py:190
+#: addon\globalPlugins\polyglot\app\manager.py:194
 msgid "No translation engines available."
 msgstr "Không có bộ dịch nào khả dụng."
 
-#: addon\globalPlugins\polyglot\app\manager.py:195
-#: addon\globalPlugins\polyglot\app\manager.py:348
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:44
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:237
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:271
+#: addon\globalPlugins\polyglot\app\manager.py:199
+#: addon\globalPlugins\polyglot\app\manager.py:351
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:47
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:243
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:279
 msgid "No enabled translation engines available."
 msgstr "Không có bộ dịch khả dụng nào được bật."
 
 #. Translators: Announcement of the current translation engine and languages. {engine} is the engine name, {source} is the source language, {target} is the target language.
-#: addon\globalPlugins\polyglot\app\manager.py:213
+#: addon\globalPlugins\polyglot\app\manager.py:215
 #, python-brace-format
 msgid "{engine}, from {source} to {target}"
 msgstr "{engine}, từ {source} sang {target}"
 
-#: addon\globalPlugins\polyglot\app\manager.py:222
+#: addon\globalPlugins\polyglot\app\manager.py:224
 msgid "Languages not configured or current engine is invalid"
 msgstr "Ngôn ngữ chưa được cấu hình hoặc bộ dịch hiện tại không hợp lệ"
 
-#: addon\globalPlugins\polyglot\app\manager.py:267
+#: addon\globalPlugins\polyglot\app\manager.py:269
 msgid "Languages not configured, cannot reverse."
 msgstr "Ngôn ngữ chưa được cấu hình, không thể đảo chiều dịch."
 
-#: addon\globalPlugins\polyglot\app\manager.py:273
+#: addon\globalPlugins\polyglot\app\manager.py:275
 msgid "Reverse failed: 'Auto-detect' cannot be the target language."
 msgstr ""
 "Đảo chiều thất bại: Không thể chọn 'Tự động phát hiện' làm ngôn ngữ đích."
 
-#: addon\globalPlugins\polyglot\app\manager.py:276
+#: addon\globalPlugins\polyglot\app\manager.py:278
 msgid "Current translation engine is invalid."
 msgstr "Bộ dịch hiện tại không hợp lệ."
 
-#: addon\globalPlugins\polyglot\app\manager.py:292
+#: addon\globalPlugins\polyglot\app\manager.py:295
 msgid "Nothing to translate"
 msgstr "Không có gì để dịch"
 
-#: addon\globalPlugins\polyglot\app\manager.py:306
+#: addon\globalPlugins\polyglot\app\manager.py:309
 #, python-brace-format
 msgid "Error: Selected engine '{engine}' is unavailable or not configured."
 msgstr ""
 "Lỗi: Bộ dịch được chọn '{engine}' không khả dụng hoặc chưa được cấu hình."
 
 #. Translators: Error message when the selected translation engine is not configured properly. {engine} is the internal ID of the engine.
-#: addon\globalPlugins\polyglot\app\manager.py:378
+#: addon\globalPlugins\polyglot\app\manager.py:381
 #, python-brace-format
 msgid "Error: Engine '{engine}' is not configured."
 msgstr "Lỗi: Bộ dịch '{engine}' chưa được cấu hình."
 
-#: addon\globalPlugins\polyglot\app\manager.py:478
+#: addon\globalPlugins\polyglot\app\manager.py:481
 msgid "Translation failed: "
 msgstr "Dịch thất bại: "
 
-#: addon\globalPlugins\polyglot\app\manager.py:482
+#: addon\globalPlugins\polyglot\app\manager.py:485
 msgid "An unknown error occurred"
 msgstr "Đã xảy ra lỗi không xác định"
 
-#: addon\globalPlugins\polyglot\app\manager.py:496
+#: addon\globalPlugins\polyglot\app\manager.py:499
 msgid "Auto-translation disabled due to repeated failures."
 msgstr "Đã tắt dịch tự động do gặp lỗi liên tiếp nhiều lần."
 
-#: addon\globalPlugins\polyglot\common\cues.py:171
+#: addon\globalPlugins\polyglot\common\cues.py:165
 #, python-format
 msgid "%d percent"
 msgstr "%d phần trăm"
 
 #. --- Special Codes ---
-#: addon\globalPlugins\polyglot\common\languages.py:15
-#: addon\globalPlugins\polyglot\common\languages.py:16
+#: addon\globalPlugins\polyglot\common\languages.py:19
+#: addon\globalPlugins\polyglot\common\languages.py:20
 msgid "Auto-detect"
 msgstr "Tự động phát hiện"
 
 #. Used by Microsoft and Yandex
 #. --- Chinese Variants ---
-#: addon\globalPlugins\polyglot\common\languages.py:18
-#: addon\globalPlugins\polyglot\common\languages.py:29
+#: addon\globalPlugins\polyglot\common\languages.py:22
+#: addon\globalPlugins\polyglot\common\languages.py:33
 msgid "Chinese"
 msgstr "Tiếng Trung"
 
-#: addon\globalPlugins\polyglot\common\languages.py:19
-#: addon\globalPlugins\polyglot\common\languages.py:20
-#: addon\globalPlugins\polyglot\common\languages.py:21
+#: addon\globalPlugins\polyglot\common\languages.py:23
+#: addon\globalPlugins\polyglot\common\languages.py:24
+#: addon\globalPlugins\polyglot\common\languages.py:25
 msgid "Chinese (Simplified)"
 msgstr "Tiếng Trung (Giản thể)"
 
 #. Lingva
-#: addon\globalPlugins\polyglot\common\languages.py:22
-#: addon\globalPlugins\polyglot\common\languages.py:23
-#: addon\globalPlugins\polyglot\common\languages.py:24
-#: addon\globalPlugins\polyglot\common\languages.py:25
 #: addon\globalPlugins\polyglot\common\languages.py:26
+#: addon\globalPlugins\polyglot\common\languages.py:27
+#: addon\globalPlugins\polyglot\common\languages.py:28
+#: addon\globalPlugins\polyglot\common\languages.py:29
+#: addon\globalPlugins\polyglot\common\languages.py:30
 msgid "Chinese (Traditional)"
 msgstr "Tiếng Trung (Phồn thể)"
 
-#: addon\globalPlugins\polyglot\common\languages.py:27
+#: addon\globalPlugins\polyglot\common\languages.py:31
 msgid "Cantonese"
 msgstr "Tiếng Quảng Đông"
 
-#: addon\globalPlugins\polyglot\common\languages.py:28
+#: addon\globalPlugins\polyglot\common\languages.py:32
 msgid "Classical Chinese"
 msgstr "Tiếng Trung cổ phong / Văn ngôn"
 
 #. DeepL
 #. --- Major Languages ---
-#: addon\globalPlugins\polyglot\common\languages.py:31
+#: addon\globalPlugins\polyglot\common\languages.py:35
 msgid "English"
 msgstr "Tiếng Anh"
 
-#: addon\globalPlugins\polyglot\common\languages.py:32
-#: addon\globalPlugins\polyglot\common\languages.py:33
+#: addon\globalPlugins\polyglot\common\languages.py:36
+#: addon\globalPlugins\polyglot\common\languages.py:37
 msgid "Japanese"
 msgstr "Tiếng Nhật"
 
 #. Baidu
-#: addon\globalPlugins\polyglot\common\languages.py:34
-#: addon\globalPlugins\polyglot\common\languages.py:35
-#: addon\globalPlugins\polyglot\common\languages.py:36
+#: addon\globalPlugins\polyglot\common\languages.py:38
+#: addon\globalPlugins\polyglot\common\languages.py:39
+#: addon\globalPlugins\polyglot\common\languages.py:40
 msgid "Korean"
 msgstr "Tiếng Hàn"
 
 #. DeepL
-#: addon\globalPlugins\polyglot\common\languages.py:37
-#: addon\globalPlugins\polyglot\common\languages.py:38
+#: addon\globalPlugins\polyglot\common\languages.py:41
+#: addon\globalPlugins\polyglot\common\languages.py:42
 msgid "French"
 msgstr "Tiếng Pháp"
 
 #. Baidu
-#: addon\globalPlugins\polyglot\common\languages.py:39
+#: addon\globalPlugins\polyglot\common\languages.py:43
 msgid "German"
 msgstr "Tiếng Đức"
 
-#: addon\globalPlugins\polyglot\common\languages.py:40
-#: addon\globalPlugins\polyglot\common\languages.py:41
+#: addon\globalPlugins\polyglot\common\languages.py:44
+#: addon\globalPlugins\polyglot\common\languages.py:45
 msgid "Spanish"
 msgstr "Tiếng Tây Ban Nha"
 
 #. Baidu
-#: addon\globalPlugins\polyglot\common\languages.py:42
+#: addon\globalPlugins\polyglot\common\languages.py:46
 msgid "Russian"
 msgstr "Tiếng Nga"
 
-#: addon\globalPlugins\polyglot\common\languages.py:43
+#: addon\globalPlugins\polyglot\common\languages.py:47
 msgid "Portuguese"
 msgstr "Tiếng Bồ Đào Nha"
 
-#: addon\globalPlugins\polyglot\common\languages.py:44
+#: addon\globalPlugins\polyglot\common\languages.py:48
 msgid "Italian"
 msgstr "Tiếng Ý"
 
-#: addon\globalPlugins\polyglot\common\languages.py:45
-#: addon\globalPlugins\polyglot\common\languages.py:46
+#: addon\globalPlugins\polyglot\common\languages.py:49
+#: addon\globalPlugins\polyglot\common\languages.py:50
 msgid "Arabic"
 msgstr "Tiếng Ả Rập"
 
 #. Baidu
-#: addon\globalPlugins\polyglot\common\languages.py:47
+#: addon\globalPlugins\polyglot\common\languages.py:51
 msgid "Achuar"
 msgstr "Tiếng Achuar"
 
-#: addon\globalPlugins\polyglot\common\languages.py:48
+#: addon\globalPlugins\polyglot\common\languages.py:52
 msgid "Amharic"
 msgstr "Tiếng Amharic"
 
 #. --- Other European Languages ---
-#: addon\globalPlugins\polyglot\common\languages.py:50
+#: addon\globalPlugins\polyglot\common\languages.py:54
 msgid "Dutch"
 msgstr "Tiếng Hà Lan"
 
-#: addon\globalPlugins\polyglot\common\languages.py:51
-#: addon\globalPlugins\polyglot\common\languages.py:52
+#: addon\globalPlugins\polyglot\common\languages.py:55
+#: addon\globalPlugins\polyglot\common\languages.py:56
 msgid "Swedish"
 msgstr "Tiếng Thụy Điển"
 
 #. Baidu
-#: addon\globalPlugins\polyglot\common\languages.py:53
+#: addon\globalPlugins\polyglot\common\languages.py:57
 msgid "Polish"
 msgstr "Tiếng Ba Lan"
 
-#: addon\globalPlugins\polyglot\common\languages.py:54
-#: addon\globalPlugins\polyglot\common\languages.py:55
+#: addon\globalPlugins\polyglot\common\languages.py:58
+#: addon\globalPlugins\polyglot\common\languages.py:59
 msgid "Danish"
 msgstr "Tiếng Đan Mạch"
 
 #. Baidu
-#: addon\globalPlugins\polyglot\common\languages.py:56
-#: addon\globalPlugins\polyglot\common\languages.py:57
+#: addon\globalPlugins\polyglot\common\languages.py:60
+#: addon\globalPlugins\polyglot\common\languages.py:61
 msgid "Finnish"
 msgstr "Tiếng Phần Lan"
 
 #. Baidu
-#: addon\globalPlugins\polyglot\common\languages.py:58
+#: addon\globalPlugins\polyglot\common\languages.py:62
 msgid "Norwegian"
 msgstr "Tiếng Na Uy"
 
-#: addon\globalPlugins\polyglot\common\languages.py:59
+#: addon\globalPlugins\polyglot\common\languages.py:63
 msgid "Norwegian (Bokmål)"
 msgstr "Tiếng Na Uy (Bokmål)"
 
-#: addon\globalPlugins\polyglot\common\languages.py:60
+#: addon\globalPlugins\polyglot\common\languages.py:64
 msgid "Norwegian (Nynorsk)"
 msgstr "Tiếng Na Uy (Nynorsk)"
 
-#: addon\globalPlugins\polyglot\common\languages.py:61
+#: addon\globalPlugins\polyglot\common\languages.py:65
 msgid "Czech"
 msgstr "Tiếng Séc"
 
-#: addon\globalPlugins\polyglot\common\languages.py:62
+#: addon\globalPlugins\polyglot\common\languages.py:66
 msgid "Slovak"
 msgstr "Tiếng Slovak"
 
-#: addon\globalPlugins\polyglot\common\languages.py:63
+#: addon\globalPlugins\polyglot\common\languages.py:67
 msgid "Hungarian"
 msgstr "Tiếng Hungary"
 
-#: addon\globalPlugins\polyglot\common\languages.py:64
-#: addon\globalPlugins\polyglot\common\languages.py:65
+#: addon\globalPlugins\polyglot\common\languages.py:68
+#: addon\globalPlugins\polyglot\common\languages.py:69
 msgid "Romanian"
 msgstr "Tiếng Romania"
 
 #. Baidu
-#: addon\globalPlugins\polyglot\common\languages.py:66
-#: addon\globalPlugins\polyglot\common\languages.py:67
+#: addon\globalPlugins\polyglot\common\languages.py:70
+#: addon\globalPlugins\polyglot\common\languages.py:71
 msgid "Bulgarian"
 msgstr "Tiếng Bulgaria"
 
 #. Baidu
-#: addon\globalPlugins\polyglot\common\languages.py:68
+#: addon\globalPlugins\polyglot\common\languages.py:72
 msgid "Greek"
 msgstr "Tiếng Hy Lạp"
 
-#: addon\globalPlugins\polyglot\common\languages.py:69
+#: addon\globalPlugins\polyglot\common\languages.py:73
 msgid "Lithuanian"
 msgstr "Tiếng Litva"
 
-#: addon\globalPlugins\polyglot\common\languages.py:70
+#: addon\globalPlugins\polyglot\common\languages.py:74
 msgid "Latvian"
 msgstr "Tiếng Latvia"
 
-#: addon\globalPlugins\polyglot\common\languages.py:71
-#: addon\globalPlugins\polyglot\common\languages.py:72
+#: addon\globalPlugins\polyglot\common\languages.py:75
+#: addon\globalPlugins\polyglot\common\languages.py:76
 msgid "Estonian"
 msgstr "Tiếng Estonia"
 
 #. Baidu
-#: addon\globalPlugins\polyglot\common\languages.py:73
-#: addon\globalPlugins\polyglot\common\languages.py:74
+#: addon\globalPlugins\polyglot\common\languages.py:77
+#: addon\globalPlugins\polyglot\common\languages.py:78
 msgid "Slovenian"
 msgstr "Tiếng Slovenia"
 
 #. Baidu
-#: addon\globalPlugins\polyglot\common\languages.py:75
+#: addon\globalPlugins\polyglot\common\languages.py:79
 msgid "Croatian"
 msgstr "Tiếng Croatia"
 
-#: addon\globalPlugins\polyglot\common\languages.py:76
+#: addon\globalPlugins\polyglot\common\languages.py:80
 msgid "Serbian"
 msgstr "Tiếng Serbia"
 
-#: addon\globalPlugins\polyglot\common\languages.py:77
+#: addon\globalPlugins\polyglot\common\languages.py:81
 msgid "Bosnian"
 msgstr "Tiếng Bosnia"
 
-#: addon\globalPlugins\polyglot\common\languages.py:78
+#: addon\globalPlugins\polyglot\common\languages.py:82
 msgid "Albanian"
 msgstr "Tiếng An-ba-ni"
 
-#: addon\globalPlugins\polyglot\common\languages.py:79
+#: addon\globalPlugins\polyglot\common\languages.py:83
 msgid "Macedonian"
 msgstr "Tiếng Macedonia"
 
-#: addon\globalPlugins\polyglot\common\languages.py:80
+#: addon\globalPlugins\polyglot\common\languages.py:84
 msgid "Ukrainian"
 msgstr "Tiếng Ukraina"
 
-#: addon\globalPlugins\polyglot\common\languages.py:81
+#: addon\globalPlugins\polyglot\common\languages.py:85
 msgid "Belarusian"
 msgstr "Tiếng Belarus"
 
-#: addon\globalPlugins\polyglot\common\languages.py:82
+#: addon\globalPlugins\polyglot\common\languages.py:86
 msgid "Icelandic"
 msgstr "Tiếng Iceland"
 
-#: addon\globalPlugins\polyglot\common\languages.py:83
+#: addon\globalPlugins\polyglot\common\languages.py:87
 msgid "Irish"
 msgstr "Tiếng Ireland"
 
-#: addon\globalPlugins\polyglot\common\languages.py:84
+#: addon\globalPlugins\polyglot\common\languages.py:88
 msgid "Maltese"
 msgstr "Tiếng Malta"
 
-#: addon\globalPlugins\polyglot\common\languages.py:85
+#: addon\globalPlugins\polyglot\common\languages.py:89
 msgid "Welsh"
 msgstr "Tiếng xứ Wales"
 
-#: addon\globalPlugins\polyglot\common\languages.py:86
+#: addon\globalPlugins\polyglot\common\languages.py:90
 msgid "Basque"
 msgstr "Tiếng Basque"
 
-#: addon\globalPlugins\polyglot\common\languages.py:87
+#: addon\globalPlugins\polyglot\common\languages.py:91
 msgid "Catalan"
 msgstr "Tiếng Catalan"
 
-#: addon\globalPlugins\polyglot\common\languages.py:88
+#: addon\globalPlugins\polyglot\common\languages.py:92
 msgid "Galician"
 msgstr "Tiếng Galician"
 
-#: addon\globalPlugins\polyglot\common\languages.py:89
+#: addon\globalPlugins\polyglot\common\languages.py:93
 msgid "Luxembourgish"
 msgstr "Tiếng Luxembourg"
 
-#: addon\globalPlugins\polyglot\common\languages.py:90
+#: addon\globalPlugins\polyglot\common\languages.py:94
 msgid "Scots Gaelic"
 msgstr "Tiếng Gaelic Scotland"
 
 #. --- Other Asian & Middle Eastern Languages ---
-#: addon\globalPlugins\polyglot\common\languages.py:92
+#: addon\globalPlugins\polyglot\common\languages.py:96
 msgid "Thai"
 msgstr "Tiếng Thái"
 
-#: addon\globalPlugins\polyglot\common\languages.py:93
-#: addon\globalPlugins\polyglot\common\languages.py:94
+#: addon\globalPlugins\polyglot\common\languages.py:97
+#: addon\globalPlugins\polyglot\common\languages.py:98
 msgid "Vietnamese"
 msgstr "Tiếng Việt"
 
 #. Baidu
-#: addon\globalPlugins\polyglot\common\languages.py:95
+#: addon\globalPlugins\polyglot\common\languages.py:99
 msgid "Indonesian"
 msgstr "Tiếng Indonesia"
 
-#: addon\globalPlugins\polyglot\common\languages.py:96
+#: addon\globalPlugins\polyglot\common\languages.py:100
 msgid "Malay"
 msgstr "Tiếng Mã Lai"
 
-#: addon\globalPlugins\polyglot\common\languages.py:97
+#: addon\globalPlugins\polyglot\common\languages.py:101
 msgid "Filipino"
 msgstr "Tiếng Phi-líp-pin"
 
-#: addon\globalPlugins\polyglot\common\languages.py:98
+#: addon\globalPlugins\polyglot\common\languages.py:102
 msgid "Cebuano"
 msgstr "Tiếng Cebuano"
 
-#: addon\globalPlugins\polyglot\common\languages.py:99
+#: addon\globalPlugins\polyglot\common\languages.py:103
 msgid "Myanmar (Burmese)"
 msgstr "Tiếng Miến Điện (Myanmar)"
 
-#: addon\globalPlugins\polyglot\common\languages.py:100
+#: addon\globalPlugins\polyglot\common\languages.py:104
 msgid "Khmer"
 msgstr "Tiếng Khơ-me"
 
-#: addon\globalPlugins\polyglot\common\languages.py:101
+#: addon\globalPlugins\polyglot\common\languages.py:105
 msgid "Lao"
 msgstr "Tiếng Lào"
 
-#: addon\globalPlugins\polyglot\common\languages.py:102
+#: addon\globalPlugins\polyglot\common\languages.py:106
 msgid "Javanese"
 msgstr "Tiếng Java"
 
-#: addon\globalPlugins\polyglot\common\languages.py:103
+#: addon\globalPlugins\polyglot\common\languages.py:107
 msgid "Sundanese"
 msgstr "Tiếng Sunda"
 
-#: addon\globalPlugins\polyglot\common\languages.py:104
+#: addon\globalPlugins\polyglot\common\languages.py:108
 msgid "Hindi"
 msgstr "Tiếng Hindi"
 
-#: addon\globalPlugins\polyglot\common\languages.py:105
+#: addon\globalPlugins\polyglot\common\languages.py:109
 msgid "Bengali"
 msgstr "Tiếng Bengali"
 
-#: addon\globalPlugins\polyglot\common\languages.py:106
+#: addon\globalPlugins\polyglot\common\languages.py:110
 msgid "Punjabi"
 msgstr "Tiếng Punjabi"
 
-#: addon\globalPlugins\polyglot\common\languages.py:107
+#: addon\globalPlugins\polyglot\common\languages.py:111
 msgid "Gujarati"
 msgstr "Tiếng Gujarati"
 
-#: addon\globalPlugins\polyglot\common\languages.py:108
+#: addon\globalPlugins\polyglot\common\languages.py:112
 msgid "Marathi"
 msgstr "Tiếng Marathi"
 
-#: addon\globalPlugins\polyglot\common\languages.py:109
+#: addon\globalPlugins\polyglot\common\languages.py:113
 msgid "Tamil"
 msgstr "Tiếng Tamil"
 
-#: addon\globalPlugins\polyglot\common\languages.py:110
+#: addon\globalPlugins\polyglot\common\languages.py:114
 msgid "Telugu"
 msgstr "Tiếng Telugu"
 
-#: addon\globalPlugins\polyglot\common\languages.py:111
+#: addon\globalPlugins\polyglot\common\languages.py:115
 msgid "Kannada"
 msgstr "Tiếng Kannada"
 
-#: addon\globalPlugins\polyglot\common\languages.py:112
+#: addon\globalPlugins\polyglot\common\languages.py:116
 msgid "Malayalam"
 msgstr "Tiếng Malayalam"
 
-#: addon\globalPlugins\polyglot\common\languages.py:113
+#: addon\globalPlugins\polyglot\common\languages.py:117
 msgid "Sinhala"
 msgstr "Tiếng Sinhala"
 
-#: addon\globalPlugins\polyglot\common\languages.py:114
+#: addon\globalPlugins\polyglot\common\languages.py:118
 msgid "Nepali"
 msgstr "Tiếng Nepal"
 
-#: addon\globalPlugins\polyglot\common\languages.py:115
+#: addon\globalPlugins\polyglot\common\languages.py:119
 msgid "Sindhi"
 msgstr "Tiếng Sindhi"
 
-#: addon\globalPlugins\polyglot\common\languages.py:116
+#: addon\globalPlugins\polyglot\common\languages.py:120
 msgid "Persian"
 msgstr "Tiếng Ba Tư"
 
-#: addon\globalPlugins\polyglot\common\languages.py:117
-#: addon\globalPlugins\polyglot\common\languages.py:118
+#: addon\globalPlugins\polyglot\common\languages.py:121
+#: addon\globalPlugins\polyglot\common\languages.py:122
 msgid "Hebrew"
 msgstr "Tiếng Do Thái"
 
 #. Chrome Translator API
-#: addon\globalPlugins\polyglot\common\languages.py:119
+#: addon\globalPlugins\polyglot\common\languages.py:123
 msgid "Turkish"
 msgstr "Tiếng Thổ Nhĩ Kỳ"
 
-#: addon\globalPlugins\polyglot\common\languages.py:120
+#: addon\globalPlugins\polyglot\common\languages.py:124
 msgid "Azerbaijani"
 msgstr "Tiếng Azerbaijan"
 
-#: addon\globalPlugins\polyglot\common\languages.py:121
+#: addon\globalPlugins\polyglot\common\languages.py:125
 msgid "Armenian"
 msgstr "Tiếng Armenia"
 
-#: addon\globalPlugins\polyglot\common\languages.py:122
+#: addon\globalPlugins\polyglot\common\languages.py:126
 msgid "Georgian"
 msgstr "Tiếng Gruzia"
 
-#: addon\globalPlugins\polyglot\common\languages.py:123
+#: addon\globalPlugins\polyglot\common\languages.py:127
 msgid "Uzbek"
 msgstr "Tiếng Uzbek"
 
-#: addon\globalPlugins\polyglot\common\languages.py:124
+#: addon\globalPlugins\polyglot\common\languages.py:128
 msgid "Kazakh"
 msgstr "Tiếng Kazakh"
 
-#: addon\globalPlugins\polyglot\common\languages.py:125
+#: addon\globalPlugins\polyglot\common\languages.py:129
 msgid "Kyrgyz"
 msgstr "Tiếng Kyrgyz"
 
-#: addon\globalPlugins\polyglot\common\languages.py:126
+#: addon\globalPlugins\polyglot\common\languages.py:130
 msgid "Tajik"
 msgstr "Tiếng Tajik"
 
-#: addon\globalPlugins\polyglot\common\languages.py:127
+#: addon\globalPlugins\polyglot\common\languages.py:131
 msgid "Urdu"
 msgstr "Tiếng Urdu"
 
-#: addon\globalPlugins\polyglot\common\languages.py:128
+#: addon\globalPlugins\polyglot\common\languages.py:132
 msgid "Pashto"
 msgstr "Tiếng Pashto"
 
-#: addon\globalPlugins\polyglot\common\languages.py:129
+#: addon\globalPlugins\polyglot\common\languages.py:133
 msgid "Kurdish"
 msgstr "Tiếng Kurd"
 
-#: addon\globalPlugins\polyglot\common\languages.py:130
+#: addon\globalPlugins\polyglot\common\languages.py:134
 msgid "Mongolian (Cyrillic)"
 msgstr "Tiếng Mông Cổ (Chữ Cyrillic)"
 
-#: addon\globalPlugins\polyglot\common\languages.py:131
+#: addon\globalPlugins\polyglot\common\languages.py:135
 msgid "Mongolian (Traditional)"
 msgstr "Tiếng Mông Cổ (Chữ truyền thống)"
 
-#: addon\globalPlugins\polyglot\common\languages.py:132
+#: addon\globalPlugins\polyglot\common\languages.py:136
 msgid "Hmong"
 msgstr "Tiếng H'Mông"
 
 #. --- African Languages ---
-#: addon\globalPlugins\polyglot\common\languages.py:134
+#: addon\globalPlugins\polyglot\common\languages.py:138
 msgid "Afrikaans"
 msgstr "Tiếng Afrikaans"
 
-#: addon\globalPlugins\polyglot\common\languages.py:135
+#: addon\globalPlugins\polyglot\common\languages.py:139
 msgid "Swahili"
 msgstr "Tiếng Swahili"
 
-#: addon\globalPlugins\polyglot\common\languages.py:136
+#: addon\globalPlugins\polyglot\common\languages.py:140
 msgid "Somali"
 msgstr "Tiếng Somali"
 
-#: addon\globalPlugins\polyglot\common\languages.py:137
+#: addon\globalPlugins\polyglot\common\languages.py:141
 msgid "Hausa"
 msgstr "Tiếng Hausa"
 
-#: addon\globalPlugins\polyglot\common\languages.py:138
+#: addon\globalPlugins\polyglot\common\languages.py:142
 msgid "Yoruba"
 msgstr "Tiếng Yoruba"
 
-#: addon\globalPlugins\polyglot\common\languages.py:139
+#: addon\globalPlugins\polyglot\common\languages.py:143
 msgid "Igbo"
 msgstr "Tiếng Igbo"
 
-#: addon\globalPlugins\polyglot\common\languages.py:140
+#: addon\globalPlugins\polyglot\common\languages.py:144
 msgid "Zulu"
 msgstr "Tiếng Zulu"
 
-#: addon\globalPlugins\polyglot\common\languages.py:141
+#: addon\globalPlugins\polyglot\common\languages.py:145
 msgid "Xhosa"
 msgstr "Tiếng Xhosa"
 
-#: addon\globalPlugins\polyglot\common\languages.py:142
+#: addon\globalPlugins\polyglot\common\languages.py:146
 msgid "Sesotho"
 msgstr "Tiếng Sesotho"
 
-#: addon\globalPlugins\polyglot\common\languages.py:143
+#: addon\globalPlugins\polyglot\common\languages.py:147
 msgid "Shona"
 msgstr "Tiếng Shona"
 
-#: addon\globalPlugins\polyglot\common\languages.py:144
+#: addon\globalPlugins\polyglot\common\languages.py:148
 msgid "Malagasy"
 msgstr "Tiếng Malagasy"
 
-#: addon\globalPlugins\polyglot\common\languages.py:145
+#: addon\globalPlugins\polyglot\common\languages.py:149
 msgid "Chichewa"
 msgstr "Tiếng Chichewa"
 
 #. --- Oceanic & Constructed Languages ---
-#: addon\globalPlugins\polyglot\common\languages.py:147
+#: addon\globalPlugins\polyglot\common\languages.py:151
 msgid "Maori"
 msgstr "Tiếng Maori"
 
-#: addon\globalPlugins\polyglot\common\languages.py:148
+#: addon\globalPlugins\polyglot\common\languages.py:152
 msgid "Samoan"
 msgstr "Tiếng Samoa"
 
-#: addon\globalPlugins\polyglot\common\languages.py:149
+#: addon\globalPlugins\polyglot\common\languages.py:153
 msgid "Haitian Creole"
 msgstr "Tiếng Creole Haiti"
 
-#: addon\globalPlugins\polyglot\common\languages.py:150
+#: addon\globalPlugins\polyglot\common\languages.py:154
 msgid "Hawaiian"
 msgstr "Tiếng Hawaii"
 
-#: addon\globalPlugins\polyglot\common\languages.py:151
+#: addon\globalPlugins\polyglot\common\languages.py:155
 msgid "Corsican"
 msgstr "Tiếng Corsica"
 
-#: addon\globalPlugins\polyglot\common\languages.py:152
+#: addon\globalPlugins\polyglot\common\languages.py:156
 msgid "Frisian"
 msgstr "Tiếng Frisia"
 
-#: addon\globalPlugins\polyglot\common\languages.py:153
+#: addon\globalPlugins\polyglot\common\languages.py:157
 msgid "Yiddish"
 msgstr "Tiếng Yiddish"
 
-#: addon\globalPlugins\polyglot\common\languages.py:154
+#: addon\globalPlugins\polyglot\common\languages.py:158
 msgid "Esperanto"
 msgstr "Tiếng Esperanto"
 
-#: addon\globalPlugins\polyglot\common\languages.py:155
+#: addon\globalPlugins\polyglot\common\languages.py:159
 msgid "Latin"
 msgstr "Tiếng La-tinh"
 
-#: addon\globalPlugins\polyglot\common\network.py:74
+#: addon\globalPlugins\polyglot\common\network.py:83
 #, python-brace-format
 msgid ""
 "Service temporarily unavailable or timed out. Please try again later. (HTTP "
@@ -761,31 +761,31 @@ msgstr ""
 "Dịch vụ tạm thời không khả dụng hoặc quá thời gian chờ. Vui lòng thử lại "
 "sau. (Mã lỗi HTTP: {code})"
 
-#: addon\globalPlugins\polyglot\common\network.py:79
+#: addon\globalPlugins\polyglot\common\network.py:88
 msgid "Request to translation service timed out"
 msgstr "Yêu cầu đến dịch vụ dịch thuật đã quá thời gian chờ"
 
-#: addon\globalPlugins\polyglot\common\network.py:84
-#, python-brace-format
-msgid "Network connection error: {error}"
+#: addon\globalPlugins\polyglot\common\network.py:93
+#, fuzzy
+msgid "Network connection error. Check your connection and try again."
 msgstr "Lỗi kết nối mạng: {error}"
 
-#: addon\globalPlugins\polyglot\common\network.py:130
+#: addon\globalPlugins\polyglot\common\network.py:136
 msgid "Authentication failed. Please check your API key."
 msgstr "Xác thực thất bại. Vui lòng kiểm tra lại khóa API của bạn."
 
-#: addon\globalPlugins\polyglot\common\network.py:132
+#: addon\globalPlugins\polyglot\common\network.py:138
 msgid "Monthly translation quota has been reached."
 msgstr "Đã đạt đến hạn ngạch dịch thuật hàng tháng."
 
-#: addon\globalPlugins\polyglot\common\network.py:137
+#: addon\globalPlugins\polyglot\common\network.py:143
 #, python-brace-format
 msgid "Service returned an error: {code} {reason}. Details: {details}"
 msgstr "Dịch vụ báo lỗi: {code} {reason}. Chi tiết: {details}"
 
 #. Translators: Spoken when a valid-looking English word is absent from the bundled local
 #. dictionary. {word} is the word reviewed by the user.
-#: addon\globalPlugins\polyglot\common\wordDictionary.py:66
+#: addon\globalPlugins\polyglot\common\wordDictionary.py:70
 #, python-brace-format
 msgid "The local dictionary does not contain {word}."
 msgstr ""
@@ -793,7 +793,7 @@ msgstr ""
 #. Translators: Spoken when an all-capital word only matches a lowercase dictionary entry.
 #. {word} is the reviewed text, {entry} is the lowercase headword, and {definition} is its
 #. bundled definition.
-#: addon\globalPlugins\polyglot\common\wordDictionary.py:76
+#: addon\globalPlugins\polyglot\common\wordDictionary.py:80
 #, python-brace-format
 msgid ""
 "When read as lowercase {entry}, {word} may mean: {definition}. In all caps, "
@@ -802,183 +802,183 @@ msgstr ""
 
 #. Translators: One item in a spoken list of possible dictionary entries. {entry} is the
 #. dictionary headword and {definition} is its bundled definition.
-#: addon\globalPlugins\polyglot\common\wordDictionary.py:86
+#: addon\globalPlugins\polyglot\common\wordDictionary.py:90
 #, python-brace-format
 msgid "{entry}: {definition}."
 msgstr ""
 
 #. Translators: Introduces a spoken list of up to three possible dictionary entries.
 #. {entries} contains the entries and their definitions.
-#: addon\globalPlugins\polyglot\common\wordDictionary.py:93
+#: addon\globalPlugins\polyglot\common\wordDictionary.py:97
 #, python-brace-format
 msgid "Possibilities: {entries}"
 msgstr ""
 
-#: addon\globalPlugins\polyglot\modelManager\catalog.py:154
+#: addon\globalPlugins\polyglot\modelManager\catalog.py:153
 msgid "Bundled model catalog is missing."
 msgstr "Danh mục mô hình đi kèm add-on (Bundled catalog) bị thiếu."
 
-#: addon\globalPlugins\polyglot\modelManager\catalog.py:161
+#: addon\globalPlugins\polyglot\modelManager\catalog.py:160
 msgid "Catalog JSON is empty."
 msgstr "Tệp JSON danh mục đang trống."
 
-#: addon\globalPlugins\polyglot\modelManager\catalog.py:164
+#: addon\globalPlugins\polyglot\modelManager\catalog.py:163
 msgid "Catalog JSON is invalid."
 msgstr "Tệp JSON danh mục không hợp lệ."
 
-#: addon\globalPlugins\polyglot\modelManager\catalog.py:171
+#: addon\globalPlugins\polyglot\modelManager\catalog.py:170
 #, python-brace-format
 msgid "Unsupported catalog schema version: {version}"
 msgstr ""
 "Phiên bản cấu trúc danh mục (Schema version) không được hỗ trợ: {version}"
 
-#: addon\globalPlugins\polyglot\modelManager\catalog.py:183
+#: addon\globalPlugins\polyglot\modelManager\catalog.py:182
 #, python-brace-format
 msgid "Duplicate model package key in catalog: {key}"
 msgstr "Trùng lặp khóa gói mô hình trong danh mục: {key}"
 
-#: addon\globalPlugins\polyglot\modelManager\catalog.py:242
+#: addon\globalPlugins\polyglot\modelManager\catalog.py:244
 msgid "Catalog URL must be an HTTP or HTTPS URL."
 msgstr "Đường dẫn URL danh mục phải là định dạng HTTP hoặc HTTPS."
 
-#: addon\globalPlugins\polyglot\modelManager\catalog.py:288
+#: addon\globalPlugins\polyglot\modelManager\catalog.py:290
 #, python-brace-format
 msgid "{source} / {target}"
 msgstr "{source} / {target}"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:91
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:269
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:296
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:386
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:493
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:603
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:92
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:270
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:297
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:387
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:494
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:604
 #: addon\globalPlugins\polyglot\modelManager\service.py:235
 #: addon\globalPlugins\polyglot\modelManager\service.py:261
 #: addon\globalPlugins\polyglot\modelManager\service.py:292
 msgid "Polyglot ChromeAI Model Manager"
 msgstr "Trình quản lý mô hình ChromeAI Polyglot"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:127
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:128
 msgid ""
 "Models: check a model to install it; uncheck an installed model to remove it."
 msgstr ""
 "Mô hình: tích chọn để cài đặt; bỏ chọn đối với mô hình đã cài đặt để gỡ bỏ."
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:139
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:140
 msgid "Language"
 msgstr "Ngôn ngữ"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:140
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:141
 msgid "Status"
 msgstr "Trạng thái"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:141
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:142
 msgid "Size"
 msgstr "Dung lượng"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:142
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:143
 msgid "Version"
 msgstr "Phiên bản"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:154
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:560
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:155
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:561
 #, python-brace-format
 msgid "Apply changes ({count})"
 msgstr "Áp dụng các thay đổi ({count})"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:155
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:569
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:156
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:570
 msgid "Advanced"
 msgstr "Nâng cao"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:167
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:168
 msgid "Log"
 msgstr "Nhật ký lỗi (Log)"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:187
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:188
 msgid "Catalog URL:"
 msgstr "Đường dẫn danh mục (Catalog URL):"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:192
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:193
 msgid "Restore default"
 msgstr "Khôi phục mặc định"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:200
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:347
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:201
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:348
 msgid "Catalog: not loaded"
 msgstr "Danh mục: Chưa tải"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:203
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:204
 #, python-brace-format
 msgid "Install target: {path}"
 msgstr "Thư mục cài đặt đích: {path}"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:205
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:206
 msgid "Status: idle"
 msgstr "Trạng thái: Đang rảnh"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:210
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:211
 msgid "Load catalog"
 msgstr "Tải danh mục"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:211
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:212
 msgid "Open target"
 msgstr "Mở thư mục đích"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:213
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:214
 msgid "Open temp downloads"
 msgstr "Mở thư mục tải xuống tạm thời"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:268
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:269
 msgid "A model operation is still running."
 msgstr "Một tiến trình xử lý mô hình hiện đang chạy."
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:295
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:600
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:296
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:601
 msgid "Failed."
 msgstr "Thất bại."
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:299
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:300
 #, python-brace-format
 msgid "Loading catalog: {url}"
 msgstr "Đang tải danh mục: {url}"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:308
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:309
 #, python-brace-format
 msgid "Catalog: remote; generated {generatedAt}"
 msgstr "Danh mục: Máy chủ từ xa; được tạo lúc {generatedAt}"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:314
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:315
 #, python-brace-format
 msgid "Remote catalog failed: {error}"
 msgstr "Tải danh mục từ xa thất bại: {error}"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:318
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:319
 #, python-brace-format
 msgid "Catalog: bundled fallback; generated {generatedAt}"
 msgstr "Danh mục: Sử dụng tệp đi kèm dự phòng; được tạo lúc {generatedAt}"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:333
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:334
 msgid "Catalog: failed to load"
 msgstr "Danh mục: Không thể tải"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:342
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:343
 #, python-brace-format
 msgid "Loaded {count} model package(s)."
 msgstr "Đã tải {count} gói mô hình."
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:349
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:393
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:350
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:394
 #: addon\globalPlugins\polyglot\modelManager\service.py:260
 msgid "Another model operation is already running."
 msgstr "Một tiến trình xử lý mô hình khác hiện đang chạy."
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:370
 #: addon\globalPlugins\polyglot\modelManager\dialog.py:371
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:372
 msgid "Changes applied."
 msgstr "Đã áp dụng các thay đổi."
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:383
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:384
 #, python-brace-format
 msgid ""
 "This will delete {size:.1f} MiB of temporary and legacy cached downloads. "
@@ -991,35 +991,35 @@ msgstr ""
 "\n"
 "Tiếp tục chứ?"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:413
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:414
 msgid "Temporary downloads are empty."
 msgstr "Thư mục tải xuống tạm thời đang trống."
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:415
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:416
 #: addon\globalPlugins\polyglot\modelManager\installer.py:135
 #, python-brace-format
 msgid "Cleared temporary downloads ({size:.1f} MiB)."
 msgstr "Đã xóa các tệp tải xuống tạm thời ({size:.1f} MiB)."
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:440
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:441
 msgid "installed"
 msgstr "đã cài đặt"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:440
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:441
 msgid "not installed"
 msgstr "chưa cài đặt"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:449
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:450
 #, python-brace-format
 msgid "{count} installed package(s) detected."
 msgstr "Phát hiện {count} gói đã được cài đặt."
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:467
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:468
 #, python-brace-format
 msgid "{size:.1f} MiB"
 msgstr "{size:.1f} MiB"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:491
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:492
 #, python-brace-format
 msgid ""
 "The following installed model package(s) will be removed:\n"
@@ -1034,7 +1034,7 @@ msgstr ""
 "\n"
 "Tiếp tục chứ?"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:510
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:511
 #, python-brace-format
 msgid ""
 "Selected: {selected} | Install: {install} | Remove: {remove} | Cleanup: "
@@ -1043,16 +1043,16 @@ msgstr ""
 "Đang chọn: {selected} | Cài đặt: {install} | Gỡ bỏ: {remove} | Dọn dẹp: "
 "{cleanup}"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:569
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:570
 msgid "Hide advanced"
 msgstr "Ẩn nâng cao"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:574
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:575
 #, python-brace-format
 msgid "Status: {message}"
 msgstr "Trạng thái: {message}"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:611
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:612
 #, python-brace-format
 msgid "Settings could not be saved: {error}"
 msgstr "Không thể lưu cài đặt: {error}"
@@ -1149,15 +1149,15 @@ msgstr ""
 "Lỗi: {error}"
 
 #: addon\globalPlugins\polyglot\modelManager\installer.py:618
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:33
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:39
 msgid "Chrome AI (Offline)"
 msgstr "Chrome AI (Ngoại tuyến)"
 
-#: addon\globalPlugins\polyglot\modelManager\menu.py:68
+#: addon\globalPlugins\polyglot\modelManager\menu.py:67
 msgid "Polyglot ChromeAI model manager"
 msgstr "Trình quản lý mô hình ChromeAI Polyglot"
 
-#: addon\globalPlugins\polyglot\modelManager\menu.py:69
+#: addon\globalPlugins\polyglot\modelManager\menu.py:68
 msgid "Manage Polyglot ChromeAI offline translation models"
 msgstr "Quản lý các mô hình dịch thuật ngoại tuyến ChromeAI của Polyglot"
 
@@ -1188,165 +1188,165 @@ msgstr ""
 msgid "Model installation complete."
 msgstr "Quá trình cài đặt mô hình đã hoàn tất."
 
-#: addon\globalPlugins\polyglot\services\engine.py:58
+#: addon\globalPlugins\polyglot\services\engine.py:63
 msgid "Enable this engine"
 msgstr "Bật bộ dịch này"
 
-#: addon\globalPlugins\polyglot\services\engine.py:242
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:122
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:46
+#: addon\globalPlugins\polyglot\services\engine.py:251
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:129
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:49
 msgid "Source language:"
 msgstr "Ngôn ngữ nguồn:"
 
-#: addon\globalPlugins\polyglot\services\engine.py:249
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:129
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:47
+#: addon\globalPlugins\polyglot\services\engine.py:258
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:136
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:50
 msgid "Target language:"
 msgstr "Ngôn ngữ đích:"
 
-#: addon\globalPlugins\polyglot\services\engine.py:260
+#: addon\globalPlugins\polyglot\services\engine.py:269
 msgid "Proxy mode:"
 msgstr "Chế độ Proxy:"
 
-#: addon\globalPlugins\polyglot\services\engine.py:263
+#: addon\globalPlugins\polyglot\services\engine.py:272
 msgid "Use system proxy settings"
 msgstr "Sử dụng cấu hình proxy của hệ thống"
 
-#: addon\globalPlugins\polyglot\services\engine.py:264
+#: addon\globalPlugins\polyglot\services\engine.py:273
 msgid "Do not use proxy"
 msgstr "Không sử dụng proxy"
 
-#: addon\globalPlugins\polyglot\services\engine.py:270
+#: addon\globalPlugins\polyglot\services\engine.py:279
 msgid "Request timeout:"
 msgstr "Thời gian chờ yêu cầu:"
 
-#: addon\globalPlugins\polyglot\services\engine.py:286
+#: addon\globalPlugins\polyglot\services\engine.py:295
 msgid ""
 "Auto-swap if detected source matches target (source must be 'Auto-detect')"
 msgstr ""
 "Tự động hoán đổi nếu ngôn ngữ nguồn phát hiện được trùng với ngôn ngữ đích "
 "(ngôn ngữ nguồn phải là 'Tự động phát hiện')"
 
-#: addon\globalPlugins\polyglot\services\engine.py:293
+#: addon\globalPlugins\polyglot\services\engine.py:302
 msgid "Swap to language:"
 msgstr "Hoán đổi sang ngôn ngữ:"
 
-#: addon\globalPlugins\polyglot\services\engine.py:389
+#: addon\globalPlugins\polyglot\services\engine.py:402
 #: addon\globalPlugins\polyglot\services\engines\niutrans.py:189
 msgid "Failed to parse response from translation service."
 msgstr "Không thể phân tích phản hồi từ dịch vụ dịch thuật."
 
-#: addon\globalPlugins\polyglot\services\engine.py:394
+#: addon\globalPlugins\polyglot\services\engine.py:407
 #: addon\globalPlugins\polyglot\services\engines\microsoft.py:146
 #: addon\globalPlugins\polyglot\services\engines\niutrans.py:194
 msgid "An unknown error occurred during translation."
 msgstr "Đã xảy ra lỗi không xác định trong quá trình dịch."
 
-#: addon\globalPlugins\polyglot\services\engines\baidu.py:19
+#: addon\globalPlugins\polyglot\services\engines\baidu.py:25
 msgid "Baidu Translate"
 msgstr "Baidu Translate"
 
-#: addon\globalPlugins\polyglot\services\engines\baidu.py:23
+#: addon\globalPlugins\polyglot\services\engines\baidu.py:29
 msgid "Request timed out"
 msgstr "Yêu cầu quá thời gian chờ"
 
-#: addon\globalPlugins\polyglot\services\engines\baidu.py:24
+#: addon\globalPlugins\polyglot\services\engines\baidu.py:30
 msgid "System error"
 msgstr "Lỗi hệ thống"
 
-#: addon\globalPlugins\polyglot\services\engines\baidu.py:25
+#: addon\globalPlugins\polyglot\services\engines\baidu.py:31
 msgid ""
 "Unauthorized user. Please check your App ID or if the service is enabled."
 msgstr ""
 "Người dùng chưa được cấp quyền. Vui lòng kiểm tra lại App ID hoặc xem dịch "
 "vụ đã được bật chưa."
 
-#: addon\globalPlugins\polyglot\services\engines\baidu.py:26
+#: addon\globalPlugins\polyglot\services\engines\baidu.py:32
 msgid "Required parameter is missing"
 msgstr "Thiếu tham số bắt buộc"
 
-#: addon\globalPlugins\polyglot\services\engines\baidu.py:27
+#: addon\globalPlugins\polyglot\services\engines\baidu.py:33
 msgid "Signature error. Please check your App Secret."
 msgstr "Lỗi chữ ký xác thực. Vui lòng kiểm tra lại App Secret."
 
-#: addon\globalPlugins\polyglot\services\engines\baidu.py:28
+#: addon\globalPlugins\polyglot\services\engines\baidu.py:34
 msgid "Access frequency limited"
 msgstr "Tần suất truy cập bị giới hạn"
 
-#: addon\globalPlugins\polyglot\services\engines\baidu.py:29
+#: addon\globalPlugins\polyglot\services\engines\baidu.py:35
 msgid "Insufficient account balance"
 msgstr "Số dư tài khoản không đủ"
 
-#: addon\globalPlugins\polyglot\services\engines\baidu.py:30
+#: addon\globalPlugins\polyglot\services\engines\baidu.py:36
 msgid "Frequent long query requests"
 msgstr "Yêu cầu truy vấn dài quá thường xuyên"
 
-#: addon\globalPlugins\polyglot\services\engines\baidu.py:31
+#: addon\globalPlugins\polyglot\services\engines\baidu.py:37
 msgid "Invalid client IP"
 msgstr "IP máy khách không hợp lệ"
 
-#: addon\globalPlugins\polyglot\services\engines\baidu.py:32
+#: addon\globalPlugins\polyglot\services\engines\baidu.py:38
 msgid ""
 "Translation direction not supported (may be due to insufficient permissions)"
 msgstr "Hướng dịch không được hỗ trợ (có thể do không đủ quyền hạn)"
 
-#: addon\globalPlugins\polyglot\services\engines\baidu.py:33
+#: addon\globalPlugins\polyglot\services\engines\baidu.py:39
 msgid "Service is currently disabled"
 msgstr "Dịch vụ hiện đang bị tắt"
 
-#: addon\globalPlugins\polyglot\services\engines\baidu.py:34
+#: addon\globalPlugins\polyglot\services\engines\baidu.py:40
 msgid "IP has been blocked"
 msgstr "Địa chỉ IP đã bị chặn"
 
-#: addon\globalPlugins\polyglot\services\engines\baidu.py:35
+#: addon\globalPlugins\polyglot\services\engines\baidu.py:41
 msgid "Authentication failed or has not taken effect"
 msgstr "Xác thực thất bại hoặc chưa có hiệu lực"
 
-#: addon\globalPlugins\polyglot\services\engines\baidu.py:36
+#: addon\globalPlugins\polyglot\services\engines\baidu.py:42
 msgid "Request content poses a security risk"
 msgstr "Nội dung yêu cầu có nguy cơ rủi ro bảo mật"
 
-#: addon\globalPlugins\polyglot\services\engines\baidu.py:61
+#: addon\globalPlugins\polyglot\services\engines\baidu.py:67
 msgid ""
 "Use custom terminology (requires authentication and configuration on the "
 "platform)"
 msgstr ""
 "Sử dụng thuật ngữ tùy chỉnh (yêu cầu xác thực và cấu hình trên nền tảng)"
 
-#: addon\globalPlugins\polyglot\services\engines\baidu.py:112
+#: addon\globalPlugins\polyglot\services\engines\baidu.py:118
 msgid "App ID and App Secret are required."
 msgstr "Yêu cầu phải có App ID và App Secret."
 
-#: addon\globalPlugins\polyglot\services\engines\baidu.py:140
-#: addon\globalPlugins\polyglot\services\engines\tencent.py:162
-#: addon\globalPlugins\polyglot\services\engines\tencentPolyglot.py:92
-#: addon\globalPlugins\polyglot\services\engines\vivo.py:110
-#: addon\globalPlugins\polyglot\services\engines\volcenginePolyglot.py:100
+#: addon\globalPlugins\polyglot\services\engines\baidu.py:146
+#: addon\globalPlugins\polyglot\services\engines\tencent.py:167
+#: addon\globalPlugins\polyglot\services\engines\tencentPolyglot.py:96
+#: addon\globalPlugins\polyglot\services\engines\vivo.py:114
+#: addon\globalPlugins\polyglot\services\engines\volcenginePolyglot.py:106
 msgid "Unknown API error"
 msgstr "Lỗi API không xác định"
 
-#: addon\globalPlugins\polyglot\services\engines\caiyun.py:21
+#: addon\globalPlugins\polyglot\services\engines\caiyun.py:25
 msgid "Caiyun"
 msgstr "Caiyun"
 
-#: addon\globalPlugins\polyglot\services\engines\caiyun.py:59
+#: addon\globalPlugins\polyglot\services\engines\caiyun.py:63
 msgid "Authentication Token"
 msgstr "Mã xác thực (Token)"
 
-#: addon\globalPlugins\polyglot\services\engines\caiyun.py:68
+#: addon\globalPlugins\polyglot\services\engines\caiyun.py:72
 msgid "Authentication Token for Caiyun is not configured."
 msgstr "Mã xác thực cho Caiyun chưa được cấu hình."
 
-#: addon\globalPlugins\polyglot\services\engines\caiyun.py:101
-#: addon\globalPlugins\polyglot\services\engines\deepl.py:181
-#: addon\globalPlugins\polyglot\services\engines\microsoft.py:206
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:241
-#: addon\globalPlugins\polyglot\services\engines\tencent.py:176
-#: addon\globalPlugins\polyglot\services\engines\yandex.py:120
+#: addon\globalPlugins\polyglot\services\engines\caiyun.py:105
+#: addon\globalPlugins\polyglot\services\engines\deepl.py:187
+#: addon\globalPlugins\polyglot\services\engines\microsoft.py:203
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:240
+#: addon\globalPlugins\polyglot\services\engines\tencent.py:179
+#: addon\globalPlugins\polyglot\services\engines\yandex.py:124
 msgid "Invalid API response or no translation result included."
 msgstr "Phản hồi API không hợp lệ hoặc không bao gồm kết quả dịch."
 
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:104
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:111
 msgid ""
 "Enable Chrome AI offline engine (requires Chrome 138+, resources released on "
 "NVDA exit)"
@@ -1354,7 +1354,7 @@ msgstr ""
 "Bật bộ dịch ngoại tuyến Chrome AI (yêu cầu Chrome 138+, tài nguyên sẽ được "
 "giải phóng khi thoát NVDA)"
 
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:202
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:209
 msgid ""
 "Chrome AI offline engine is disabled. Enable it in the Polyglot settings "
 "panel before using it."
@@ -1363,25 +1363,25 @@ msgstr ""
 "Polyglot trước khi sử dụng."
 
 #. Translators: {model} is a model name like "Translation model".
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:242
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:249
 #, python-brace-format
 msgid "Preparing {model}..."
 msgstr "Đang chuẩn bị {model}..."
 
 #. Translators: Announced when Chrome has finished preparing an offline model.
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:254
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:261
 msgid "Model ready."
 msgstr "Mô hình đã sẵn sàng."
 
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:389
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:405
 msgid "Translation model"
 msgstr "Mô hình dịch thuật"
 
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:395
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:411
 msgid "Unexpected Chrome AI error: "
 msgstr "Lỗi Chrome AI không mong muốn: "
 
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:416
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:432
 msgid ""
 "Chrome's Translator API is not available. Please update Chrome to version "
 "138 or later and ensure the TranslationAPI flag is enabled in chrome://flags."
@@ -1390,7 +1390,7 @@ msgstr ""
 "bản 138 hoặc mới hơn và đảm bảo flag TranslationAPI đã được bật trong "
 "chrome://flags."
 
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:425
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:441
 msgid ""
 "Chrome AI must run in a secure page context. Please restart NVDA and try the "
 "Chrome AI engine again."
@@ -1398,91 +1398,91 @@ msgstr ""
 "Chrome AI phải chạy trong ngữ cảnh trang bảo mật. Vui lòng khởi động lại "
 "NVDA và thử lại bộ dịch Chrome AI."
 
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:436
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:452
 msgid "Chrome AI error: "
 msgstr "Lỗi Chrome AI: "
 
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:436
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:452
 msgid "Unknown error"
 msgstr "Lỗi không xác định"
 
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:438
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:454
 msgid "Chrome AI returned an unexpected response."
 msgstr "Chrome AI trả về một phản hồi không mong muốn."
 
-#: addon\globalPlugins\polyglot\services\engines\deepl.py:17
+#: addon\globalPlugins\polyglot\services\engines\deepl.py:23
 msgid "DeepL"
 msgstr "DeepL"
 
-#: addon\globalPlugins\polyglot\services\engines\deepl.py:39
+#: addon\globalPlugins\polyglot\services\engines\deepl.py:45
 msgid "API Key (Auth Key)"
 msgstr "Khóa API (Mã xác thực)"
 
-#: addon\globalPlugins\polyglot\services\engines\deepl.py:40
+#: addon\globalPlugins\polyglot\services\engines\deepl.py:46
 msgid "Use Free API"
 msgstr "Sử dụng API miễn phí"
 
-#: addon\globalPlugins\polyglot\services\engines\deepl.py:41
+#: addon\globalPlugins\polyglot\services\engines\deepl.py:47
 msgid "Context (optional):"
 msgstr "Ngữ cảnh (không bắt buộc):"
 
-#: addon\globalPlugins\polyglot\services\engines\deepl.py:44
+#: addon\globalPlugins\polyglot\services\engines\deepl.py:50
 msgid "Sentence splitting mode:"
 msgstr "Chế độ tách câu:"
 
-#: addon\globalPlugins\polyglot\services\engines\deepl.py:47
+#: addon\globalPlugins\polyglot\services\engines\deepl.py:53
 msgid "On (split at punctuation and newlines)"
 msgstr "Bật (ngắt tại dấu câu và xuống dòng)"
 
-#: addon\globalPlugins\polyglot\services\engines\deepl.py:48
+#: addon\globalPlugins\polyglot\services\engines\deepl.py:54
 msgid "Off (no splitting)"
 msgstr "Tắt (không ngắt câu)"
 
-#: addon\globalPlugins\polyglot\services\engines\deepl.py:49
+#: addon\globalPlugins\polyglot\services\engines\deepl.py:55
 msgid "Only at punctuation"
 msgstr "Chỉ ngắt tại dấu câu"
 
-#: addon\globalPlugins\polyglot\services\engines\deepl.py:55
+#: addon\globalPlugins\polyglot\services\engines\deepl.py:61
 msgid "Preserve formatting"
 msgstr "Giữ nguyên định dạng"
 
-#: addon\globalPlugins\polyglot\services\engines\deepl.py:61
+#: addon\globalPlugins\polyglot\services\engines\deepl.py:67
 msgid "Formality (for supported languages):"
 msgstr "Mức độ trang trọng (cho các ngôn ngữ được hỗ trợ):"
 
-#: addon\globalPlugins\polyglot\services\engines\deepl.py:64
+#: addon\globalPlugins\polyglot\services\engines\deepl.py:70
 msgid "Default"
 msgstr "Mặc định"
 
-#: addon\globalPlugins\polyglot\services\engines\deepl.py:65
+#: addon\globalPlugins\polyglot\services\engines\deepl.py:71
 msgid "More formal"
 msgstr "Trang trọng hơn"
 
-#: addon\globalPlugins\polyglot\services\engines\deepl.py:66
+#: addon\globalPlugins\polyglot\services\engines\deepl.py:72
 msgid "Less formal"
 msgstr "Thân mật hơn"
 
-#: addon\globalPlugins\polyglot\services\engines\deepl.py:72
+#: addon\globalPlugins\polyglot\services\engines\deepl.py:78
 msgid "Model type:"
 msgstr "Loại mô hình:"
 
-#: addon\globalPlugins\polyglot\services\engines\deepl.py:75
+#: addon\globalPlugins\polyglot\services\engines\deepl.py:81
 msgid "Speed-optimized (default)"
 msgstr "Tối ưu tốc độ (mặc định)"
 
-#: addon\globalPlugins\polyglot\services\engines\deepl.py:76
+#: addon\globalPlugins\polyglot\services\engines\deepl.py:82
 msgid "Quality-optimized"
 msgstr "Tối ưu chất lượng"
 
-#: addon\globalPlugins\polyglot\services\engines\deepl.py:77
+#: addon\globalPlugins\polyglot\services\engines\deepl.py:83
 msgid "Prefer quality-optimized model"
 msgstr "Ưu tiên mô hình tối ưu chất lượng"
 
-#: addon\globalPlugins\polyglot\services\engines\deepl.py:129
+#: addon\globalPlugins\polyglot\services\engines\deepl.py:135
 msgid "DeepL API Key (Auth Key) is not configured."
 msgstr "Khóa DeepL API (Mã xác thực) chưa được cấu hình."
 
-#: addon\globalPlugins\polyglot\services\engines\deepl.py:134
+#: addon\globalPlugins\polyglot\services\engines\deepl.py:140
 msgid ""
 "You have selected the Pro API, but the provided key is for the Free API. "
 "Please check 'Use Free API' in settings."
@@ -1490,111 +1490,111 @@ msgstr ""
 "Bạn đã chọn API trả phí (Pro), nhưng khóa được cung cấp lại dành cho API "
 "miễn phí. Vui lòng tích chọn 'Sử dụng API miễn phí' trong phần cài đặt."
 
-#: addon\globalPlugins\polyglot\services\engines\google.py:17
+#: addon\globalPlugins\polyglot\services\engines\google.py:21
 msgid "Google Translate (key-free)"
 msgstr "Google Translate (không cần khóa)"
 
-#: addon\globalPlugins\polyglot\services\engines\google.py:45
+#: addon\globalPlugins\polyglot\services\engines\google.py:49
 msgid "Use mirror server (translate.googleapis.mirror.nvdadr.com)"
 msgstr "Sử dụng máy chủ gương (translate.googleapis.mirror.nvdadr.com)"
 
-#: addon\globalPlugins\polyglot\services\engines\googlePolyglot.py:18
+#: addon\globalPlugins\polyglot\services\engines\googlePolyglot.py:23
 msgid "Google Translate (Polyglot)"
 msgstr "Google Translate (Polyglot)"
 
-#: addon\globalPlugins\polyglot\services\engines\googlePolyglot.py:143
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:102
+#: addon\globalPlugins\polyglot\services\engines\googlePolyglot.py:148
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:104
 msgid "API Key"
 msgstr "Khóa API (API Key)"
 
-#: addon\globalPlugins\polyglot\services\engines\googlePolyglot.py:149
+#: addon\globalPlugins\polyglot\services\engines\googlePolyglot.py:154
 msgid "Endpoint URL"
 msgstr "Đường dẫn Endpoint"
 
-#: addon\globalPlugins\polyglot\services\engines\googlePolyglot.py:160
+#: addon\globalPlugins\polyglot\services\engines\googlePolyglot.py:165
 msgid "API Key for Google Translate (HQ) is not configured."
 msgstr "Khóa API cho Google Translate (HQ) chưa được cấu hình."
 
-#: addon\globalPlugins\polyglot\services\engines\googlePolyglot.py:194
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:220
+#: addon\globalPlugins\polyglot\services\engines\googlePolyglot.py:199
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:222
 msgid "Failed to parse API response."
 msgstr "Không thể phân tích phản hồi từ API."
 
-#: addon\globalPlugins\polyglot\services\engines\googlePolyglot.py:203
+#: addon\globalPlugins\polyglot\services\engines\googlePolyglot.py:207
 msgid "Invalid API response or no translation text included."
 msgstr "Phản hồi API không hợp lệ hoặc không bao gồm văn bản dịch."
 
-#: addon\globalPlugins\polyglot\services\engines\lingva.py:22
+#: addon\globalPlugins\polyglot\services\engines\lingva.py:26
 msgid "Lingva Translate"
 msgstr "Lingva Translate"
 
 #. Sometimes Lingva might return a non-JSON error for very long texts
-#: addon\globalPlugins\polyglot\services\engines\lingva.py:101
+#: addon\globalPlugins\polyglot\services\engines\lingva.py:105
 msgid "Service returned an invalid result (text may be too long)."
 msgstr "Dịch vụ trả về kết quả không hợp lệ (văn bản có thể quá dài)."
 
-#: addon\globalPlugins\polyglot\services\engines\microsoft.py:26
+#: addon\globalPlugins\polyglot\services\engines\microsoft.py:30
 msgid "Microsoft Translator (key-free)"
 msgstr "Microsoft Translator (không cần khóa)"
 
-#: addon\globalPlugins\polyglot\services\engines\microsoft.py:104
+#: addon\globalPlugins\polyglot\services\engines\microsoft.py:107
 msgid "Could not get Microsoft Translator authentication token."
 msgstr "Không thể lấy mã token xác thực từ Microsoft Translator."
 
-#: addon\globalPlugins\polyglot\services\engines\microsoft.py:185
+#: addon\globalPlugins\polyglot\services\engines\microsoft.py:183
 msgid "Failed to parse response from Microsoft Translator."
 msgstr "Không thể phân tích phản hồi từ Microsoft Translator."
 
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:28
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:31
 msgid "Niutrans"
 msgstr "Niutrans"
 
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:34
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:37
 msgid "Request address does not exist"
 msgstr "Địa chỉ yêu cầu không tồn tại"
 
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:35
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:38
 msgid "Request is too frequent, exceeding QPS limit"
 msgstr "Yêu cầu quá thường xuyên, vượt quá giới hạn số yêu cầu mỗi giây (QPS)"
 
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:36
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:39
 msgid "Request string length exceeds the limit"
 msgstr "Độ dài chuỗi yêu cầu vượt quá giới hạn"
 
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:37
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:40
 msgid "Source language encoding is not UTF-8"
 msgstr "Mã hóa ngôn ngữ nguồn không phải là UTF-8"
 
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:38
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:41
 msgid "Insufficient character allowance or no access permission"
 msgstr "Hạn ngạch ký tự không đủ hoặc không có quyền truy cập"
 
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:39
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:42
 msgid "Content filtering exception"
 msgstr "Ngoại lệ trong quá trình lọc nội dung"
 
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:40
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:43
 msgid "Source and target languages are the same"
 msgstr "Ngôn ngữ nguồn và ngôn ngữ đích giống nhau"
 
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:41
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:44
 msgid "Language not supported"
 msgstr "Ngôn ngữ không được hỗ trợ"
 
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:42
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:45
 msgid "Request processing timeout"
 msgstr "Xử lý yêu cầu quá thời gian chờ"
 
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:43
-#: addon\globalPlugins\polyglot\services\engines\tencent.py:167
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:46
+#: addon\globalPlugins\polyglot\services\engines\tencent.py:170
 msgid "Authentication failed"
 msgstr "Xác thực thất bại"
 
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:44
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:47
 msgid "Parameters do not conform to specifications"
 msgstr "Các tham số không đúng quy cách"
 
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:46
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:49
 msgid ""
 "Parameter validation exception (e.g., from/to/srcText/appId/authStr/"
 "timestamp cannot be empty)"
@@ -1602,39 +1602,39 @@ msgstr ""
 "Ngoại lệ xác thực tham số (ví dụ: các trường từ/đến/văn bản nguồn/appId/"
 "authStr/dấu thời gian không được để trống)"
 
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:48
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:51
 msgid "Incorrect request parameters"
 msgstr "Tham số yêu cầu không chính xác"
 
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:49
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:52
 msgid "Unsupported parameter passing method"
 msgstr "Phương thức truyền tham số không được hỗ trợ"
 
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:84
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:87
 msgid "App ID"
 msgstr "App ID"
 
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:85
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:88
 msgid "API Key (for signing)"
 msgstr "Khóa API (dùng để ký xác thực)"
 
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:88
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:91
 msgid "Enable bilingual alignment mode"
 msgstr "Bật chế độ đối chiếu song ngữ"
 
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:95
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:98
 msgid "Bilingual output order:"
 msgstr "Thứ tự xuất song ngữ:"
 
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:98
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:101
 msgid "Source -> Target"
 msgstr "Nguồn -> Đích"
 
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:99
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:102
 msgid "Target -> Source"
 msgstr "Đích -> Nguồn"
 
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:137
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:138
 msgid "App ID and API Key for Niutrans must be configured."
 msgstr "App ID và API Key cho Niutrans phải được cấu hình."
 
@@ -1644,212 +1644,212 @@ msgstr ""
 "Không thể phân tích phản hồi API. Phản hồi không phải là định dạng JSON hợp "
 "lệ."
 
-#: addon\globalPlugins\polyglot\services\engines\ollama1.py:17
+#: addon\globalPlugins\polyglot\services\engines\ollama1.py:21
 msgid "Ollama 1"
 msgstr "Ollama 1"
 
-#: addon\globalPlugins\polyglot\services\engines\ollama2.py:17
+#: addon\globalPlugins\polyglot\services\engines\ollama2.py:21
 msgid "Ollama 2"
 msgstr "Ollama 2"
 
-#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:79
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:98
+#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:83
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:100
 msgid "API URL"
 msgstr "Đường dẫn API URL"
 
-#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:83
+#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:87
 msgid "Model Name"
 msgstr "Tên mô hình"
 
-#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:84
+#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:88
 msgid "API Key (optional)"
 msgstr "Khóa API (không bắt buộc)"
 
-#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:87
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:118
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:55
+#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:91
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:120
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:58
 msgid "Prompt Template:"
 msgstr "Mẫu lời nhắc (Prompt Template):"
 
-#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:90
+#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:94
 msgid "Simple (No JSON)"
 msgstr "Đơn giản (Không dùng JSON)"
 
-#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:91
+#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:95
 msgid "Concise JSON (Recommended)"
 msgstr "JSON ngắn gọn (Khuyên dùng)"
 
-#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:92
+#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:96
 msgid "Structured JSON (Reliable)"
 msgstr "JSON có cấu trúc (Đáng tin cậy)"
 
-#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:93
+#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:97
 msgid "Fluent Style (No JSON)"
 msgstr "Phong cách trôi chảy (Không dùng JSON)"
 
-#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:94
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:124
+#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:98
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:126
 msgid "Custom (Editable)"
 msgstr "Tùy chỉnh (Có thể chỉnh sửa)"
 
-#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:100
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:130
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:56
+#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:104
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:132
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:59
 msgid "Custom System Prompt (Role):"
 msgstr "Lời nhắc hệ thống tùy chỉnh (Vai trò):"
 
-#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:106
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:136
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:57
+#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:110
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:138
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:60
 msgid "Custom User Prompt (Task):"
 msgstr "Lời nhắc người dùng tùy chỉnh (Nhiệm vụ):"
 
-#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:126
+#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:130
 msgid "Ollama API URL and Model Name are required."
 msgstr "Yêu cầu phải có Ollama API URL và Tên mô hình."
 
-#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:181
+#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:185
 msgid "API response did not contain a 'response' field."
 msgstr "Phản hồi từ API không có trường 'response'."
 
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:23
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:25
 msgid "OpenRouter"
 msgstr "OpenRouter"
 
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:41
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:43
 msgid "Custom Model"
 msgstr "Mô hình tùy chỉnh"
 
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:105
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:54
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:107
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:57
 msgid "Model:"
 msgstr "Mô hình:"
 
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:112
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:114
 msgid "Custom Model Name:"
 msgstr "Tên mô hình tùy chỉnh:"
 
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:121
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:123
 msgid "Structured JSON (Reliable, includes language detection)"
 msgstr "JSON có cấu trúc (Đáng tin cậy, bao gồm phát hiện ngôn ngữ)"
 
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:122
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:124
 msgid "Simple Text (Fastest, no language detection)"
 msgstr "Văn bản thuần túy (Nhanh nhất, không phát hiện ngôn ngữ)"
 
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:123
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:125
 msgid "Fluent Style (Natural, no language detection)"
 msgstr "Phong cách trôi chảy (Tự nhiên, không phát hiện ngôn ngữ)"
 
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:162
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:164
 msgid "OpenRouter API URL is not configured."
 msgstr "Đường dẫn OpenRouter API URL chưa được cấu hình."
 
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:165
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:167
 msgid "API Key for OpenRouter is not configured."
 msgstr "Khóa API cho OpenRouter chưa được cấu hình."
 
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:171
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:173
 msgid "Custom model name is not specified."
 msgstr "Tên mô hình tùy chỉnh chưa được chỉ định."
 
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:264
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:266
 msgid "Invalid API response structure."
 msgstr "Cấu trúc phản hồi API không hợp lệ."
 
-#: addon\globalPlugins\polyglot\services\engines\tencent.py:21
+#: addon\globalPlugins\polyglot\services\engines\tencent.py:26
 msgid "Tencent Translate"
 msgstr "Tencent Translate"
 
-#: addon\globalPlugins\polyglot\services\engines\tencent.py:63
+#: addon\globalPlugins\polyglot\services\engines\tencent.py:68
 msgid "Secret ID"
 msgstr "Secret ID"
 
-#: addon\globalPlugins\polyglot\services\engines\tencent.py:64
+#: addon\globalPlugins\polyglot\services\engines\tencent.py:69
 msgid "Secret Key"
 msgstr "Secret Key"
 
-#: addon\globalPlugins\polyglot\services\engines\tencent.py:67
+#: addon\globalPlugins\polyglot\services\engines\tencent.py:72
 msgid "Region:"
 msgstr "Khu vực:"
 
-#: addon\globalPlugins\polyglot\services\engines\tencent.py:70
+#: addon\globalPlugins\polyglot\services\engines\tencent.py:75
 msgid "North China (Beijing)"
 msgstr "Hoa Bắc (Bắc Kinh)"
 
-#: addon\globalPlugins\polyglot\services\engines\tencent.py:71
+#: addon\globalPlugins\polyglot\services\engines\tencent.py:76
 msgid "South China (Guangzhou)"
 msgstr "Hoa Nam (Quảng Châu)"
 
-#: addon\globalPlugins\polyglot\services\engines\tencent.py:72
+#: addon\globalPlugins\polyglot\services\engines\tencent.py:77
 msgid "East China (Shanghai)"
 msgstr "Hoa Đông (Thượng Hải)"
 
-#: addon\globalPlugins\polyglot\services\engines\tencent.py:73
+#: addon\globalPlugins\polyglot\services\engines\tencent.py:78
 msgid "Hong Kong, Macao and Taiwan (Hong Kong, China)"
 msgstr "Hồng Kông, Ma Cao và Đài Loan (Hồng Kông, Trung Quốc)"
 
-#: addon\globalPlugins\polyglot\services\engines\tencent.py:74
+#: addon\globalPlugins\polyglot\services\engines\tencent.py:79
 msgid "Southeast Asia-Pacific (Singapore)"
 msgstr "Đông Nam Á - Thái Bình Dương (Singapore)"
 
-#: addon\globalPlugins\polyglot\services\engines\tencent.py:75
+#: addon\globalPlugins\polyglot\services\engines\tencent.py:80
 msgid "US East (Ashburn)"
 msgstr "Đông Hoa Kỳ (Ashburn)"
 
-#: addon\globalPlugins\polyglot\services\engines\tencent.py:87
+#: addon\globalPlugins\polyglot\services\engines\tencent.py:92
 msgid "Secret ID and Secret Key must be provided."
 msgstr "Phải cung cấp Secret ID và Secret Key."
 
-#: addon\globalPlugins\polyglot\services\engines\tencentPolyglot.py:17
+#: addon\globalPlugins\polyglot\services\engines\tencentPolyglot.py:23
 msgid "Tencent Translate (Polyglot)"
 msgstr "Tencent Translate (Polyglot)"
 
-#: addon\globalPlugins\polyglot\services\engines\tencentPolyglot.py:44
-#: addon\globalPlugins\polyglot\services\engines\vivo.py:54
-#: addon\globalPlugins\polyglot\services\engines\volcenginePolyglot.py:52
+#: addon\globalPlugins\polyglot\services\engines\tencentPolyglot.py:48
+#: addon\globalPlugins\polyglot\services\engines\vivo.py:59
+#: addon\globalPlugins\polyglot\services\engines\volcenginePolyglot.py:58
 msgid "NVDACN Username"
 msgstr "Tên người dùng NVDACN"
 
-#: addon\globalPlugins\polyglot\services\engines\tencentPolyglot.py:45
-#: addon\globalPlugins\polyglot\services\engines\vivo.py:55
-#: addon\globalPlugins\polyglot\services\engines\volcenginePolyglot.py:53
+#: addon\globalPlugins\polyglot\services\engines\tencentPolyglot.py:49
+#: addon\globalPlugins\polyglot\services\engines\vivo.py:60
+#: addon\globalPlugins\polyglot\services\engines\volcenginePolyglot.py:59
 msgid "NVDACN Password"
 msgstr "Mật khẩu NVDACN"
 
-#: addon\globalPlugins\polyglot\services\engines\tencentPolyglot.py:54
-#: addon\globalPlugins\polyglot\services\engines\vivo.py:68
-#: addon\globalPlugins\polyglot\services\engines\volcenginePolyglot.py:62
+#: addon\globalPlugins\polyglot\services\engines\tencentPolyglot.py:58
+#: addon\globalPlugins\polyglot\services\engines\vivo.py:73
+#: addon\globalPlugins\polyglot\services\engines\volcenginePolyglot.py:68
 msgid "NVDACN username and password must be provided in settings."
 msgstr "Tên người dùng và mật khẩu NVDACN phải được cung cấp trong cài đặt."
 
-#: addon\globalPlugins\polyglot\services\engines\tencentPolyglot.py:88
-#: addon\globalPlugins\polyglot\services\engines\vivo.py:106
-#: addon\globalPlugins\polyglot\services\engines\volcenginePolyglot.py:96
+#: addon\globalPlugins\polyglot\services\engines\tencentPolyglot.py:92
+#: addon\globalPlugins\polyglot\services\engines\vivo.py:110
+#: addon\globalPlugins\polyglot\services\engines\volcenginePolyglot.py:102
 msgid "API response successful but did not contain a translation result."
 msgstr "Phản hồi API thành công nhưng không chứa kết quả dịch."
 
 #. Translators: Error message when authentication with the translation service fails. {error} is the detailed error description.
-#: addon\globalPlugins\polyglot\services\engines\tencentPolyglot.py:95
-#: addon\globalPlugins\polyglot\services\engines\vivo.py:83
-#: addon\globalPlugins\polyglot\services\engines\volcenginePolyglot.py:103
+#: addon\globalPlugins\polyglot\services\engines\tencentPolyglot.py:99
+#: addon\globalPlugins\polyglot\services\engines\vivo.py:87
+#: addon\globalPlugins\polyglot\services\engines\volcenginePolyglot.py:109
 #, python-brace-format
 msgid "Authentication failed: {error}"
 msgstr "Xác thực thất bại: {error}"
 
-#: addon\globalPlugins\polyglot\services\engines\vivo.py:20
+#: addon\globalPlugins\polyglot\services\engines\vivo.py:25
 msgid "VIVO Translate"
 msgstr "VIVO Translate"
 
-#: addon\globalPlugins\polyglot\services\engines\vivo.py:24
+#: addon\globalPlugins\polyglot\services\engines\vivo.py:29
 msgid "Server error"
 msgstr "Lỗi máy chủ"
 
-#: addon\globalPlugins\polyglot\services\engines\vivo.py:25
+#: addon\globalPlugins\polyglot\services\engines\vivo.py:30
 msgid "Invalid request parameters"
 msgstr "Tham số yêu cầu không hợp lệ"
 
-#: addon\globalPlugins\polyglot\services\engines\vivo.py:78
+#: addon\globalPlugins\polyglot\services\engines\vivo.py:82
 msgid ""
 "Could not connect to the NVDACN authentication server to get a signature. "
 "Please check your network connection or try again later."
@@ -1857,102 +1857,102 @@ msgstr ""
 "Không thể kết nối với máy chủ xác thực NVDACN để lấy chữ ký điện tử. Vui "
 "lòng kiểm tra kết nối mạng hoặc thử lại sau."
 
-#: addon\globalPlugins\polyglot\services\engines\vivo.py:85
+#: addon\globalPlugins\polyglot\services\engines\vivo.py:89
 msgid "An unknown error occurred while generating authentication info."
 msgstr "Đã xảy ra lỗi không xác định khi tạo thông tin xác thực."
 
-#: addon\globalPlugins\polyglot\services\engines\volcenginePolyglot.py:17
+#: addon\globalPlugins\polyglot\services\engines\volcenginePolyglot.py:23
 msgid "Volcengine (Polyglot)"
 msgstr "Volcengine (Polyglot)"
 
-#: addon\globalPlugins\polyglot\services\engines\yandex.py:23
+#: addon\globalPlugins\polyglot\services\engines\yandex.py:27
 msgid "Yandex Translate"
 msgstr "Yandex Translate"
 
-#: addon\globalPlugins\polyglot\services\engines\_vivoAuth.py:88
+#: addon\globalPlugins\polyglot\services\engines\_vivoAuth.py:76
 msgid "Could not connect to the authentication server."
 msgstr "Không thể kết nối đến máy chủ xác thực."
 
-#: addon\globalPlugins\polyglot\services\engines\_vivoAuth.py:95
+#: addon\globalPlugins\polyglot\services\engines\_vivoAuth.py:79
 msgid "Invalid response from the authentication server."
 msgstr "Phản hồi từ máy chủ xác thực không hợp lệ."
 
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:23
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:26
 msgid "Polyglot Interactive Translation"
 msgstr "Dịch thuật tương tác Polyglot"
 
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:40
-#: addon\globalPlugins\polyglot\views\settings.py:54
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:43
+#: addon\globalPlugins\polyglot\views\settings.py:63
 msgid "Translation &engine:"
 msgstr "Bộ &dịch:"
 
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:49
-#: addon\globalPlugins\polyglot\views\settings.py:228
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:52
+#: addon\globalPlugins\polyglot\views\settings.py:239
 msgid "Current Engine Settings"
 msgstr "Cài đặt bộ dịch hiện tại"
 
 #. --- Text Areas (Vertical Layout for better expansion) ---
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:67
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:70
 msgid "Te&xt to translate:"
 msgstr "Văn &bản cần dịch:"
 
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:76
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:79
 msgid "Translation &result:"
 msgstr "Kết &quả dịch:"
 
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:87
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:90
 msgid "&Translate"
 msgstr "&Dịch"
 
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:91
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:94
 msgid "C&opy result"
 msgstr "Sa&o chép kết quả"
 
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:92
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:95
 msgid "C&lear"
 msgstr "X&óa"
 
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:93
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:96
 msgid "&Close"
 msgstr "&Đóng"
 
 #. Translators: Label for custom model with its name.
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:168
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:174
 #, python-brace-format
 msgid "Custom: {modelName}"
 msgstr "Tùy chỉnh: {modelName}"
 
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:184
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:198
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:244
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:245
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:190
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:204
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:251
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:252
 msgid "Not applicable"
 msgstr "Không áp dụng"
 
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:304
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:312
 msgid "Translating..."
 msgstr "Đang dịch..."
 
-#: addon\globalPlugins\polyglot\views\settings.py:64
+#: addon\globalPlugins\polyglot\views\settings.py:73
 msgid "Common Settings"
 msgstr "Cài đặt chung"
 
-#: addon\globalPlugins\polyglot\views\settings.py:69
+#: addon\globalPlugins\polyglot\views\settings.py:78
 msgid "Copy manual translation results to clipboard"
 msgstr "Sao chép kết quả dịch thủ công vào bộ nhớ tạm"
 
-#: addon\globalPlugins\polyglot\views\settings.py:76
+#: addon\globalPlugins\polyglot\views\settings.py:85
 msgid ""
 "Prefer the local English-Chinese dictionary for selected text, clipboard "
 "text, and last spoken text"
 msgstr ""
 
 #. Translators: Checkbox controlling local dictionary definitions in NVDA text review.
-#: addon\globalPlugins\polyglot\views\settings.py:84
+#: addon\globalPlugins\polyglot\views\settings.py:93
 msgid "Use the local English-Chinese dictionary in text review"
 msgstr ""
 
-#: addon\globalPlugins\polyglot\views\settings.py:91
+#: addon\globalPlugins\polyglot\views\settings.py:100
 msgid ""
 "Enable smart speech filter (skips non-translatable text like roles, states, "
 "location and other formatting information)"
@@ -1960,42 +1960,41 @@ msgstr ""
 "Bật bộ lọc giọng đọc thông minh (bỏ qua văn bản không cần dịch như vai trò, "
 "trạng thái, vị trí và các thông tin định dạng khác)"
 
-#: addon\globalPlugins\polyglot\views\settings.py:95
+#: addon\globalPlugins\polyglot\views\settings.py:104
 msgid "Clear Cache"
 msgstr "Xóa bộ nhớ đệm"
 
-#: addon\globalPlugins\polyglot\views\settings.py:234
+#: addon\globalPlugins\polyglot\views\settings.py:245
 msgid "This engine requires no additional configuration."
 msgstr "Bộ dịch này không cần cấu hình thêm."
 
-#: addon\globalPlugins\polyglot\views\settings.py:322
+#: addon\globalPlugins\polyglot\views\settings.py:335
 #, python-brace-format
 msgid "Clear Cache (Items: {})"
 msgstr "Xóa bộ nhớ đệm (Số lượng: {})"
 
 #. Add-on description
 #. Translators: Long description to be shown for this add-on on add-on information from add-on store
-#: buildVars.py:26
+#: buildVars.py:35
 msgid "A translation add-on for NVDA with support for multiple engines."
 msgstr "Một add-on dịch thuật dành cho NVDA hỗ trợ nhiều bộ dịch khác nhau."
 
 #. Brief changelog for this version
 #. Translators: what's new content for the add-on version to be shown in the add-on store
-#: buildVars.py:31
+#: buildVars.py:40
 msgid ""
-"### 1.0.0\n"
+"### 1.1.0\n"
 "\n"
-"- Added offline English-to-Chinese definitions to NVDA's repeated current-"
-"word review command in Chinese,\n"
-"  including conservative lookup for common spelling and inflection variants, "
-"candidate announcements for\n"
-"  ambiguous words, and clear feedback for possible abbreviations and words "
-"absent from the local dictionary.\n"
-"- Manual selection, clipboard, and last-spoken translation now use matching "
-"local word definitions for\n"
-"  supported English-Chinese requests. Translation-command and text-review "
-"lookup can be controlled separately\n"
-"  from Common Settings."
+"- Relicensed Polyglot and its first-party dictionary resources under GPL-3.0-"
+"or-later, with cary-rowen\n"
+"  copyright attribution and preserved third-party MIT and Apache-2.0 "
+"notices.\n"
+"- Standardized copyright headers, NVDA naming, and docstrings, and removed "
+"sensitive content from diagnostic\n"
+"  logs.\n"
+"- Applied repository-wide Ruff formatting and excluded vendored dependencies "
+"and template build files from\n"
+"  first-party linting."
 msgstr ""
 
 #~ msgid ""

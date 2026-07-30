@@ -34,17 +34,17 @@ addon_info = AddonInfo(
 	# Translators: Long description to be shown for this add-on on add-on information from add-on store
 	addon_description=_("""A translation add-on for NVDA with support for multiple engines."""),
 	# version
-	addon_version="1.0.0",
+	addon_version="1.1.0",
 	# Brief changelog for this version
 	# Translators: what's new content for the add-on version to be shown in the add-on store
-	addon_changelog=_("""### 1.0.0
+	addon_changelog=_("""### 1.1.0
 
-- Added offline English-to-Chinese definitions to NVDA's repeated current-word review command in Chinese,
-  including conservative lookup for common spelling and inflection variants, candidate announcements for
-  ambiguous words, and clear feedback for possible abbreviations and words absent from the local dictionary.
-- Manual selection, clipboard, and last-spoken translation now use matching local word definitions for
-  supported English-Chinese requests. Translation-command and text-review lookup can be controlled separately
-  from Common Settings."""),
+- Relicensed Polyglot and its first-party dictionary resources under GPL-3.0-or-later, with cary-rowen
+  copyright attribution and preserved third-party MIT and Apache-2.0 notices.
+- Standardized copyright headers, NVDA naming, and docstrings, and removed sensitive content from diagnostic
+  logs.
+- Applied repository-wide Ruff formatting and excluded vendored dependencies and template build files from
+  first-party linting."""),
 	# Author(s)
 	addon_author="cary-rowen <manchen_0528@outlook.com>",
 	# URL for the add-on documentation support
