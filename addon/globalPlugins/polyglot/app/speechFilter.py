@@ -382,18 +382,19 @@ class SpeechFilter:
 
 		def hookedSpellTextInfo(
 			info: textInfos.TextInfo,
-			shouldUseCharacterDescriptions: bool = False,
+			useCharacterDescriptions: bool = False,
 			priority: speech.Spri | None = None,
 		) -> None:
 			"""Speak a local definition or delegate unchanged to NVDA's spelling implementation."""
-			if self._isWordDefinitionHookActive and shouldUseCharacterDescriptions:
+			# Keep NVDA's public keyword name; core review commands pass it by keyword.
+			if self._isWordDefinitionHookActive and useCharacterDescriptions:
 				lookupResult = self._wordDictionary.lookup(info.text)
 				if lookupResult is not None:
 					self._speakWordLookupResult(lookupResult, priority)
 					return
 			original(
 				info,
-				useCharacterDescriptions=shouldUseCharacterDescriptions,
+				useCharacterDescriptions=useCharacterDescriptions,
 				priority=priority,
 			)
 
