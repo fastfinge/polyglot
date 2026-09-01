@@ -7,7 +7,7 @@ name = "polyglot"
 dynamic = ["version"]
 description = "NVDA translation add-on with multiple engines"
 maintainers = [
-	{name = "cary-rowen", email = "manchen_0528@outlook.com"},
+	{name = "cary-rowen", email = "cary-rowen@outlook.com"},
 ]
 requires-python = ">=3.13,<3.14"
 classifiers = [

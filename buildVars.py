@@ -1,4 +1,4 @@
-# Copyright (C) 2025-2026 cary-rowen <manchen_0528@outlook.com>
+# Copyright (C) 2025-2026 cary-rowen <cary-rowen@outlook.com>
 # This file is covered by the GNU General Public License version 3 or later.
 # See the file COPYING.txt for more details.
 
@@ -42,7 +42,7 @@ addon_info = AddonInfo(
 - Fixed repeated current-character review failing after version 1.1.0 by preserving NVDA's
   `speech.spellTextInfo` keyword-argument contract."""),
 	# Author(s)
-	addon_author="cary-rowen <manchen_0528@outlook.com>",
+	addon_author="cary-rowen <cary-rowen@outlook.com>",
 	# URL for the add-on documentation support
 	addon_url="https://github.com/cary-rowen/polyglot",
 	# URL for the add-on repository where the source code can be found
