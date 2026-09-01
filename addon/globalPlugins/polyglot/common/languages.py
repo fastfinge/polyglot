@@ -26,7 +26,6 @@ _ALL_LANGUAGES = {
 	"zh-TW": _("Chinese (Traditional)"),
 	"zh-HK": _("Chinese (Traditional)"),
 	"zh-Hant": _("Chinese (Traditional)"),
-	"zh_HANT": _("Chinese (Traditional)"),  # Lingva
 	"cht": _("Chinese (Traditional)"),
 	"yue": _("Cantonese"),
 	"wyw": _("Classical Chinese"),

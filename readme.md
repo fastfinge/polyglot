@@ -204,7 +204,6 @@ The repository currently includes the following engines:
 | `DeepL` | DeepL API key | Standard vendor API integration. |
 | `Google Translate (key-free)` | None | Supports an optional mirror endpoint toggle. |
 | `Google Translate (Polyglot)` | Configurable API key and endpoint | Ships with default endpoint values in code; availability depends on service status. |
-| `Lingva Translate` | None | Public Lingva endpoint, no language-detection reporting in responses. |
 | `Microsoft Translator (key-free)` | None | Fetches a temporary token automatically. |
 | `Niutrans` | Niutrans API key | Standard vendor API integration. |
 | `Ollama 1` | Ollama URL, model name, optional key | First saved Ollama profile. |

@@ -163,7 +163,6 @@ Kho lưu trữ hiện tại bao gồm các bộ dịch sau:
 | `DeepL` | DeepL API key | Tích hợp API chuẩn của nhà cung cấp. |
 | `Google Translate (key-free)` | Không có | Hỗ trợ nút bật/tắt chuyển đổi sang máy chủ dự phòng tùy chọn. |
 | `Google Translate (Polyglot)` | Khóa API và endpoint có thể cấu hình | Đi kèm với các giá trị endpoint mặc định trong mã nguồn; tính khả dụng tùy thuộc vào trạng thái dịch vụ. |
-| `Lingva Translate` | Không có | Endpoint công cộng của Lingva, không có báo cáo phát hiện ngôn ngữ trong phản hồi. |
 | `Microsoft Translator (key-free)` | Không có | Tự động lấy mã token tạm thời. |
 | `Niutrans` | Niutrans API key | Tích hợp API chuẩn của nhà cung cấp. |
 | `Ollama 1` | Ollama URL, tên mô hình, khóa tùy chọn | Cấu hình hồ sơ Ollama đã lưu thứ nhất. |

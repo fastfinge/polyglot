@@ -272,11 +272,9 @@ msgstr "中文"
 msgid "Chinese (Simplified)"
 msgstr "中文 (简体)"
 
-#. Lingva
 #: addon\globalPlugins\polyglot\common\languages.py:26
 #: addon\globalPlugins\polyglot\common\languages.py:27
 #: addon\globalPlugins\polyglot\common\languages.py:28
-#: addon\globalPlugins\polyglot\common\languages.py:29
 #: addon\globalPlugins\polyglot\common\languages.py:30
 msgid "Chinese (Traditional)"
 msgstr "中文 (繁体)"
@@ -1500,15 +1498,6 @@ msgstr "无法解析API响应。"
 #: addon\globalPlugins\polyglot\services\engines\googlePolyglot.py:207
 msgid "Invalid API response or no translation text included."
 msgstr "API 响应无效或未包含翻译文本。"
-
-#: addon\globalPlugins\polyglot\services\engines\lingva.py:26
-msgid "Lingva Translate"
-msgstr "Lingva 翻译"
-
-#. Sometimes Lingva might return a non-JSON error for very long texts
-#: addon\globalPlugins\polyglot\services\engines\lingva.py:105
-msgid "Service returned an invalid result (text may be too long)."
-msgstr "服务返回了无效结果 (可能文本过长)。"
 
 #: addon\globalPlugins\polyglot\services\engines\microsoft.py:30
 msgid "Microsoft Translator (key-free)"

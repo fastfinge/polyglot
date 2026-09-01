@@ -189,7 +189,6 @@ NVDA 退出时，Polyglot 会关闭由插件启动的 Chrome 实例。
 | `DeepL` | DeepL API 密钥 | 标准厂商 API 接入。 |
 | `Google Translate (key-free)` | 无 | 可选启用镜像接口。 |
 | `Google Translate (Polyglot)` | 可配置 API 密钥和端点 URL | 代码内带默认接口值，实际可用性取决于服务状态。 |
-| `Lingva Translate` | 无 | 使用公开 Lingva 接口，不报告检测语言。 |
 | `Microsoft Translator (key-free)` | 无 | 会自动获取临时访问令牌。 |
 | `Niutrans` | 小牛翻译 API 密钥 | 标准厂商 API 接入。 |
 | `Ollama 1` | Ollama 地址、模型名、可选密钥 | 第一个独立 Ollama 配置槽。 |
