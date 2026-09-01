@@ -4,24 +4,47 @@
 # This file is covered by the GNU General Public License version 3 or later.
 # See the file COPYING.txt for more details.
 
+from collections.abc import Callable
 
-def splitText(text: str, maxLength: int) -> list[str]:
+
+def splitText(
+	text: str,
+	maxLength: int,
+	lengthFunction: Callable[[str], int] = len,
+) -> list[str]:
 	"""
-	Split text recursively into chunks of at most maxLength characters.
+	Split text recursively into chunks of at most maxLength measured units.
 	Attempts to split at natural boundaries like paragraphs, sentences, and words.
 	"""
-	if maxLength <= 0 or len(text) <= maxLength:
+	if maxLength <= 0 or lengthFunction(text) <= maxLength:
 		return [text]
 
+	def _splitByLength(currentText: str) -> list[str]:
+		"""Split at code-point boundaries while respecting the supplied unit metric."""
+		chunks: list[str] = []
+		currentChunk: list[str] = []
+		currentLength = 0
+		for character in currentText:
+			characterLength = lengthFunction(character)
+			if currentChunk and currentLength + characterLength > maxLength:
+				chunks.append("".join(currentChunk))
+				currentChunk = []
+				currentLength = 0
+			currentChunk.append(character)
+			currentLength += characterLength
+		if currentChunk:
+			chunks.append("".join(currentChunk))
+		return chunks
+
 	def _split(currentText: str, separators: list[str]) -> list[str]:
-		if len(currentText) <= maxLength:
+		if lengthFunction(currentText) <= maxLength:
 			return [currentText]
 		if not separators:
-			return [currentText[i : i + maxLength] for i in range(0, len(currentText), maxLength)]
+			return _splitByLength(currentText)
 
 		sep = separators[0]
 		if sep == "":
-			return [currentText[i : i + maxLength] for i in range(0, len(currentText), maxLength)]
+			return _splitByLength(currentText)
 
 		chunks = currentText.split(sep)
 		newChunks = []
@@ -36,7 +59,7 @@ def splitText(text: str, maxLength: int) -> list[str]:
 		currentChunk = ""
 
 		for c in newChunks:
-			if len(c) > maxLength:
+			if lengthFunction(c) > maxLength:
 				if currentChunk:
 					result.append(currentChunk)
 					currentChunk = ""
@@ -44,7 +67,7 @@ def splitText(text: str, maxLength: int) -> list[str]:
 				subChunks = _split(c, separators[1:])
 				result.extend(subChunks)
 			else:
-				if len(currentChunk) + len(c) <= maxLength:
+				if lengthFunction(currentChunk) + lengthFunction(c) <= maxLength:
 					currentChunk += c
 				else:
 					if currentChunk:

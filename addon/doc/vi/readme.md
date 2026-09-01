@@ -161,6 +161,7 @@ Kho lưu trữ hiện tại bao gồm các bộ dịch sau:
 | `Caiyun` | Caiyun token | Tích hợp API chuẩn của nhà cung cấp. |
 | `Chrome AI (Offline)` | Không có | Sử dụng API dịch thuật tích hợp sẵn của Chrome với các mô hình cục bộ; yêu cầu chọn rõ ràng ngôn ngữ nguồn. |
 | `DeepL` | DeepL API key | Tích hợp API chuẩn của nhà cung cấp. |
+| `DeepL Web (key-free)` | Không có | Sử dụng endpoint Web ẩn danh không chính thức của DeepL; giới hạn 1.500 ký tự mỗi yêu cầu. |
 | `Google Translate (key-free)` | Không có | Hỗ trợ nút bật/tắt chuyển đổi sang máy chủ dự phòng tùy chọn. |
 | `Google Translate (Polyglot)` | Khóa API và endpoint có thể cấu hình | Đi kèm với các giá trị endpoint mặc định trong mã nguồn; tính khả dụng tùy thuộc vào trạng thái dịch vụ. |
 | `Microsoft Translator (key-free)` | Không có | Tự động lấy mã token tạm thời. |

@@ -91,8 +91,8 @@ class TranslationTask(threading.Thread):
 				self.isManual
 				and engineConfig.get("enableAutoSwap")
 				and self.langFrom == autoDetectCode
-				and langDetected is not None
-				and langDetected == self.langTo
+				and isinstance(langDetected, str)
+				and engine.areLanguagesEquivalent(langDetected, self.langTo)
 			)
 			finalTargetLang = self.langTo
 			if shouldSwap:

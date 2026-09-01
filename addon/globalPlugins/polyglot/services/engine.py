@@ -57,6 +57,10 @@ class TranslationEngine(ABC):
 		"""Return whether translation results include the detected source language."""
 		return self.doesSupportLanguageDetection
 
+	def areLanguagesEquivalent(self, detectedLanguage: str, targetLanguage: str) -> bool:
+		"""Return whether a detected source and target language are equivalent for auto-swap."""
+		return detectedLanguage == targetLanguage
+
 	@property
 	def enabledConfigLabel(self) -> str:
 		"""Return the label for the common engine enable checkbox."""
@@ -117,6 +121,10 @@ class ChunkedTranslationMixin(TranslationEngine):
 		"""
 		return 0
 
+	def _getRequestLength(self, text: str) -> int:
+		"""Return the request length according to this engine's endpoint rules."""
+		return len(text)
+
 	@property
 	def requestDelayRange(self) -> tuple[float, float] | None:
 		"""
@@ -146,10 +154,10 @@ class ChunkedTranslationMixin(TranslationEngine):
 	) -> dict[str, Any]:
 		"""Translate text sequentially in bounded chunks while preserving whitespace."""
 		limit = self.maxRequestLength
-		if limit <= 0 or len(text) <= limit:
+		if limit <= 0 or self._getRequestLength(text) <= limit:
 			return self._translateChunk(text, langFrom, langTo, config)
 
-		chunks = splitText(text, limit)
+		chunks = splitText(text, limit, self._getRequestLength)
 		totalChunks = len(chunks)
 		delayRange = self.requestDelayRange
 

@@ -187,6 +187,7 @@ NVDA 退出时，Polyglot 会关闭由插件启动的 Chrome 实例。
 | `Caiyun` | 彩云 token | 标准厂商 API 接入。 |
 | `Chrome AI (Offline)` | 无 | 使用 Chrome 内置 Translator API 和本机模型；需要明确指定源语言。 |
 | `DeepL` | DeepL API 密钥 | 标准厂商 API 接入。 |
+| `DeepL Web (key-free)` | 无 | 使用 DeepL 非公开免密 Web 接口；每次请求最多 1,500 个字符。 |
 | `Google Translate (key-free)` | 无 | 可选启用镜像接口。 |
 | `Google Translate (Polyglot)` | 可配置 API 密钥和端点 URL | 代码内带默认接口值，实际可用性取决于服务状态。 |
 | `Microsoft Translator (key-free)` | 无 | 会自动获取临时访问令牌。 |

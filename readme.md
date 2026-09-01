@@ -202,6 +202,7 @@ The repository currently includes the following engines:
 | `Caiyun` | Caiyun token | Standard vendor API integration. |
 | `Chrome AI (Offline)` | None | Uses Chrome's built-in Translator API with local models; select the source language explicitly. |
 | `DeepL` | DeepL API key | Standard vendor API integration. |
+| `DeepL Web (key-free)` | None | Uses DeepL's unofficial anonymous Web endpoint; limited to 1,500 characters per request. |
 | `Google Translate (key-free)` | None | Supports an optional mirror endpoint toggle. |
 | `Google Translate (Polyglot)` | Configurable API key and endpoint | Ships with default endpoint values in code; availability depends on service status. |
 | `Microsoft Translator (key-free)` | None | Fetches a temporary token automatically. |

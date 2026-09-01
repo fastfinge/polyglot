@@ -32,6 +32,8 @@ _ALL_LANGUAGES = {
 	"ZH": _("Chinese"),  # DeepL
 	# --- Major Languages ---
 	"en": _("English"),
+	"en-US": _("English (American)"),
+	"en-GB": _("English (British)"),
 	"ja": _("Japanese"),
 	"jp": _("Japanese"),  # Baidu
 	"ko": _("Korean"),
@@ -41,9 +43,12 @@ _ALL_LANGUAGES = {
 	"fra": _("French"),  # Baidu
 	"de": _("German"),
 	"es": _("Spanish"),
+	"es-419": _("Spanish (Latin American)"),
 	"spa": _("Spanish"),  # Baidu
 	"ru": _("Russian"),
 	"pt": _("Portuguese"),
+	"pt-BR": _("Portuguese (Brazilian)"),
+	"pt-PT": _("Portuguese (European)"),
 	"it": _("Italian"),
 	"ar": _("Arabic"),
 	"ara": _("Arabic"),  # Baidu
@@ -291,3 +296,8 @@ def getLanguageDictForCodes(codes: list[str]) -> dict[str, str]:
 def getLanguageName(code: str) -> str:
 	"""Return the translated language name, falling back to the supplied code."""
 	return _ALL_LANGUAGES.get(code, code)
+
+
+def getLanguageFamily(code: str) -> str:
+	"""Return the base language subtag used for language-family comparisons."""
+	return code.partition("-")[0].casefold()
