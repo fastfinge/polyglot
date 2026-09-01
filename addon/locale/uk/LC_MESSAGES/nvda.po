@@ -1951,11 +1951,11 @@ msgstr "Скопіювати результати перекладу в буфе
 
 #: addon\globalPlugins\polyglot\views\settings.py:85
 msgid ""
-"Prefer the local English-Chinese dictionary for selected text, clipboard "
-"text, and last spoken text"
+"Prefer local English-Chinese dictionary for selected text, clipboard, and "
+"last spoken text"
 msgstr ""
-"Використовувати локальний англійсько-китайський словник для вибраного "
-"тексту, тексту з буфера обміну та останнього промовленого тексту"
+"Застосовувати локальний англо-китайський словник: вибраний текст, буфер, "
+"останній текст"
 
 #. Translators: Checkbox controlling local dictionary definitions in NVDA text review.
 #: addon\globalPlugins\polyglot\views\settings.py:93
@@ -1965,12 +1965,10 @@ msgstr ""
 
 #: addon\globalPlugins\polyglot\views\settings.py:100
 msgid ""
-"Enable smart speech filter (skips non-translatable text like roles, states, "
-"location and other formatting information)"
+"Enable smart speech filter (skips roles, states, location, and formatting "
+"information)"
 msgstr ""
-"Увімкнути інтелектуальний фільтр мовлення (пропускає текст, який не підлягає "
-"перекладу, наприклад, ролі, стани, орієнтири та іншу інформацію про "
-"форматування)"
+"Увімкнути розумний голосовий фільтр (пропускати ролі, стани, розташування та форматування)"
 
 #: addon\globalPlugins\polyglot\views\settings.py:104
 msgid "Clear Cache"
