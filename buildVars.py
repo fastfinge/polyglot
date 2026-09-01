@@ -34,13 +34,17 @@ addon_info = AddonInfo(
 	# Translators: Long description to be shown for this add-on on add-on information from add-on store
 	addon_description=_("""A translation add-on for NVDA with support for multiple engines."""),
 	# version
-	addon_version="1.1.1",
+	addon_version="1.2.0",
 	# Brief changelog for this version
 	# Translators: what's new content for the add-on version to be shown in the add-on store
-	addon_changelog=_("""### 1.1.1
+	addon_changelog=_("""### 1.2.0
 
-- Fixed repeated current-character review failing after version 1.1.0 by preserving NVDA's
-  `speech.spellTextInfo` keyword-argument contract."""),
+- Added the key-free `DeepL Web` engine with automatic source detection, regional language options, and support for requests up to 1,500 characters.
+- Migrated key-free Microsoft Translator to the current Edge `translatetext` endpoint and removed the retired authentication-token flow.
+- Refreshed OpenRouter presets with current translation-specialised Tencent and Gemini Flash Lite models, automatic fallback for retired presets, and prompt options matched to model capabilities.
+- Reused HTTP connections across translation requests to reduce latency for repeated translations.
+- Removed the unavailable Lingva Translate engine.
+- Fixed long labels overflowing the Chrome AI and Common Settings panels."""),
 	# Author(s)
 	addon_author="cary-rowen <cary-rowen@outlook.com>",
 	# URL for the add-on documentation support
