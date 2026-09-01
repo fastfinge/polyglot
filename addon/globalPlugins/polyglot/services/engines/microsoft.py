@@ -5,33 +5,23 @@
 # See the file COPYING.txt for more details.
 
 import json
-import time
 import urllib.parse
 
 import addonHandler
-import requests
-from logHandler import log
 
 from ...common import languages
-from ...common.network import getSession
 from ..engine import BaseHttpEngine
-from ...common.exceptions import ApiResponseError, AuthenticationError, EngineError
+from ...common.exceptions import ApiResponseError
 
 addonHandler.initTranslation()
 
 
 class MicrosoftTranslateEngine(BaseHttpEngine):
-	"""
-	An engine for Microsoft Translator, simulating requests from the Edge browser.
-	This engine does not require a user-provided API key. It fetches a temporary
-	authentication token automatically.
-	"""
+	"""Translate text through Microsoft's key-free Edge translation endpoint."""
+	# ponytail: no SLA; use official Azure when a contractual guarantee is required.
 
 	id = "microsoft"
 	name = _("Microsoft Translator (key-free)")
-
-	# Class-level cache for the authentication token
-	_tokenCache = {"token": None, "expiry": 0}
 
 	@property
 	def autoDetectCode(self) -> str | None:
@@ -72,95 +62,14 @@ class MicrosoftTranslateEngine(BaseHttpEngine):
 		]
 		return languages.getLanguageDictForCodes(supportedCodes)
 
-	def _getAuthToken(self, config: dict) -> str:
-		"""
-		Fetch or return a cached token from Microsoft's authentication service.
-		The token is typically valid for 10 minutes.
-		"""
-		# Check if we have a valid, non-expired token
-		if self._tokenCache["token"] and self._tokenCache["expiry"] > time.time():
-			return self._tokenCache["token"]
-
-		url = "https://edge.microsoft.com/translate/auth"
-		headers = {
-			"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0",
-		}
-
-		proxyMode = config.get("proxyMode", "system")
-		proxiesDict = {"http": None, "https": None} if proxyMode == "none" else None
-		timeoutInt = int(config.get("timeout", "15"))
-
-		try:
-			response = getSession().get(
-				url,
-				headers=headers,
-				proxies=proxiesDict,
-				timeout=timeoutInt,
-			)
-			response.raise_for_status()
-			token = response.text
-
-			# Cache the token and set its expiry time (e.g., 9 minutes to be safe)
-			self._tokenCache["token"] = token
-			self._tokenCache["expiry"] = time.time() + 9 * 60
-
-			return token
-		except Exception as e:
-			log.error("Failed to fetch Microsoft Translator auth token (%s).", type(e).__name__)
-			# Clear cache on failure
-			self._tokenCache["token"] = None
-			self._tokenCache["expiry"] = 0
-			raise AuthenticationError(_("Could not get Microsoft Translator authentication token.")) from None
-
-	def _translateChunk(self, text: str, langFrom: str, langTo: str, config: dict) -> dict:
-		"""Translate a chunk using Microsoft's two-step token authentication."""
-		try:
-			# Step 1: Get the authentication token
-			authToken = self._getAuthToken(config)
-
-			# Step 2: Build and send the translation request
-			params = self._buildRequestParams(text, langFrom, langTo, config, authToken)
-
-			proxyMode = config.get("proxyMode", "system")
-			proxiesDict = {"http": None, "https": None} if proxyMode == "none" else None
-			timeoutInt = int(config.get("timeout", "15"))
-
-			# Use the shared session directly to avoid complexity with our network wrapper for
-			# this flow, while still reusing the pooled connection.
-			response = getSession().post(
-				url=params["url"],
-				headers=params["headers"],
-				data=params["data"],
-				proxies=proxiesDict,
-				timeout=timeoutInt,
-			)
-			response.raise_for_status()
-			responseBody = response.text
-
-			return self._parseResponse(responseBody)
-		except requests.exceptions.HTTPError as e:
-			# If the error is 401 Unauthorized, our token has likely expired. Clear it.
-			if e.response.status_code == 401:
-				log.warning("Microsoft Translator returned 401 Unauthorized. Clearing token cache.")
-				self._tokenCache["token"] = None
-				self._tokenCache["expiry"] = 0
-			# Re-raise as our custom exception type
-			raise ApiResponseError(f"HTTP Error: {e.response.status_code}") from None
-		except (ApiResponseError, EngineError):
-			raise
-		except Exception as e:
-			log.error("An unexpected error occurred in '%s' engine (%s).", self.id, type(e).__name__)
-			raise EngineError(_("An unknown error occurred during translation.")) from None
-
 	def _buildRequestParams(
 		self,
 		text: str,
 		langFrom: str,
 		langTo: str,
 		config: dict,
-		authToken: str,
 	) -> dict:
-		"""Build request parameters for the Microsoft translation API."""
+		"""Build a request for Microsoft's unauthenticated Edge endpoint."""
 		# Map our standard language codes to Microsoft's specific codes
 		langMap = {
 			"zh-CN": "zh-Hans",
@@ -172,15 +81,17 @@ class MicrosoftTranslateEngine(BaseHttpEngine):
 		queryParams = {
 			"from": finalLangFrom,
 			"to": finalLangTo,
-			"api-version": "3.0",
+			"isEnterpriseClient": "false",
 		}
-		url = f"https://api-edge.cognitive.microsofttranslator.com/translate?{urllib.parse.urlencode(queryParams)}"
+		url = f"https://edge.microsoft.com/translate/translatetext?{urllib.parse.urlencode(queryParams)}"
+		body = [text]
 
-		body = [{"Text": text}]
-
-		headers = {"Content-Type": "application/json", "Authorization": f"Bearer {authToken}"}
-
-		return {"url": url, "headers": headers, "data": json.dumps(body).encode("utf-8")}
+		return {
+			"method": "POST",
+			"url": url,
+			"headers": {"Content-Type": "application/json"},
+			"data": json.dumps(body, ensure_ascii=False).encode("utf-8"),
+		}
 
 	def _parseResponse(self, responseBody: str) -> dict:
 		"""Parse a Microsoft Translator response into the common result."""
@@ -189,22 +100,18 @@ class MicrosoftTranslateEngine(BaseHttpEngine):
 		except json.JSONDecodeError:
 			raise ApiResponseError(_("Failed to parse response from Microsoft Translator.")) from None
 
-		try:
-			# The response is a list of translation results
-			firstResult = data[0]
-			translationObj = firstResult["translations"][0]
-
-			translatedText = translationObj["text"]
-			detectedLangObj = firstResult.get("detectedLanguage")
-
-			detectedLang = None
-			if detectedLangObj:
-				detectedLang = detectedLangObj.get("language")
-
-			return {"translation": translatedText, "langDetected": detectedLang}
-		except (KeyError, IndexError, TypeError):
-			if "error" in data:
-				errorMsg = data["error"].get("message", "Unknown API error")
-				raise ApiResponseError(errorMsg)
-
+		if not isinstance(data, list) or not data or not isinstance(data[0], dict):
 			raise ApiResponseError(_("Invalid API response or no translation result included."))
+
+		firstResult = data[0]
+		translations = firstResult.get("translations")
+		if not isinstance(translations, list) or not translations or not isinstance(translations[0], dict):
+			raise ApiResponseError(_("Invalid API response or no translation result included."))
+
+		translatedText = translations[0].get("text")
+		if not isinstance(translatedText, str):
+			raise ApiResponseError(_("Invalid API response or no translation result included."))
+
+		detectedLangObj = firstResult.get("detectedLanguage")
+		detectedLang = detectedLangObj.get("language") if isinstance(detectedLangObj, dict) else None
+		return {"translation": translatedText, "langDetected": detectedLang}
