@@ -47,13 +47,11 @@ def _getSoundPath(name: str) -> str:
 
 
 # --- Internal Periodic Cue Machinery (Shared by all cue types) ---
-_progressThread: threading.Thread | None = None
 _stopEvent = threading.Event()
 
 
 def _startPeriodicCueInternal(cueFunction: Callable[[], None], intervalMs: int, delayMs: int) -> None:
 	"""Start a periodic cue in a background thread."""
-	global _progressThread
 	stopPeriodicCue()  # Stop any existing cue first
 	_stopEvent.clear()
 
@@ -68,8 +66,7 @@ def _startPeriodicCueInternal(cueFunction: Callable[[], None], intervalMs: int, 
 			if _stopEvent.wait(intervalSec):
 				break
 
-	_progressThread = threading.Thread(target=loopTarget, daemon=True)
-	_progressThread.start()
+	threading.Thread(target=loopTarget, daemon=True).start()
 
 
 def stopPeriodicCue() -> None:
@@ -78,9 +75,7 @@ def stopPeriodicCue() -> None:
 
 	This function is safe to call even if no cue is running.
 	"""
-	global _progressThread
 	_stopEvent.set()
-	_progressThread = None
 
 
 class Sound:
