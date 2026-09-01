@@ -1332,10 +1332,8 @@ msgid "Invalid API response or no translation result included."
 msgstr "API 响应无效或未包含翻译结果。"
 
 #: addon\globalPlugins\polyglot\services\engines\chromeAi.py:111
-msgid ""
-"Enable Chrome AI offline engine (requires Chrome 138+, resources released on "
-"NVDA exit)"
-msgstr "启用 Chrome AI 离线引擎（需要 Chrome 138+；NVDA 退出时释放资源）"
+msgid "Enable Chrome AI offline engine (Chrome 138+)"
+msgstr "启用 Chrome AI 离线引擎（Chrome 138+）"
 
 #: addon\globalPlugins\polyglot\services\engines\chromeAi.py:209
 msgid ""

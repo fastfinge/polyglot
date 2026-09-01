@@ -1347,12 +1347,8 @@ msgid "Invalid API response or no translation result included."
 msgstr "Phản hồi API không hợp lệ hoặc không bao gồm kết quả dịch."
 
 #: addon\globalPlugins\polyglot\services\engines\chromeAi.py:111
-msgid ""
-"Enable Chrome AI offline engine (requires Chrome 138+, resources released on "
-"NVDA exit)"
-msgstr ""
-"Bật bộ dịch ngoại tuyến Chrome AI (yêu cầu Chrome 138+, tài nguyên sẽ được "
-"giải phóng khi thoát NVDA)"
+msgid "Enable Chrome AI offline engine (Chrome 138+)"
+msgstr "Bật bộ dịch ngoại tuyến Chrome AI (Chrome 138+)"
 
 #: addon\globalPlugins\polyglot\services\engines\chromeAi.py:209
 msgid ""

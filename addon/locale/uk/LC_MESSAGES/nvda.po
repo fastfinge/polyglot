@@ -1358,12 +1358,8 @@ msgid "Invalid API response or no translation result included."
 msgstr "Недійсна відповідь API або відсутній результат перекладу."
 
 #: addon\globalPlugins\polyglot\services\engines\chromeAi.py:111
-msgid ""
-"Enable Chrome AI offline engine (requires Chrome 138+, resources released on "
-"NVDA exit)"
-msgstr ""
-"Увімкнути офлайн-модуль Chrome AI (потрібна версія Chrome 138 або новіша; "
-"ресурси звільняються при закритті NVDA)"
+msgid "Enable Chrome AI offline engine (Chrome 138+)"
+msgstr "Увімкнути офлайн-модуль Chrome AI (Chrome 138+)"
 
 #: addon\globalPlugins\polyglot\services\engines\chromeAi.py:209
 msgid ""
