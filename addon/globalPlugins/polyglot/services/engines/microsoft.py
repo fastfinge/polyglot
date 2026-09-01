@@ -18,7 +18,7 @@ addonHandler.initTranslation()
 
 class MicrosoftTranslateEngine(BaseHttpEngine):
 	"""Translate text through Microsoft's key-free Edge translation endpoint."""
-	# ponytail: no SLA; use official Azure when a contractual guarantee is required.
+	# No SLA; use official Azure when a contractual guarantee is required.
 
 	id = "microsoft"
 	name = _("Microsoft Translator (key-free)")
