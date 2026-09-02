@@ -9,6 +9,8 @@ from collections import OrderedDict
 from typing import Any
 
 import addonHandler
+import gui
+import ui
 import wx
 from gui import guiHelper
 from gui.settingsDialogs import SettingsPanel
@@ -16,6 +18,7 @@ from logHandler import log
 
 from ..common.cache import TranslationCache
 from ..common import config
+from ..common import secretStore
 from ..services import engineManager
 from . import factory as uiFactory
 
@@ -102,6 +105,10 @@ class TranslationSettingsPanel(SettingsPanel):
 			),
 		)
 		self.clearCacheButton = commonSHelper.addItem(wx.Button(self, label=_("Clear Cache")))
+		self.clearCredentialsButton = commonSHelper.addItem(
+			# Translators: Button that deletes every API key Polyglot has stored in the Windows Credential Locker.
+			wx.Button(self, label=_("Clear Stored API Keys")),
+		)
 		_unused = sHelper.addItem(commonSizer, flag=wx.EXPAND)
 
 		self.engineChoice.Bind(wx.EVT_CHOICE, self.onEngineChanged)
@@ -110,6 +117,7 @@ class TranslationSettingsPanel(SettingsPanel):
 		self.enableLocalDictionaryForTextReviewCheckbox.Bind(wx.EVT_CHECKBOX, self.onAnyControlChanged)
 		self.enableSmartFilterCheckbox.Bind(wx.EVT_CHECKBOX, self.onAnyControlChanged)
 		self.clearCacheButton.Bind(wx.EVT_BUTTON, self.onClearCache)
+		self.clearCredentialsButton.Bind(wx.EVT_BUTTON, self.onClearCredentials)
 
 		self._populateInitialState()
 
@@ -232,7 +240,7 @@ class TranslationSettingsPanel(SettingsPanel):
 			return panel
 
 		engineConf = config.getConfig()["engines"].get(engine.id, {})
-		configSpecList = engine.getConfigSpec()
+		configSpecList = engineManager.getEngineConfigSpec(engine)
 
 		self.dynamicControls[engineId] = {}
 
@@ -309,9 +317,10 @@ class TranslationSettingsPanel(SettingsPanel):
 				self.uiModel[cid] = info["handler"].getValueFromControl(info["control"])
 
 	def onPanelActivated(self):
-		"""Refresh cache information when the panel becomes active."""
+		"""Refresh cache and stored credential information when the panel becomes active."""
 		super().onPanelActivated()
 		self._updateCacheButton()
+		self._updateCredentialsButton()
 
 	def _getSelectedEngineId(self) -> str | None:
 		selection = self.engineChoice.GetSelection()
@@ -333,3 +342,46 @@ class TranslationSettingsPanel(SettingsPanel):
 
 	def _updateCacheButton(self):
 		self.clearCacheButton.SetLabel(_("Clear Cache (Items: {})").format(self.cache.getItemCount()))
+
+	def onClearCredentials(self, event: wx.Event):
+		"""Delete every API key Polyglot has stored, after confirming with the user."""
+		storedCount = len(secretStore.getStoredTargetNames())
+		if not storedCount:
+			# Translators: Message reported when there is no stored API key to delete.
+			ui.message(_("Polyglot has no stored API keys."))
+			return
+		if (
+			gui.messageBox(
+				# Translators: Confirmation prompt shown before deleting stored API keys. {count} is how many are stored.
+				_(
+					"Delete the {count} API key(s) Polyglot has stored for this Windows account? You will have to enter them again to use the engines that need them.",
+				).format(count=storedCount),
+				# Translators: Title of the dialog confirming deletion of stored API keys.
+				_("Clear Stored API Keys"),
+				wx.YES_NO | wx.NO_DEFAULT | wx.ICON_WARNING,
+				self,
+			)
+			!= wx.YES
+		):
+			return
+		removedCount = secretStore.deleteAllSecrets()
+		self._reloadCredentialControls()
+		self._updateCredentialsButton()
+		# Translators: Message reported after stored API keys are deleted. {count} is how many were deleted.
+		ui.message(_("Deleted {count} stored API key(s).").format(count=removedCount))
+		wx.CallAfter(self.clearCredentialsButton.SetFocus)
+
+	def _reloadCredentialControls(self):
+		"""Refresh every credential field from the secret store."""
+		enginesConf = config.getConfig()["engines"]
+		for engineId, controls in self.dynamicControls.items():
+			engineConf = enginesConf.get(engineId, {})
+			for info in controls.values():
+				if info["handler"].isSecret:
+					info["handler"].loadFromConfig(info["control"], engineConf, info["spec"])
+
+	def _updateCredentialsButton(self):
+		self.clearCredentialsButton.SetLabel(
+			# Translators: Label of the button that deletes stored API keys. {} is how many are stored.
+			_("Clear Stored API Keys (Items: {})").format(len(secretStore.getStoredTargetNames())),
+		)

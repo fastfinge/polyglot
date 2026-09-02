@@ -311,9 +311,7 @@ class TranslationManager:
 					),
 				)
 			return
-		if engineId not in conf["engines"]:
-			conf["engines"][engineId] = {}
-		engineConfig = conf["engines"][engineId].dict()
+		engineConfig = engineManager.getResolvedEngineConfig(currentEngine)
 		shouldUseLocalDictionary = (
 			isManual and shouldPreferLocalDictionary and conf.get("enableLocalDictionaryForTranslation", True)
 		)
@@ -361,9 +359,7 @@ class TranslationManager:
 			conf["engine"] = fallbackEngine.id
 			engineId = fallbackEngine.id
 			currentEngine = fallbackEngine
-			if engineId not in conf["engines"]:
-				conf["engines"][engineId] = {}
-			engineConfig = conf["engines"][engineId].dict()
+			engineConfig = engineManager.getResolvedEngineConfig(currentEngine)
 			langFrom = None
 			langTo = None
 		try:
