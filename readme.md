@@ -115,6 +115,17 @@ Current dictionary size:
 - `Use the local English-Chinese dictionary in text review`: Controls local definitions for NVDA text review.
 - `Enable smart speech filter`: When translating spoken NVDA output, skips non-content speech such as roles, states, location, and formatting details where possible.
 - `Clear Cache`: Clears the persistent translation cache and shows the current item count in the button label.
+- `Clear Stored API Keys`: Deletes every API key, token, and password Polyglot has stored for your Windows account, and shows how many are stored in the button label.
+
+### API Key Storage
+
+API keys, tokens, and passwords are never written to `nvda.ini`. They are kept in the Windows Credential Locker, where Windows encrypts them for the signed-in account. This means they do not appear in NVDA's log at debug level, are not copied into portable copies of NVDA, and are not readable by other add-ons through NVDA's configuration.
+
+Each credential is stored under a target name of the form `NVDA/Polyglot/<engine>/<setting>`, for example `NVDA/Polyglot/deepl/apiKey`. You can review or delete them from Windows itself: `Control Panel -> User Accounts -> Credential Manager -> Windows Credentials`, or by pressing `Clear Stored API Keys` in Polyglot's settings.
+
+A credential can also come from an environment variable, which is useful for shared or managed machines where nothing should be stored at all. The variable name is `POLYGLOT_` followed by the engine ID and the setting name in upper case, for example `POLYGLOT_DEEPL_APIKEY`, `POLYGLOT_OPENROUTER_APIKEY`, or `POLYGLOT_TENCENT_SECRETKEY`. When such a variable is set, it takes precedence over anything stored, and the matching settings field is disabled and labelled with the variable name.
+
+Upgrading from Polyglot 1.2.0 or earlier moves any keys already saved in `nvda.ini` into the Credential Locker and removes the plain-text copies the first time the add-on starts. If secure storage is unavailable, the plain-text copy is still removed and an error is written to the log; re-enter the key in Polyglot's settings.
 
 ### Shared Engine Settings
 

@@ -11,10 +11,13 @@ from typing import Any
 
 from logHandler import log
 
+from ..common import secretStore
 from . import engines
 from .engine import TranslationEngine
 
 _engineInstances: list[TranslationEngine] | None = None
+#: Credential setting IDs mapped to their built-in defaults, cached per engine ID.
+_secretDefaults: dict[str, dict[str, str]] = {}
 
 
 def _scanAndLoadEngines() -> None:
@@ -59,6 +62,45 @@ def _getEngineConfig(engineId: str) -> dict[str, Any]:
 
 	conf = config.getConfig()
 	return conf["engines"].get(engineId, {})
+
+
+def getEngineConfigSpec(engine: TranslationEngine) -> list[dict[str, Any]]:
+	"""Return an engine's control specifications, each tagged with the owning engine ID.
+
+	Credential controls are stored per engine in the secret store rather than in NVDA's configuration
+	file, so they need to know which engine they belong to.
+	"""
+	spec = engine.getConfigSpec()
+	for item in spec:
+		item["engineId"] = engine.id
+	return spec
+
+
+def getSecretDefaults(engine: TranslationEngine) -> dict[str, str]:
+	"""Return an engine's credential setting IDs mapped to their built-in default values."""
+	cached = _secretDefaults.get(engine.id)
+	if cached is None:
+		cached = {
+			str(item["id"]): str(item.get("default", ""))
+			for item in engine.getConfigSpec()
+			if item.get("type") == secretStore.SECRET_CONTROL_TYPE
+		}
+		_secretDefaults[engine.id] = cached
+	return cached
+
+
+def getResolvedEngineConfig(engine: TranslationEngine) -> dict[str, Any]:
+	"""Return an engine's saved settings with its credentials taken from the secret store."""
+	from ..common import config
+
+	conf = config.getConfig()
+	if engine.id not in conf["engines"]:
+		conf["engines"][engine.id] = {}
+	engineConfig: dict[str, Any] = conf["engines"][engine.id].dict()
+	for key, defaultValue in getSecretDefaults(engine).items():
+		# A stale plain-text value must never win over the secret store or the built-in default.
+		engineConfig[key] = secretStore.getSecret(engine.id, key) or defaultValue
+	return engineConfig
 
 
 def getEnabledEngines() -> list[TranslationEngine]:

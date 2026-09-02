@@ -8,8 +8,14 @@ from collections import OrderedDict
 from collections.abc import Callable
 from typing import Any
 
+import addonHandler
 import wx
 from configobj.validate import is_boolean
+from logHandler import log
+
+from ..common import secretStore
+
+addonHandler.initTranslation()
 
 # Create a Type Alias for complex, reused types.
 ConfigSpec = dict[str, Any]
@@ -18,6 +24,11 @@ ConfigSection = dict[str, Any]
 
 class ControlHandlerBase:
 	"""Define the configuration and wx-control conversion contract."""
+
+	@property
+	def isSecret(self) -> bool:
+		"""Return whether values of this type are credentials kept out of NVDA's configuration file."""
+		return False
 
 	@property
 	def configType(self) -> str:
@@ -178,6 +189,70 @@ class TextHandler(LabeledControlHandler):
 		configSection[spec["id"]] = self.getValueFromControl(control)
 
 
+class PasswordHandler(TextHandler):
+	"""Adapt credential configuration items to wx text controls backed by the secret store.
+
+	Credentials never reach NVDA's configuration file, so specifications handled here must carry the
+	owning engine's ID in an ``engineId`` entry; see :func:`engineManager.getEngineConfigSpec`.
+	"""
+
+	@property
+	def isSecret(self) -> bool:
+		return True
+
+	def _getEngineId(self, spec: ConfigSpec) -> str:
+		"""Return the engine owning a credential, or an empty string when it is unknown."""
+		engineId = str(spec.get("engineId", ""))
+		if not engineId:
+			log.error(
+				f"""Credential setting '{spec.get("id")}' is not bound to an engine, so it cannot be stored securely.""",
+			)
+		return engineId
+
+	def createControlPair(
+		self,
+		panel: wx.Window,
+		spec: ConfigSpec,
+	) -> tuple[wx.StaticText | None, wx.Control]:
+		label, control = super().createControlPair(panel, spec)
+		engineId = self._getEngineId(spec)
+		if label is not None and engineId and secretStore.isProvidedByEnvironment(engineId, spec["id"]):
+			label.SetLabel(
+				# Translators: Label for a credential field whose value comes from an environment
+				# variable. {label} is the usual field label, {variable} is the variable name.
+				_("{label} (set by the {variable} environment variable)").format(
+					label=spec["label"],
+					variable=secretStore.getEnvironmentVariableName(engineId, spec["id"]),
+				),
+			)
+		return (label, control)
+
+	def loadFromConfig(self, control: wx.Control, configSection: ConfigSection, spec: ConfigSpec) -> None:
+		assert isinstance(control, wx.TextCtrl)
+		engineId = self._getEngineId(spec)
+		if engineId and secretStore.isProvidedByEnvironment(engineId, spec["id"]):
+			# The environment wins over anything the user could type here.
+			control.SetValue("")
+			control.Disable()
+			return
+		stored = secretStore.getSecret(engineId, spec["id"]) if engineId else ""
+		self.setValueToControl(control, stored or spec.get("default", ""), spec)
+
+	def saveToConfig(self, control: wx.Control, configSection: ConfigSection, spec: ConfigSpec) -> None:
+		assert isinstance(control, wx.TextCtrl)
+		# configSection is deliberately untouched: credentials never reach NVDA's configuration file.
+		engineId = self._getEngineId(spec)
+		if not engineId or secretStore.isProvidedByEnvironment(engineId, spec["id"]):
+			return
+		value = self.getValueFromControl(control)
+		if value.strip() == str(spec.get("default", "")).strip():
+			# The built-in default needs no stored copy.
+			_unused = secretStore.deleteSecret(engineId, spec["id"])
+			return
+		if not secretStore.setSecret(engineId, spec["id"], value):
+			log.error(f"Could not save the '{engineId}' credential '{spec['id']}' to secure storage.")
+
+
 class ChoiceHandler(LabeledControlHandler):
 	"""Adapt enumerated string configuration items to wx choices."""
 
@@ -317,7 +392,7 @@ class SpinCtrlHandler(LabeledControlHandler):
 _controlHandlers: dict[str, ControlHandlerBase] = {
 	"checkbox": CheckboxHandler(),
 	"text": TextHandler(),
-	"password": TextHandler(),
+	"password": PasswordHandler(),
 	"choice": ChoiceHandler(),
 	"spinctrl": SpinCtrlHandler(),
 }
