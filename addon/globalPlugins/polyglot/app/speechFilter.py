@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 # Copyright (C) 2025-2026 cary-rowen <cary-rowen@outlook.com>
 # This file is covered by the GNU General Public License version 3 or later.
 # See the file COPYING.txt for more details.
@@ -13,7 +11,6 @@ import languageHandler
 import speech
 import speech.speech
 import textInfos
-import ui
 from speech.extensions import filter_speechSequence
 
 from ..common import cues
@@ -546,53 +543,43 @@ class SpeechFilter:
 			if self._isSpeakingTranslation:
 				self._isSpeakingTranslation = False
 			return sequence
-		if textToSave:
-			if time.monotonic() < self._gracePeriodEnd:
-				# Inside the grace window; pass through without overwriting lastSpokenText.
-				return sequence
-			else:
-				self.lastSpokenText = textToSave
+		if time.monotonic() < self._gracePeriodEnd:
+			# Inside the grace window; pass through without overwriting lastSpokenText.
+			return sequence
+		self.lastSpokenText = textToSave
 		if not self.manager.isAutoTranslateEnabled:
 			return sequence
 		# To prevent translation loops, skip if the speech is already a translation result.
 		if self._isSpeakingTranslation:
 			self._isSpeakingTranslation = False
 			return sequence
-		# Trigger auto-translation if there is text.
-		if textToSave:
-			self.manager.requestTranslation(
-				textToSave,
-				isManual=False,
-				shouldShowStatus=False,
-				shouldAllowCopy=False,
-				onSuccess=lambda translation: self._handleAutoTranslationResult(
-					translation,
-					sequence,
-					translatableIndices,
-				),
-			)
+		self.manager.requestTranslation(
+			textToSave,
+			isManual=False,
+			shouldShowStatus=False,
+			shouldAllowCopy=False,
+			onSuccess=lambda translation: self._handleAutoTranslationResult(
+				translation,
+				sequence,
+				translatableIndices,
+			),
+		)
 		# Block the original speech sequence; it will be replaced by the translation.
 		return []
 
 	def _handleAutoTranslationResult(
 		self,
 		translation: str,
-		originalSequence: list[Any] | None = None,
-		translatableIndices: list[int] | None = None,
+		originalSequence: list[Any],
+		translatableIndices: list[int],
 	) -> None:
 		"""
 		Handle a successful automatic translation.
 		Called by the TranslationManager on the main thread.
 		"""
-		# 1. Set a flag to prevent this result from being re-translated.
 		self._isSpeakingTranslation = True
-		# 2. Reconstruct the sequence with translated content in place,
-		#    preserving roles, states, and other NVDA speech commands.
-		if originalSequence is not None and translatableIndices:
-			reconstructed = list(originalSequence)
-			reconstructed[translatableIndices[0]] = translation
-			for idx in translatableIndices[1:]:
-				reconstructed[idx] = ""
-			speech.speech.speak(reconstructed)
-		else:
-			ui.message(translation)
+		reconstructed = list(originalSequence)
+		reconstructed[translatableIndices[0]] = translation
+		for idx in translatableIndices[1:]:
+			reconstructed[idx] = ""
+		speech.speech.speak(reconstructed)

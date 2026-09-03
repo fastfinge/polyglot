@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 # Copyright (C) 2025-2026 cary-rowen <cary-rowen@outlook.com>
 # This file is covered by the GNU General Public License version 3 or later.
 # See the file COPYING.txt for more details.
@@ -29,11 +27,6 @@ class InteractiveTranslationDialog(DPIScaledDialog):
 		self.manager = manager
 		self.allEngines = engineManager.getEnabledEngines()
 		self.hasEnabledEngines = bool(self.allEngines)
-
-		# Internal state for dynamic choices
-		self._modeIds = []
-		self._modelIds = []
-		self._langCodes = []
 
 		mainSizer = wx.BoxSizer(wx.VERTICAL)
 		sHelper = guiHelper.BoxSizerHelper(self, orientation=wx.VERTICAL)
@@ -328,15 +321,13 @@ class InteractiveTranslationDialog(DPIScaledDialog):
 
 	def onTranslationDone(self, resultText):
 		"""Display a completed translation and restore dialog controls."""
-		if self.hasEnabledEngines:
-			self.translateBtn.Enable()
+		self.translateBtn.Enable()
 		self.resultTextCtrl.SetValue(resultText)
 		self.resultTextCtrl.SetFocus()
 
 	def onTranslationError(self, errorMessage: str) -> None:
 		"""Display a translation error and restore dialog controls."""
-		if self.hasEnabledEngines:
-			self.translateBtn.Enable()
+		self.translateBtn.Enable()
 		self.resultTextCtrl.SetValue(errorMessage)
 		self.resultTextCtrl.SetFocus()
 

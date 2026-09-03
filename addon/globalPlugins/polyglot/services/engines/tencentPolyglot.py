@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 # Copyright (C) 2025-2026 cary-rowen <cary-rowen@outlook.com>
 # This file is covered by the GNU General Public License version 3 or later.
 # See the file COPYING.txt for more details.
@@ -30,7 +28,7 @@ class TencentWebTranslateEngine(NvdacnJsonEngine):
 
 	@property
 	def doesReportDetectedLanguage(self) -> bool:
-		"""This engine does not support source language detection."""
+		"""Return whether the engine reports its automatically detected source language."""
 		return False
 
 	def getSupportedLanguages(self) -> dict:

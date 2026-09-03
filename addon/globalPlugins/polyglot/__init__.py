@@ -122,7 +122,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 			return super().getScript(gesture)
 		script = super().getScript(gesture)
 		if not script:
-			script = self.script_layerError
+			script = self._handleLayerError
 
 		if getattr(script, "_shouldStayInLayer", False):
 			return script
@@ -141,14 +141,14 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		self.clearGestureBindings()
 		self.bindGestures(self.__gestures)
 
-	def script_layerError(self, gesture: "inputCore.InputGesture") -> None:
-		"""Signal that a gesture has no command-layer action."""
+	def _handleLayerError(self, _gesture: "inputCore.InputGesture") -> None:
+		"""Play an error tone for an unbound command-layer gesture."""
 		tones.beep(120, 100)
 
 	@script(description=_("Enter the translation command layer; press H for command layer help"))
 	def script_layerEntry(self, gesture: "inputCore.InputGesture") -> None:
 		if self.isLayerActive:
-			self.script_layerError(gesture)
+			self._handleLayerError(gesture)
 			return
 		self.speechFilter.setGracePeriod()
 		self.bindGestures(self.__layerGestures)

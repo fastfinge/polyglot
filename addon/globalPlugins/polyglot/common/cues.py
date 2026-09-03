@@ -1,16 +1,8 @@
-# -*- coding: utf-8 -*-
-
 # Copyright (C) 2025-2026 cary-rowen <cary-rowen@outlook.com>
 # This file is covered by the GNU General Public License version 3 or later.
 # See the file COPYING.txt for more details.
 
-"""
-A stateless, utility module for providing user feedback (cues).
-
-This module offers static methods for playing sounds, beeps, and speaking text.
-It also provides simple, standalone functions for managing a periodic,
-background cue loop for tasks like indicating progress.
-"""
+"""Provide sound, beep, and speech feedback for Polyglot workflows."""
 
 import os
 import threading
