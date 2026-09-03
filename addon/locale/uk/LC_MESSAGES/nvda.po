@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: 'nvda-translations@groups.io'\n"
-"POT-Creation-Date: 2026-09-01 14:16+0300\n"
+"POT-Creation-Date: 2026-09-04 03:04+0800\n"
 "PO-Revision-Date: 2026-09-01 14:32+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -22,7 +22,7 @@ msgstr ""
 #. Translators: Summary/title for this add-on
 #. to be shown on installation and add-on information found in add-on store
 #: addon\globalPlugins\polyglot\__init__.py:82
-#: addon\globalPlugins\polyglot\views\settings.py:28 buildVars.py:32
+#: addon\globalPlugins\polyglot\views\settings.py:26 buildVars.py:32
 msgid "Polyglot"
 msgstr "Поліглот"
 
@@ -101,7 +101,7 @@ msgid "Auto-translation disabled"
 msgstr "Автоматичний переклад вимкнено"
 
 #: addon\globalPlugins\polyglot\__init__.py:294
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:213
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:212
 msgid "Clear cache"
 msgstr "Очистити кеш"
 
@@ -171,66 +171,66 @@ msgstr "Ключ"
 msgid "Action"
 msgstr "Дія"
 
-#: addon\globalPlugins\polyglot\app\manager.py:111
-#: addon\globalPlugins\polyglot\app\manager.py:149
+#: addon\globalPlugins\polyglot\app\manager.py:109
+#: addon\globalPlugins\polyglot\app\manager.py:147
 msgid "Invalid engine configuration."
 msgstr "Неправильна конфігурація сервісу."
 
-#: addon\globalPlugins\polyglot\app\manager.py:120
+#: addon\globalPlugins\polyglot\app\manager.py:118
 msgid "Swap failed: 'Auto-detect' cannot be the target language."
 msgstr "Помилка заміни: «Автоматичне визначення» не може бути мовою перекладу."
 
 #. Translators: A message indicating that the source and target languages have been swapped. {source} is the new source language, {target} is the new target language.
-#: addon\globalPlugins\polyglot\app\manager.py:125
+#: addon\globalPlugins\polyglot\app\manager.py:123
 #, python-brace-format
 msgid "Languages swapped: from {source} to {target}"
 msgstr "Змінено мови: з {source} на {target}"
 
-#: addon\globalPlugins\polyglot\app\manager.py:169
+#: addon\globalPlugins\polyglot\app\manager.py:167
 msgid "No languages available for cycling."
 msgstr "Немає мов, доступних для циклічного перемикання."
 
-#: addon\globalPlugins\polyglot\app\manager.py:194
+#: addon\globalPlugins\polyglot\app\manager.py:192
 msgid "No translation engines available."
 msgstr "Немає доступних сервісів перекладу."
 
-#: addon\globalPlugins\polyglot\app\manager.py:199
-#: addon\globalPlugins\polyglot\app\manager.py:351
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:47
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:243
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:279
+#: addon\globalPlugins\polyglot\app\manager.py:197
+#: addon\globalPlugins\polyglot\app\manager.py:349
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:40
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:236
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:272
 msgid "No enabled translation engines available."
 msgstr "Немає доступних увімкнених сервісів перекладу."
 
 #. Translators: Announcement of the current translation engine and languages. {engine} is the engine name, {source} is the source language, {target} is the target language.
-#: addon\globalPlugins\polyglot\app\manager.py:215
+#: addon\globalPlugins\polyglot\app\manager.py:213
 #, python-brace-format
 msgid "{engine}, from {source} to {target}"
 msgstr "{engine}, з {source} на {target}"
 
-#: addon\globalPlugins\polyglot\app\manager.py:224
+#: addon\globalPlugins\polyglot\app\manager.py:222
 msgid "Languages not configured or current engine is invalid"
 msgstr "Мови не налаштовано або поточний сервіс перекладу недійсний"
 
-#: addon\globalPlugins\polyglot\app\manager.py:269
+#: addon\globalPlugins\polyglot\app\manager.py:267
 msgid "Languages not configured, cannot reverse."
 msgstr "Мови не налаштовано, неможливо змінити."
 
-#: addon\globalPlugins\polyglot\app\manager.py:275
+#: addon\globalPlugins\polyglot\app\manager.py:273
 msgid "Reverse failed: 'Auto-detect' cannot be the target language."
 msgstr ""
 "Помилка при зворотному перекладі: «Автоматичне визначення» не може бути "
 "мовою перекладу."
 
-#: addon\globalPlugins\polyglot\app\manager.py:278
+#: addon\globalPlugins\polyglot\app\manager.py:276
 msgid "Current translation engine is invalid."
 msgstr "Поточний сервіс перекладу недійсний."
 
-#: addon\globalPlugins\polyglot\app\manager.py:295
+#: addon\globalPlugins\polyglot\app\manager.py:293
 msgid "Nothing to translate"
 msgstr "Нема чого перекладати"
 
-#: addon\globalPlugins\polyglot\app\manager.py:309
+#: addon\globalPlugins\polyglot\app\manager.py:307
 #, python-brace-format
 msgid "Error: Selected engine '{engine}' is unavailable or not configured."
 msgstr ""
@@ -238,542 +238,542 @@ msgstr ""
 "налаштований."
 
 #. Translators: Error message when the selected translation engine is not configured properly. {engine} is the internal ID of the engine.
-#: addon\globalPlugins\polyglot\app\manager.py:381
+#: addon\globalPlugins\polyglot\app\manager.py:379
 #, python-brace-format
 msgid "Error: Engine '{engine}' is not configured."
 msgstr "Помилка: Сервіс перекладу \"{engine}\" не налаштований."
 
-#: addon\globalPlugins\polyglot\app\manager.py:481
+#: addon\globalPlugins\polyglot\app\manager.py:479
 msgid "Translation failed: "
 msgstr "Помилка перекладу: "
 
-#: addon\globalPlugins\polyglot\app\manager.py:485
+#: addon\globalPlugins\polyglot\app\manager.py:483
 msgid "An unknown error occurred"
 msgstr "Сталася невідома помилка"
 
-#: addon\globalPlugins\polyglot\app\manager.py:499
+#: addon\globalPlugins\polyglot\app\manager.py:497
 msgid "Auto-translation disabled due to repeated failures."
 msgstr "Автоматичний переклад вимкнено через повторні помилки."
 
-#: addon\globalPlugins\polyglot\common\cues.py:160
+#: addon\globalPlugins\polyglot\common\cues.py:152
 #, python-format
 msgid "%d percent"
 msgstr "%d відсотків"
 
 #. --- Special Codes ---
-#: addon\globalPlugins\polyglot\common\languages.py:19
-#: addon\globalPlugins\polyglot\common\languages.py:20
+#: addon\globalPlugins\polyglot\common\languages.py:17
+#: addon\globalPlugins\polyglot\common\languages.py:18
 msgid "Auto-detect"
 msgstr "Автоматичне визначення"
 
 #. Used by Microsoft and Yandex
 #. --- Chinese Variants ---
-#: addon\globalPlugins\polyglot\common\languages.py:22
-#: addon\globalPlugins\polyglot\common\languages.py:32
+#: addon\globalPlugins\polyglot\common\languages.py:20
+#: addon\globalPlugins\polyglot\common\languages.py:30
 msgid "Chinese"
 msgstr "китайська"
 
+#: addon\globalPlugins\polyglot\common\languages.py:21
+#: addon\globalPlugins\polyglot\common\languages.py:22
 #: addon\globalPlugins\polyglot\common\languages.py:23
-#: addon\globalPlugins\polyglot\common\languages.py:24
-#: addon\globalPlugins\polyglot\common\languages.py:25
 msgid "Chinese (Simplified)"
 msgstr "китайська (спрощена)"
 
+#: addon\globalPlugins\polyglot\common\languages.py:24
+#: addon\globalPlugins\polyglot\common\languages.py:25
 #: addon\globalPlugins\polyglot\common\languages.py:26
 #: addon\globalPlugins\polyglot\common\languages.py:27
-#: addon\globalPlugins\polyglot\common\languages.py:28
-#: addon\globalPlugins\polyglot\common\languages.py:29
 msgid "Chinese (Traditional)"
 msgstr "китайська (традиційна)"
 
-#: addon\globalPlugins\polyglot\common\languages.py:30
+#: addon\globalPlugins\polyglot\common\languages.py:28
 msgid "Cantonese"
 msgstr "кантонська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:31
+#: addon\globalPlugins\polyglot\common\languages.py:29
 msgid "Classical Chinese"
 msgstr "класична китайська"
 
 #. DeepL
 #. --- Major Languages ---
-#: addon\globalPlugins\polyglot\common\languages.py:34
+#: addon\globalPlugins\polyglot\common\languages.py:32
 msgid "English"
 msgstr "англійська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:35
+#: addon\globalPlugins\polyglot\common\languages.py:33
 msgid "English (American)"
 msgstr "Англійська (американська)"
 
-#: addon\globalPlugins\polyglot\common\languages.py:36
+#: addon\globalPlugins\polyglot\common\languages.py:34
 msgid "English (British)"
 msgstr "Англійська (британська)"
 
-#: addon\globalPlugins\polyglot\common\languages.py:37
-#: addon\globalPlugins\polyglot\common\languages.py:38
+#: addon\globalPlugins\polyglot\common\languages.py:35
+#: addon\globalPlugins\polyglot\common\languages.py:36
 msgid "Japanese"
 msgstr "японська"
 
 #. Baidu
+#: addon\globalPlugins\polyglot\common\languages.py:37
+#: addon\globalPlugins\polyglot\common\languages.py:38
 #: addon\globalPlugins\polyglot\common\languages.py:39
-#: addon\globalPlugins\polyglot\common\languages.py:40
-#: addon\globalPlugins\polyglot\common\languages.py:41
 msgid "Korean"
 msgstr "корейська"
 
 #. DeepL
-#: addon\globalPlugins\polyglot\common\languages.py:42
-#: addon\globalPlugins\polyglot\common\languages.py:43
+#: addon\globalPlugins\polyglot\common\languages.py:40
+#: addon\globalPlugins\polyglot\common\languages.py:41
 msgid "French"
 msgstr "французька"
 
 #. Baidu
-#: addon\globalPlugins\polyglot\common\languages.py:44
+#: addon\globalPlugins\polyglot\common\languages.py:42
 msgid "German"
 msgstr "німецька"
 
+#: addon\globalPlugins\polyglot\common\languages.py:43
 #: addon\globalPlugins\polyglot\common\languages.py:45
-#: addon\globalPlugins\polyglot\common\languages.py:47
 msgid "Spanish"
 msgstr "іспанська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:46
+#: addon\globalPlugins\polyglot\common\languages.py:44
 msgid "Spanish (Latin American)"
 msgstr "Іспанська (латиноамериканська)"
 
 #. Baidu
-#: addon\globalPlugins\polyglot\common\languages.py:48
+#: addon\globalPlugins\polyglot\common\languages.py:46
 msgid "Russian"
 msgstr "російська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:49
+#: addon\globalPlugins\polyglot\common\languages.py:47
 msgid "Portuguese"
 msgstr "португальська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:50
+#: addon\globalPlugins\polyglot\common\languages.py:48
 msgid "Portuguese (Brazilian)"
 msgstr "Португальська (бразильська)"
 
-#: addon\globalPlugins\polyglot\common\languages.py:51
+#: addon\globalPlugins\polyglot\common\languages.py:49
 msgid "Portuguese (European)"
 msgstr "Португальська (європейська)"
 
-#: addon\globalPlugins\polyglot\common\languages.py:52
+#: addon\globalPlugins\polyglot\common\languages.py:50
 msgid "Italian"
 msgstr "італійська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:53
-#: addon\globalPlugins\polyglot\common\languages.py:54
+#: addon\globalPlugins\polyglot\common\languages.py:51
+#: addon\globalPlugins\polyglot\common\languages.py:52
 msgid "Arabic"
 msgstr "арабська"
 
 #. Baidu
-#: addon\globalPlugins\polyglot\common\languages.py:55
+#: addon\globalPlugins\polyglot\common\languages.py:53
 msgid "Achuar"
 msgstr "ачуар"
 
-#: addon\globalPlugins\polyglot\common\languages.py:56
+#: addon\globalPlugins\polyglot\common\languages.py:54
 msgid "Amharic"
 msgstr "амхарська"
 
 #. --- Other European Languages ---
-#: addon\globalPlugins\polyglot\common\languages.py:58
+#: addon\globalPlugins\polyglot\common\languages.py:56
 msgid "Dutch"
 msgstr "нідерландська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:59
-#: addon\globalPlugins\polyglot\common\languages.py:60
+#: addon\globalPlugins\polyglot\common\languages.py:57
+#: addon\globalPlugins\polyglot\common\languages.py:58
 msgid "Swedish"
 msgstr "шведська"
 
 #. Baidu
-#: addon\globalPlugins\polyglot\common\languages.py:61
+#: addon\globalPlugins\polyglot\common\languages.py:59
 msgid "Polish"
 msgstr "польська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:62
-#: addon\globalPlugins\polyglot\common\languages.py:63
+#: addon\globalPlugins\polyglot\common\languages.py:60
+#: addon\globalPlugins\polyglot\common\languages.py:61
 msgid "Danish"
 msgstr "датська"
 
 #. Baidu
-#: addon\globalPlugins\polyglot\common\languages.py:64
-#: addon\globalPlugins\polyglot\common\languages.py:65
+#: addon\globalPlugins\polyglot\common\languages.py:62
+#: addon\globalPlugins\polyglot\common\languages.py:63
 msgid "Finnish"
 msgstr "фінська"
 
 #. Baidu
-#: addon\globalPlugins\polyglot\common\languages.py:66
+#: addon\globalPlugins\polyglot\common\languages.py:64
 msgid "Norwegian"
 msgstr "норвезька"
 
-#: addon\globalPlugins\polyglot\common\languages.py:67
+#: addon\globalPlugins\polyglot\common\languages.py:65
 msgid "Norwegian (Bokmål)"
 msgstr "норвезька (Букмол)"
 
-#: addon\globalPlugins\polyglot\common\languages.py:68
+#: addon\globalPlugins\polyglot\common\languages.py:66
 msgid "Norwegian (Nynorsk)"
 msgstr "норвезька (нюнорск)"
 
-#: addon\globalPlugins\polyglot\common\languages.py:69
+#: addon\globalPlugins\polyglot\common\languages.py:67
 msgid "Czech"
 msgstr "чеська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:70
+#: addon\globalPlugins\polyglot\common\languages.py:68
 msgid "Slovak"
 msgstr "словацька"
 
-#: addon\globalPlugins\polyglot\common\languages.py:71
+#: addon\globalPlugins\polyglot\common\languages.py:69
 msgid "Hungarian"
 msgstr "угорська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:72
-#: addon\globalPlugins\polyglot\common\languages.py:73
+#: addon\globalPlugins\polyglot\common\languages.py:70
+#: addon\globalPlugins\polyglot\common\languages.py:71
 msgid "Romanian"
 msgstr "румунська"
 
 #. Baidu
-#: addon\globalPlugins\polyglot\common\languages.py:74
-#: addon\globalPlugins\polyglot\common\languages.py:75
+#: addon\globalPlugins\polyglot\common\languages.py:72
+#: addon\globalPlugins\polyglot\common\languages.py:73
 msgid "Bulgarian"
 msgstr "болгарська"
 
 #. Baidu
-#: addon\globalPlugins\polyglot\common\languages.py:76
+#: addon\globalPlugins\polyglot\common\languages.py:74
 msgid "Greek"
 msgstr "грецька"
 
-#: addon\globalPlugins\polyglot\common\languages.py:77
+#: addon\globalPlugins\polyglot\common\languages.py:75
 msgid "Lithuanian"
 msgstr "литовська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:78
+#: addon\globalPlugins\polyglot\common\languages.py:76
 msgid "Latvian"
 msgstr "латиська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:79
-#: addon\globalPlugins\polyglot\common\languages.py:80
+#: addon\globalPlugins\polyglot\common\languages.py:77
+#: addon\globalPlugins\polyglot\common\languages.py:78
 msgid "Estonian"
 msgstr "естонська"
 
 #. Baidu
-#: addon\globalPlugins\polyglot\common\languages.py:81
-#: addon\globalPlugins\polyglot\common\languages.py:82
+#: addon\globalPlugins\polyglot\common\languages.py:79
+#: addon\globalPlugins\polyglot\common\languages.py:80
 msgid "Slovenian"
 msgstr "словенська"
 
 #. Baidu
-#: addon\globalPlugins\polyglot\common\languages.py:83
+#: addon\globalPlugins\polyglot\common\languages.py:81
 msgid "Croatian"
 msgstr "хорватська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:84
+#: addon\globalPlugins\polyglot\common\languages.py:82
 msgid "Serbian"
 msgstr "сербська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:85
+#: addon\globalPlugins\polyglot\common\languages.py:83
 msgid "Bosnian"
 msgstr "боснійська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:86
+#: addon\globalPlugins\polyglot\common\languages.py:84
 msgid "Albanian"
 msgstr "албанська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:87
+#: addon\globalPlugins\polyglot\common\languages.py:85
 msgid "Macedonian"
 msgstr "македонська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:88
+#: addon\globalPlugins\polyglot\common\languages.py:86
 msgid "Ukrainian"
 msgstr "українська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:89
+#: addon\globalPlugins\polyglot\common\languages.py:87
 msgid "Belarusian"
 msgstr "білоруська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:90
+#: addon\globalPlugins\polyglot\common\languages.py:88
 msgid "Icelandic"
 msgstr "ісландська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:91
+#: addon\globalPlugins\polyglot\common\languages.py:89
 msgid "Irish"
 msgstr "ірландська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:92
+#: addon\globalPlugins\polyglot\common\languages.py:90
 msgid "Maltese"
 msgstr "мальтійська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:93
+#: addon\globalPlugins\polyglot\common\languages.py:91
 msgid "Welsh"
 msgstr "валлійська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:94
+#: addon\globalPlugins\polyglot\common\languages.py:92
 msgid "Basque"
 msgstr "баскська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:95
+#: addon\globalPlugins\polyglot\common\languages.py:93
 msgid "Catalan"
 msgstr "каталонська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:96
+#: addon\globalPlugins\polyglot\common\languages.py:94
 msgid "Galician"
 msgstr "галісійська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:97
+#: addon\globalPlugins\polyglot\common\languages.py:95
 msgid "Luxembourgish"
 msgstr "люксембурзька"
 
-#: addon\globalPlugins\polyglot\common\languages.py:98
+#: addon\globalPlugins\polyglot\common\languages.py:96
 msgid "Scots Gaelic"
 msgstr "шотландська гельська"
 
 #. --- Other Asian & Middle Eastern Languages ---
-#: addon\globalPlugins\polyglot\common\languages.py:100
+#: addon\globalPlugins\polyglot\common\languages.py:98
 msgid "Thai"
 msgstr "тайська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:101
-#: addon\globalPlugins\polyglot\common\languages.py:102
+#: addon\globalPlugins\polyglot\common\languages.py:99
+#: addon\globalPlugins\polyglot\common\languages.py:100
 msgid "Vietnamese"
 msgstr "в'єтнамська"
 
 #. Baidu
-#: addon\globalPlugins\polyglot\common\languages.py:103
+#: addon\globalPlugins\polyglot\common\languages.py:101
 msgid "Indonesian"
 msgstr "індонезійська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:104
+#: addon\globalPlugins\polyglot\common\languages.py:102
 msgid "Malay"
 msgstr "малайська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:105
+#: addon\globalPlugins\polyglot\common\languages.py:103
 msgid "Filipino"
 msgstr "філіппінська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:106
+#: addon\globalPlugins\polyglot\common\languages.py:104
 msgid "Cebuano"
 msgstr "себуанська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:107
+#: addon\globalPlugins\polyglot\common\languages.py:105
 msgid "Myanmar (Burmese)"
 msgstr "м'янма (бірманська)"
 
-#: addon\globalPlugins\polyglot\common\languages.py:108
+#: addon\globalPlugins\polyglot\common\languages.py:106
 msgid "Khmer"
 msgstr "кхмерська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:109
+#: addon\globalPlugins\polyglot\common\languages.py:107
 msgid "Lao"
 msgstr "лаоська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:110
+#: addon\globalPlugins\polyglot\common\languages.py:108
 msgid "Javanese"
 msgstr "яванська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:111
+#: addon\globalPlugins\polyglot\common\languages.py:109
 msgid "Sundanese"
 msgstr "сунданська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:112
+#: addon\globalPlugins\polyglot\common\languages.py:110
 msgid "Hindi"
 msgstr "хінді"
 
-#: addon\globalPlugins\polyglot\common\languages.py:113
+#: addon\globalPlugins\polyglot\common\languages.py:111
 msgid "Bengali"
 msgstr "бенгальська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:114
+#: addon\globalPlugins\polyglot\common\languages.py:112
 msgid "Punjabi"
 msgstr "панджабська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:115
+#: addon\globalPlugins\polyglot\common\languages.py:113
 msgid "Gujarati"
 msgstr "гуджараті"
 
-#: addon\globalPlugins\polyglot\common\languages.py:116
+#: addon\globalPlugins\polyglot\common\languages.py:114
 msgid "Marathi"
 msgstr "маратхі"
 
-#: addon\globalPlugins\polyglot\common\languages.py:117
+#: addon\globalPlugins\polyglot\common\languages.py:115
 msgid "Tamil"
 msgstr "тамільська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:118
+#: addon\globalPlugins\polyglot\common\languages.py:116
 msgid "Telugu"
 msgstr "телугу"
 
-#: addon\globalPlugins\polyglot\common\languages.py:119
+#: addon\globalPlugins\polyglot\common\languages.py:117
 msgid "Kannada"
 msgstr "каннадська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:120
+#: addon\globalPlugins\polyglot\common\languages.py:118
 msgid "Malayalam"
 msgstr "малаяламська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:121
+#: addon\globalPlugins\polyglot\common\languages.py:119
 msgid "Sinhala"
 msgstr "сінгальська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:122
+#: addon\globalPlugins\polyglot\common\languages.py:120
 msgid "Nepali"
 msgstr "непальська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:123
+#: addon\globalPlugins\polyglot\common\languages.py:121
 msgid "Sindhi"
 msgstr "сіндхі"
 
-#: addon\globalPlugins\polyglot\common\languages.py:124
+#: addon\globalPlugins\polyglot\common\languages.py:122
 msgid "Persian"
 msgstr "перська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:125
-#: addon\globalPlugins\polyglot\common\languages.py:126
+#: addon\globalPlugins\polyglot\common\languages.py:123
+#: addon\globalPlugins\polyglot\common\languages.py:124
 msgid "Hebrew"
 msgstr "іврит"
 
 #. Chrome Translator API
-#: addon\globalPlugins\polyglot\common\languages.py:127
+#: addon\globalPlugins\polyglot\common\languages.py:125
 msgid "Turkish"
 msgstr "турецька"
 
-#: addon\globalPlugins\polyglot\common\languages.py:128
+#: addon\globalPlugins\polyglot\common\languages.py:126
 msgid "Azerbaijani"
 msgstr "азербайджанська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:129
+#: addon\globalPlugins\polyglot\common\languages.py:127
 msgid "Armenian"
 msgstr "вірменська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:130
+#: addon\globalPlugins\polyglot\common\languages.py:128
 msgid "Georgian"
 msgstr "грузинська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:131
+#: addon\globalPlugins\polyglot\common\languages.py:129
 msgid "Uzbek"
 msgstr "узбецька"
 
-#: addon\globalPlugins\polyglot\common\languages.py:132
+#: addon\globalPlugins\polyglot\common\languages.py:130
 msgid "Kazakh"
 msgstr "казахська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:133
+#: addon\globalPlugins\polyglot\common\languages.py:131
 msgid "Kyrgyz"
 msgstr "киргизька"
 
-#: addon\globalPlugins\polyglot\common\languages.py:134
+#: addon\globalPlugins\polyglot\common\languages.py:132
 msgid "Tajik"
 msgstr "таджицька"
 
-#: addon\globalPlugins\polyglot\common\languages.py:135
+#: addon\globalPlugins\polyglot\common\languages.py:133
 msgid "Urdu"
 msgstr "урду"
 
-#: addon\globalPlugins\polyglot\common\languages.py:136
+#: addon\globalPlugins\polyglot\common\languages.py:134
 msgid "Pashto"
 msgstr "пушту"
 
-#: addon\globalPlugins\polyglot\common\languages.py:137
+#: addon\globalPlugins\polyglot\common\languages.py:135
 msgid "Kurdish"
 msgstr "курдська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:138
+#: addon\globalPlugins\polyglot\common\languages.py:136
 msgid "Mongolian (Cyrillic)"
 msgstr "монгольська (кирилиця)"
 
-#: addon\globalPlugins\polyglot\common\languages.py:139
+#: addon\globalPlugins\polyglot\common\languages.py:137
 msgid "Mongolian (Traditional)"
 msgstr "монгольська (традиційна)"
 
-#: addon\globalPlugins\polyglot\common\languages.py:140
+#: addon\globalPlugins\polyglot\common\languages.py:138
 msgid "Hmong"
 msgstr "хмонг"
 
 #. --- African Languages ---
-#: addon\globalPlugins\polyglot\common\languages.py:142
+#: addon\globalPlugins\polyglot\common\languages.py:140
 msgid "Afrikaans"
 msgstr "африкаанс"
 
-#: addon\globalPlugins\polyglot\common\languages.py:143
+#: addon\globalPlugins\polyglot\common\languages.py:141
 msgid "Swahili"
 msgstr "суахілі"
 
-#: addon\globalPlugins\polyglot\common\languages.py:144
+#: addon\globalPlugins\polyglot\common\languages.py:142
 msgid "Somali"
 msgstr "сомалійська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:145
+#: addon\globalPlugins\polyglot\common\languages.py:143
 msgid "Hausa"
 msgstr "хауса"
 
-#: addon\globalPlugins\polyglot\common\languages.py:146
+#: addon\globalPlugins\polyglot\common\languages.py:144
 msgid "Yoruba"
 msgstr "йоруба"
 
-#: addon\globalPlugins\polyglot\common\languages.py:147
+#: addon\globalPlugins\polyglot\common\languages.py:145
 msgid "Igbo"
 msgstr "ігбо"
 
-#: addon\globalPlugins\polyglot\common\languages.py:148
+#: addon\globalPlugins\polyglot\common\languages.py:146
 msgid "Zulu"
 msgstr "Зулу"
 
-#: addon\globalPlugins\polyglot\common\languages.py:149
+#: addon\globalPlugins\polyglot\common\languages.py:147
 msgid "Xhosa"
 msgstr "коса"
 
-#: addon\globalPlugins\polyglot\common\languages.py:150
+#: addon\globalPlugins\polyglot\common\languages.py:148
 msgid "Sesotho"
 msgstr "сесото"
 
-#: addon\globalPlugins\polyglot\common\languages.py:151
+#: addon\globalPlugins\polyglot\common\languages.py:149
 msgid "Shona"
 msgstr "шона"
 
-#: addon\globalPlugins\polyglot\common\languages.py:152
+#: addon\globalPlugins\polyglot\common\languages.py:150
 msgid "Malagasy"
 msgstr "малагасійська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:153
+#: addon\globalPlugins\polyglot\common\languages.py:151
 msgid "Chichewa"
 msgstr "чічева"
 
 #. --- Oceanic & Constructed Languages ---
-#: addon\globalPlugins\polyglot\common\languages.py:155
+#: addon\globalPlugins\polyglot\common\languages.py:153
 msgid "Maori"
 msgstr "маорі"
 
-#: addon\globalPlugins\polyglot\common\languages.py:156
+#: addon\globalPlugins\polyglot\common\languages.py:154
 msgid "Samoan"
 msgstr "самоанська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:157
+#: addon\globalPlugins\polyglot\common\languages.py:155
 msgid "Haitian Creole"
 msgstr "гаїтянська креольська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:158
+#: addon\globalPlugins\polyglot\common\languages.py:156
 msgid "Hawaiian"
 msgstr "гавайська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:159
+#: addon\globalPlugins\polyglot\common\languages.py:157
 msgid "Corsican"
 msgstr "корсиканська"
 
-#: addon\globalPlugins\polyglot\common\languages.py:160
+#: addon\globalPlugins\polyglot\common\languages.py:158
 msgid "Frisian"
 msgstr "фризька"
 
-#: addon\globalPlugins\polyglot\common\languages.py:161
+#: addon\globalPlugins\polyglot\common\languages.py:159
 msgid "Yiddish"
 msgstr "ідиш"
 
-#: addon\globalPlugins\polyglot\common\languages.py:162
+#: addon\globalPlugins\polyglot\common\languages.py:160
 msgid "Esperanto"
 msgstr "есперанто"
 
-#: addon\globalPlugins\polyglot\common\languages.py:163
+#: addon\globalPlugins\polyglot\common\languages.py:161
 msgid "Latin"
 msgstr "латинська"
 
-#: addon\globalPlugins\polyglot\common\network.py:137
+#: addon\globalPlugins\polyglot\common\network.py:133
 #, python-brace-format
 msgid ""
 "Service temporarily unavailable or timed out. Please try again later. (HTTP "
@@ -782,30 +782,30 @@ msgstr ""
 "Служба тимчасово недоступна або минув час очікування. Спробуйте пізніше. "
 "(HTTP {code})"
 
-#: addon\globalPlugins\polyglot\common\network.py:142
+#: addon\globalPlugins\polyglot\common\network.py:138
 msgid "Request to translation service timed out"
 msgstr "Час очікування запиту до служби перекладу минув"
 
-#: addon\globalPlugins\polyglot\common\network.py:147
+#: addon\globalPlugins\polyglot\common\network.py:143
 msgid "Network connection error. Check your connection and try again."
 msgstr "Помилка мережевого з’єднання. Перевірте з’єднання та повторіть спробу."
 
-#: addon\globalPlugins\polyglot\common\network.py:190
+#: addon\globalPlugins\polyglot\common\network.py:186
 msgid "Authentication failed. Please check your API key."
 msgstr "Помилка автентифікації. Будь ласка, перевірте свій ключ API."
 
-#: addon\globalPlugins\polyglot\common\network.py:192
+#: addon\globalPlugins\polyglot\common\network.py:188
 msgid "Monthly translation quota has been reached."
 msgstr "Вичерпано місячну квоту на переклад."
 
-#: addon\globalPlugins\polyglot\common\network.py:197
+#: addon\globalPlugins\polyglot\common\network.py:193
 #, python-brace-format
 msgid "Service returned an error: {code} {reason}. Details: {details}"
 msgstr "Служба повернула помилку: {code} {reason}. Деталі: {details}"
 
 #. Translators: Spoken when a valid-looking English word is absent from the bundled local
 #. dictionary. {word} is the word reviewed by the user.
-#: addon\globalPlugins\polyglot\common\wordDictionary.py:70
+#: addon\globalPlugins\polyglot\common\wordDictionary.py:68
 #, python-brace-format
 msgid "The local dictionary does not contain {word}."
 msgstr "У локальному словнику немає слова {word}."
@@ -813,7 +813,7 @@ msgstr "У локальному словнику немає слова {word}."
 #. Translators: Spoken when an all-capital word only matches a lowercase dictionary entry.
 #. {word} is the reviewed text, {entry} is the lowercase headword, and {definition} is its
 #. bundled definition.
-#: addon\globalPlugins\polyglot\common\wordDictionary.py:80
+#: addon\globalPlugins\polyglot\common\wordDictionary.py:78
 #, python-brace-format
 msgid ""
 "When read as lowercase {entry}, {word} may mean: {definition}. In all caps, "
@@ -825,183 +825,183 @@ msgstr ""
 
 #. Translators: One item in a spoken list of possible dictionary entries. {entry} is the
 #. dictionary headword and {definition} is its bundled definition.
-#: addon\globalPlugins\polyglot\common\wordDictionary.py:90
+#: addon\globalPlugins\polyglot\common\wordDictionary.py:88
 #, python-brace-format
 msgid "{entry}: {definition}."
 msgstr "{entry}: {definition}."
 
 #. Translators: Introduces a spoken list of up to three possible dictionary entries.
 #. {entries} contains the entries and their definitions.
-#: addon\globalPlugins\polyglot\common\wordDictionary.py:97
+#: addon\globalPlugins\polyglot\common\wordDictionary.py:95
 #, python-brace-format
 msgid "Possibilities: {entries}"
 msgstr "Варіанти: {entries}"
 
-#: addon\globalPlugins\polyglot\modelManager\catalog.py:153
+#: addon\globalPlugins\polyglot\modelManager\catalog.py:149
 msgid "Bundled model catalog is missing."
 msgstr "Каталог моделей в комплекті відсутній."
 
-#: addon\globalPlugins\polyglot\modelManager\catalog.py:160
+#: addon\globalPlugins\polyglot\modelManager\catalog.py:156
 msgid "Catalog JSON is empty."
 msgstr "Каталог JSON порожній."
 
-#: addon\globalPlugins\polyglot\modelManager\catalog.py:163
+#: addon\globalPlugins\polyglot\modelManager\catalog.py:159
 msgid "Catalog JSON is invalid."
 msgstr "Каталогг JSON недійсний."
 
-#: addon\globalPlugins\polyglot\modelManager\catalog.py:170
+#: addon\globalPlugins\polyglot\modelManager\catalog.py:166
 #, python-brace-format
 msgid "Unsupported catalog schema version: {version}"
 msgstr "Непідтримувана версія схеми каталогу: {version}"
 
-#: addon\globalPlugins\polyglot\modelManager\catalog.py:182
+#: addon\globalPlugins\polyglot\modelManager\catalog.py:178
 #, python-brace-format
 msgid "Duplicate model package key in catalog: {key}"
 msgstr "У каталозі вже існує ключ пакета моделі з такою самою назвою: {key}"
 
-#: addon\globalPlugins\polyglot\modelManager\catalog.py:244
+#: addon\globalPlugins\polyglot\modelManager\catalog.py:239
 msgid "Catalog URL must be an HTTP or HTTPS URL."
 msgstr "URL каталогу має бути URL HTTP або HTTPS."
 
-#: addon\globalPlugins\polyglot\modelManager\catalog.py:290
+#: addon\globalPlugins\polyglot\modelManager\catalog.py:285
 #, python-brace-format
 msgid "{source} / {target}"
 msgstr "{source} / {target}"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:92
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:270
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:297
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:387
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:494
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:604
-#: addon\globalPlugins\polyglot\modelManager\service.py:235
-#: addon\globalPlugins\polyglot\modelManager\service.py:261
-#: addon\globalPlugins\polyglot\modelManager\service.py:292
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:91
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:269
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:296
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:386
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:493
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:603
+#: addon\globalPlugins\polyglot\modelManager\service.py:208
+#: addon\globalPlugins\polyglot\modelManager\service.py:234
+#: addon\globalPlugins\polyglot\modelManager\service.py:265
 msgid "Polyglot ChromeAI Model Manager"
 msgstr "Менеджер моделей"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:128
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:127
 msgid ""
 "Models: check a model to install it; uncheck an installed model to remove it."
 msgstr ""
 "Моделі: встановіть прапорець на моделі, щоб встановити її; зніміть прапорець "
 "з уже встановленої моделі, щоб видалити її."
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:140
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:139
 msgid "Language"
 msgstr "Мова"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:141
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:140
 msgid "Status"
 msgstr "Статус"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:142
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:141
 msgid "Size"
 msgstr "Розмір"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:143
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:142
 msgid "Version"
 msgstr "Версія"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:155
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:561
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:154
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:560
 #, python-brace-format
 msgid "Apply changes ({count})"
 msgstr "Застосувати ({count}) змін"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:156
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:570
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:155
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:569
 msgid "Advanced"
 msgstr "Додаткові параметри"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:168
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:167
 msgid "Log"
 msgstr "Журнал"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:188
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:187
 msgid "Catalog URL:"
 msgstr "URL каталогу:"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:193
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:192
 msgid "Restore default"
 msgstr "Відновити до початкового"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:201
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:348
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:200
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:347
 msgid "Catalog: not loaded"
 msgstr "Каталог: не завантажено"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:204
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:203
 #, python-brace-format
 msgid "Install target: {path}"
 msgstr "Шлях встановлення: {path}"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:206
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:205
 msgid "Status: idle"
 msgstr "Статус: не працює"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:211
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:210
 msgid "Load catalog"
 msgstr "Завантажити каталог"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:212
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:211
 msgid "Open target"
 msgstr "Відкрити папку каталогу"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:214
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:213
 msgid "Open temp downloads"
 msgstr "Відкрити тимчасові завантаження"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:269
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:268
 msgid "A model operation is still running."
 msgstr "Операція все ще триває."
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:296
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:601
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:295
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:600
 msgid "Failed."
 msgstr "Помилка."
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:300
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:299
 #, python-brace-format
 msgid "Loading catalog: {url}"
 msgstr "Завантаження каталогу: {url}"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:309
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:308
 #, python-brace-format
 msgid "Catalog: remote; generated {generatedAt}"
 msgstr "Каталог: віддалений; згенеровано {generatedAt}"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:315
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:314
 #, python-brace-format
 msgid "Remote catalog failed: {error}"
 msgstr "Помилка віддаленого каталогу: {error}"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:319
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:318
 #, python-brace-format
 msgid "Catalog: bundled fallback; generated {generatedAt}"
 msgstr "Каталог: резервний пакет; згенеровано {generatedAt}"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:334
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:333
 msgid "Catalog: failed to load"
 msgstr "Каталог: не вдалося завантажити"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:343
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:342
 #, python-brace-format
 msgid "Loaded {count} model package(s)."
 msgstr "Завантажено {count} пакетів / моделей."
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:350
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:394
-#: addon\globalPlugins\polyglot\modelManager\service.py:260
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:349
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:393
+#: addon\globalPlugins\polyglot\modelManager\service.py:233
 msgid "Another model operation is already running."
 msgstr "Уже виконується інша операція моделі."
 
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:370
 #: addon\globalPlugins\polyglot\modelManager\dialog.py:371
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:372
 msgid "Changes applied."
 msgstr "Зміни застосовано."
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:384
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:383
 #, python-brace-format
 msgid ""
 "This will delete {size:.1f} MiB of temporary and legacy cached downloads. "
@@ -1014,35 +1014,35 @@ msgstr ""
 "\n"
 "Продовжити?"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:414
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:413
 msgid "Temporary downloads are empty."
 msgstr "Тимчасові завантаження очищено."
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:416
-#: addon\globalPlugins\polyglot\modelManager\installer.py:135
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:415
+#: addon\globalPlugins\polyglot\modelManager\installer.py:134
 #, python-brace-format
 msgid "Cleared temporary downloads ({size:.1f} MiB)."
 msgstr "Тимчасові завантажені файли очищено ({size:.1f} МіБ)."
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:441
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:440
 msgid "installed"
 msgstr "встановлено"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:441
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:440
 msgid "not installed"
 msgstr "не встановлено"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:450
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:449
 #, python-brace-format
 msgid "{count} installed package(s) detected."
 msgstr "Виявлено {count} встановлених пакетів."
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:468
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:467
 #, python-brace-format
 msgid "{size:.1f} MiB"
 msgstr "{size:.1f} МіБ"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:492
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:491
 #, python-brace-format
 msgid ""
 "The following installed model package(s) will be removed:\n"
@@ -1057,7 +1057,7 @@ msgstr ""
 "\n"
 "Продовжити?"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:511
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:510
 #, python-brace-format
 msgid ""
 "Selected: {selected} | Install: {install} | Remove: {remove} | Cleanup: "
@@ -1066,94 +1066,94 @@ msgstr ""
 "Вибрано: {selected} | Встановити: {install} | Видалити: {remove} | Очистити: "
 "{cleanup}"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:570
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:569
 msgid "Hide advanced"
 msgstr "Приховати додаткові параметри"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:575
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:574
 #, python-brace-format
 msgid "Status: {message}"
 msgstr "Статус: {message}"
 
-#: addon\globalPlugins\polyglot\modelManager\dialog.py:612
+#: addon\globalPlugins\polyglot\modelManager\dialog.py:611
 #, python-brace-format
 msgid "Settings could not be saved: {error}"
 msgstr "Не вдалося зберегти налаштування: {error}"
 
-#: addon\globalPlugins\polyglot\modelManager\installer.py:155
+#: addon\globalPlugins\polyglot\modelManager\installer.py:154
 msgid "No model packages selected."
 msgstr "Пакети моделей не вибрано."
 
-#: addon\globalPlugins\polyglot\modelManager\installer.py:159
+#: addon\globalPlugins\polyglot\modelManager\installer.py:158
 #, python-brace-format
 msgid "Unknown package key: {key}"
 msgstr "Невідомий ключ пакета: {key}"
 
-#: addon\globalPlugins\polyglot\modelManager\installer.py:189
+#: addon\globalPlugins\polyglot\modelManager\installer.py:188
 msgid "TranslateKit runtime already installed."
 msgstr "Середовище виконання TranslateKit вже встановлено."
 
-#: addon\globalPlugins\polyglot\modelManager\installer.py:194
+#: addon\globalPlugins\polyglot\modelManager\installer.py:193
 msgid "TranslateKit runtime does not have a downloadable archive."
 msgstr ""
 "Для середовища виконання TranslateKit не передбачено архіву для завантаження."
 
-#: addon\globalPlugins\polyglot\modelManager\installer.py:195
+#: addon\globalPlugins\polyglot\modelManager\installer.py:194
 msgid "Installing downloaded TranslateKit runtime."
 msgstr "Встановлення завантаженого середовища виконання TranslateKit."
 
-#: addon\globalPlugins\polyglot\modelManager\installer.py:217
+#: addon\globalPlugins\polyglot\modelManager\installer.py:216
 #, python-brace-format
 msgid "{package} already installed."
 msgstr "{package} вже встановлено."
 
-#: addon\globalPlugins\polyglot\modelManager\installer.py:224
+#: addon\globalPlugins\polyglot\modelManager\installer.py:223
 #, python-brace-format
 msgid "{package} does not have a downloadable archive."
 msgstr "{package} не має архіву для завантаження."
 
-#: addon\globalPlugins\polyglot\modelManager\installer.py:260
+#: addon\globalPlugins\polyglot\modelManager\installer.py:259
 #, python-brace-format
 msgid "Using cached archive {fileName}."
 msgstr "Використання кешованого архіву {fileName}."
 
-#: addon\globalPlugins\polyglot\modelManager\installer.py:265
-#: addon\globalPlugins\polyglot\modelManager\installer.py:478
+#: addon\globalPlugins\polyglot\modelManager\installer.py:264
+#: addon\globalPlugins\polyglot\modelManager\installer.py:477
 #, python-brace-format
 msgid "Downloading {fileName}."
 msgstr "Завантаження {fileName}."
 
-#: addon\globalPlugins\polyglot\modelManager\installer.py:270
+#: addon\globalPlugins\polyglot\modelManager\installer.py:269
 #, python-brace-format
 msgid "Downloaded archive verification failed: {fileName}"
 msgstr "Не вдалося перевірити завантажений архів: {fileName}"
 
-#: addon\globalPlugins\polyglot\modelManager\installer.py:295
+#: addon\globalPlugins\polyglot\modelManager\installer.py:294
 #, python-brace-format
 msgid "Archive entry is outside the install root: {entry}"
 msgstr "Запис архіву знаходиться поза коренем інсталяції: {entry}"
 
-#: addon\globalPlugins\polyglot\modelManager\installer.py:304
+#: addon\globalPlugins\polyglot\modelManager\installer.py:303
 #, python-brace-format
 msgid "Extracting {fileName}."
 msgstr "Розпакування {fileName}."
 
-#: addon\globalPlugins\polyglot\modelManager\installer.py:312
+#: addon\globalPlugins\polyglot\modelManager\installer.py:311
 #, python-brace-format
 msgid "Removed {package}."
 msgstr "Видалено {package}."
 
-#: addon\globalPlugins\polyglot\modelManager\installer.py:344
+#: addon\globalPlugins\polyglot\modelManager\installer.py:343
 #, python-brace-format
 msgid "Removed TranslateKit runtime ({size:.1f} MiB)."
 msgstr "Видалено середовище виконання TranslateKit ({size:.1f} MiB)."
 
-#: addon\globalPlugins\polyglot\modelManager\installer.py:456
+#: addon\globalPlugins\polyglot\modelManager\installer.py:455
 #, python-brace-format
 msgid "Archive path has no file name: {path}"
 msgstr "Шлях архіву {path} не має назви файлу:"
 
-#: addon\globalPlugins\polyglot\modelManager\installer.py:615
+#: addon\globalPlugins\polyglot\modelManager\installer.py:614
 #, python-brace-format
 msgid ""
 "Some model files are currently being used and cannot be replaced or "
@@ -1172,20 +1172,20 @@ msgstr ""
 "\n"
 "Помилка: {error}"
 
-#: addon\globalPlugins\polyglot\modelManager\installer.py:618
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:39
+#: addon\globalPlugins\polyglot\modelManager\installer.py:617
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:31
 msgid "Chrome AI (Offline)"
 msgstr "Chrome AI (офлайн)"
 
-#: addon\globalPlugins\polyglot\modelManager\menu.py:67
+#: addon\globalPlugins\polyglot\modelManager\menu.py:66
 msgid "Polyglot ChromeAI model manager"
 msgstr "Менеджер моделей ChromeAI"
 
-#: addon\globalPlugins\polyglot\modelManager\menu.py:68
+#: addon\globalPlugins\polyglot\modelManager\menu.py:67
 msgid "Manage Polyglot ChromeAI offline translation models"
 msgstr "Керування багатомовними моделями офлайн-перекладу ChromeAI"
 
-#: addon\globalPlugins\polyglot\modelManager\service.py:223
+#: addon\globalPlugins\polyglot\modelManager\service.py:196
 #, python-brace-format
 msgid ""
 "The following offline model package(s) are not installed:\n"
@@ -1208,129 +1208,129 @@ msgstr ""
 "Виберіть «Ні», щоб дозволити Chrome завантажити їх.\n"
 "Виберіть «Скасувати», щоб скасувати цей переклад."
 
-#: addon\globalPlugins\polyglot\modelManager\service.py:279
+#: addon\globalPlugins\polyglot\modelManager\service.py:252
 msgid "Model installation complete."
 msgstr "Встановлення моделі завершено."
 
-#: addon\globalPlugins\polyglot\services\engine.py:67
+#: addon\globalPlugins\polyglot\services\engine.py:65
 msgid "Enable this engine"
 msgstr "Увімкнути цей сервіс перекладу"
 
-#: addon\globalPlugins\polyglot\services\engine.py:259
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:129
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:49
+#: addon\globalPlugins\polyglot\services\engine.py:251
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:121
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:42
 msgid "Source language:"
 msgstr "Мова оригіналу:"
 
-#: addon\globalPlugins\polyglot\services\engine.py:266
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:136
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:50
+#: addon\globalPlugins\polyglot\services\engine.py:258
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:128
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:43
 msgid "Target language:"
 msgstr "Мова перекладу:"
 
-#: addon\globalPlugins\polyglot\services\engine.py:277
+#: addon\globalPlugins\polyglot\services\engine.py:269
 msgid "Proxy mode:"
 msgstr "Режим проксі:"
 
-#: addon\globalPlugins\polyglot\services\engine.py:280
+#: addon\globalPlugins\polyglot\services\engine.py:272
 msgid "Use system proxy settings"
 msgstr "Використовувати системні налаштування проксі"
 
-#: addon\globalPlugins\polyglot\services\engine.py:281
+#: addon\globalPlugins\polyglot\services\engine.py:273
 msgid "Do not use proxy"
 msgstr "Не використовувати проксі-сервер"
 
-#: addon\globalPlugins\polyglot\services\engine.py:287
+#: addon\globalPlugins\polyglot\services\engine.py:279
 msgid "Request timeout:"
 msgstr "Час очікування запиту:"
 
-#: addon\globalPlugins\polyglot\services\engine.py:303
+#: addon\globalPlugins\polyglot\services\engine.py:295
 msgid ""
 "Auto-swap if detected source matches target (source must be 'Auto-detect')"
 msgstr ""
 "Автоматично міняти місцями, якщо мова оригіналу збігається з мовою перекладу "
 "(мова оригіналу має бути в режимі \"Автовизначення\")"
 
-#: addon\globalPlugins\polyglot\services\engine.py:310
+#: addon\globalPlugins\polyglot\services\engine.py:302
 msgid "Swap to language:"
 msgstr "Мова для зміни:"
 
-#: addon\globalPlugins\polyglot\services\engine.py:410
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:189
+#: addon\globalPlugins\polyglot\services\engine.py:399
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:187
 msgid "Failed to parse response from translation service."
 msgstr "Не вдалося проаналізувати відповідь сервісу перекладу."
 
-#: addon\globalPlugins\polyglot\services\engine.py:415
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:194
+#: addon\globalPlugins\polyglot\services\engine.py:404
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:192
 msgid "An unknown error occurred during translation."
 msgstr "Під час перекладу сталася невідома помилка."
 
-#: addon\globalPlugins\polyglot\services\engines\baidu.py:25
+#: addon\globalPlugins\polyglot\services\engines\baidu.py:23
 msgid "Baidu Translate"
 msgstr "Перекладач Baidu"
 
-#: addon\globalPlugins\polyglot\services\engines\baidu.py:29
+#: addon\globalPlugins\polyglot\services\engines\baidu.py:27
 msgid "Request timed out"
 msgstr "Час очікування запиту минув"
 
-#: addon\globalPlugins\polyglot\services\engines\baidu.py:30
+#: addon\globalPlugins\polyglot\services\engines\baidu.py:28
 msgid "System error"
 msgstr "Системна помилка"
 
-#: addon\globalPlugins\polyglot\services\engines\baidu.py:31
+#: addon\globalPlugins\polyglot\services\engines\baidu.py:29
 msgid ""
 "Unauthorized user. Please check your App ID or if the service is enabled."
 msgstr ""
 "Неавторизований користувач. Будь ласка, перевірте свій Ідентифікатор додатка "
 "або чи увімкнено цю послугу."
 
-#: addon\globalPlugins\polyglot\services\engines\baidu.py:32
+#: addon\globalPlugins\polyglot\services\engines\baidu.py:30
 msgid "Required parameter is missing"
 msgstr "Відсутній обов’язковий параметр"
 
-#: addon\globalPlugins\polyglot\services\engines\baidu.py:33
+#: addon\globalPlugins\polyglot\services\engines\baidu.py:31
 msgid "Signature error. Please check your App Secret."
 msgstr "Помилка підпису. Будь ласка, перевірте секретний ключ додатка."
 
-#: addon\globalPlugins\polyglot\services\engines\baidu.py:34
+#: addon\globalPlugins\polyglot\services\engines\baidu.py:32
 msgid "Access frequency limited"
 msgstr "Перевищено ліміт кількості запитів"
 
-#: addon\globalPlugins\polyglot\services\engines\baidu.py:35
+#: addon\globalPlugins\polyglot\services\engines\baidu.py:33
 msgid "Insufficient account balance"
 msgstr "Недостатній баланс на рахунку"
 
-#: addon\globalPlugins\polyglot\services\engines\baidu.py:36
+#: addon\globalPlugins\polyglot\services\engines\baidu.py:34
 msgid "Frequent long query requests"
 msgstr "Часті запити з великим обсягом даних"
 
-#: addon\globalPlugins\polyglot\services\engines\baidu.py:37
+#: addon\globalPlugins\polyglot\services\engines\baidu.py:35
 msgid "Invalid client IP"
 msgstr "Недійсний IP клієнта"
 
-#: addon\globalPlugins\polyglot\services\engines\baidu.py:38
+#: addon\globalPlugins\polyglot\services\engines\baidu.py:36
 msgid ""
 "Translation direction not supported (may be due to insufficient permissions)"
 msgstr ""
 "Напрямок перекладу не підтримується (можливо, через недостатні права доступу)"
 
-#: addon\globalPlugins\polyglot\services\engines\baidu.py:39
+#: addon\globalPlugins\polyglot\services\engines\baidu.py:37
 msgid "Service is currently disabled"
 msgstr "Сервіс наразі вимкнено"
 
-#: addon\globalPlugins\polyglot\services\engines\baidu.py:40
+#: addon\globalPlugins\polyglot\services\engines\baidu.py:38
 msgid "IP has been blocked"
 msgstr "IP заблоковано"
 
-#: addon\globalPlugins\polyglot\services\engines\baidu.py:41
+#: addon\globalPlugins\polyglot\services\engines\baidu.py:39
 msgid "Authentication failed or has not taken effect"
 msgstr "Аутентифікація не вдалася або не набула чинності"
 
-#: addon\globalPlugins\polyglot\services\engines\baidu.py:42
+#: addon\globalPlugins\polyglot\services\engines\baidu.py:40
 msgid "Request content poses a security risk"
 msgstr "Вміст запиту становить загрозу безпеці"
 
-#: addon\globalPlugins\polyglot\services\engines\baidu.py:67
+#: addon\globalPlugins\polyglot\services\engines\baidu.py:65
 msgid ""
 "Use custom terminology (requires authentication and configuration on the "
 "platform)"
@@ -1338,50 +1338,50 @@ msgstr ""
 "Використовувати власну термінологію (потрібна авторизація та налаштування на "
 "платформі)"
 
-#: addon\globalPlugins\polyglot\services\engines\baidu.py:118
+#: addon\globalPlugins\polyglot\services\engines\baidu.py:116
 msgid "App ID and App Secret are required."
 msgstr ""
 "Необхідно вказати ідентифікатор додатка (App ID) та секретний ключ додатка "
 "(App Secret)."
 
-#: addon\globalPlugins\polyglot\services\engines\baidu.py:146
-#: addon\globalPlugins\polyglot\services\engines\tencent.py:167
-#: addon\globalPlugins\polyglot\services\engines\vivo.py:114
-#: addon\globalPlugins\polyglot\services\engines\_nvdacn.py:72
+#: addon\globalPlugins\polyglot\services\engines\baidu.py:144
+#: addon\globalPlugins\polyglot\services\engines\tencent.py:165
+#: addon\globalPlugins\polyglot\services\engines\vivo.py:112
+#: addon\globalPlugins\polyglot\services\engines\_nvdacn.py:70
 msgid "Unknown API error"
 msgstr "Невідома помилка API"
 
-#: addon\globalPlugins\polyglot\services\engines\caiyun.py:25
+#: addon\globalPlugins\polyglot\services\engines\caiyun.py:23
 msgid "Caiyun"
 msgstr "Caiyun"
 
-#: addon\globalPlugins\polyglot\services\engines\caiyun.py:63
+#: addon\globalPlugins\polyglot\services\engines\caiyun.py:61
 msgid "Authentication Token"
 msgstr "Токен автентифікації"
 
-#: addon\globalPlugins\polyglot\services\engines\caiyun.py:72
+#: addon\globalPlugins\polyglot\services\engines\caiyun.py:70
 msgid "Authentication Token for Caiyun is not configured."
 msgstr "Токен автентифікації для Caiyun не налаштований."
 
-#: addon\globalPlugins\polyglot\services\engines\caiyun.py:105
-#: addon\globalPlugins\polyglot\services\engines\deepl.py:187
-#: addon\globalPlugins\polyglot\services\engines\deeplWeb.py:211
-#: addon\globalPlugins\polyglot\services\engines\deeplWeb.py:216
-#: addon\globalPlugins\polyglot\services\engines\deeplWeb.py:219
-#: addon\globalPlugins\polyglot\services\engines\microsoft.py:105
-#: addon\globalPlugins\polyglot\services\engines\microsoft.py:110
-#: addon\globalPlugins\polyglot\services\engines\microsoft.py:114
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:240
-#: addon\globalPlugins\polyglot\services\engines\tencent.py:179
-#: addon\globalPlugins\polyglot\services\engines\yandex.py:124
+#: addon\globalPlugins\polyglot\services\engines\caiyun.py:103
+#: addon\globalPlugins\polyglot\services\engines\deepl.py:185
+#: addon\globalPlugins\polyglot\services\engines\deeplWeb.py:209
+#: addon\globalPlugins\polyglot\services\engines\deeplWeb.py:214
+#: addon\globalPlugins\polyglot\services\engines\deeplWeb.py:217
+#: addon\globalPlugins\polyglot\services\engines\microsoft.py:103
+#: addon\globalPlugins\polyglot\services\engines\microsoft.py:108
+#: addon\globalPlugins\polyglot\services\engines\microsoft.py:112
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:238
+#: addon\globalPlugins\polyglot\services\engines\tencent.py:177
+#: addon\globalPlugins\polyglot\services\engines\yandex.py:122
 msgid "Invalid API response or no translation result included."
 msgstr "Недійсна відповідь API або відсутній результат перекладу."
 
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:111
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:103
 msgid "Enable Chrome AI offline engine (Chrome 138+)"
 msgstr "Увімкнути офлайн-модуль Chrome AI (Chrome 138+)"
 
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:209
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:201
 msgid ""
 "Chrome AI offline engine is disabled. Enable it in the Polyglot settings "
 "panel before using it."
@@ -1390,25 +1390,25 @@ msgstr ""
 "панелі налаштувань поліглот."
 
 #. Translators: {model} is a model name like "Translation model".
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:249
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:241
 #, python-brace-format
 msgid "Preparing {model}..."
 msgstr "Підготовка моделі {model}..."
 
 #. Translators: Announced when Chrome has finished preparing an offline model.
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:261
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:253
 msgid "Model ready."
 msgstr "Модель готова."
 
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:405
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:394
 msgid "Translation model"
 msgstr "Модель перекладу"
 
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:411
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:400
 msgid "Unexpected Chrome AI error: "
 msgstr "Неочікувана помилка Chrome AI: "
 
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:432
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:421
 msgid ""
 "Chrome's Translator API is not available. Please update Chrome to version "
 "138 or later and ensure the TranslationAPI flag is enabled in chrome://flags."
@@ -1417,7 +1417,7 @@ msgstr ""
 "або пізнішої та переконайтеся, що прапорець TranslationAPI увімкнено в "
 "chrome://flags."
 
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:441
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:430
 msgid ""
 "Chrome AI must run in a secure page context. Please restart NVDA and try the "
 "Chrome AI engine again."
@@ -1425,91 +1425,91 @@ msgstr ""
 "Chrome AI має працювати в безпечному контексті сторінки. Будь ласка, "
 "перезапустіть NVDA та спробуйте знову скористатися сервісом Chrome AI."
 
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:452
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:441
 msgid "Chrome AI error: "
 msgstr "Помилка Chrome AI: "
 
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:452
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:441
 msgid "Unknown error"
 msgstr "Невідома помилка"
 
-#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:454
+#: addon\globalPlugins\polyglot\services\engines\chromeAi.py:443
 msgid "Chrome AI returned an unexpected response."
 msgstr "Chrome AI повернув неочікувану відповідь."
 
-#: addon\globalPlugins\polyglot\services\engines\deepl.py:23
+#: addon\globalPlugins\polyglot\services\engines\deepl.py:21
 msgid "DeepL"
 msgstr "DeepL"
 
-#: addon\globalPlugins\polyglot\services\engines\deepl.py:45
+#: addon\globalPlugins\polyglot\services\engines\deepl.py:43
 msgid "API Key (Auth Key)"
 msgstr "Ключ API (ключ авторизації)"
 
-#: addon\globalPlugins\polyglot\services\engines\deepl.py:46
+#: addon\globalPlugins\polyglot\services\engines\deepl.py:44
 msgid "Use Free API"
 msgstr "Використовувати безкоштовний API"
 
-#: addon\globalPlugins\polyglot\services\engines\deepl.py:47
+#: addon\globalPlugins\polyglot\services\engines\deepl.py:45
 msgid "Context (optional):"
 msgstr "Контекст (необов'язково):"
 
-#: addon\globalPlugins\polyglot\services\engines\deepl.py:50
+#: addon\globalPlugins\polyglot\services\engines\deepl.py:48
 msgid "Sentence splitting mode:"
 msgstr "Режим розділення речень:"
 
-#: addon\globalPlugins\polyglot\services\engines\deepl.py:53
+#: addon\globalPlugins\polyglot\services\engines\deepl.py:51
 msgid "On (split at punctuation and newlines)"
 msgstr "Увімкнено (розділяти на розділові знаки та новий рядок)"
 
-#: addon\globalPlugins\polyglot\services\engines\deepl.py:54
+#: addon\globalPlugins\polyglot\services\engines\deepl.py:52
 msgid "Off (no splitting)"
 msgstr "Вимкнено (не розділяти)"
 
-#: addon\globalPlugins\polyglot\services\engines\deepl.py:55
+#: addon\globalPlugins\polyglot\services\engines\deepl.py:53
 msgid "Only at punctuation"
 msgstr "Тільки на розділові знаки"
 
-#: addon\globalPlugins\polyglot\services\engines\deepl.py:61
+#: addon\globalPlugins\polyglot\services\engines\deepl.py:59
 msgid "Preserve formatting"
 msgstr "Зберегти форматування"
 
-#: addon\globalPlugins\polyglot\services\engines\deepl.py:67
+#: addon\globalPlugins\polyglot\services\engines\deepl.py:65
 msgid "Formality (for supported languages):"
 msgstr "Стилістичне оформлення (для підтримуваних мов):"
 
-#: addon\globalPlugins\polyglot\services\engines\deepl.py:70
+#: addon\globalPlugins\polyglot\services\engines\deepl.py:68
 msgid "Default"
 msgstr "Початково"
 
-#: addon\globalPlugins\polyglot\services\engines\deepl.py:71
+#: addon\globalPlugins\polyglot\services\engines\deepl.py:69
 msgid "More formal"
 msgstr "Більш офіційний"
 
-#: addon\globalPlugins\polyglot\services\engines\deepl.py:72
+#: addon\globalPlugins\polyglot\services\engines\deepl.py:70
 msgid "Less formal"
 msgstr "Менш офіційний"
 
-#: addon\globalPlugins\polyglot\services\engines\deepl.py:78
+#: addon\globalPlugins\polyglot\services\engines\deepl.py:76
 msgid "Model type:"
 msgstr "Тип моделі:"
 
-#: addon\globalPlugins\polyglot\services\engines\deepl.py:81
+#: addon\globalPlugins\polyglot\services\engines\deepl.py:79
 msgid "Speed-optimized (default)"
 msgstr "Оптимізовано за швидкістю (початково)"
 
-#: addon\globalPlugins\polyglot\services\engines\deepl.py:82
+#: addon\globalPlugins\polyglot\services\engines\deepl.py:80
 msgid "Quality-optimized"
 msgstr "Оптимізовано за якістю"
 
-#: addon\globalPlugins\polyglot\services\engines\deepl.py:83
+#: addon\globalPlugins\polyglot\services\engines\deepl.py:81
 msgid "Prefer quality-optimized model"
 msgstr "Надавати перевагу моделі, оптимізованій за якістю"
 
-#: addon\globalPlugins\polyglot\services\engines\deepl.py:135
+#: addon\globalPlugins\polyglot\services\engines\deepl.py:133
 msgid "DeepL API Key (Auth Key) is not configured."
 msgstr "Ключ автентифікації DeepL API не налаштований."
 
-#: addon\globalPlugins\polyglot\services\engines\deepl.py:140
+#: addon\globalPlugins\polyglot\services\engines\deepl.py:138
 msgid ""
 "You have selected the Pro API, but the provided key is for the Free API. "
 "Please check 'Use Free API' in settings."
@@ -1519,112 +1519,121 @@ msgstr ""
 "API»."
 
 #. Translators: Name of the anonymous DeepL Web translation engine.
-#: addon\globalPlugins\polyglot\services\engines\deeplWeb.py:27
+#: addon\globalPlugins\polyglot\services\engines\deeplWeb.py:25
 msgid "DeepL Web (key-free)"
 msgstr "DeepL Web (без введення ключа)"
 
-#: addon\globalPlugins\polyglot\services\engines\deeplWeb.py:164
+#: addon\globalPlugins\polyglot\services\engines\deeplWeb.py:159
+#, fuzzy
+msgid "target"
+msgstr "Відкрити папку каталогу"
+
+#: addon\globalPlugins\polyglot\services\engines\deeplWeb.py:159
+msgid "source"
+msgstr ""
+
+#: addon\globalPlugins\polyglot\services\engines\deeplWeb.py:162
 #, python-brace-format
 msgid "Unsupported DeepL Web {kind} language: {code}"
 msgstr "Непідтримувана мова DeepL Web {kind}: {code}"
 
-#: addon\globalPlugins\polyglot\services\engines\deeplWeb.py:203
+#: addon\globalPlugins\polyglot\services\engines\deeplWeb.py:201
 msgid "Invalid DeepL Web response."
 msgstr "Недійсна відповідь DeepL веб."
 
-#: addon\globalPlugins\polyglot\services\engines\google.py:21
+#: addon\globalPlugins\polyglot\services\engines\google.py:19
 msgid "Google Translate (key-free)"
 msgstr "Перекладач Google (без введення ключа)"
 
-#: addon\globalPlugins\polyglot\services\engines\google.py:49
+#: addon\globalPlugins\polyglot\services\engines\google.py:47
 msgid "Use mirror server (translate.googleapis.mirror.nvdadr.com)"
 msgstr ""
 "Використовувати дзеркальний сервер (translate.googleapis.mirror.nvdadr.com)"
 
-#: addon\globalPlugins\polyglot\services\engines\googlePolyglot.py:23
+#: addon\globalPlugins\polyglot\services\engines\googlePolyglot.py:21
 msgid "Google Translate (Polyglot)"
 msgstr "Перекладач Google (Поліглот)"
 
-#: addon\globalPlugins\polyglot\services\engines\googlePolyglot.py:42
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:182
+#: addon\globalPlugins\polyglot\services\engines\googlePolyglot.py:40
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:180
 msgid "API Key"
 msgstr "Ключ API"
 
-#: addon\globalPlugins\polyglot\services\engines\googlePolyglot.py:48
+#: addon\globalPlugins\polyglot\services\engines\googlePolyglot.py:46
 msgid "Endpoint URL"
 msgstr "URL кінцевої точки"
 
-#: addon\globalPlugins\polyglot\services\engines\googlePolyglot.py:59
+#: addon\globalPlugins\polyglot\services\engines\googlePolyglot.py:57
 msgid "API Key for Google Translate (HQ) is not configured."
 msgstr "Ключ API для Перекладача Google (HQ) не налаштовано."
 
-#: addon\globalPlugins\polyglot\services\engines\googlePolyglot.py:93
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:306
+#: addon\globalPlugins\polyglot\services\engines\googlePolyglot.py:91
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:304
 msgid "Failed to parse API response."
 msgstr "Не вдалося проаналізувати відповідь API."
 
-#: addon\globalPlugins\polyglot\services\engines\googlePolyglot.py:101
+#: addon\globalPlugins\polyglot\services\engines\googlePolyglot.py:99
 msgid "Invalid API response or no translation text included."
 msgstr "Недійсна відповідь API або відсутній текст перекладу."
 
-#: addon\globalPlugins\polyglot\services\engines\microsoft.py:25
+#: addon\globalPlugins\polyglot\services\engines\microsoft.py:23
 msgid "Microsoft Translator (key-free)"
 msgstr "Microsoft Translator (без введення ключа)"
 
-#: addon\globalPlugins\polyglot\services\engines\microsoft.py:102
+#: addon\globalPlugins\polyglot\services\engines\microsoft.py:100
 msgid "Failed to parse response from Microsoft Translator."
 msgstr "Не вдалося проаналізувати відповідь від Microsoft Translator."
 
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:31
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:29
 msgid "Niutrans"
 msgstr "Niutrans"
 
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:37
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:35
 msgid "Request address does not exist"
 msgstr "Адреса запиту не існує"
 
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:38
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:36
 msgid "Request is too frequent, exceeding QPS limit"
 msgstr "Запит надходить занадто часто, перевищуючи обмеження QPS"
 
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:39
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:37
 msgid "Request string length exceeds the limit"
 msgstr "Довжина запиту перевищує ліміт"
 
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:40
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:38
 msgid "Source language encoding is not UTF-8"
 msgstr "Кодування мови оригіналу не є UTF-8"
 
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:41
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:39
 msgid "Insufficient character allowance or no access permission"
 msgstr "Недостатня кількість символів або відсутність дозволу на доступ"
 
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:42
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:40
 msgid "Content filtering exception"
 msgstr "Виняток щодо фільтрування вмісту"
 
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:43
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:41
 msgid "Source and target languages are the same"
 msgstr "Мова оригіналу та мова перекладу однакові"
 
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:44
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:42
 msgid "Language not supported"
 msgstr "Ця мова не підтримується"
 
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:45
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:43
 msgid "Request processing timeout"
 msgstr "Час очікування обробки запиту"
 
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:46
-#: addon\globalPlugins\polyglot\services\engines\tencent.py:170
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:44
+#: addon\globalPlugins\polyglot\services\engines\tencent.py:168
 msgid "Authentication failed"
 msgstr "Помилка автентифікації"
 
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:47
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:45
 msgid "Parameters do not conform to specifications"
 msgstr "Параметри не відповідають технічним вимогам"
 
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:49
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:47
 msgid ""
 "Parameter validation exception (e.g., from/to/srcText/appId/authStr/"
 "timestamp cannot be empty)"
@@ -1632,297 +1641,297 @@ msgstr ""
 "Виняток під час перевірки параметрів (наприклад, поля from/to/srcText/appId/"
 "authStr/timestamp не можуть бути порожніми)"
 
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:51
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:49
 msgid "Incorrect request parameters"
 msgstr "Неправильні параметри запиту"
 
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:52
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:50
 msgid "Unsupported parameter passing method"
 msgstr "Непідтримуваний спосіб передачі параметрів"
 
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:87
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:85
 msgid "App ID"
 msgstr "Ідентифікатор додатка"
 
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:88
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:86
 msgid "API Key (for signing)"
 msgstr "Ключ API (для підпису)"
 
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:91
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:89
 msgid "Enable bilingual alignment mode"
 msgstr "Увімкнути режим двомовного вирівнювання"
 
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:98
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:96
 msgid "Bilingual output order:"
 msgstr "Порядок виведення двомовного тексту:"
 
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:101
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:99
 msgid "Source -> Target"
 msgstr "Оригінал -> Переклад"
 
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:102
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:100
 msgid "Target -> Source"
 msgstr "Переклад -> Оригінал"
 
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:138
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:136
 msgid "App ID and API Key for Niutrans must be configured."
 msgstr "Необхідно налаштувати ідентифікатор додатка та ключ API для Niutrans."
 
-#: addon\globalPlugins\polyglot\services\engines\niutrans.py:201
+#: addon\globalPlugins\polyglot\services\engines\niutrans.py:199
 msgid "Failed to parse API response. Response was not valid JSON."
 msgstr ""
 "Не вдалося проаналізувати відповідь API. Відповідь була недійсним JSON."
 
-#: addon\globalPlugins\polyglot\services\engines\ollama1.py:21
+#: addon\globalPlugins\polyglot\services\engines\ollama1.py:19
 msgid "Ollama 1"
 msgstr "Ollama 1"
 
-#: addon\globalPlugins\polyglot\services\engines\ollama2.py:21
+#: addon\globalPlugins\polyglot\services\engines\ollama2.py:19
 msgid "Ollama 2"
 msgstr "Ollama 2"
 
-#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:83
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:178
+#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:81
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:176
 msgid "API URL"
 msgstr "URL API"
 
-#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:87
+#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:85
 msgid "Model Name"
 msgstr "Назва моделі"
 
-#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:88
+#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:86
 msgid "API Key (optional)"
 msgstr "Ключ API (не обов’язково)"
 
-#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:91
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:198
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:58
+#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:89
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:196
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:51
 msgid "Prompt Template:"
 msgstr "Шаблон підказки:"
 
-#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:94
+#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:92
 msgid "Simple (No JSON)"
 msgstr "Простий (без JSON)"
 
-#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:95
+#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:93
 msgid "Concise JSON (Recommended)"
 msgstr "Стислий формат JSON (рекомендовано)"
 
-#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:96
+#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:94
 msgid "Structured JSON (Reliable)"
 msgstr "Структурований JSON (надійний)"
 
-#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:97
+#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:95
 msgid "Fluent Style (No JSON)"
 msgstr "Вільний стиль (без JSON)"
 
-#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:98
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:157
+#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:96
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:155
 msgid "Custom (Editable)"
 msgstr "Користувацька (з можливістю редагування)"
 
-#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:104
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:209
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:59
+#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:102
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:207
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:52
 msgid "Custom System Prompt (Role):"
 msgstr "Користувацька системна підказка (роль):"
 
-#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:110
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:215
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:60
+#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:108
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:213
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:53
 msgid "Custom User Prompt (Task):"
 msgstr "Користувацька підказка (завдання):"
 
-#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:130
+#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:128
 msgid "Ollama API URL and Model Name are required."
 msgstr "URL API Ollama та назва моделі є обов’язковими для заповнення."
 
-#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:185
+#: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:183
 msgid "API response did not contain a 'response' field."
 msgstr "Відповідь API не містить поля «response»."
 
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:25
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:23
 msgid "OpenRouter"
 msgstr "OpenRouter"
 
 #. Translators: An OpenRouter model name shown in the model selection list.
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:40
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:38
 msgid "Tencent: Hy-MT2-30B-A3B (Translation specialist, recommended)"
 msgstr "Tencent: Hy-MT2-30B-A3B (спеціаліст з перекладу, рекомендовано)"
 
 #. Translators: An OpenRouter model name shown in the model selection list.
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:42
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:40
 msgid "Tencent: Hy-MT2-7B (Translation specialist, fastest)"
 msgstr "Tencent: Hy-MT2-7B (спеціаліст з перекладу, найшвидший)"
 
 #. Translators: An OpenRouter model name shown in the model selection list.
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:44
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:42
 msgid "Tencent: Hy-MT2-1.8B (Translation specialist, cheapest)"
 msgstr "Tencent: Hy-MT2-1.8B (Спеціаліст з перекладу, найдешевший)"
 
 #. Translators: An OpenRouter model name shown in the model selection list.
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:46
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:44
 msgid "Inception: Mercury 2 (Fast, keeps language detection)"
 msgstr "Початок: Mercury 2 (Швидкий, зберігає розпізнавання мови)"
 
 #. Translators: An OpenRouter model name shown in the model selection list.
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:48
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:46
 msgid "Google: Gemini 3.5 Flash Lite"
 msgstr "Google: Gemini 3.5 Flash Lite"
 
 #. Translators: An OpenRouter model name shown in the model selection list.
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:50
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:48
 msgid "Google: Gemini 3.1 Flash Lite"
 msgstr "Google: Gemini 3.1 Flash Lite"
 
 #. Translators: An OpenRouter model name shown in the model selection list.
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:52
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:50
 msgid "Google: Gemini 2.5 Flash Lite"
 msgstr "Google: Gemini 2.5 Flash Lite"
 
 #. Translators: An OpenRouter model name shown in the model selection list.
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:54
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:52
 msgid "OpenAI: GPT-5 Mini"
 msgstr "OpenAI: GPT-5 Mini"
 
 #. Translators: An OpenRouter model name shown in the model selection list.
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:56
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:54
 msgid "Anthropic: Claude Haiku 4.5"
 msgstr "Anthropic: Claude Haiku 4.5"
 
 #. Translators: An OpenRouter model name shown in the model selection list.
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:58
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:56
 msgid "OpenAI: GPT-4o Mini"
 msgstr "OpenAI: GPT-4o Mini"
 
 #. Translators: An OpenRouter model name shown in the model selection list.
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:60
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:58
 msgid "Mistral: Large (High Quality)"
 msgstr "Mistral: великий (високої якості)"
 
 #. Translators: An OpenRouter model name shown in the model selection list.
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:62
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:60
 msgid "Meta: Llama 3.1 70B (Powerful)"
 msgstr "Meta: Llama 3.1 70B (Потужна)"
 
 #. Translators: The option for entering a custom OpenRouter model name.
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:64
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:62
 msgid "Custom Model"
 msgstr "Користувацька модель"
 
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:154
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:152
 msgid "Structured JSON (Reliable, includes language detection)"
 msgstr "Структурований JSON (надійний, з функцією визначення мови)"
 
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:155
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:153
 msgid "Simple Text (Fastest, no language detection)"
 msgstr "Простий текст (найшвидший варіант, без визначення мови)"
 
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:156
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:154
 msgid "Fluent Style (Natural, no language detection)"
 msgstr "Вільний стиль (природний, без визначення мови)"
 
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:185
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:57
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:183
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:50
 msgid "Model:"
 msgstr "Модель:"
 
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:192
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:190
 msgid "Custom Model Name:"
 msgstr "Користувацька назва моделі:"
 
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:252
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:250
 msgid "OpenRouter API URL is not configured."
 msgstr "URL OpenRouter API не налаштовано."
 
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:255
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:253
 msgid "API Key for OpenRouter is not configured."
 msgstr "API-ключ для OpenRouter не налаштовано."
 
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:259
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:257
 msgid "Custom model name is not specified."
 msgstr "Назва користувацької моделі не вказана."
 
-#: addon\globalPlugins\polyglot\services\engines\openRouter.py:354
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:352
 msgid "Invalid API response structure."
 msgstr "Недійсна структура відповіді API."
 
-#: addon\globalPlugins\polyglot\services\engines\tencent.py:26
+#: addon\globalPlugins\polyglot\services\engines\tencent.py:24
 msgid "Tencent Translate"
 msgstr "Tencent Translate"
 
-#: addon\globalPlugins\polyglot\services\engines\tencent.py:68
+#: addon\globalPlugins\polyglot\services\engines\tencent.py:66
 msgid "Secret ID"
 msgstr "Секретний ідентифікатор"
 
-#: addon\globalPlugins\polyglot\services\engines\tencent.py:69
+#: addon\globalPlugins\polyglot\services\engines\tencent.py:67
 msgid "Secret Key"
 msgstr "Секретний ключ"
 
-#: addon\globalPlugins\polyglot\services\engines\tencent.py:72
+#: addon\globalPlugins\polyglot\services\engines\tencent.py:70
 msgid "Region:"
 msgstr "Регіон:"
 
-#: addon\globalPlugins\polyglot\services\engines\tencent.py:75
+#: addon\globalPlugins\polyglot\services\engines\tencent.py:73
 msgid "North China (Beijing)"
 msgstr "Північний Китай (Пекін)"
 
-#: addon\globalPlugins\polyglot\services\engines\tencent.py:76
+#: addon\globalPlugins\polyglot\services\engines\tencent.py:74
 msgid "South China (Guangzhou)"
 msgstr "Південний Китай (Гуанчжоу)"
 
-#: addon\globalPlugins\polyglot\services\engines\tencent.py:77
+#: addon\globalPlugins\polyglot\services\engines\tencent.py:75
 msgid "East China (Shanghai)"
 msgstr "Східний Китай (Шанхай)"
 
-#: addon\globalPlugins\polyglot\services\engines\tencent.py:78
+#: addon\globalPlugins\polyglot\services\engines\tencent.py:76
 msgid "Hong Kong, Macao and Taiwan (Hong Kong, China)"
 msgstr "Гонконг, Макао та Тайвань (Гонконг, Китай)"
 
-#: addon\globalPlugins\polyglot\services\engines\tencent.py:79
+#: addon\globalPlugins\polyglot\services\engines\tencent.py:77
 msgid "Southeast Asia-Pacific (Singapore)"
 msgstr "Південно-Східна Азія-Тихоокеанський регіон (Сінгапур)"
 
-#: addon\globalPlugins\polyglot\services\engines\tencent.py:80
+#: addon\globalPlugins\polyglot\services\engines\tencent.py:78
 msgid "US East (Ashburn)"
 msgstr "Схід США (Ашберн)"
 
-#: addon\globalPlugins\polyglot\services\engines\tencent.py:92
+#: addon\globalPlugins\polyglot\services\engines\tencent.py:90
 msgid "Secret ID and Secret Key must be provided."
 msgstr "Необхідно вказати секретний ідентифікатор та секретний ключ."
 
-#: addon\globalPlugins\polyglot\services\engines\tencentPolyglot.py:19
+#: addon\globalPlugins\polyglot\services\engines\tencentPolyglot.py:17
 msgid "Tencent Translate (Polyglot)"
 msgstr "Tencent Translate (Поліглот)"
 
-#: addon\globalPlugins\polyglot\services\engines\vivo.py:25
+#: addon\globalPlugins\polyglot\services\engines\vivo.py:23
 msgid "VIVO Translate"
 msgstr "VIVO Translate"
 
-#: addon\globalPlugins\polyglot\services\engines\vivo.py:29
+#: addon\globalPlugins\polyglot\services\engines\vivo.py:27
 msgid "Server error"
 msgstr "Помилка сервера"
 
-#: addon\globalPlugins\polyglot\services\engines\vivo.py:30
+#: addon\globalPlugins\polyglot\services\engines\vivo.py:28
 msgid "Invalid request parameters"
 msgstr "Недійсні параметри запиту"
 
-#: addon\globalPlugins\polyglot\services\engines\vivo.py:59
-#: addon\globalPlugins\polyglot\services\engines\_nvdacn.py:35
+#: addon\globalPlugins\polyglot\services\engines\vivo.py:57
+#: addon\globalPlugins\polyglot\services\engines\_nvdacn.py:33
 msgid "NVDACN Username"
 msgstr "Ім'я користувача NVDACN"
 
-#: addon\globalPlugins\polyglot\services\engines\vivo.py:60
-#: addon\globalPlugins\polyglot\services\engines\_nvdacn.py:36
+#: addon\globalPlugins\polyglot\services\engines\vivo.py:58
+#: addon\globalPlugins\polyglot\services\engines\_nvdacn.py:34
 msgid "NVDACN Password"
 msgstr "Пароль NVDACN"
 
-#: addon\globalPlugins\polyglot\services\engines\vivo.py:73
-#: addon\globalPlugins\polyglot\services\engines\_nvdacn.py:46
+#: addon\globalPlugins\polyglot\services\engines\vivo.py:71
+#: addon\globalPlugins\polyglot\services\engines\_nvdacn.py:44
 msgid "NVDACN username and password must be provided in settings."
 msgstr "Ім’я користувача та пароль NVDACN необхідно вказати в налаштуваннях."
 
-#: addon\globalPlugins\polyglot\services\engines\vivo.py:82
+#: addon\globalPlugins\polyglot\services\engines\vivo.py:80
 msgid ""
 "Could not connect to the NVDACN authentication server to get a signature. "
 "Please check your network connection or try again later."
@@ -1931,102 +1940,102 @@ msgstr ""
 "отримання підпису. Перевірте мережеве з’єднання або спробуйте ще раз пізніше."
 
 #. Translators: Error message when authentication with the translation service fails. {error} is the detailed error description.
-#: addon\globalPlugins\polyglot\services\engines\vivo.py:87
-#: addon\globalPlugins\polyglot\services\engines\_nvdacn.py:75
+#: addon\globalPlugins\polyglot\services\engines\vivo.py:85
+#: addon\globalPlugins\polyglot\services\engines\_nvdacn.py:73
 #, python-brace-format
 msgid "Authentication failed: {error}"
 msgstr "Помилка автентифікації: {error}"
 
-#: addon\globalPlugins\polyglot\services\engines\vivo.py:89
+#: addon\globalPlugins\polyglot\services\engines\vivo.py:87
 msgid "An unknown error occurred while generating authentication info."
 msgstr "Під час формування даних для автентифікації сталася невідома помилка."
 
-#: addon\globalPlugins\polyglot\services\engines\vivo.py:110
-#: addon\globalPlugins\polyglot\services\engines\_nvdacn.py:69
+#: addon\globalPlugins\polyglot\services\engines\vivo.py:108
+#: addon\globalPlugins\polyglot\services\engines\_nvdacn.py:67
 msgid "API response successful but did not contain a translation result."
 msgstr "Відповідь API успішна, але не містить результату перекладу."
 
-#: addon\globalPlugins\polyglot\services\engines\volcenginePolyglot.py:19
+#: addon\globalPlugins\polyglot\services\engines\volcenginePolyglot.py:17
 msgid "Volcengine (Polyglot)"
 msgstr "Volcengine (Поліглот)"
 
-#: addon\globalPlugins\polyglot\services\engines\yandex.py:27
+#: addon\globalPlugins\polyglot\services\engines\yandex.py:25
 msgid "Yandex Translate"
 msgstr "Yandex Translate"
 
-#: addon\globalPlugins\polyglot\services\engines\_vivoAuth.py:76
+#: addon\globalPlugins\polyglot\services\engines\_vivoAuth.py:70
 msgid "Could not connect to the authentication server."
 msgstr "Не вдалося підключитися до сервера автентифікації."
 
-#: addon\globalPlugins\polyglot\services\engines\_vivoAuth.py:79
+#: addon\globalPlugins\polyglot\services\engines\_vivoAuth.py:73
 msgid "Invalid response from the authentication server."
 msgstr "Недійсна відповідь від сервера автентифікації."
 
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:26
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:24
 msgid "Polyglot Interactive Translation"
 msgstr "Інтерактивний переклад"
 
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:43
-#: addon\globalPlugins\polyglot\views\settings.py:63
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:36
+#: addon\globalPlugins\polyglot\views\settings.py:61
 msgid "Translation &engine:"
 msgstr "Сервіс &перекладу:"
 
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:52
-#: addon\globalPlugins\polyglot\views\settings.py:239
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:45
+#: addon\globalPlugins\polyglot\views\settings.py:237
 msgid "Current Engine Settings"
 msgstr "Поточні налаштування сервісу перекладу"
 
 #. --- Text Areas (Vertical Layout for better expansion) ---
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:70
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:63
 msgid "Te&xt to translate:"
 msgstr "&Текст для перекладу:"
 
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:79
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:72
 msgid "Translation &result:"
 msgstr "&результат перекладу:"
 
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:90
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:83
 msgid "&Translate"
 msgstr "&Перекласти"
 
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:94
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:87
 msgid "C&opy result"
 msgstr "&Копіювати результат"
 
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:95
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:88
 msgid "C&lear"
 msgstr "О&чистити"
 
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:96
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:89
 msgid "&Close"
 msgstr "&Закрити"
 
 #. Translators: Label for custom model with its name.
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:174
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:167
 #, python-brace-format
 msgid "Custom: {modelName}"
 msgstr "Користувацька модель: {modelName}"
 
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:190
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:204
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:251
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:252
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:183
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:197
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:244
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:245
 msgid "Not applicable"
 msgstr "Не застосовується"
 
-#: addon\globalPlugins\polyglot\views\interactiveDialog.py:312
+#: addon\globalPlugins\polyglot\views\interactiveDialog.py:305
 msgid "Translating..."
 msgstr "Переклад..."
 
-#: addon\globalPlugins\polyglot\views\settings.py:73
+#: addon\globalPlugins\polyglot\views\settings.py:71
 msgid "Common Settings"
 msgstr "Загальні налаштування"
 
-#: addon\globalPlugins\polyglot\views\settings.py:78
+#: addon\globalPlugins\polyglot\views\settings.py:76
 msgid "Copy manual translation results to clipboard"
 msgstr "Скопіювати результати перекладу в буфер обміну"
 
-#: addon\globalPlugins\polyglot\views\settings.py:85
+#: addon\globalPlugins\polyglot\views\settings.py:83
 msgid ""
 "Prefer local English-Chinese dictionary for selected text, clipboard, and "
 "last spoken text"
@@ -2035,12 +2044,12 @@ msgstr ""
 "останній текст"
 
 #. Translators: Checkbox controlling local dictionary definitions in NVDA text review.
-#: addon\globalPlugins\polyglot\views\settings.py:93
+#: addon\globalPlugins\polyglot\views\settings.py:91
 msgid "Use the local English-Chinese dictionary in text review"
 msgstr ""
 "Використовувати локальний англо-китайський словник під час перегляду тексту"
 
-#: addon\globalPlugins\polyglot\views\settings.py:100
+#: addon\globalPlugins\polyglot\views\settings.py:98
 msgid ""
 "Enable smart speech filter (skips roles, states, location, and formatting "
 "information)"
@@ -2048,15 +2057,15 @@ msgstr ""
 "Увімкнути розумний голосовий фільтр (пропускати ролі, стани, розташування та "
 "форматування)"
 
-#: addon\globalPlugins\polyglot\views\settings.py:104
+#: addon\globalPlugins\polyglot\views\settings.py:102
 msgid "Clear Cache"
 msgstr "Очистити кеш"
 
-#: addon\globalPlugins\polyglot\views\settings.py:245
+#: addon\globalPlugins\polyglot\views\settings.py:243
 msgid "This engine requires no additional configuration."
 msgstr "Цей сервіс перекладу не потребує додаткового налаштування."
 
-#: addon\globalPlugins\polyglot\views\settings.py:335
+#: addon\globalPlugins\polyglot\views\settings.py:333
 #, python-brace-format
 msgid "Clear Cache (Items: {})"
 msgstr "Очистити кеш ({} елементів)"
@@ -2071,37 +2080,47 @@ msgstr "Додаток для перекладу з підтримкою дек�
 #. Translators: what's new content for the add-on version to be shown in the add-on store
 #: buildVars.py:40
 msgid ""
-"### 1.2.0\n"
+"### 1.2.1\n"
 "\n"
-"- Added the key-free `DeepL Web` engine with automatic source detection, "
-"regional language options, and support for requests up to 1,500 characters.\n"
-"- Migrated key-free Microsoft Translator to the current Edge `translatetext` "
-"endpoint and removed the retired authentication-token flow.\n"
-"- Refreshed OpenRouter presets with current translation-specialised Tencent "
-"and Gemini Flash Lite models, automatic fallback for retired presets, and "
-"prompt options matched to model capabilities.\n"
-"- Reused HTTP connections across translation requests to reduce latency for "
-"repeated translations.\n"
-"- Removed the unavailable Lingva Translate engine.\n"
-"- Fixed long labels overflowing the Chrome AI and Common Settings panels."
+"- Improved the Simplified Chinese and Ukrainian localizations and aligned "
+"the English and Simplified Chinese documentation.\n"
+"- Removed unused internal code and obsolete comments."
 msgstr ""
-"### 1.2.0\n"
-"\n"
-"- Додано сервіс `DeepL Web`, що не вимагає ключа, з автоматичним виявленням "
-"мови оригіналу, регіональними мовними налаштуваннями та підтримкою запитів "
-"довжиною до 1500 символів.\n"
-"- Перенесено Microsoft Translator, що не вимагає ключа, на поточну кінцеву "
-"точку `translatetext` браузера Edge та видалено застарілий алгоритм роботи з "
-"токенами автентифікації.\n"
-"- Оновлено пресети OpenRouter, додавши сучасні моделі Tencent та Gemini "
-"Flash Lite, спеціалізовані на перекладі, автоматичне переключення на "
-"альтернативні варіанти у разі виведення пресетів з експлуатації, а також "
-"функції підказки, що відповідають можливостям моделей.\n"
-"- Впроваджено повторне використання HTTP-з’єднань між запитами на переклад "
-"для зменшення затримки при повторних перекладах.\n"
-"- Вилучено недоступний механізм Lingva Translate.\n"
-"- Виправлено переповнення довгих міток на панелях Chrome AI та «Загальні "
-"налаштування»."
+
+#~ msgid ""
+#~ "### 1.2.0\n"
+#~ "\n"
+#~ "- Added the key-free `DeepL Web` engine with automatic source detection, "
+#~ "regional language options, and support for requests up to 1,500 "
+#~ "characters.\n"
+#~ "- Migrated key-free Microsoft Translator to the current Edge "
+#~ "`translatetext` endpoint and removed the retired authentication-token "
+#~ "flow.\n"
+#~ "- Refreshed OpenRouter presets with current translation-specialised "
+#~ "Tencent and Gemini Flash Lite models, automatic fallback for retired "
+#~ "presets, and prompt options matched to model capabilities.\n"
+#~ "- Reused HTTP connections across translation requests to reduce latency "
+#~ "for repeated translations.\n"
+#~ "- Removed the unavailable Lingva Translate engine.\n"
+#~ "- Fixed long labels overflowing the Chrome AI and Common Settings panels."
+#~ msgstr ""
+#~ "### 1.2.0\n"
+#~ "\n"
+#~ "- Додано сервіс `DeepL Web`, що не вимагає ключа, з автоматичним "
+#~ "виявленням мови оригіналу, регіональними мовними налаштуваннями та "
+#~ "підтримкою запитів довжиною до 1500 символів.\n"
+#~ "- Перенесено Microsoft Translator, що не вимагає ключа, на поточну "
+#~ "кінцеву точку `translatetext` браузера Edge та видалено застарілий "
+#~ "алгоритм роботи з токенами автентифікації.\n"
+#~ "- Оновлено пресети OpenRouter, додавши сучасні моделі Tencent та Gemini "
+#~ "Flash Lite, спеціалізовані на перекладі, автоматичне переключення на "
+#~ "альтернативні варіанти у разі виведення пресетів з експлуатації, а також "
+#~ "функції підказки, що відповідають можливостям моделей.\n"
+#~ "- Впроваджено повторне використання HTTP-з’єднань між запитами на "
+#~ "переклад для зменшення затримки при повторних перекладах.\n"
+#~ "- Вилучено недоступний механізм Lingva Translate.\n"
+#~ "- Виправлено переповнення довгих міток на панелях Chrome AI та «Загальні "
+#~ "налаштування»."
 
 #~ msgid "Could not get Microsoft Translator authentication token."
 #~ msgstr "Не вдалося отримати токен автентифікації Microsoft Translator."
