@@ -76,10 +76,7 @@ class MicrosoftTranslateEngineTest(unittest.TestCase):
 
 	def test_parsesDetectedLanguageAndPreservesLiteralEntities(self) -> None:
 		"""Detected language is retained without interpreting response text as HTML."""
-		responseBody = (
-			'[{"detectedLanguage":{"language":"en"},'
-			'"translations":[{"text":"Compare &lt; B"}]}]'
-		)
+		responseBody = '[{"detectedLanguage":{"language":"en"},"translations":[{"text":"Compare &lt; B"}]}]'
 
 		self.assertEqual(
 			self.engine._parseResponse(responseBody),

@@ -134,7 +134,7 @@ class DeepLWebTranslateEngine(BaseHttpEngine):
 		if detectedLanguage.casefold() == targetLanguage.casefold():
 			return True
 		return "-" not in detectedLanguage and languages.getLanguageFamily(
-			detectedLanguage
+			detectedLanguage,
 		) == languages.getLanguageFamily(targetLanguage)
 
 	@property
