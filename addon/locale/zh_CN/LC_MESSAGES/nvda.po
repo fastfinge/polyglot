@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 'polyglot' '0.1.0'\n"
+"Project-Id-Version: 'polyglot' '1.2.0'\n"
 "Report-Msgid-Bugs-To: 'nvda-translations@groups.io'\n"
-"POT-Creation-Date: 2026-07-31 00:12+0800\n"
-"PO-Revision-Date: 2026-06-09 08:00+0800\n"
+"POT-Creation-Date: 2026-09-04 02:06+0800\n"
+"PO-Revision-Date: 2026-09-04 02:06+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -215,7 +215,7 @@ msgstr "未配置语言，无法执行反向翻译。"
 
 #: addon\globalPlugins\polyglot\app\manager.py:275
 msgid "Reverse failed: 'Auto-detect' cannot be the target language."
-msgstr "交换失败：“自动检测”不能作为目标语言。"
+msgstr "反向翻译失败：“自动检测”不能作为目标语言。"
 
 #: addon\globalPlugins\polyglot\app\manager.py:278
 msgid "Current translation engine is invalid."
@@ -270,14 +270,14 @@ msgstr "中文"
 #: addon\globalPlugins\polyglot\common\languages.py:24
 #: addon\globalPlugins\polyglot\common\languages.py:25
 msgid "Chinese (Simplified)"
-msgstr "中文 (简体)"
+msgstr "中文（简体）"
 
 #: addon\globalPlugins\polyglot\common\languages.py:26
 #: addon\globalPlugins\polyglot\common\languages.py:27
 #: addon\globalPlugins\polyglot\common\languages.py:28
 #: addon\globalPlugins\polyglot\common\languages.py:30
 msgid "Chinese (Traditional)"
-msgstr "中文 (繁体)"
+msgstr "中文（繁体）"
 
 #: addon\globalPlugins\polyglot\common\languages.py:31
 msgid "Cantonese"
@@ -292,6 +292,14 @@ msgstr "文言文"
 #: addon\globalPlugins\polyglot\common\languages.py:35
 msgid "English"
 msgstr "英语"
+
+#: addon\globalPlugins\polyglot\common\languages.py:33
+msgid "English (American)"
+msgstr "美式英语"
+
+#: addon\globalPlugins\polyglot\common\languages.py:34
+msgid "English (British)"
+msgstr "英式英语"
 
 #: addon\globalPlugins\polyglot\common\languages.py:36
 #: addon\globalPlugins\polyglot\common\languages.py:37
@@ -321,6 +329,10 @@ msgstr "德语"
 msgid "Spanish"
 msgstr "西班牙语"
 
+#: addon\globalPlugins\polyglot\common\languages.py:44
+msgid "Spanish (Latin American)"
+msgstr "拉丁美洲西班牙语"
+
 #. Baidu
 #: addon\globalPlugins\polyglot\common\languages.py:46
 msgid "Russian"
@@ -329,6 +341,14 @@ msgstr "俄语"
 #: addon\globalPlugins\polyglot\common\languages.py:47
 msgid "Portuguese"
 msgstr "葡萄牙语"
+
+#: addon\globalPlugins\polyglot\common\languages.py:48
+msgid "Portuguese (Brazilian)"
+msgstr "巴西葡萄牙语"
+
+#: addon\globalPlugins\polyglot\common\languages.py:49
+msgid "Portuguese (European)"
+msgstr "欧洲葡萄牙语"
 
 #: addon\globalPlugins\polyglot\common\languages.py:48
 msgid "Italian"
@@ -381,11 +401,11 @@ msgstr "挪威语"
 
 #: addon\globalPlugins\polyglot\common\languages.py:63
 msgid "Norwegian (Bokmål)"
-msgstr "挪威语(巴克摩)"
+msgstr "挪威语（博克马尔）"
 
 #: addon\globalPlugins\polyglot\common\languages.py:64
 msgid "Norwegian (Nynorsk)"
-msgstr "挪威语(耐诺斯克)"
+msgstr "挪威语（尼诺斯克）"
 
 #: addon\globalPlugins\polyglot\common\languages.py:65
 msgid "Czech"
@@ -650,11 +670,11 @@ msgstr "库尔德语"
 
 #: addon\globalPlugins\polyglot\common\languages.py:134
 msgid "Mongolian (Cyrillic)"
-msgstr "蒙古语(西里尔)"
+msgstr "蒙古语（西里尔字母）"
 
 #: addon\globalPlugins\polyglot\common\languages.py:135
 msgid "Mongolian (Traditional)"
-msgstr "蒙古语(传统)"
+msgstr "蒙古语（传统蒙古文）"
 
 #: addon\globalPlugins\polyglot\common\languages.py:136
 msgid "Hmong"
@@ -663,7 +683,7 @@ msgstr "苗语"
 #. --- African Languages ---
 #: addon\globalPlugins\polyglot\common\languages.py:138
 msgid "Afrikaans"
-msgstr "南非语"
+msgstr "南非荷兰语"
 
 #: addon\globalPlugins\polyglot\common\languages.py:139
 msgid "Swahili"
@@ -751,16 +771,15 @@ msgstr "拉丁语"
 msgid ""
 "Service temporarily unavailable or timed out. Please try again later. (HTTP "
 "{code})"
-msgstr "服务暂时不可用或超时，请稍后重试。(HTTP {code})"
+msgstr "服务暂时不可用或超时，请稍后重试。（HTTP {code}）"
 
 #: addon\globalPlugins\polyglot\common\network.py:88
 msgid "Request to translation service timed out"
 msgstr "请求翻译服务超时"
 
 #: addon\globalPlugins\polyglot\common\network.py:93
-#, fuzzy
 msgid "Network connection error. Check your connection and try again."
-msgstr "网络连接错误：{error}"
+msgstr "网络连接错误。请检查网络连接后重试。"
 
 #: addon\globalPlugins\polyglot\common\network.py:136
 msgid "Authentication failed. Please check your API key."
@@ -832,7 +851,7 @@ msgstr "模型清单中存在重复的模型包标识：{key}"
 
 #: addon\globalPlugins\polyglot\modelManager\catalog.py:244
 msgid "Catalog URL must be an HTTP or HTTPS URL."
-msgstr "清单地址必须是 HTTP 或 HTTPS URL。"
+msgstr "清单 URL 必须使用 HTTP 或 HTTPS 协议。"
 
 #: addon\globalPlugins\polyglot\modelManager\catalog.py:290
 #, python-brace-format
@@ -1267,12 +1286,12 @@ msgstr "长查询请求频繁"
 
 #: addon\globalPlugins\polyglot\services\engines\baidu.py:37
 msgid "Invalid client IP"
-msgstr "客户端IP非法"
+msgstr "客户端 IP 无效"
 
 #: addon\globalPlugins\polyglot\services\engines\baidu.py:38
 msgid ""
 "Translation direction not supported (may be due to insufficient permissions)"
-msgstr "翻译语言方向不支持 (可能权限不足)"
+msgstr "不支持该翻译方向（可能是权限不足）"
 
 #: addon\globalPlugins\polyglot\services\engines\baidu.py:39
 msgid "Service is currently disabled"
@@ -1280,7 +1299,7 @@ msgstr "服务当前已关闭"
 
 #: addon\globalPlugins\polyglot\services\engines\baidu.py:40
 msgid "IP has been blocked"
-msgstr "IP已被封禁"
+msgstr "IP 已被封禁"
 
 #: addon\globalPlugins\polyglot\services\engines\baidu.py:41
 msgid "Authentication failed or has not taken effect"
@@ -1294,7 +1313,7 @@ msgstr "请求内容存在安全风险"
 msgid ""
 "Use custom terminology (requires authentication and configuration on the "
 "platform)"
-msgstr "使用自定义术语库 (需完成认证并在平台配置)"
+msgstr "使用自定义术语库（需完成认证并在平台配置）"
 
 #: addon\globalPlugins\polyglot\services\engines\baidu.py:118
 msgid "App ID and App Secret are required."
@@ -1306,7 +1325,7 @@ msgstr "需要 App ID 和 App Secret。"
 #: addon\globalPlugins\polyglot\services\engines\vivo.py:114
 #: addon\globalPlugins\polyglot\services\engines\volcenginePolyglot.py:106
 msgid "Unknown API error"
-msgstr "未知API错误"
+msgstr "未知 API 错误"
 
 #: addon\globalPlugins\polyglot\services\engines\caiyun.py:25
 msgid "Caiyun"
@@ -1343,7 +1362,7 @@ msgstr "Chrome AI 离线引擎已禁用。请先在 Polyglot 设置面板中启�
 #: addon\globalPlugins\polyglot\services\engines\chromeAi.py:249
 #, python-brace-format
 msgid "Preparing {model}..."
-msgstr "正在准备 {model}..."
+msgstr "正在准备 {model}……"
 
 #. Translators: Announced when Chrome has finished preparing an offline model.
 #: addon\globalPlugins\polyglot\services\engines\chromeAi.py:261
@@ -1391,7 +1410,7 @@ msgstr "DeepL"
 
 #: addon\globalPlugins\polyglot\services\engines\deepl.py:45
 msgid "API Key (Auth Key)"
-msgstr "API 密钥 (Auth Key)"
+msgstr "API 密钥（Auth Key）"
 
 #: addon\globalPlugins\polyglot\services\engines\deepl.py:46
 msgid "Use Free API"
@@ -1399,7 +1418,7 @@ msgstr "使用免费版 API"
 
 #: addon\globalPlugins\polyglot\services\engines\deepl.py:47
 msgid "Context (optional):"
-msgstr "上下文 (可选)："
+msgstr "上下文（可选）："
 
 #: addon\globalPlugins\polyglot\services\engines\deepl.py:50
 msgid "Sentence splitting mode:"
@@ -1407,11 +1426,11 @@ msgstr "句子拆分模式："
 
 #: addon\globalPlugins\polyglot\services\engines\deepl.py:53
 msgid "On (split at punctuation and newlines)"
-msgstr "开启 (在标点和换行处拆分)"
+msgstr "开启（在标点和换行处拆分）"
 
 #: addon\globalPlugins\polyglot\services\engines\deepl.py:54
 msgid "Off (no splitting)"
-msgstr "关闭 (不拆分)"
+msgstr "关闭（不拆分）"
 
 #: addon\globalPlugins\polyglot\services\engines\deepl.py:55
 msgid "Only at punctuation"
@@ -1423,7 +1442,7 @@ msgstr "保留格式"
 
 #: addon\globalPlugins\polyglot\services\engines\deepl.py:67
 msgid "Formality (for supported languages):"
-msgstr "正式性语氣 (适用于支持的语言)："
+msgstr "正式程度（适用于支持的语言）："
 
 #: addon\globalPlugins\polyglot\services\engines\deepl.py:70
 msgid "Default"
@@ -1443,7 +1462,7 @@ msgstr "模型类型："
 
 #: addon\globalPlugins\polyglot\services\engines\deepl.py:81
 msgid "Speed-optimized (default)"
-msgstr "速度优化 (默认)"
+msgstr "速度优化（默认）"
 
 #: addon\globalPlugins\polyglot\services\engines\deepl.py:82
 msgid "Quality-optimized"
@@ -1455,7 +1474,7 @@ msgstr "优先使用质量优化模型"
 
 #: addon\globalPlugins\polyglot\services\engines\deepl.py:135
 msgid "DeepL API Key (Auth Key) is not configured."
-msgstr "DeepL API 密钥 (Auth Key) 未配置。"
+msgstr "DeepL API 密钥（Auth Key）未配置。"
 
 #: addon\globalPlugins\polyglot\services\engines\deepl.py:140
 msgid ""
@@ -1465,17 +1484,39 @@ msgstr ""
 "您选择了专业版 API，但提供的密钥是免费版密钥。请在设置中勾选“使用免费版 "
 "API”。"
 
+#. Translators: Name of the anonymous DeepL Web translation engine.
+#: addon\globalPlugins\polyglot\services\engines\deeplWeb.py:25
+msgid "DeepL Web (key-free)"
+msgstr "DeepL Web（免密钥）"
+
+#: addon\globalPlugins\polyglot\services\engines\deeplWeb.py:159
+msgid "target"
+msgstr "目标"
+
+#: addon\globalPlugins\polyglot\services\engines\deeplWeb.py:159
+msgid "source"
+msgstr "源"
+
+#: addon\globalPlugins\polyglot\services\engines\deeplWeb.py:162
+#, python-brace-format
+msgid "Unsupported DeepL Web {kind} language: {code}"
+msgstr "DeepL Web 不支持{kind}语言：{code}"
+
+#: addon\globalPlugins\polyglot\services\engines\deeplWeb.py:201
+msgid "Invalid DeepL Web response."
+msgstr "DeepL Web 响应无效。"
+
 #: addon\globalPlugins\polyglot\services\engines\google.py:21
 msgid "Google Translate (key-free)"
-msgstr "Google 翻译（免秘钥）"
+msgstr "Google 翻译（免密钥）"
 
 #: addon\globalPlugins\polyglot\services\engines\google.py:49
 msgid "Use mirror server (translate.googleapis.mirror.nvdadr.com)"
-msgstr "使用镜像服务器 (translate.googleapis.mirror.nvdadr.com)"
+msgstr "使用镜像服务器（translate.googleapis.mirror.nvdadr.com）"
 
 #: addon\globalPlugins\polyglot\services\engines\googlePolyglot.py:23
 msgid "Google Translate (Polyglot)"
-msgstr "Google 翻译 (Polyglot)"
+msgstr "Google 翻译（Polyglot）"
 
 #: addon\globalPlugins\polyglot\services\engines\googlePolyglot.py:148
 #: addon\globalPlugins\polyglot\services\engines\openRouter.py:104
@@ -1488,12 +1529,12 @@ msgstr "端点 URL"
 
 #: addon\globalPlugins\polyglot\services\engines\googlePolyglot.py:165
 msgid "API Key for Google Translate (HQ) is not configured."
-msgstr "Google 翻译 (HQ) 的 API 密钥未配置。"
+msgstr "Google 翻译（HQ）的 API 密钥未配置。"
 
 #: addon\globalPlugins\polyglot\services\engines\googlePolyglot.py:199
 #: addon\globalPlugins\polyglot\services\engines\openRouter.py:222
 msgid "Failed to parse API response."
-msgstr "无法解析API响应。"
+msgstr "无法解析 API 响应。"
 
 #: addon\globalPlugins\polyglot\services\engines\googlePolyglot.py:207
 msgid "Invalid API response or no translation text included."
@@ -1501,11 +1542,7 @@ msgstr "API 响应无效或未包含翻译文本。"
 
 #: addon\globalPlugins\polyglot\services\engines\microsoft.py:30
 msgid "Microsoft Translator (key-free)"
-msgstr "微软翻译 （免密钥）"
-
-#: addon\globalPlugins\polyglot\services\engines\microsoft.py:107
-msgid "Could not get Microsoft Translator authentication token."
-msgstr "无法获取微软翻译认证令牌。"
+msgstr "微软翻译（免密钥）"
 
 #: addon\globalPlugins\polyglot\services\engines\microsoft.py:183
 msgid "Failed to parse response from Microsoft Translator."
@@ -1521,7 +1558,7 @@ msgstr "请求地址不存在"
 
 #: addon\globalPlugins\polyglot\services\engines\niutrans.py:38
 msgid "Request is too frequent, exceeding QPS limit"
-msgstr "请求过于频繁，超过QPS限制"
+msgstr "请求过于频繁，超过 QPS 限制"
 
 #: addon\globalPlugins\polyglot\services\engines\niutrans.py:39
 msgid "Request string length exceeds the limit"
@@ -1529,7 +1566,7 @@ msgstr "请求字符串长度超出限制"
 
 #: addon\globalPlugins\polyglot\services\engines\niutrans.py:40
 msgid "Source language encoding is not UTF-8"
-msgstr "源语言编码不是UTF-8"
+msgstr "源语言编码不是 UTF-8"
 
 #: addon\globalPlugins\polyglot\services\engines\niutrans.py:41
 msgid "Insufficient character allowance or no access permission"
@@ -1564,7 +1601,7 @@ msgstr "参数不符合规范"
 msgid ""
 "Parameter validation exception (e.g., from/to/srcText/appId/authStr/"
 "timestamp cannot be empty)"
-msgstr "参数验证异常 (例如：from/to/srcText/appId/authStr/timestamp 不能为空)"
+msgstr "参数验证异常（例如：from/to/srcText/appId/authStr/timestamp 不能为空）"
 
 #: addon\globalPlugins\polyglot\services\engines\niutrans.py:51
 msgid "Incorrect request parameters"
@@ -1580,7 +1617,7 @@ msgstr "App ID"
 
 #: addon\globalPlugins\polyglot\services\engines\niutrans.py:88
 msgid "API Key (for signing)"
-msgstr "API密钥"
+msgstr "API 密钥（用于签名）"
 
 #: addon\globalPlugins\polyglot\services\engines\niutrans.py:91
 msgid "Enable bilingual alignment mode"
@@ -1592,11 +1629,11 @@ msgstr "双语输出顺序："
 
 #: addon\globalPlugins\polyglot\services\engines\niutrans.py:101
 msgid "Source -> Target"
-msgstr "源 -> 目标"
+msgstr "源语言 -> 目标语言"
 
 #: addon\globalPlugins\polyglot\services\engines\niutrans.py:102
 msgid "Target -> Source"
-msgstr "目标 -> 源"
+msgstr "目标语言 -> 源语言"
 
 #: addon\globalPlugins\polyglot\services\engines\niutrans.py:138
 msgid "App ID and API Key for Niutrans must be configured."
@@ -1625,7 +1662,7 @@ msgstr "模型名称"
 
 #: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:88
 msgid "API Key (optional)"
-msgstr "API 密钥 (可选)"
+msgstr "API 密钥（可选）"
 
 #: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:91
 #: addon\globalPlugins\polyglot\services\engines\openRouter.py:120
@@ -1635,36 +1672,36 @@ msgstr "提示词模板："
 
 #: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:94
 msgid "Simple (No JSON)"
-msgstr "简单 (无 JSON)"
+msgstr "简单（无 JSON）"
 
 #: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:95
 msgid "Concise JSON (Recommended)"
-msgstr "简洁 JSON (推荐)"
+msgstr "简洁 JSON（推荐）"
 
 #: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:96
 msgid "Structured JSON (Reliable)"
-msgstr "结构化 JSON (可靠)"
+msgstr "结构化 JSON（可靠）"
 
 #: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:97
 msgid "Fluent Style (No JSON)"
-msgstr "流利风格 (无 JSON)"
+msgstr "流畅风格（无 JSON）"
 
 #: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:98
 #: addon\globalPlugins\polyglot\services\engines\openRouter.py:126
 msgid "Custom (Editable)"
-msgstr "自定义 (可编辑)"
+msgstr "自定义（可编辑）"
 
 #: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:104
 #: addon\globalPlugins\polyglot\services\engines\openRouter.py:132
 #: addon\globalPlugins\polyglot\views\interactiveDialog.py:59
 msgid "Custom System Prompt (Role):"
-msgstr "自定义系统提示词 (角色)："
+msgstr "自定义系统提示词（角色）："
 
 #: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:110
 #: addon\globalPlugins\polyglot\services\engines\openRouter.py:138
 #: addon\globalPlugins\polyglot\views\interactiveDialog.py:60
 msgid "Custom User Prompt (Task):"
-msgstr "自定义用户提示词 (任务)："
+msgstr "自定义用户提示词（任务）："
 
 #: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:130
 msgid "Ollama API URL and Model Name are required."
@@ -1672,12 +1709,73 @@ msgstr "需要 Ollama API 地址和模型名称。"
 
 #: addon\globalPlugins\polyglot\services\engines\ollamaBase.py:185
 msgid "API response did not contain a 'response' field."
-msgstr "API 响应中不包含 'response' 字段。"
+msgstr "API 响应中不包含“response”字段。"
 
 #: addon\globalPlugins\polyglot\services\engines\openRouter.py:25
 msgid "OpenRouter"
 msgstr "OpenRouter"
 
+#. Translators: An OpenRouter model name shown in the model selection list.
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:38
+msgid "Tencent: Hy-MT2-30B-A3B (Translation specialist, recommended)"
+msgstr "腾讯：Hy-MT2-30B-A3B（翻译专用，推荐）"
+
+#. Translators: An OpenRouter model name shown in the model selection list.
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:40
+msgid "Tencent: Hy-MT2-7B (Translation specialist, fastest)"
+msgstr "腾讯：Hy-MT2-7B（翻译专用，速度最快）"
+
+#. Translators: An OpenRouter model name shown in the model selection list.
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:42
+msgid "Tencent: Hy-MT2-1.8B (Translation specialist, cheapest)"
+msgstr "腾讯：Hy-MT2-1.8B（翻译专用，成本最低）"
+
+#. Translators: An OpenRouter model name shown in the model selection list.
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:44
+msgid "Inception: Mercury 2 (Fast, keeps language detection)"
+msgstr "Inception：Mercury 2（速度快，保留语言检测）"
+
+#. Translators: An OpenRouter model name shown in the model selection list.
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:46
+msgid "Google: Gemini 3.5 Flash Lite"
+msgstr "Google：Gemini 3.5 Flash Lite"
+
+#. Translators: An OpenRouter model name shown in the model selection list.
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:48
+msgid "Google: Gemini 3.1 Flash Lite"
+msgstr "Google：Gemini 3.1 Flash Lite"
+
+#. Translators: An OpenRouter model name shown in the model selection list.
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:50
+msgid "Google: Gemini 2.5 Flash Lite"
+msgstr "Google：Gemini 2.5 Flash Lite"
+
+#. Translators: An OpenRouter model name shown in the model selection list.
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:52
+msgid "OpenAI: GPT-5 Mini"
+msgstr "OpenAI：GPT-5 Mini"
+
+#. Translators: An OpenRouter model name shown in the model selection list.
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:54
+msgid "Anthropic: Claude Haiku 4.5"
+msgstr "Anthropic：Claude Haiku 4.5"
+
+#. Translators: An OpenRouter model name shown in the model selection list.
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:56
+msgid "OpenAI: GPT-4o Mini"
+msgstr "OpenAI：GPT-4o Mini"
+
+#. Translators: An OpenRouter model name shown in the model selection list.
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:58
+msgid "Mistral: Large (High Quality)"
+msgstr "Mistral：Large（高质量）"
+
+#. Translators: An OpenRouter model name shown in the model selection list.
+#: addon\globalPlugins\polyglot\services\engines\openRouter.py:60
+msgid "Meta: Llama 3.1 70B (Powerful)"
+msgstr "Meta：Llama 3.1 70B（性能强劲）"
+
+#. Translators: The option for entering a custom OpenRouter model name.
 #: addon\globalPlugins\polyglot\services\engines\openRouter.py:43
 msgid "Custom Model"
 msgstr "自定义模型"
@@ -1693,15 +1791,15 @@ msgstr "自定义模型名称："
 
 #: addon\globalPlugins\polyglot\services\engines\openRouter.py:123
 msgid "Structured JSON (Reliable, includes language detection)"
-msgstr "结构化 JSON (可靠，包含语言检测)"
+msgstr "结构化 JSON（可靠，包含语言检测）"
 
 #: addon\globalPlugins\polyglot\services\engines\openRouter.py:124
 msgid "Simple Text (Fastest, no language detection)"
-msgstr "简单文本 (最快，无语言检测)"
+msgstr "简单文本（最快，无语言检测）"
 
 #: addon\globalPlugins\polyglot\services\engines\openRouter.py:125
 msgid "Fluent Style (Natural, no language detection)"
-msgstr "流利风格 (自然，无语言检测)"
+msgstr "流畅风格（自然，无语言检测）"
 
 #: addon\globalPlugins\polyglot\services\engines\openRouter.py:164
 msgid "OpenRouter API URL is not configured."
@@ -1737,27 +1835,27 @@ msgstr "地域："
 
 #: addon\globalPlugins\polyglot\services\engines\tencent.py:75
 msgid "North China (Beijing)"
-msgstr "华北地区(北京)"
+msgstr "华北地区（北京）"
 
 #: addon\globalPlugins\polyglot\services\engines\tencent.py:76
 msgid "South China (Guangzhou)"
-msgstr "华南地区(广州)"
+msgstr "华南地区（广州）"
 
 #: addon\globalPlugins\polyglot\services\engines\tencent.py:77
 msgid "East China (Shanghai)"
-msgstr "华东地区(上海)"
+msgstr "华东地区（上海）"
 
 #: addon\globalPlugins\polyglot\services\engines\tencent.py:78
 msgid "Hong Kong, Macao and Taiwan (Hong Kong, China)"
-msgstr "港澳台地区(中国香港)"
+msgstr "港澳台地区（中国香港）"
 
 #: addon\globalPlugins\polyglot\services\engines\tencent.py:79
 msgid "Southeast Asia-Pacific (Singapore)"
-msgstr "亚太东南(新加坡)"
+msgstr "亚太东南（新加坡）"
 
 #: addon\globalPlugins\polyglot\services\engines\tencent.py:80
 msgid "US East (Ashburn)"
-msgstr "美国东部(弗吉尼亚)"
+msgstr "美国东部（阿什本）"
 
 #: addon\globalPlugins\polyglot\services\engines\tencent.py:92
 msgid "Secret ID and Secret Key must be provided."
@@ -1765,25 +1863,25 @@ msgstr "必须提供 Secret ID 和 Secret Key。"
 
 #: addon\globalPlugins\polyglot\services\engines\tencentPolyglot.py:23
 msgid "Tencent Translate (Polyglot)"
-msgstr "腾讯翻译 (Polyglot)"
+msgstr "腾讯翻译（Polyglot）"
 
 #: addon\globalPlugins\polyglot\services\engines\tencentPolyglot.py:48
 #: addon\globalPlugins\polyglot\services\engines\vivo.py:59
 #: addon\globalPlugins\polyglot\services\engines\volcenginePolyglot.py:58
 msgid "NVDACN Username"
-msgstr "NVDA中文站 用户名"
+msgstr "NVDA 中文站用户名"
 
 #: addon\globalPlugins\polyglot\services\engines\tencentPolyglot.py:49
 #: addon\globalPlugins\polyglot\services\engines\vivo.py:60
 #: addon\globalPlugins\polyglot\services\engines\volcenginePolyglot.py:59
 msgid "NVDACN Password"
-msgstr "NVDA中文站 密码"
+msgstr "NVDA 中文站密码"
 
 #: addon\globalPlugins\polyglot\services\engines\tencentPolyglot.py:58
 #: addon\globalPlugins\polyglot\services\engines\vivo.py:73
 #: addon\globalPlugins\polyglot\services\engines\volcenginePolyglot.py:68
 msgid "NVDACN username and password must be provided in settings."
-msgstr "必须在设置中提供 NVDA中文站 的用户名和密码。"
+msgstr "必须在设置中提供 NVDA 中文站的用户名和密码。"
 
 #: addon\globalPlugins\polyglot\services\engines\tencentPolyglot.py:92
 #: addon\globalPlugins\polyglot\services\engines\vivo.py:110
@@ -1797,7 +1895,7 @@ msgstr "API 响应成功，但未包含翻译结果。"
 #: addon\globalPlugins\polyglot\services\engines\volcenginePolyglot.py:109
 #, python-brace-format
 msgid "Authentication failed: {error}"
-msgstr "认证失败: {error}"
+msgstr "认证失败：{error}"
 
 #: addon\globalPlugins\polyglot\services\engines\vivo.py:25
 msgid "VIVO Translate"
@@ -1823,7 +1921,7 @@ msgstr "生成认证信息时发生未知错误。"
 
 #: addon\globalPlugins\polyglot\services\engines\volcenginePolyglot.py:23
 msgid "Volcengine (Polyglot)"
-msgstr "火山翻译 （Polyglot）"
+msgstr "火山翻译（Polyglot）"
 
 #: addon\globalPlugins\polyglot\services\engines\yandex.py:27
 msgid "Yandex Translate"
@@ -1880,7 +1978,7 @@ msgstr "关闭(&C)"
 #: addon\globalPlugins\polyglot\views\interactiveDialog.py:174
 #, python-brace-format
 msgid "Custom: {modelName}"
-msgstr "自定义： {modelName}"
+msgstr "自定义：{modelName}"
 
 #: addon\globalPlugins\polyglot\views\interactiveDialog.py:190
 #: addon\globalPlugins\polyglot\views\interactiveDialog.py:204
@@ -1891,7 +1989,7 @@ msgstr "不适用"
 
 #: addon\globalPlugins\polyglot\views\interactiveDialog.py:312
 msgid "Translating..."
-msgstr "翻译中..."
+msgstr "正在翻译……"
 
 #: addon\globalPlugins\polyglot\views\settings.py:73
 msgid "Common Settings"
@@ -1929,7 +2027,7 @@ msgstr "此引擎无需额外配置。"
 #: addon\globalPlugins\polyglot\views\settings.py:335
 #, python-brace-format
 msgid "Clear Cache (Items: {})"
-msgstr "清除缓存 (条目数：{})"
+msgstr "清除缓存（条目数：{}）"
 
 #. Add-on description
 #. Translators: Long description to be shown for this add-on on add-on information from add-on store
@@ -1941,18 +2039,28 @@ msgstr "支持多种引擎的 NVDA 翻译插件。"
 #. Translators: what's new content for the add-on version to be shown in the add-on store
 #: buildVars.py:40
 msgid ""
-"### 1.1.1\n"
+"### 1.2.0\n"
 "\n"
-"- Fixed repeated current-character review failing after version 1.1.0 by "
-"preserving NVDA's\n"
-"  `speech.spellTextInfo` keyword-argument contract."
+"- Added the key-free `DeepL Web` engine with automatic source detection, "
+"regional language options, and support for requests up to 1,500 characters.\n"
+"- Migrated key-free Microsoft Translator to the current Edge `translatetext` "
+"endpoint and removed the retired authentication-token flow.\n"
+"- Refreshed OpenRouter presets with current translation-specialised Tencent "
+"and Gemini Flash Lite models, automatic fallback for retired presets, and "
+"prompt options matched to model capabilities.\n"
+"- Reused HTTP connections across translation requests to reduce latency for "
+"repeated translations.\n"
+"- Removed the unavailable Lingva Translate engine.\n"
+"- Fixed long labels overflowing the Chrome AI and Common Settings panels."
 msgstr ""
-
-#~ msgid ""
-#~ "### 0.9.1\n"
-#~ "\n"
-#~ "- Require an explicit source language for ChromeAI offline translation."
-#~ msgstr ""
-#~ "### 0.9.1\n"
-#~ "\n"
-#~ "- ChromeAI 离线翻译需要明确指定源语言。"
+"### 1.2.0\n"
+"\n"
+"- 新增免密钥 `DeepL Web` 引擎，支持自动检测源语言、地区语言选项，以及每次最多 "
+"1,500 个字符的请求。\n"
+"- 将免密钥微软翻译迁移到当前的 Edge `translatetext` 端点，并移除已停用的认证令牌"
+"流程。\n"
+"- 更新 OpenRouter 预设，采用当前的腾讯翻译专用模型和 Gemini Flash Lite 模型；为"
+"已下线预设提供自动回退，并根据模型能力提供匹配的提示词选项。\n"
+"- 在翻译请求间复用 HTTP 连接，降低重复翻译的延迟。\n"
+"- 移除不可用的 Lingva Translate 引擎。\n"
+"- 修复 Chrome AI 和通用设置面板中长标签溢出的问题。"

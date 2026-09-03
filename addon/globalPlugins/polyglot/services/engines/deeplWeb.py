@@ -156,7 +156,7 @@ class DeepLWebTranslateEngine(BaseHttpEngine):
 		languageMap = self.TARGET_LANG_MAP if isTarget else self.SOURCE_LANG_MAP
 		wireCode = languageMap.get(code.upper())
 		if wireCode is None:
-			kind = "target" if isTarget else "source"
+			kind = _("target") if isTarget else _("source")
 			# Translators: Error shown when a configured language is not accepted by DeepL Web. {kind} is source or target; {code} is the configured code.
 			raise ApiResponseError(
 				_("Unsupported DeepL Web {kind} language: {code}").format(kind=kind, code=code),
