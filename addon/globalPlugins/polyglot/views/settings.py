@@ -16,6 +16,7 @@ from logHandler import log
 
 from ..common.cache import TranslationCache
 from ..common import config
+from ..common import configProfiles
 from ..common import secretStore
 from ..services import engineManager
 from . import factory as uiFactory
@@ -254,6 +255,20 @@ class TranslationSettingsPanel(SettingsPanel):
 			panel.SetSizer(containerSizer)
 			return panel
 
+		editedProfile = configProfiles.getWritableProfileName()
+		if editedProfile is not None and any(
+			uiFactory.getControlHandler(spec["type"]).isSecret for spec in configSpecList
+		):
+			profileHint = wx.StaticText(
+				panel,
+				# Translators: Explains how API keys behave while a configuration profile other than
+				# NVDA's normal configuration is being edited.
+				label=_(
+					"API keys here apply only to this configuration profile. Clear a key to inherit it again.",
+				),
+			)
+			containerSizer.Add(profileHint, 0, wx.ALL, 5)
+
 		gridSizer = wx.FlexGridSizer(cols=2, vgap=5, hgap=5)
 		gridSizer.AddGrowableCol(1)
 
@@ -352,7 +367,7 @@ class TranslationSettingsPanel(SettingsPanel):
 			gui.messageBox(
 				# Translators: Confirmation prompt shown before deleting stored API keys. {count} is how many are stored.
 				_(
-					"Delete the {count} API key(s) Polyglot has stored for this Windows account? You will have to enter them again to use the engines that need them.",
+					"Delete the {count} API key(s) Polyglot has stored for this Windows account, in every configuration profile? You will have to enter them again to use the engines that need them.",
 				).format(count=storedCount),
 				# Translators: Title of the dialog confirming deletion of stored API keys.
 				_("Clear Stored API Keys"),
@@ -370,13 +385,18 @@ class TranslationSettingsPanel(SettingsPanel):
 		wx.CallAfter(self.clearCredentialsButton.SetFocus)
 
 	def _reloadCredentialControls(self):
-		"""Refresh every credential field from the secret store."""
+		"""Refresh every credential field and its label from the secret store."""
 		enginesConf = config.getConfig()["engines"]
 		for engineId, controls in self.dynamicControls.items():
 			engineConf = enginesConf.get(engineId, {})
 			for info in controls.values():
-				if info["handler"].isSecret:
-					info["handler"].loadFromConfig(info["control"], engineConf, info["spec"])
+				handler = info["handler"]
+				if not handler.isSecret:
+					continue
+				handler.loadFromConfig(info["control"], engineConf, info["spec"])
+				# Whether a credential is inherited can have changed, and the label says so.
+				handler.refreshLabel(info["labelControl"], info["spec"])
+		self.Layout()
 
 	def _updateCredentialsButton(self):
 		self.clearCredentialsButton.SetLabel(

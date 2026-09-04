@@ -115,17 +115,29 @@ Current dictionary size:
 - `Use the local English-Chinese dictionary in text review`: Controls local definitions for NVDA text review.
 - `Enable smart speech filter (skips roles, states, location, and formatting information)`: When translating spoken NVDA output, skips non-content speech such as roles, states, location, and formatting details where possible.
 - `Clear Cache`: Clears the persistent translation cache and shows the current item count in the button label.
-- `Clear Stored API Keys`: Deletes every API key, token, and password Polyglot has stored for your Windows account, and shows how many are stored in the button label.
+- `Clear Stored API Keys`: Deletes every API key, token, and password Polyglot has stored for your Windows account, in every configuration profile, and shows how many are stored in the button label.
 
 ### API Key Storage
 
 API keys, tokens, and passwords are never written to `nvda.ini`. They are kept in the Windows Credential Locker, where Windows encrypts them for the signed-in account. This means they do not appear in NVDA's log at debug level, are not copied into portable copies of NVDA, and are not readable by other add-ons through NVDA's configuration.
 
-Each credential is stored under a target name of the form `NVDA/Polyglot/<engine>/<setting>`, for example `NVDA/Polyglot/deepl/apiKey`. You can review or delete them from Windows itself: `Control Panel -> User Accounts -> Credential Manager -> Windows Credentials`, or by pressing `Clear Stored API Keys` in Polyglot's settings.
+A credential can also come from an environment variable, which is useful for shared or managed machines where nothing should be stored at all. The variable name is `POLYGLOT_` followed by the engine ID and the setting name in upper case, for example `POLYGLOT_DEEPL_APIKEY`, `POLYGLOT_OPENROUTER_APIKEY`, or `POLYGLOT_TENCENT_SECRETKEY`. A variable describes the whole machine, so it applies to every configuration profile: when one is set, it takes precedence over anything stored, and the matching settings field is disabled and labelled with the variable name.
 
-A credential can also come from an environment variable, which is useful for shared or managed machines where nothing should be stored at all. The variable name is `POLYGLOT_` followed by the engine ID and the setting name in upper case, for example `POLYGLOT_DEEPL_APIKEY`, `POLYGLOT_OPENROUTER_APIKEY`, or `POLYGLOT_TENCENT_SECRETKEY`. When such a variable is set, it takes precedence over anything stored, and the matching settings field is disabled and labelled with the variable name.
+### API Keys and Configuration Profiles
 
-Upgrading from Polyglot 1.2.0 or earlier moves any keys already saved in `nvda.ini` into the Credential Locker and removes the plain-text copies the first time the add-on starts. If secure storage is unavailable, the plain-text copy is still removed and an error is written to the log; re-enter the key in Polyglot's settings.
+Every API key belongs to one NVDA configuration profile, and Polyglot applies NVDA's own profile rules to keys even though they are not stored in `nvda.ini`:
+
+- A key you enter is saved to the profile NVDA is currently writing to, which is the profile named in the title of NVDA's settings dialog.
+- A profile that has no key of its own uses the key from the profile below it, ending at the normal configuration. So a key entered in the normal configuration is used everywhere until a profile is given its own.
+- When several profiles are active at once, the most recently activated one supplies the key, exactly as it supplies every other setting.
+
+While a configuration profile other than the normal configuration is being edited, an API key field shows only that profile's own key. Its label says `(set in this profile)` when the profile has a key of its own, and `(inherited from the normal configuration)` or `(inherited from the <profile> profile)` when the field is empty because the key comes from elsewhere. Clearing the field removes the profile's own key so that it inherits again; it does not blank the inherited key.
+
+Renaming a configuration profile moves its keys with it, and deleting a profile deletes the keys stored for it.
+
+Each credential is stored under a target name of the form `NVDA/Polyglot/<engine>/<setting>` for the normal configuration, for example `NVDA/Polyglot/deepl/apiKey`, and `NVDA/Polyglot/profiles:<profile>/<engine>/<setting>` for a named profile, for example `NVDA/Polyglot/profiles:Reading email/deepl/apiKey`. You can review or delete them from Windows itself: `Control Panel -> User Accounts -> Credential Manager -> Windows Credentials`, or by pressing `Clear Stored API Keys` in Polyglot's settings.
+
+Upgrading from Polyglot 1.2.0 or earlier moves any keys already saved in `nvda.ini` into the Credential Locker and removes the plain-text copies the first time the add-on starts. Every saved profile is migrated, not only the active ones, so a key you set in a profile keeps working in that profile. Keys stored by Polyglot 1.2.1 belong to the normal configuration, so every profile inherits them until you give it a key of its own. If secure storage is unavailable, the plain-text copy is still removed and an error is written to the log; re-enter the key in Polyglot's settings.
 
 ### Shared Engine Settings
 

@@ -30,6 +30,7 @@ from scriptHandler import script
 
 from .app.manager import TranslationManager
 from .app.speechFilter import SpeechFilter
+from .common import configProfiles
 from .common import cues
 from .common import secretStore
 from .common.config import getConfigSectionName
@@ -80,6 +81,44 @@ def _buildFinalConfigSpec() -> dict[str, ConfigObj]:
 	return {getConfigSectionName(): finalSpec}
 
 
+def _migrateProfilePlainTextCredentials(profileName: str | None, profile: ConfigObj) -> tuple[int, int]:
+	"""Move one configuration profile's plain-text credentials into that profile's secure storage.
+
+	:return: How many entries were removed from the profile, and how many were stored securely.
+	"""
+	enginesSection = profile.get(getConfigSectionName(), {}).get("engines")
+	if not enginesSection:
+		return (0, 0)
+	removedCount = 0
+	migratedCount = 0
+	for engine in engineManager.getAllEngines():
+		engineSection = enginesSection.get(engine.id)
+		if not engineSection:
+			continue
+		for key, defaultValue in engineManager.getSecretDefaults(engine).items():
+			if key not in engineSection:
+				continue
+			value = str(engineSection.pop(key) or "").strip()
+			removedCount += 1
+			if not value or value == defaultValue:
+				# Nothing worth keeping: the entry was blank or held the built-in default.
+				continue
+			if secretStore.isProvidedByEnvironment(engine.id, key) or secretStore.getStoredSecret(
+				engine.id,
+				key,
+				profileName,
+			):
+				# The environment or an earlier migration already supplies this credential here.
+				continue
+			if secretStore.setSecret(engine.id, key, value, profileName):
+				migratedCount += 1
+			else:
+				log.error(
+					f"""The '{engine.id}' credential '{key}' could not be moved to secure storage and has been removed from the NVDA configuration file. Enter it again in Polyglot's settings.""",
+				)
+	return (removedCount, migratedCount)
+
+
 def _migratePlainTextCredentials() -> None:
 	"""Move credentials saved by earlier releases out of NVDA's configuration file.
 
@@ -87,40 +126,23 @@ def _migratePlainTextCredentials() -> None:
 	portable copies and debug logs, stayed readable by other add-ons, and survived uninstalling the
 	add-on. Each value found there is handed to the secret store and then removed, whether or not it
 	could be stored, so that no plain-text copy is left behind.
+
+	Every saved configuration profile is migrated, not only the profiles that happen to be active, so
+	that a key a profile was set up with keeps working in that profile and no profile keeps a readable
+	copy. Credentials stored before Polyglot understood profiles belong to the normal configuration and
+	stay where they are, so every profile inherits them until it is given a key of its own.
 	"""
 	removedCount = 0
 	migratedCount = 0
-	baseProfile = config.conf.profiles[0]
-	# NVDA offers no public way to flag a named profile as needing to be written back to disk.
-	dirtyProfiles: set[str] | None = getattr(config.conf, "_dirtyProfiles", None)
-	for profile in config.conf.profiles:
-		enginesSection = profile.get(getConfigSectionName(), {}).get("engines")
-		if not enginesSection:
-			continue
-		profileRemovedCount = 0
-		for engine in engineManager.getAllEngines():
-			engineSection = enginesSection.get(engine.id)
-			if not engineSection:
-				continue
-			for key, defaultValue in engineManager.getSecretDefaults(engine).items():
-				if key not in engineSection:
-					continue
-				value = str(engineSection.pop(key) or "").strip()
-				profileRemovedCount += 1
-				if not value or value == defaultValue:
-					# Nothing worth keeping: the entry was blank or held the built-in default.
-					continue
-				migratedCount += 1
-				if secretStore.getSecret(engine.id, key):
-					# The environment or an earlier migration already supplies this credential.
-					continue
-				if not secretStore.setSecret(engine.id, key, value):
-					log.error(
-						f"""The '{engine.id}' credential '{key}' could not be moved to secure storage and has been removed from the NVDA configuration file. Enter it again in Polyglot's settings.""",
-					)
+	for profileName, profile in configProfiles.iterAllProfiles():
+		profileRemovedCount, profileMigratedCount = _migrateProfilePlainTextCredentials(
+			profileName,
+			profile,
+		)
 		removedCount += profileRemovedCount
-		if profileRemovedCount and profile is not baseProfile and dirtyProfiles is not None:
-			dirtyProfiles.add(profile.name)
+		migratedCount += profileMigratedCount
+		if profileRemovedCount:
+			configProfiles.markProfileDirty(profileName)
 	if not removedCount:
 		return
 	if migratedCount:
@@ -148,6 +170,10 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		if not globalVars.appArgs.secure:
 			# A secure session must not copy the user's credentials into the system account's locker.
 			_migratePlainTextCredentials()
+			# Credentials are addressed by profile name, so they have to follow renames and deletions.
+			configProfiles.post_profileRenamed.register(secretStore.renameProfileSecrets)
+			configProfiles.post_profileDeleted.register(secretStore.deleteSecretsForProfile)
+			configProfiles.installProfileHooks()
 		self.manager = TranslationManager()
 		self.speechFilter = SpeechFilter(self.manager)
 		self.speechFilter.register()
@@ -165,6 +191,9 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		CdpBridge.getInstance().terminate()
 		modelManagerMenu.closeModelManagerDialog()
 		if not globalVars.appArgs.secure:
+			configProfiles.removeProfileHooks()
+			configProfiles.post_profileRenamed.unregister(secretStore.renameProfileSecrets)
+			configProfiles.post_profileDeleted.unregister(secretStore.deleteSecretsForProfile)
 			if settings.TranslationSettingsPanel in gui.settingsDialogs.NVDASettingsDialog.categoryClasses:
 				gui.settingsDialogs.NVDASettingsDialog.categoryClasses.remove(
 					settings.TranslationSettingsPanel,

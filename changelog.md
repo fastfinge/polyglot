@@ -1,3 +1,9 @@
+### Unreleased
+
+- API keys, tokens, and passwords now follow NVDA's configuration profile rules: each profile can hold its own key, a profile without one uses the key from the profile below it, and the profile activated last wins. Keys are saved to the profile NVDA is editing, and clearing a field returns that profile to the inherited key.
+- Renaming a configuration profile now moves its stored keys with it, and deleting a profile removes them.
+- Upgrading from Polyglot 1.2.0 or earlier now migrates the keys saved in every configuration profile, not only in the profiles that happen to be active.
+
 ### 1.2.1
 
 - Improved the Simplified Chinese and Ukrainian localizations and aligned the English and Simplified Chinese documentation.

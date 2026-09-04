@@ -11,6 +11,7 @@ import wx
 from configobj.validate import is_boolean
 from logHandler import log
 
+from ..common import configProfiles
 from ..common import secretStore
 
 addonHandler.initTranslation()
@@ -77,6 +78,11 @@ class ControlHandlerBase:
 				if labelControl:
 					labelControl.Show(bool(value))
 
+	def refreshLabel(self, labelControl: wx.StaticText | None, spec: ConfigSpec) -> None:
+		"""Update a label whose text depends on state the control itself does not hold."""
+		if labelControl is not None:
+			labelControl.SetLabel(spec["label"])
+
 	def loadFromConfig(self, control: wx.Control, configSection: ConfigSection, spec: ConfigSpec) -> None:
 		"""Load a configuration value into the control."""
 		value = configSection.get(spec["id"], spec.get("default"))
@@ -135,6 +141,7 @@ class LabeledControlHandler(ControlHandlerBase):
 	) -> tuple[wx.StaticText | None, wx.Control]:
 		wxClass, kwargs = self.getWxClassAndKwargs(spec)
 		label = wx.StaticText(panel, label=spec["label"])
+		self.refreshLabel(label, spec)
 		control = wxClass(panel, **kwargs)
 		return (label, control)
 
@@ -175,6 +182,11 @@ class PasswordHandler(TextHandler):
 
 	Credentials never reach NVDA's configuration file, so specifications handled here must carry the
 	owning engine's ID in an ``engineId`` entry; see :func:`engineManager.getEngineConfigSpec`.
+
+	The field shows and saves only the credential belonging to the configuration profile NVDA is
+	writing to, matching how NVDA treats every other setting. When a named profile holds no
+	credential of its own the field is left empty and its label names the profile the credential is
+	inherited from, so clearing the field is what returns a profile to the inherited credential.
 	"""
 
 	@property
@@ -190,23 +202,43 @@ class PasswordHandler(TextHandler):
 			)
 		return engineId
 
-	def createControlPair(
-		self,
-		panel: wx.Window,
-		spec: ConfigSpec,
-	) -> tuple[wx.StaticText | None, wx.Control]:
-		label, control = super().createControlPair(panel, spec)
+	def _getLabel(self, spec: ConfigSpec) -> str:
+		"""Return the field label, saying where the credential in use comes from when that is not obvious."""
 		engineId = self._getEngineId(spec)
-		if label is not None and engineId and secretStore.isProvidedByEnvironment(engineId, spec["id"]):
-			label.SetLabel(
-				# Translators: Label for a credential field whose value comes from an environment
-				# variable. {label} is the usual field label, {variable} is the variable name.
-				_("{label} (set by the {variable} environment variable)").format(
-					label=spec["label"],
-					variable=secretStore.getEnvironmentVariableName(engineId, spec["id"]),
-				),
+		if not engineId:
+			return str(spec["label"])
+		if secretStore.isProvidedByEnvironment(engineId, spec["id"]):
+			# Translators: Label for a credential field whose value comes from an environment
+			# variable. {label} is the usual field label, {variable} is the variable name.
+			return _("{label} (set by the {variable} environment variable)").format(
+				label=spec["label"],
+				variable=secretStore.getEnvironmentVariableName(engineId, spec["id"]),
 			)
-		return (label, control)
+		editedProfile = configProfiles.getWritableProfileName()
+		if editedProfile is None:
+			# The normal configuration inherits from nothing, so its label needs no explanation.
+			return str(spec["label"])
+		if secretStore.getStoredSecret(engineId, spec["id"], editedProfile):
+			# Translators: Label for a credential field holding a key used only by the configuration
+			# profile being edited. {label} is the usual field label.
+			return _("{label} (set in this profile)").format(label=spec["label"])
+		inherited = secretStore.resolveSecret(engineId, spec["id"])
+		if inherited.source is not secretStore.CredentialSource.PROFILE:
+			return str(spec["label"])
+		if inherited.profileName is None:
+			# Translators: Label for an empty credential field in a configuration profile that uses
+			# the key from NVDA's normal configuration. {label} is the usual field label.
+			return _("{label} (inherited from the normal configuration)").format(label=spec["label"])
+		# Translators: Label for an empty credential field in a configuration profile that uses the
+		# key from another profile. {label} is the usual field label, {profile} is that profile.
+		return _("{label} (inherited from the {profile} profile)").format(
+			label=spec["label"],
+			profile=inherited.profileName,
+		)
+
+	def refreshLabel(self, labelControl: wx.StaticText | None, spec: ConfigSpec) -> None:
+		if labelControl is not None:
+			labelControl.SetLabel(self._getLabel(spec))
 
 	def loadFromConfig(self, control: wx.Control, configSection: ConfigSection, spec: ConfigSpec) -> None:
 		assert isinstance(control, wx.TextCtrl)
@@ -216,7 +248,13 @@ class PasswordHandler(TextHandler):
 			control.SetValue("")
 			control.Disable()
 			return
-		stored = secretStore.getSecret(engineId, spec["id"]) if engineId else ""
+		editedProfile = configProfiles.getWritableProfileName()
+		stored = secretStore.getStoredSecret(engineId, spec["id"], editedProfile) if engineId else ""
+		if not stored and editedProfile is not None:
+			# An empty field in a named profile means the credential is inherited, so the built-in
+			# default must not be shown here: it would be saved over what the profile inherits.
+			self.setValueToControl(control, "", spec)
+			return
 		self.setValueToControl(control, stored or spec.get("default", ""), spec)
 
 	def saveToConfig(self, control: wx.Control, configSection: ConfigSection, spec: ConfigSpec) -> None:
@@ -225,12 +263,15 @@ class PasswordHandler(TextHandler):
 		engineId = self._getEngineId(spec)
 		if not engineId or secretStore.isProvidedByEnvironment(engineId, spec["id"]):
 			return
-		value = self.getValueFromControl(control)
-		if value.strip() == str(spec.get("default", "")).strip():
-			# The built-in default needs no stored copy.
-			_unused = secretStore.deleteSecret(engineId, spec["id"])
+		editedProfile = configProfiles.getWritableProfileName()
+		value = self.getValueFromControl(control).strip()
+		isBuiltInDefault = value == str(spec.get("default", "")).strip()
+		if not value or (editedProfile is None and isBuiltInDefault):
+			# An empty field stores nothing, so a named profile goes back to inheriting; and in the
+			# normal configuration the built-in default needs no stored copy of its own.
+			_unused = secretStore.deleteSecret(engineId, spec["id"], editedProfile)
 			return
-		if not secretStore.setSecret(engineId, spec["id"], value):
+		if not secretStore.setSecret(engineId, spec["id"], value, editedProfile):
 			log.error(f"Could not save the '{engineId}' credential '{spec['id']}' to secure storage.")
 
 
