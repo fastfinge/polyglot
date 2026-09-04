@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright (C) 2025-2026 cary-rowen <cary-rowen@outlook.com>
 # This file is covered by the GNU General Public License version 3 or later.
 # See the file COPYING.txt for more details.
@@ -46,7 +45,7 @@ class ModelManagerSettings:
 
 	@staticmethod
 	def settingsPath(polyglotRoot: Path) -> Path:
-		"""Return the settings file path used by both native and standalone managers."""
+		"""Return the model manager settings file path."""
 		return polyglotRoot / "ChromeAIModelManager" / "settings.json"
 
 

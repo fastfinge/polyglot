@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright (C) 2025-2026 cary-rowen <cary-rowen@outlook.com>
 # This file is covered by the GNU General Public License version 3 or later.
 # See the file COPYING.txt for more details.
@@ -98,7 +97,6 @@ class ModelPackage:
 	installRelativeDir: str = ""
 	crxRelativePath: str = ""
 	archive: ArchiveRef | None = None
-	builtin: bool = False
 	updateClientData: dict[str, Any] | None = None
 
 	@classmethod
@@ -119,7 +117,6 @@ class ModelPackage:
 			installRelativeDir=getString(data, "installRelativeDir"),
 			crxRelativePath=getString(data, "crxRelativePath"),
 			archive=ArchiveRef.fromJson(data.get("archive")),
-			builtin=bool(data.get("builtin", False)),
 			updateClientData=updateClientData if isinstance(updateClientData, dict) else None,
 		)
 
@@ -128,7 +125,6 @@ class ModelPackage:
 class ModelCatalog:
 	"""Model catalog with package lookup helpers."""
 
-	schemaVersion: int = 0
 	baseUrl: str = ""
 	generatedAt: str = ""
 	runtime: RuntimeEntry = field(default_factory=RuntimeEntry)
@@ -182,7 +178,6 @@ class ModelCatalog:
 				raise RuntimeError(_("Duplicate model package key in catalog: {key}").format(key=package.key))
 			byKey[lowerKey] = package
 		return cls(
-			schemaVersion=schemaVersion,
 			baseUrl=getString(rawData, "baseUrl"),
 			generatedAt=getString(rawData, "generatedAt"),
 			runtime=RuntimeEntry.fromJson(rawData.get("runtime")),

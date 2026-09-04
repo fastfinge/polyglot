@@ -1,16 +1,8 @@
-# -*- coding: utf-8 -*-
-
 # Copyright (C) 2025-2026 cary-rowen <cary-rowen@outlook.com>
 # This file is covered by the GNU General Public License version 3 or later.
 # See the file COPYING.txt for more details.
 
-"""
-chromeAi - Chrome On-Device AI Translation Engine.
-
-Uses Chrome's built-in Translator API via CDP.
-Download feedback uses periodic beep cues (not speech) to avoid
-triggering the auto-translate cascade loop.
-"""
+"""Translate with Chrome's on-device Translator API through CDP."""
 
 import json
 import re
@@ -230,14 +222,14 @@ class ChromeAiEngine(ChunkedTranslationMixin):
 		"""Build a handler for Chrome model-preparation progress events."""
 
 		def handler(logText: str) -> None:
-			if "[MODEL_PROGRESS]" in logText or "[DOWNLOAD_PROGRESS]" in logText:
+			if logText.startswith("[MODEL_PROGRESS]"):
 				try:
-					rawPct = logText.replace("[MODEL_PROGRESS]", "").replace("[DOWNLOAD_PROGRESS]", "")
+					rawPct = logText.removeprefix("[MODEL_PROGRESS]")
 					pct = int(rawPct)
 					cues.Beep.reportProgress(pct, 100)
 				except ValueError:
 					pass
-			elif logText in ("[MODEL_START]", "[DOWNLOAD_START]"):
+			elif logText == "[MODEL_START]":
 				cues.Beep.resetProgress()
 				log.debug("Chrome AI: %s preparation started.", modelLabel)
 				with self._downloadLock:
@@ -250,7 +242,7 @@ class ChromeAiEngine(ChunkedTranslationMixin):
 				)
 			elif logText == "[MODEL_FINALIZING]":
 				log.debug("Chrome AI: %s preparation finalizing.", modelLabel)
-			elif logText in ("[MODEL_END]", "[DOWNLOAD_END]"):
+			elif logText == "[MODEL_END]":
 				log.debug("Chrome AI: %s preparation complete.", modelLabel)
 				with self._downloadLock:
 					ChromeAiEngine._isPreparingModel = False
@@ -290,7 +282,6 @@ class ChromeAiEngine(ChunkedTranslationMixin):
 		operationName: str,
 	) -> dict[str, Any]:
 		"""Evaluate a Chrome AI script with bounded transient retries."""
-		lastResult: dict[str, Any] | None = None
 		for attempt in range(self._MAX_TRANSIENT_RETRIES + 1):
 			try:
 				result = self._bridge.evaluateSync(jsPayload, onConsoleLog=onConsoleLog)
@@ -305,7 +296,6 @@ class ChromeAiEngine(ChunkedTranslationMixin):
 				)
 				time.sleep(0.4 * (attempt + 1))
 				continue
-			lastResult = result
 			if not self._shouldRetryResult(result) or attempt >= self._MAX_TRANSIENT_RETRIES:
 				return result
 			log.warning(
@@ -314,7 +304,6 @@ class ChromeAiEngine(ChunkedTranslationMixin):
 				result.get("code", "unknown"),
 			)
 			time.sleep(0.4 * (attempt + 1))
-		return lastResult or {"code": "PARSE_ERR", "raw": ""}
 
 	def _translateChunk(
 		self,

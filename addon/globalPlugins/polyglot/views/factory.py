@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 # Copyright (C) 2025-2026 cary-rowen <cary-rowen@outlook.com>
 # This file is covered by the GNU General Public License version 3 or later.
 # See the file COPYING.txt for more details.
@@ -79,13 +77,14 @@ class ControlHandlerBase:
 				if labelControl:
 					labelControl.Show(bool(value))
 
-	def loadFromConfig(self, control: wx.Control, configSection: ConfigSection, spec: ConfigSpec):
+	def loadFromConfig(self, control: wx.Control, configSection: ConfigSection, spec: ConfigSpec) -> None:
 		"""Load a configuration value into the control."""
-		raise NotImplementedError
+		value = configSection.get(spec["id"], spec.get("default"))
+		self.setValueToControl(control, value, spec)
 
-	def saveToConfig(self, control: wx.Control, configSection: ConfigSection, spec: ConfigSpec):
+	def saveToConfig(self, control: wx.Control, configSection: ConfigSection, spec: ConfigSpec) -> None:
 		"""Save the control's value to the configuration dictionary."""
-		raise NotImplementedError
+		configSection[spec["id"]] = self.getValueFromControl(control)
 
 
 def getControlHandler(typeName: str) -> ControlHandlerBase:
@@ -124,15 +123,6 @@ class CheckboxHandler(ControlHandlerBase):
 	def bindEvent(self, control: wx.Control, callback: Callable[[wx.Event], None]) -> None:
 		assert isinstance(control, wx.CheckBox)
 		control.Bind(wx.EVT_CHECKBOX, callback)
-
-	def loadFromConfig(self, control: wx.Control, configSection: ConfigSection, spec: ConfigSpec) -> None:
-		assert isinstance(control, wx.CheckBox)
-		value = configSection.get(spec["id"], spec.get("default"))
-		self.setValueToControl(control, value, spec)
-
-	def saveToConfig(self, control: wx.Control, configSection: ConfigSection, spec: ConfigSpec) -> None:
-		assert isinstance(control, wx.CheckBox)
-		configSection[spec["id"]] = self.getValueFromControl(control)
 
 
 class LabeledControlHandler(ControlHandlerBase):
@@ -178,15 +168,6 @@ class TextHandler(LabeledControlHandler):
 	def bindEvent(self, control: wx.Control, callback: Callable[[wx.Event], None]) -> None:
 		assert isinstance(control, wx.TextCtrl)
 		control.Bind(wx.EVT_TEXT, callback)
-
-	def loadFromConfig(self, control: wx.Control, configSection: ConfigSection, spec: ConfigSpec) -> None:
-		assert isinstance(control, wx.TextCtrl)
-		value = configSection.get(spec["id"], spec.get("default"))
-		self.setValueToControl(control, value, spec)
-
-	def saveToConfig(self, control: wx.Control, configSection: ConfigSection, spec: ConfigSpec) -> None:
-		assert isinstance(control, wx.TextCtrl)
-		configSection[spec["id"]] = self.getValueFromControl(control)
 
 
 class PasswordHandler(TextHandler):
@@ -332,15 +313,6 @@ class ChoiceHandler(LabeledControlHandler):
 		assert isinstance(control, wx.Choice)
 		control.Bind(wx.EVT_CHOICE, callback)
 
-	def loadFromConfig(self, control: wx.Control, configSection: ConfigSection, spec: ConfigSpec) -> None:
-		assert isinstance(control, wx.Choice)
-		value = configSection.get(spec["id"], spec.get("default"))
-		self.setValueToControl(control, value, spec)
-
-	def saveToConfig(self, control: wx.Control, configSection: ConfigSection, spec: ConfigSpec) -> None:
-		assert isinstance(control, wx.Choice)
-		configSection[spec["id"]] = self.getValueFromControl(control)
-
 
 class SpinCtrlHandler(LabeledControlHandler):
 	"""Adapt bounded integer configuration items to wx spin controls."""
@@ -378,15 +350,6 @@ class SpinCtrlHandler(LabeledControlHandler):
 		control.Bind(wx.EVT_SPINCTRL, callback)
 		# Also bind the text event to respond to direct input.
 		control.Bind(wx.EVT_TEXT, callback)
-
-	def loadFromConfig(self, control: wx.Control, configSection: ConfigSection, spec: ConfigSpec) -> None:
-		assert isinstance(control, wx.SpinCtrl)
-		value = configSection.get(spec["id"], spec.get("default"))
-		self.setValueToControl(control, value, spec)
-
-	def saveToConfig(self, control: wx.Control, configSection: ConfigSection, spec: ConfigSpec) -> None:
-		assert isinstance(control, wx.SpinCtrl)
-		configSection[spec["id"]] = self.getValueFromControl(control)
 
 
 _controlHandlers: dict[str, ControlHandlerBase] = {

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 # Copyright (C) 2025-2026 cary-rowen <cary-rowen@outlook.com>
 # This file is covered by the GNU General Public License version 3 or later.
 # See the file COPYING.txt for more details.
@@ -182,10 +180,6 @@ class ChunkedTranslationMixin(TranslationEngine):
 			trailingWhitespace = chunk[-trailingWhitespaceLength:] if trailingWhitespaceLength > 0 else ""
 
 			strippedChunk = chunk.strip()
-			if not strippedChunk:
-				translatedChunks.append(chunk)
-				continue
-
 			chunkResult = self._translateChunk(strippedChunk, langFrom, langTo, config)
 			translatedText = chunkResult.get("translation", "").strip()
 
@@ -245,8 +239,6 @@ class BaseHttpEngine(ChunkedTranslationMixin):
 		autoCode = self.autoDetectCode
 
 		fromChoices = allLangs.copy()
-		if not self.doesSupportLanguageDetection and autoCode:
-			_unused = fromChoices.pop(autoCode, None)
 
 		toChoices = allLangs.copy()
 		if autoCode is not None:
@@ -346,9 +338,6 @@ class BaseHttpEngine(ChunkedTranslationMixin):
 		)
 		# Source language (langFrom): Exclude the currently selected target language.
 		validFromLangs = self._getFilteredChoices(allLangs, excludeCode=selectedTo)
-		# Special handling for the source list: only remove "auto-detect" if the engine does not support it.
-		if not self.doesSupportLanguageDetection and autoCode:
-			_unused = validFromLangs.pop(autoCode, None)
 		states["langFrom"] = {"choices": validFromLangs}
 		states["langTo"] = {"choices": validToLangs}
 		# --- Logic for auto-swap related controls ---

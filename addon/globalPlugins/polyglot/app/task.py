@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 # Copyright (C) 2025-2026 cary-rowen <cary-rowen@outlook.com>
 # This file is covered by the GNU General Public License version 3 or later.
 # See the file COPYING.txt for more details.
@@ -121,12 +119,9 @@ class TranslationTask(threading.Thread):
 							self.text,
 						)
 						self.cache.set(specificKey, finalTranslation)
-				if self.langFrom == autoDetectCode:
-					# Fix: Ensure `autoDetectCode` is a string before passing it to `buildKey`.
-					# This handles cases where an engine might not support auto-detection (`autoDetectCode` is None).
-					if isinstance(autoDetectCode, str):
-						autoKey = self.cache.buildKey(autoDetectCode, self.langTo, self.text)
-						self.cache.set(autoKey, finalTranslation)
+				if autoDetectCode is not None and self.langFrom == autoDetectCode:
+					autoKey = self.cache.buildKey(autoDetectCode, self.langTo, self.text)
+					self.cache.set(autoKey, finalTranslation)
 		except EngineError as e:
 			result["error"] = e
 		except SilentTranslationCancel:

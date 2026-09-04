@@ -1,6 +1,6 @@
 # Polyglot for NVDA
 
-Polyglot is an NVDA global add-on focused on fast, flexible multilingual translation. It can translate selected text, clipboard content, and the last text spoken by NVDA, and it can also intercept spoken content for live auto-translation.
+Polyglot is a fast, extensible translation add-on for NVDA with support for multiple engines. It can translate selected text, clipboard text, and the last text spoken by NVDA, and can also automatically translate NVDA's speech output.
 
 The add-on is built around a dynamic engine architecture. Translation engines declare their own capabilities and configuration schema, and the settings UI is generated from that schema at runtime. That keeps the core plugin small while making it straightforward to add new services.
 
@@ -77,17 +77,17 @@ The interactive dialog is designed for longer text and iterative translation wor
 When NVDA's interface language is Chinese, including Simplified and Traditional Chinese, Polyglot adds an
 offline English-to-Chinese dictionary to the command that reports the word at the review cursor:
 
-1. Press `numpad5` once in the desktop keyboard layout to read the word at the review cursor.
+1. With the desktop keyboard layout, press `numpad 5` once to read the word at the review cursor.
 2. Press it twice to hear the word spelled out.
 3. Press it three times to hear the Chinese definition when the complete word is found locally.
 
 Add-ons that call NVDA's `speech.spellTextInfo` receive the same behavior. If a line contains only one
-English word, pressing the current-line command three times also reports its definition. Lookup handles one
-layer of common leading or trailing sentence punctuation, safe spelling variants, and common plurals,
-tenses, participles, comparatives, and superlatives. Exact entries take priority. When a spelling can refer
-to several entries, Polyglot announces up to three candidates with their first senses. If a two- or
-three-character uppercase word only matches a lowercase entry, Polyglot reports the possible lowercase
-meaning and warns that it may instead be an abbreviation. Words that look valid but are not included are
+English word, pressing the current-line command three times also reports its definition. Lookup strips one
+layer of common leading or trailing sentence punctuation and recognizes common inflections, including
+plural, tense, participial, comparative, and superlative forms. Exact entries take priority. When a
+spelling can refer to several entries, Polyglot announces up to three candidates with their first senses.
+If a two- or three-character uppercase word only matches a lowercase entry, Polyglot reports the possible
+lowercase meaning and warns that it may instead be an abbreviation. Words that look valid but are not included are
 reported as missing. Single characters, multiword lines, and unsupported text keep NVDA's original character
 descriptions. Lookup is fully local and never sends the word to a translation service.
 
@@ -110,10 +110,10 @@ Current dictionary size:
 ### Common Settings
 
 - `Copy manual translation results to clipboard`: Copies manual translation output after a successful request.
-- `Prefer the local English-Chinese dictionary for selected text, clipboard text, and last spoken text`: Controls local
+- `Prefer local English-Chinese dictionary for selected text, clipboard, and last spoken text`: Controls local
   lookup for those three translation commands.
 - `Use the local English-Chinese dictionary in text review`: Controls local definitions for NVDA text review.
-- `Enable smart speech filter`: When translating spoken NVDA output, skips non-content speech such as roles, states, location, and formatting details where possible.
+- `Enable smart speech filter (skips roles, states, location, and formatting information)`: When translating spoken NVDA output, skips non-content speech such as roles, states, location, and formatting details where possible.
 - `Clear Cache`: Clears the persistent translation cache and shows the current item count in the button label.
 - `Clear Stored API Keys`: Deletes every API key, token, and password Polyglot has stored for your Windows account, and shows how many are stored in the button label.
 
@@ -138,7 +138,7 @@ Most engines inherit a common set of settings:
 
 If an engine reports detected source language, Polyglot also exposes:
 
-- `Auto-swap if detected source matches target`: useful when the source language is set to auto-detect
+- `Auto-swap if detected source matches target (source must be 'Auto-detect')`: uses the configured swap language when auto-detection identifies the current target language
 - `Swap to language`: the alternative target used during auto-swap
 
 ### Auto-Translation Behavior
@@ -154,7 +154,7 @@ Some engines expose additional controls:
 
 - `Ollama 1` and `Ollama 2` provide two separate saved profiles for different local or remote Ollama setups.
 - `OpenRouter` exposes API URL, API key, model preset, custom model name, prompt template, and custom prompts.
-  The default preset is a translation-specialised model, which answers faster and costs less than a
+  The default preset is a translation-specialized model, which responds faster and costs less than a
   general-purpose model. Such models reply with the translated text only, so only the prompt templates they
   can follow are offered; pick a general-purpose preset if you need the structured JSON template and its
   source-language detection.
@@ -216,7 +216,7 @@ The repository currently includes the following engines:
 | `DeepL Web (key-free)` | None | Uses DeepL's unofficial anonymous Web endpoint; limited to 1,500 characters per request. |
 | `Google Translate (key-free)` | None | Supports an optional mirror endpoint toggle. |
 | `Google Translate (Polyglot)` | Configurable API key and endpoint | Ships with default endpoint values in code; availability depends on service status. |
-| `Microsoft Translator (key-free)` | None | Fetches a temporary token automatically. |
+| `Microsoft Translator (key-free)` | None | Uses the Edge `translatetext` endpoint. |
 | `Niutrans` | Niutrans API key | Standard vendor API integration. |
 | `Ollama 1` | Ollama URL, model name, optional key | First saved Ollama profile. |
 | `Ollama 2` | Ollama URL, model name, optional key | Second saved Ollama profile. |

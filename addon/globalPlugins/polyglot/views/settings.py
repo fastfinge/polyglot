@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 # Copyright (C) 2025-2026 cary-rowen <cary-rowen@outlook.com>
 # Copyright (C) 2025 WangFeng Huang <1398969445@qq.com>
 # This file is covered by the GNU General Public License version 3 or later.
@@ -83,7 +81,7 @@ class TranslationSettingsPanel(SettingsPanel):
 		self.enableLocalDictionaryForTranslationCheckbox = commonSHelper.addItem(
 			wx.CheckBox(
 				self,
-				# Translators: Checkbox controlling local dictionary lookup for the three manual translation commands.
+				# Translators: Checkbox controlling local dictionary lookup for manual translation commands.
 				label=_(
 					"Prefer local English-Chinese dictionary for selected text, clipboard, and last spoken text",
 				),

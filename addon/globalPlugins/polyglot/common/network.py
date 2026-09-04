@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 # Copyright (C) 2025-2026 cary-rowen <cary-rowen@outlook.com>
 # This file is covered by the GNU General Public License version 3 or later.
 # See the file COPYING.txt for more details.
@@ -10,7 +8,6 @@ import time
 from collections.abc import Callable
 from http import cookiejar
 
-# Best practice: Import advanced typing tools for creating robust decorators and `cast`.
 from typing import Any, ParamSpec, TypeVar, cast
 
 import addonHandler
@@ -22,7 +19,6 @@ from .exceptions import ApiResponseError, AuthenticationError, NetworkConnection
 
 addonHandler.initTranslation()
 
-# Best practice: Use ParamSpec and TypeVar to create a generic decorator.
 P = ParamSpec("P")
 R = TypeVar("R")
 

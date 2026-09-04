@@ -1,3 +1,8 @@
+### 1.2.1
+
+- Improved the Simplified Chinese and Ukrainian localizations and aligned the English and Simplified Chinese documentation.
+- Removed unused internal code and obsolete comments.
+
 ### 1.2.0
 
 - Added the key-free `DeepL Web` engine with automatic source detection, regional language options, and support for requests up to 1,500 characters.

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright (C) 2025-2026 cary-rowen <cary-rowen@outlook.com>
 # This file is covered by the GNU General Public License version 3 or later.
 # See the file COPYING.txt for more details.
@@ -21,7 +20,7 @@ from gui.guiHelper import wxCallOnMain
 from logHandler import log
 
 from ..common import cues
-from .catalog import ModelCatalog, ModelPackage, pairDisplayName, resolveInitialCatalogUrl
+from .catalog import ModelCatalog, ModelPackage, pairDisplayName
 from .installer import (
 	MODEL_OPERATION_LOCK,
 	InstallProgress,
@@ -29,7 +28,6 @@ from .installer import (
 	formatFileInUseFailure,
 	isFileInUseFailure,
 )
-from .settings import ModelManagerSettings
 
 addonHandler.initTranslation()
 
@@ -86,7 +84,6 @@ class ModelManagerService:
 		super().__init__()
 		self.installer = ModelInstaller()
 		self._catalog: ModelCatalog | None = None
-		self._catalogUrl: str = ""
 		self._chromeFallbackPackageKeys: set[str] = set()
 		self._missingModelRequestLock = threading.Lock()
 		self._activeMissingModelRequest: _ActiveMissingModelRequest | None = None
@@ -96,32 +93,8 @@ class ModelManagerService:
 		if self._catalog is not None:
 			return self._catalog
 		catalog = ModelCatalog.loadBundled()
-		self._catalogUrl = ""
 		self._catalog = catalog
 		return catalog
-
-	def loadCatalog(self) -> ModelCatalog:
-		"""Load the configured remote catalog with bundled fallback."""
-		settings = ModelManagerSettings.load(self.installer.polyglotRoot)
-		catalogUrl = resolveInitialCatalogUrl(settings.catalogUrl)
-		if self._catalog is not None and self._catalogUrl == catalogUrl:
-			return self._catalog
-		try:
-			catalog = ModelCatalog.loadRemote(catalogUrl)
-			settings.catalogUrl = catalogUrl
-			settings.save(self.installer.polyglotRoot)
-			self._catalogUrl = catalogUrl
-			self._catalog = catalog
-			return catalog
-		except Exception as exc:
-			log.warning(
-				"Failed to load remote ChromeAI model catalog (%s); using bundled fallback.",
-				type(exc).__name__,
-			)
-			catalog = ModelCatalog.loadBundled()
-			self._catalogUrl = ""
-			self._catalog = catalog
-			return catalog
 
 	def findRequiredPackages(
 		self,

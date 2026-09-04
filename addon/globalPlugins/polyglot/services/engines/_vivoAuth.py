@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 # Copyright (C) 2025-2026 cary-rowen <cary-rowen@outlook.com>
 # This file is covered by the GNU General Public License version 3 or later.
 # See the file COPYING.txt for more details.
@@ -43,12 +41,8 @@ def _genCanonicalQueryString(params: dict) -> str:
 	return "&".join(f"{urllib.parse.quote(k)}={urllib.parse.quote(str(v))}" for k, v in sortedParams)
 
 
-@network.retryOnNetworkError(attempts=3, delay=0.5, backoff=2)
 def _fetchSignatureFromService(nvdacnUser: str, nvdacnPass: str, signingStringBytes: bytes) -> str:
-	"""
-	Fetch the Vivo signature from the NVDACN API.
-	This function benefits from the centralized retry logic.
-	"""
+	"""Fetch the Vivo signature from the NVDACN API."""
 	apiParams = {"user": nvdacnUser, "pass": nvdacnPass, "name": "vivo", "action": "signature"}
 	url = f"{_NVDACN_API_URL}?{urllib.parse.urlencode(apiParams)}"
 
