@@ -1,4 +1,4 @@
-### Unreleased
+### Polyglot-secure 0.0.1
 
 - API keys, tokens, and passwords now follow NVDA's configuration profile rules: each profile can hold its own key, a profile without one uses the key from the profile below it, and the profile activated last wins. Keys are saved to the profile NVDA is editing, and clearing a field returns that profile to the inherited key.
 - Renaming a configuration profile now moves its stored keys with it, and deleting a profile removes them.

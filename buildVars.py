@@ -25,28 +25,25 @@ from site_scons.site_tools.NVDATool.utils import _
 # Add-on information variables
 addon_info = AddonInfo(
 	# add-on Name/identifier, internal for NVDA
-	addon_name="polyglot",
+	addon_name="polyglot-secure",
 	# Add-on summary/title, usually the user visible name of the add-on
 	# Translators: Summary/title for this add-on
 	# to be shown on installation and add-on information found in add-on store
-	addon_summary=_("Polyglot"),
+	addon_summary=_("Polyglot-secure"),
 	# Add-on description
 	# Translators: Long description to be shown for this add-on on add-on information from add-on store
 	addon_description=_("""A translation add-on for NVDA with support for multiple engines."""),
 	# version
-	addon_version="1.2.1",
+	addon_version="0.0.1",
 	# Brief changelog for this version
 	# Translators: what's new content for the add-on version to be shown in the add-on store
-	addon_changelog=_("""### 1.2.1
-
-- Improved the Simplified Chinese and Ukrainian localizations and aligned the English and Simplified Chinese documentation.
-- Removed unused internal code and obsolete comments."""),
+	addon_changelog=_("""First release. """),
 	# Author(s)
-	addon_author="cary-rowen <cary-rowen@outlook.com>",
+	addon_author="Fastfinge and cary-rowen <cary-rowen@outlook.com>",
 	# URL for the add-on documentation support
-	addon_url="https://github.com/cary-rowen/polyglot",
+	addon_url="https://github.com/fastfinge/polyglot-secure",
 	# URL for the add-on repository where the source code can be found
-	addon_sourceURL="https://github.com/cary-rowen/polyglot",
+	addon_sourceURL="https://github.com/fastfinge/polyglot-secure",
 	# Documentation file name
 	addon_docFileName="readme.html",
 	# Minimum NVDA version supported (e.g. "2019.3.0", minor version is optional)
