@@ -186,6 +186,8 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 	def terminate(self):
 		"""Unregister Polyglot UI and speech integrations and release resources."""
 		self.manager.terminateAllTasks()
+		# After the tasks, so translations they were still caching are written out with the rest.
+		self.manager.cache.terminate()
 		self.speechFilter.unregister()
 		closeSession()
 		CdpBridge.getInstance().terminate()

@@ -4,11 +4,12 @@
 
 """Clean-up NVDA runs when Polyglot is uninstalled.
 
-Polyglot keeps its settings in NVDA's configuration file and its API keys, tokens, and passwords in
-the Windows Credential Locker. Neither lives inside the add-on's own folder, so deleting the add-on
-would leave both behind: settings in every configuration profile that holds them, and credentials
-still listed in Windows' Credential Manager under a program that is no longer installed. This module
-removes them.
+Polyglot keeps its settings in NVDA's configuration file, its API keys, tokens, and passwords in the
+Windows Credential Locker, and its translation cache in NVDA's configuration directory. None of them
+lives inside the add-on's own folder, so deleting the add-on would leave all three behind: settings
+in every configuration profile that holds them, credentials still listed in Windows' Credential
+Manager under a program that is no longer installed, and a file recording every string the add-on
+ever translated. This module removes them.
 
 NVDA replaces an add-on by removing the installed version and putting the new one in its place, so it
 runs the uninstall task for an update as well. An update has to keep the user's settings and keys, so
@@ -125,14 +126,30 @@ def _deleteCredentials() -> None:
 		log.info(f"Removed {removedCount} Polyglot credential(s) from the Windows Credential Locker.")
 
 
+def _deleteTranslationCache() -> None:
+	"""Remove the translation cache from NVDA's configuration directory.
+
+	The cache records every string Polyglot has translated, which under auto-translation is much of
+	what NVDA has spoken. That is the user's own content rather than the add-on's working data, and
+	nothing else would ever clean it up, so it goes when the add-on does.
+	"""
+	cache = _importAddonModule("common.cache")
+	if cache is None:
+		return
+	if cache.deleteCacheFile():
+		log.info("Removed Polyglot's translation cache.")
+
+
 def onUninstall() -> None:
 	"""Remove everything Polyglot stores outside its own folder, unless it is only being updated.
 
-	Each step is kept independent, so settings are still removed when credentials cannot be, and the
-	other way round.
+	Each step is kept independent, so settings are still removed when the credentials or the cache
+	cannot be, and the other way round.
 	"""
 	if _isBeingUpdated():
-		log.debug("Polyglot is being updated, so its settings and stored credentials are being kept.")
+		log.debug(
+			"Polyglot is being updated, so its settings, stored credentials, and translation cache are being kept.",
+		)
 		return
 	try:
 		try:
@@ -143,5 +160,9 @@ def onUninstall() -> None:
 			_deleteCredentials()
 		except Exception:
 			log.exception("Could not remove Polyglot's credentials from the Windows Credential Locker.")
+		try:
+			_deleteTranslationCache()
+		except Exception:
+			log.exception("Could not remove Polyglot's translation cache.")
 	finally:
 		_forgetAddonModules()

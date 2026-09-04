@@ -3,7 +3,10 @@
 - API keys, tokens, and passwords now follow NVDA's configuration profile rules: each profile can hold its own key, a profile without one uses the key from the profile below it, and the profile activated last wins. Keys are saved to the profile NVDA is editing, and clearing a field returns that profile to the inherited key.
 - Renaming a configuration profile now moves its stored keys with it, and deleting a profile removes them.
 - Upgrading from Polyglot 1.2.0 or earlier now migrates the keys saved in every configuration profile, not only in the profiles that happen to be active.
-- Uninstalling Polyglot now removes its settings from every NVDA configuration profile and every API key, token, and password it stored in the Windows Credential Locker. Updating the add-on keeps both.
+- Uninstalling Polyglot now removes its settings from every NVDA configuration profile, every API key, token, and password it stored in the Windows Credential Locker, and its translation cache. Updating the add-on keeps all three.
+- The translation cache is now written a few seconds after it changes rather than on every translation. With auto-translation on, Polyglot used to rewrite the whole cache file for every phrase NVDA spoke; it now gathers those changes and writes them once, and writes whatever is still pending when NVDA exits.
+- The translation cache now discards the entries you have used least recently rather than the ones stored longest ago, so a phrase you keep meeting stays cached.
+- The translation cache is now replaced in a single step and is safe to use from several translations at once, so an interrupted write or two results arriving together can no longer damage it.
 
 ### 1.2.1
 

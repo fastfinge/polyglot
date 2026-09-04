@@ -128,15 +128,34 @@ class CredentialRemovalTest(unittest.TestCase):
 			installTasks._deleteCredentials()
 
 
+class TranslationCacheRemovalTest(unittest.TestCase):
+	"""Check that the record of everything translated goes with the add-on."""
+
+	def test_theCacheFileIsRemoved(self) -> None:
+		"""The cache is the user's own content, so uninstalling must not leave it on disk."""
+		cache = Mock()
+		cache.deleteCacheFile.return_value = True
+		with patch.object(installTasks, "_importAddonModule", return_value=cache):
+			installTasks._deleteTranslationCache()
+		cache.deleteCacheFile.assert_called_once_with()
+
+	def test_unreadableAddonCodeIsSurvived(self) -> None:
+		"""If the cache module cannot be read, the clean-up simply reports it."""
+		with patch.object(installTasks, "_importAddonModule", return_value=None):
+			installTasks._deleteTranslationCache()
+
+
 class UninstallTest(unittest.TestCase):
 	"""Check what the whole clean-up does and does not do."""
 
 	def setUp(self) -> None:
 		self.deleteConfiguration = Mock()
 		self.deleteCredentials = Mock()
+		self.deleteTranslationCache = Mock()
 		for name, replacement in (
 			("_deleteConfiguration", self.deleteConfiguration),
 			("_deleteCredentials", self.deleteCredentials),
+			("_deleteTranslationCache", self.deleteTranslationCache),
 		):
 			patcher = patch.object(installTasks, name, replacement)
 			_unused = patcher.start()
@@ -153,20 +172,30 @@ class UninstallTest(unittest.TestCase):
 		installTasks.onUninstall()
 		self.deleteConfiguration.assert_called_once_with()
 		self.deleteCredentials.assert_called_once_with()
+		self.deleteTranslationCache.assert_called_once_with()
 
-	def test_anUpdateKeepsSettingsAndCredentials(self) -> None:
+	def test_anUpdateKeepsSettingsCredentialsAndCache(self) -> None:
 		"""An update must not make the user set the add-on up and enter their API keys again."""
 		self._setUpdating(True)
 		installTasks.onUninstall()
 		self.deleteConfiguration.assert_not_called()
 		self.deleteCredentials.assert_not_called()
+		self.deleteTranslationCache.assert_not_called()
 
-	def test_credentialsGoEvenWhenSettingsCannot(self) -> None:
-		"""The two stores are independent, so a failure in one must not leave the other behind."""
+	def test_theOtherStoresGoEvenWhenSettingsCannot(self) -> None:
+		"""The stores are independent, so a failure in one must not leave the others behind."""
 		self._setUpdating(False)
 		self.deleteConfiguration.side_effect = RuntimeError("no configuration")
 		installTasks.onUninstall()
 		self.deleteCredentials.assert_called_once_with()
+		self.deleteTranslationCache.assert_called_once_with()
+
+	def test_theCacheGoesEvenWhenCredentialsCannot(self) -> None:
+		"""A Credential Locker that cannot be reached must not leave the user's translations behind."""
+		self._setUpdating(False)
+		self.deleteCredentials.side_effect = RuntimeError("no credential locker")
+		installTasks.onUninstall()
+		self.deleteTranslationCache.assert_called_once_with()
 
 	def test_nothingOfTheAddonStaysLoaded(self) -> None:
 		"""The modules borrowed to do the clean-up are dropped again once it is done."""
