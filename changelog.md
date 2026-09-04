@@ -3,6 +3,7 @@
 - API keys, tokens, and passwords now follow NVDA's configuration profile rules: each profile can hold its own key, a profile without one uses the key from the profile below it, and the profile activated last wins. Keys are saved to the profile NVDA is editing, and clearing a field returns that profile to the inherited key.
 - Renaming a configuration profile now moves its stored keys with it, and deleting a profile removes them.
 - Upgrading from Polyglot 1.2.0 or earlier now migrates the keys saved in every configuration profile, not only in the profiles that happen to be active.
+- Uninstalling Polyglot now removes its settings from every NVDA configuration profile and every API key, token, and password it stored in the Windows Credential Locker. Updating the add-on keeps both.
 
 ### 1.2.1
 

@@ -25,6 +25,12 @@ The preferred installation path is the NVDA Add-on Store. You can also install m
 3. Confirm installation in NVDA.
 4. Restart NVDA when prompted.
 
+### Uninstalling
+
+Removing Polyglot removes everything it keeps outside its own folder: its settings in every NVDA configuration profile, and every API key, token, and password it stored in the Windows Credential Locker. The clean-up runs the next time NVDA starts, when NVDA finishes removing the add-on.
+
+Updating Polyglot keeps your settings and your stored keys; only a removal deletes them.
+
 ## Quick Start
 
 1. Open `NVDA menu -> Preferences -> Settings -> Polyglot`.

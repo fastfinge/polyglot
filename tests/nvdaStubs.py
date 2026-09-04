@@ -27,6 +27,9 @@ class FakeProfile:
 	def get(self, key: str, default: Any = None) -> Any:
 		return self.values.get(key, default)
 
+	def pop(self, key: str, default: Any = None) -> Any:
+		return self.values.pop(key, default)
+
 
 class FakeConfigManager:
 	"""The parts of NVDA's configuration manager that Polyglot's profile handling relies on."""
@@ -38,6 +41,11 @@ class FakeConfigManager:
 		#: Renames and deletions this stub carried out, so hooks can be checked against them.
 		self.renamed: list[tuple[str, str]] = []
 		self.deleted: list[str] = []
+		#: How many times the configuration was written back to disk.
+		self.saveCount = 0
+
+	def save(self) -> None:
+		self.saveCount += 1
 
 	def addProfile(self, name: str, values: dict[str, Any] | None = None) -> FakeProfile:
 		"""Save a profile without activating it."""
@@ -106,6 +114,17 @@ def installNvdaStubs(projectRoot: Path) -> ModuleType:
 	config = ModuleType("config")
 	setattr(config, "conf", FakeConfigManager())
 	_unused = sys.modules.setdefault("config", config)
+	globalVars = ModuleType("globalVars")
+	appArgs = Mock()
+	appArgs.configPath = str(projectRoot)
+	appArgs.secure = False
+	setattr(globalVars, "appArgs", appArgs)
+	_unused = sys.modules.setdefault("globalVars", globalVars)
+	nvdaState = ModuleType("NVDAState")
+	writePaths = Mock()
+	writePaths.addonsDir = str(projectRoot / "addons")
+	setattr(nvdaState, "WritePaths", writePaths)
+	_unused = sys.modules.setdefault("NVDAState", nvdaState)
 	polyglotPackage = ModuleType("polyglot")
 	setattr(polyglotPackage, "__path__", [str(projectRoot / "addon" / "globalPlugins" / "polyglot")])
 	_unused = sys.modules.setdefault("polyglot", polyglotPackage)
