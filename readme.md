@@ -1,4 +1,12 @@
-# Polyglot for NVDA
+# Polyglot-secure for NVDA
+
+## About This Fork
+
+This fork exists due to deep and insurmountable disagreements between myself and the original addon developer regarding how API Keys must be handled. This fork stores API Keys in the Windows Credential Manager. The original addon does not. As well, this addon removes the shared API keys shipped with the original addon. First, they belong to cary-rowen, and I have no right to use or distribute them. Second, when performing translations through a shared API key, in most cases, the owner of the key can see all text translated with the key.
+
+As I do not have the right to use or access the infrastructure of NVDACN, it's possible this engine will also be removed in future. Otherwise, the addons are mostly drop-in replacements for one another, and I intend to keep polyglot-secure mostly in sync with upstream.
+
+If none of the above means anything to you: polyglot is more convenient, polyglot-secure is more secure. Take your pick based on that.
 
 Polyglot is a fast, extensible translation add-on for NVDA with support for multiple engines. It can translate selected text, clipboard text, and the last text spoken by NVDA, and can also automatically translate NVDA's speech output.
 
