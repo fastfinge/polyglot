@@ -203,6 +203,8 @@ Some engines expose additional controls:
   can follow are offered; pick a general-purpose preset if you need the structured JSON template and its
   source-language detection.
 - `Ollama` engines expose API URL, model name, optional API key, prompt template, and custom prompts.
+- `LibreTranslate` exposes the address of the server to use and an optional API key. It defaults to
+  `http://localhost:5000`, a server on this computer, so point it at your own server or a hosted one.
 - `Google Translate (key-free)` offers an optional mirror-server toggle. The mirror is run by NVDACN and
   is off unless you turn it on; it needs no credentials, and with it off the engine talks to Google directly.
 
@@ -303,6 +305,49 @@ Like the Chrome AI models, Argos models are not deleted when the add-on is unins
 - The runtime libraries stay loaded until NVDA restarts, so removing the runtime itself only takes effect after a restart.
 - Translation quality is below that of the online engines, and long passages take noticeably longer than a network round trip.
 
+## LibreTranslate
+
+[LibreTranslate](https://libretranslate.com/) is a free and open-source translation server that runs the
+same Argos models as Polyglot's offline engine, but on a server rather than inside NVDA. It is worth
+choosing when the Argos engine is not an option or not fast enough:
+
+- The machine doing the translating is the server, so a computer too slow to translate locally is no
+  longer the limit.
+- It works on 32-bit NVDA, where the offline Argos engine reports itself as unavailable.
+- If you already run a LibreTranslate server, or have access to one, Polyglot can simply use it.
+
+### How To Use
+
+Select `LibreTranslate` in Polyglot settings, then set:
+
+- `Server address`: the address of the server, such as `http://localhost:5000` for one running on this
+  computer, `https://libretranslate.example.org` for your own, or `https://libretranslate.com` for the
+  project's hosted service. Either the server's own address or the full `/translate` endpoint is accepted.
+- `API key (leave empty if the server does not require one)`: many self-hosted servers need no key. Hosted
+  services, including `libretranslate.com`, do. The key is stored in the Windows Credential Locker like
+  every other credential; see [API Key Storage](#api-key-storage).
+
+`Auto-detect` is available as the source language, and the server reports back which language it detected.
+
+### Network And Data
+
+The address ships as `http://localhost:5000`, which is where a LibreTranslate server installed on this
+computer listens. Nothing leaves the machine until you change it, and Polyglot never contacts a server you
+have not named yourself.
+
+Whatever you translate is sent to the server you configure. A server of your own, on your own machine or
+network, keeps the text there. A hosted service is a third party, and what it does with the text is
+governed by its own privacy policy.
+
+### Limitations
+
+- The language list offers every language LibreTranslate can be built with. A given server may have been
+  built with fewer, and asking it for one it does not have is answered with an error naming what it does
+  have.
+- Text longer than 2,000 characters is sent in several requests, matching the character limit servers
+  commonly set.
+- Translation quality is that of the Argos models, which is below that of the commercial online engines.
+
 ## Engine Overview
 
 The repository currently includes the following engines:
@@ -316,6 +361,7 @@ The repository currently includes the following engines:
 | `DeepL` | DeepL API key | Standard vendor API integration. |
 | `DeepL Web (key-free)` | None | Uses DeepL's unofficial anonymous Web endpoint; limited to 1,500 characters per request. |
 | `Google Translate (key-free)` | None | Talks to Google directly, with an optional toggle for an NVDACN-run mirror. |
+| `LibreTranslate` | Server address, optional API key | Talks to a LibreTranslate server you name; defaults to one on this computer. |
 | `Microsoft Translator (key-free)` | None | Uses the Edge `translatetext` endpoint. |
 | `Niutrans` | Niutrans API key | Standard vendor API integration. |
 | `Ollama 1` | Ollama URL, model name, optional key | First saved Ollama profile. |
