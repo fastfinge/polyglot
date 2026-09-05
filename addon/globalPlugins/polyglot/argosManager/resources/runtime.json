@@ -1,0 +1,49 @@
+{
+	"schemaVersion": 1,
+	"generatedAt": "2026-09-04T22:58:09Z",
+	"platform": "win_amd64",
+	"runtimes": [
+		{
+			"pythonTag": "cp313",
+			"components": [
+				{
+					"name": "ctranslate2",
+					"version": "4.8.2",
+					"fileName": "ctranslate2-4.8.2-cp313-cp313-win_amd64.whl",
+					"url": "https://files.pythonhosted.org/packages/c2/fc/a9e9e0ce1c0a29bc4c17bf56ccb4274293c0bbb2b8aae561727d82fcb0ca/ctranslate2-4.8.2-cp313-cp313-win_amd64.whl",
+					"sha256": "399c20a7336b6358f69ce3c615e090eabc08f29735a079fd1ac1e464119e0861",
+					"size": 19222061
+				},
+				{
+					"name": "sentencepiece",
+					"version": "0.2.2",
+					"fileName": "sentencepiece-0.2.2-cp313-cp313-win_amd64.whl",
+					"url": "https://files.pythonhosted.org/packages/09/fa/d2d6369257fd2f0de616b1c7110b73fab409ef61b14f1b9e0010ed325914/sentencepiece-0.2.2-cp313-cp313-win_amd64.whl",
+					"sha256": "74f0ee601047c0c12a783088b51be4e6214a62ecd9e02278c477433cd16e0ed9",
+					"size": 1247987
+				}
+			]
+		},
+		{
+			"pythonTag": "cp314",
+			"components": [
+				{
+					"name": "ctranslate2",
+					"version": "4.8.2",
+					"fileName": "ctranslate2-4.8.2-cp314-cp314-win_amd64.whl",
+					"url": "https://files.pythonhosted.org/packages/f2/86/03386a60b634a34c820e00f82bec808d38841cc2c007ec6b797892a9a5b5/ctranslate2-4.8.2-cp314-cp314-win_amd64.whl",
+					"sha256": "00bc9f44172d05bd2becefe757d2397ab3292fad1695169f9ebb9c16eb497ce2",
+					"size": 19478465
+				},
+				{
+					"name": "sentencepiece",
+					"version": "0.2.2",
+					"fileName": "sentencepiece-0.2.2-cp314-cp314-win_amd64.whl",
+					"url": "https://files.pythonhosted.org/packages/33/fe/4906f12c458274edd96387e4baaad7c6f064a2b7c11a1cc2401c8a7bd483/sentencepiece-0.2.2-cp314-cp314-win_amd64.whl",
+					"sha256": "63250cfab8b80a1ef82a614eb2b3cadfec2c405f870cedc139d08e2f063eb708",
+					"size": 1356144
+				}
+			]
+		}
+	]
+}

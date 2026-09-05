@@ -237,12 +237,59 @@ When NVDA exits, Polyglot closes the Chrome instance it started.
 - First use requires the model to be prepared; model downloads may be affected by network conditions.
 - If the Translator API is unavailable, update Chrome or make sure the related Chrome feature is enabled.
 
+## Argos Translate Offline Translation
+
+Polyglot can translate with [Argos Translate](https://www.argosopentech.com/) models. Translation runs inside NVDA on your own machine, so nothing is sent to a translation service; the only network use is downloading the runtime and the language models themselves.
+
+### Requirements
+
+- NVDA 2026.1 or later. Earlier releases of NVDA are 32-bit, and the translation libraries Argos needs are only published for 64-bit Python, so the engine reports itself as unavailable there.
+- A one-time runtime download of about 20 MB (CTranslate2 and SentencePiece). Polyglot installs it the first time you install a model, and verifies the download against a size and SHA-256 hash pinned in the add-on.
+- One model package per language direction, typically 80 to 190 MB.
+
+### How To Use
+
+Select `Argos Translate (Offline)` in Polyglot settings, then choose the source and target languages. Argos requires an explicit source language; `Auto-detect` is not available for this engine, so Polyglot can check the required models before translating.
+
+Open `Polyglot Argos model manager` from NVDA's Tools menu to install models in advance. The list shows every language direction the package index offers, with its status, download size, and version. Check the directions you want, uncheck the ones you no longer need, and press `Apply changes`. `Update all` reinstalls the directions whose published version is newer than the installed one.
+
+On first use, if the required model is not installed, Polyglot asks whether to download it, naming the packages and the total download size. Choose Yes to install them and continue the translation, or No to cancel it.
+
+When no model translates a direction directly, Polyglot pivots through English: French to German uses the French-to-English and English-to-German models in turn. The prompt and the model manager account for both packages.
+
+### Network And Models
+
+Models are listed from the Argos package index at `https://raw.githubusercontent.com/argosopentech/argospm-index/main/index.json` and downloaded from the links that index publishes. The add-on ships a snapshot of the index, so the model manager and the settings language lists work before the index has ever been downloaded; press `Load package index` in the model manager's advanced panel to refresh it. The index URL can be changed in the same panel if you host your own mirror.
+
+### Privacy And Data
+
+The runtime, the installed models, the downloaded index, and unfinished downloads are kept outside the add-on's own folder so they survive add-on updates.
+
+The default location is:
+
+```text
+%LOCALAPPDATA%\Polyglot\Argos
+```
+
+If the `LOCALAPPDATA` environment variable is not available, Polyglot falls back to `AppData\Local` under your home directory.
+
+Like the Chrome AI models, Argos models are not deleted when the add-on is uninstalled, because they are expensive to download again. To remove them, uncheck everything in the model manager and press `Apply changes` before uninstalling.
+
+### Limitations
+
+- Supported languages and language pairs are determined by the Argos package index.
+- Argos requires an explicit source language; `Auto-detect` is not available for this engine.
+- A loaded model keeps its files open. Press `Unload models` in the model manager before removing or updating a direction you have just used.
+- The runtime libraries stay loaded until NVDA restarts, so removing the runtime itself only takes effect after a restart.
+- Translation quality is below that of the online engines, and long passages take noticeably longer than a network round trip.
+
 ## Engine Overview
 
 The repository currently includes the following engines:
 
 | Engine | Credentials | Notes |
 | --- | --- | --- |
+| `Argos Translate (Offline)` | None | Translates inside NVDA with downloaded Argos models; NVDA 2026.1 or later, explicit source language. |
 | `Baidu Translate` | Baidu app ID and secret | Standard vendor API integration. |
 | `Caiyun` | Caiyun token | Standard vendor API integration. |
 | `Chrome AI (Offline)` | None | Uses Chrome's built-in Translator API with local models; select the source language explicitly. |

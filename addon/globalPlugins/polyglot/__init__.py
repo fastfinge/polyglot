@@ -38,6 +38,7 @@ from .common.network import closeSession
 from .configspec import configSpec
 from .services import engineManager
 from .services.cdpBridge import CdpBridge
+from .argosManager import menu as argosManagerMenu
 from .modelManager import menu as modelManagerMenu
 from .views import factory as uiFactory
 from .views import settings
@@ -179,9 +180,11 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		self.speechFilter.register()
 		self.isLayerActive = False
 		self.modelManagerMenuItem: wx.MenuItem | None = None
+		self.argosManagerMenuItem: wx.MenuItem | None = None
 		if not globalVars.appArgs.secure:
 			gui.settingsDialogs.NVDASettingsDialog.categoryClasses.append(settings.TranslationSettingsPanel)
 			self.modelManagerMenuItem = modelManagerMenu.bindToolsMenu(self)
+			self.argosManagerMenuItem = argosManagerMenu.bindToolsMenu(self)
 
 	def terminate(self):
 		"""Unregister Polyglot UI and speech integrations and release resources."""
@@ -192,6 +195,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		closeSession()
 		CdpBridge.getInstance().terminate()
 		modelManagerMenu.closeModelManagerDialog()
+		argosManagerMenu.closeModelManagerDialog()
 		if not globalVars.appArgs.secure:
 			configProfiles.removeProfileHooks()
 			configProfiles.post_profileRenamed.unregister(secretStore.renameProfileSecrets)
@@ -201,11 +205,16 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 					settings.TranslationSettingsPanel,
 				)
 			modelManagerMenu.unbindToolsMenu(self.modelManagerMenuItem)
+			argosManagerMenu.unbindToolsMenu(self.argosManagerMenuItem)
 		super().terminate()
 
 	def onOpenModelManager(self, event: wx.CommandEvent) -> None:
 		"""Open the native ChromeAI model manager from NVDA's Tools menu."""
 		modelManagerMenu.openModelManagerDialog()
+
+	def onOpenArgosModelManager(self, event: wx.CommandEvent) -> None:
+		"""Open the Argos Translate model manager from NVDA's Tools menu."""
+		argosManagerMenu.openModelManagerDialog()
 
 	def getScript(self, gesture: "inputCore.InputGesture") -> None:
 		"""Resolve gestures through the command layer while it is active."""

@@ -25,6 +25,7 @@ _ALL_LANGUAGES = {
 	"zh-HK": _("Chinese (Traditional)"),
 	"zh-Hant": _("Chinese (Traditional)"),
 	"cht": _("Chinese (Traditional)"),
+	"zt": _("Chinese (Traditional)"),  # Argos
 	"yue": _("Cantonese"),
 	"wyw": _("Classical Chinese"),
 	"ZH": _("Chinese"),  # DeepL
@@ -46,6 +47,7 @@ _ALL_LANGUAGES = {
 	"ru": _("Russian"),
 	"pt": _("Portuguese"),
 	"pt-BR": _("Portuguese (Brazilian)"),
+	"pb": _("Portuguese (Brazilian)"),  # Argos
 	"pt-PT": _("Portuguese (European)"),
 	"it": _("Italian"),
 	"ar": _("Arabic"),

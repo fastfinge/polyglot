@@ -1,5 +1,6 @@
 ### Polyglot-secure 0.0.1
 
+- Added the `Argos Translate (Offline)` engine, which translates inside NVDA with models you download through the new `Polyglot Argos model manager` in NVDA's Tools menu. Nothing is sent to a translation service. The manager installs, updates, and removes one model per language direction, and Polyglot offers to download a missing model the first time you translate a direction. Directions with no direct model are translated through English. The engine needs the 64-bit NVDA of 2026.1 or later; on earlier releases it reports itself as unavailable.
 - API keys, tokens, and passwords now follow NVDA's configuration profile rules: each profile can hold its own key, a profile without one uses the key from the profile below it, and the profile activated last wins. Keys are saved to the profile NVDA is editing, and clearing a field returns that profile to the inherited key.
 - Renaming a configuration profile now moves its stored keys with it, and deleting a profile removes them.
 - Upgrading from Polyglot 1.2.0 or earlier now migrates the keys saved in every configuration profile, not only in the profiles that happen to be active.
