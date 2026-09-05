@@ -45,7 +45,7 @@ def makeEntry(fromCode: str, toCode: str, version: str = "1.9") -> dict[str, obj
 		"package_version": version,
 		"argos_version": "1.9.0",
 		"links": [
-			f"https://argos-net.com/v1/translate-{fromCode}_{toCode}-{version.replace('.', '_')}.argosmodel"
+			f"https://argos-net.com/v1/translate-{fromCode}_{toCode}-{version.replace('.', '_')}.argosmodel",
 		],
 	}
 

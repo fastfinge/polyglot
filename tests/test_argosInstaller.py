@@ -216,7 +216,8 @@ class ArgosInstallerTestCase(unittest.TestCase):
 		self.installer.rememberSize(package, 12345)
 		self.assertEqual(self.installer.getCachedSize(package), 12345)
 		self.assertEqual(
-			ArgosInstaller(polyglotRoot=self.installer.polyglotRoot).getCachedSize(package), 12345
+			ArgosInstaller(polyglotRoot=self.installer.polyglotRoot).getCachedSize(package),
+			12345,
 		)
 
 	def test_savesAndReadsBackTheDownloadedIndex(self) -> None:
