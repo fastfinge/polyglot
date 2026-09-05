@@ -205,6 +205,8 @@ Some engines expose additional controls:
 - `Ollama` engines expose API URL, model name, optional API key, prompt template, and custom prompts.
 - `LibreTranslate` exposes the address of the server to use and an optional API key. It defaults to
   `http://localhost:5000`, a server on this computer, so point it at your own server or a hosted one.
+- `Lara Translate` exposes the access key ID and access key secret of a Lara account. Both halves are
+  needed; the secret is stored as a credential and never leaves this computer.
 - `Google Translate (key-free)` offers an optional mirror-server toggle. The mirror is run by NVDACN and
   is off unless you turn it on; it needs no credentials, and with it off the engine talks to Google directly.
 
@@ -383,6 +385,49 @@ nothing identifies you beyond the request itself.
 - Errors come back in Korean and say little beyond that something went wrong. Polyglot passes on what
   Naver said rather than guessing at a cause.
 
+## Lara Translate
+
+[Lara](https://laratranslate.com/) is a translation service from Translated, the company behind MyMemory
+and ModernMT. It is a translation-specialized model rather than a general-purpose one, so it answers about
+as quickly as the other online engines while translating with the surrounding sentences in mind. It is a
+paid service, with a free allowance of 10,000 characters a month.
+
+### How To Use
+
+Generate an access key in your Lara account, which gives you an access key ID and an access key secret.
+Then select `Lara Translate` in Polyglot settings and set:
+
+- `Access key ID`: the first half of the access key, which names it.
+- `Access key secret`: the second half, which proves it is yours. It is stored in the Windows Credential
+  Locker like every other credential; see [API Key Storage](#api-key-storage).
+
+`Auto-detect` is available as the source language, and Lara reports back which language it detected, so
+the auto-swap setting works with this engine.
+
+### Network And Data
+
+Whatever you translate is sent to Lara, and what Lara does with it is governed by Translated's privacy
+policy. Polyglot asks Lara not to keep the text it is sent, which is what Translated's own SDKs call a
+no-trace translation.
+
+The access key secret itself is never sent. Lara authenticates a key by having it sign a statement of what
+is being asked for, so the secret stays on this computer and only the signature travels. Lara answers that
+with a token that lasts a short while, which Polyglot reuses until it is nearly finished with and then
+replaces, so a translation normally costs one request.
+
+### Limitations
+
+- Lara publishes SDKs rather than an API, and says a REST API is available on request. Polyglot speaks
+  what the SDKs speak, read from Translated's own MIT-licensed Python SDK. Translated may change it
+  without notice, as it is not the interface they document.
+- An active subscription is required beyond the free 10,000 characters a month.
+- Text longer than 2,000 characters is sent in several requests. Lara documents no limit, so this is a
+  cautious figure rather than a measured one; because Lara translates with the surrounding sentences in
+  mind, longer requests would translate slightly better as well as cost fewer of them.
+- Lara names a locale rather than a language. Polyglot's plain codes are sent as the widest-spoken locale
+  of that language, so `English` reaches Lara as `en-US` and `Portuguese` as `pt-PT`; choose
+  `English (British)` or `Portuguese (Brazilian)` where the difference matters.
+
 ## Engine Overview
 
 The repository currently includes the following engines:
@@ -396,6 +441,7 @@ The repository currently includes the following engines:
 | `DeepL` | DeepL API key | Standard vendor API integration. |
 | `DeepL Web (key-free)` | None | Uses DeepL's unofficial anonymous Web endpoint; limited to 1,500 characters per request. |
 | `Google Translate (key-free)` | None | Talks to Google directly, with an optional toggle for an NVDACN-run mirror. |
+| `Lara Translate` | Lara access key ID and secret | Context-aware paid service from Translated; free for 10,000 characters a month. |
 | `LibreTranslate` | Server address, optional API key | Talks to a LibreTranslate server you name; defaults to one on this computer. |
 | `Microsoft Translator (key-free)` | None | Uses the Edge `translatetext` endpoint. |
 | `Naver Papago (key-free)` | None | Uses the endpoint behind Naver's search-bar translator; best of the key-free engines for Korean. |
