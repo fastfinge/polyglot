@@ -368,6 +368,17 @@ class BaseHttpEngine(ChunkedTranslationMixin):
 	def _parseResponse(self, responseBody: str) -> dict[str, Any]:
 		pass
 
+	@staticmethod
+	def _getProxies(config: dict[str, Any]) -> dict[str, str | None] | None:
+		"""Return the `requests` proxy argument for a configuration's proxy mode.
+
+		None leaves `requests` to use the system proxy settings. Engines that make a request of their
+		own, outside the one `_translateChunk` sends, use this so that the user's choice covers it too.
+		"""
+		if config.get("proxyMode", "system") == "none":
+			return {"http": None, "https": None}
+		return None
+
 	def _translateChunk(
 		self,
 		text: str,
@@ -378,12 +389,7 @@ class BaseHttpEngine(ChunkedTranslationMixin):
 		try:
 			params = self._buildRequestParams(text, langFrom, langTo, config)
 			log.debug("Engine '%s' is sending a %s request.", self.id, params.get("method", "GET"))
-			proxyMode = config.get("proxyMode", "system")
-			proxiesDict: dict[str, str | None] | None = (
-				None  # Default is None, which makes requests use system proxy settings.
-			)
-			if proxyMode == "none":
-				proxiesDict = {"http": None, "https": None}
+			proxiesDict = self._getProxies(config)
 			timeoutInt = int(config.get("timeout", "15"))
 			responseBody = sendRequest(
 				method=params.get("method", "GET"),

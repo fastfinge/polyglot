@@ -348,6 +348,41 @@ governed by its own privacy policy.
   commonly set.
 - Translation quality is that of the Argos models, which is below that of the commercial online engines.
 
+## Naver Papago
+
+[Naver](https://www.naver.com/) is Korea's largest search engine, and its search bar carries a translator
+widget powered by Papago, Naver's own translation service. `Naver Papago (key-free)` talks to the endpoint
+behind that widget, so it needs no account and no API key. It is the engine to reach for when Korean is one
+end of the translation, in either direction.
+
+### How To Use
+
+Select `Naver Papago (key-free)` in Polyglot settings and choose the source and target languages. There is
+nothing else to configure. `Auto-detect` is available as the source language, and Naver reports back which
+language it detected, so the auto-swap setting works with this engine.
+
+The languages offered are the ones the endpoint accepts: Korean, English, Japanese, Simplified and
+Traditional Chinese, Vietnamese, Indonesian, Thai, German, Russian, Spanish, Italian, French, Portuguese,
+Hindi, and Arabic.
+
+### Network And Data
+
+Whatever you translate is sent to Naver, and what Naver does with it is governed by its own privacy policy.
+
+The endpoint will not answer without a short-lived key that Naver's search page hands to its translator
+widget. Polyglot fetches that key from the search page, keeps it for as long as it lasts, and fetches
+another when Naver stops accepting it, so a translation normally costs one request. No cookie is kept and
+nothing identifies you beyond the request itself.
+
+### Limitations
+
+- This is the endpoint behind a Web page, not a documented API. Naver may change or withdraw it without
+  notice, and it comes with no service guarantee. Naver sells the Papago API for work that needs one.
+- Text longer than 5,000 characters is sent in several requests, which is where the endpoint stops
+  answering. Requests are spaced out slightly, as Naver asks that the translator not be hammered.
+- Errors come back in Korean and say little beyond that something went wrong. Polyglot passes on what
+  Naver said rather than guessing at a cause.
+
 ## Engine Overview
 
 The repository currently includes the following engines:
@@ -363,6 +398,7 @@ The repository currently includes the following engines:
 | `Google Translate (key-free)` | None | Talks to Google directly, with an optional toggle for an NVDACN-run mirror. |
 | `LibreTranslate` | Server address, optional API key | Talks to a LibreTranslate server you name; defaults to one on this computer. |
 | `Microsoft Translator (key-free)` | None | Uses the Edge `translatetext` endpoint. |
+| `Naver Papago (key-free)` | None | Uses the endpoint behind Naver's search-bar translator; best of the key-free engines for Korean. |
 | `Niutrans` | Niutrans API key | Standard vendor API integration. |
 | `Ollama 1` | Ollama URL, model name, optional key | First saved Ollama profile. |
 | `Ollama 2` | Ollama URL, model name, optional key | Second saved Ollama profile. |
