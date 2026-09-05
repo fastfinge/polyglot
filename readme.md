@@ -262,6 +262,7 @@ Polyglot can translate with [Argos Translate](https://www.argosopentech.com/) mo
 
 - NVDA 2026.1 or later. Earlier releases of NVDA are 32-bit, and the translation libraries Argos needs are only published for 64-bit Python, so the engine reports itself as unavailable there.
 - A one-time runtime download of about 20 MB (CTranslate2 and SentencePiece). Polyglot installs it the first time you install a model, and verifies the download against a size and SHA-256 hash pinned in the add-on.
+- A further 1.5 MB for the fifteen or so directions whose models are tokenized with BPE rather than SentencePiece, Spanish to English among them. Polyglot fetches those extras only when you install such a model, and verifies them the same way.
 - One model package per language direction, typically 80 to 190 MB.
 
 ### How To Use
@@ -277,6 +278,8 @@ When no model translates a direction directly, Polyglot pivots through English: 
 ### Network And Models
 
 Models are listed from the Argos package index at `https://raw.githubusercontent.com/argosopentech/argospm-index/main/index.json` and downloaded from the links that index publishes. The add-on ships a snapshot of the index, so the model manager and the settings language lists work before the index has ever been downloaded; press `Load package index` in the model manager's advanced panel to refresh it. The index URL can be changed in the same panel if you host your own mirror.
+
+The runtime and its BPE extras are downloaded from PyPI. Every one of those downloads is checked against a size and SHA-256 hash pinned in the add-on, so an unexpected file is refused rather than installed.
 
 ### Privacy And Data
 

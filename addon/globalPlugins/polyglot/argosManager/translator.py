@@ -5,8 +5,13 @@
 """Translation with installed Argos Translate models.
 
 The pipeline follows ``argostranslate.translate.apply_packaged_translation``: paragraphs are kept
-apart, each is split into sentences, every sentence is tokenized with the package's SentencePiece
-model, and the sentences of a paragraph are translated as one CTranslate2 batch.
+apart, each is split into sentences, every sentence is tokenized with the tokenizer its package
+carries, and the sentences of a paragraph are translated as one CTranslate2 batch.
+
+A package carries one of two tokenizers, and Polyglot picks the same one Argos Translate would.
+Most carry a SentencePiece model. The rest, built from OPUS-MT, carry BPE merges instead, and are
+tokenized the way those models were trained: Moses punctuation normalization, Moses tokenization,
+then the package's own merges, undone by Moses detokenization on the way back.
 
 Argos Translate itself is not used. It imports Stanza, and through it PyTorch, for sentence boundary
 detection alone, which would turn a 20 MB download into a multi-gigabyte one; the sentence splitting
@@ -45,6 +50,9 @@ _SENTENCE_END = re.compile(
 
 #: The marker SentencePiece writes in place of a space.
 _SPACE_MARKER = "▁"
+
+#: What BPE appends to every subword that is not the end of a word.
+_BPE_SEPARATOR = "@@"
 
 
 def splitSentences(paragraph: str) -> list[str]:
@@ -87,16 +95,69 @@ def _splitLongSentence(sentence: str) -> list[str]:
 	return parts
 
 
+class SentencePieceTokenizer:
+	"""Splits sentences into the subwords a package's SentencePiece model was trained on."""
+
+	def __init__(self, package: InstalledPackage, sentencepiece: Any) -> None:
+		"""Load one package's SentencePiece model."""
+		self._processor = sentencepiece.SentencePieceProcessor(model_file=str(package.tokenizerPath))
+
+	def encode(self, sentence: str) -> list[str]:
+		"""Return the subwords one sentence is made of."""
+		return self._processor.encode(sentence, out_type=str)
+
+	def decode(self, tokens: list[str]) -> str:
+		"""Return the text a model's output subwords spell out."""
+		return self._processor.decode_pieces(tokens).replace(_SPACE_MARKER, " ")
+
+
+class BpeTokenizer:
+	"""Splits sentences the way the OPUS-MT models behind the BPE packages were trained.
+
+	Moses escapes ``&``, ``<`` and the quote characters as XML entities, which is how they appear
+	in these models' vocabularies, and the detokenizer turns them back on the way out.
+	"""
+
+	def __init__(
+		self,
+		package: InstalledPackage,
+		punctNormalizerClass: Any,
+		tokenizerClass: Any,
+		detokenizerClass: Any,
+		bpeClass: Any,
+	) -> None:
+		"""Load one package's BPE merges, and the Moses rules for its two languages."""
+		self._normalizer = punctNormalizerClass(package.fromCode)
+		self._tokenizer = tokenizerClass(package.fromCode)
+		self._detokenizer = detokenizerClass(package.toCode)
+		with package.tokenizerPath.open("r", encoding="utf-8") as merges:
+			self._bpe = bpeClass(merges)
+
+	def encode(self, sentence: str) -> list[str]:
+		"""Return the subwords one sentence is made of."""
+		words = self._tokenizer.tokenize(self._normalizer.normalize(sentence))
+		return self._bpe.segment_tokens(" ".join(words).strip().split(" "))
+
+	def decode(self, tokens: list[str]) -> str:
+		"""Return the text a model's output subwords spell out."""
+		words = " ".join(tokens).replace(_BPE_SEPARATOR + " ", "").split(" ")
+		return self._detokenizer.detokenize(words)
+
+
 class LoadedModel:
 	"""One Argos package with its model and tokenizer held in memory."""
 
-	def __init__(self, package: InstalledPackage, ctranslate2: Any, sentencepiece: Any, threads: int) -> None:
-		"""Load a package's tokenizer and model."""
+	def __init__(
+		self,
+		package: InstalledPackage,
+		ctranslate2: Any,
+		tokenizer: SentencePieceTokenizer | BpeTokenizer,
+		threads: int,
+	) -> None:
+		"""Load a package's model, over the tokenizer its own files call for."""
 		self.package = package
 		self.targetPrefix = _readTargetPrefix(package.path)
-		self._processor = sentencepiece.SentencePieceProcessor(
-			model_file=str(package.path / "sentencepiece.model"),
-		)
+		self._tokenizer = tokenizer
 		self._translator = ctranslate2.Translator(
 			str(package.path / "model"),
 			device="cpu",
@@ -116,7 +177,7 @@ class LoadedModel:
 		sentences = splitSentences(paragraph)
 		if not sentences:
 			return paragraph
-		tokenized = [self._processor.encode(sentence, out_type=str) for sentence in sentences]
+		tokenized = [self._tokenizer.encode(sentence) for sentence in sentences]
 		targetPrefix = [[self.targetPrefix]] * len(tokenized) if self.targetPrefix else None
 		batches = self._translator.translate_batch(
 			tokenized,
@@ -132,7 +193,7 @@ class LoadedModel:
 		tokens: list[str] = []
 		for batch in batches:
 			tokens.extend(batch.hypotheses[0])
-		value = self._processor.decode_pieces(tokens).replace(_SPACE_MARKER, " ")
+		value = self._tokenizer.decode(tokens)
 		if self.targetPrefix and value.startswith(self.targetPrefix):
 			value = value[len(self.targetPrefix) :]
 		return value.lstrip(" ")
@@ -232,11 +293,25 @@ class ArgosTranslator:
 				return model
 			ctranslate2, sentencepiece = self._loadRuntime()
 			log.debug("Argos: loading the %s model.", package.key)
-			model = LoadedModel(package, ctranslate2, sentencepiece, self._resolveThreads(threads))
+			tokenizer = self._createTokenizer(package, sentencepiece)
+			model = LoadedModel(package, ctranslate2, tokenizer, self._resolveThreads(threads))
 			self._models[package.key] = model
 			self._touch(package.key)
 			self._evictExtraModels()
 			return model
+
+	def _createTokenizer(
+		self,
+		package: InstalledPackage,
+		sentencepiece: Any,
+	) -> SentencePieceTokenizer | BpeTokenizer:
+		"""Return the tokenizer a package's own files call for.
+
+		:raises RuntimeError: If a BPE package's extras are missing, which a reinstall puts back.
+		"""
+		if not package.usesBpe:
+			return SentencePieceTokenizer(package, sentencepiece)
+		return BpeTokenizer(package, *self.installer.runtime.loadBpe())
 
 	def _touch(self, key: str) -> None:
 		"""Mark a model as the most recently used one."""

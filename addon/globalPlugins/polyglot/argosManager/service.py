@@ -130,15 +130,21 @@ class ArgosService:
 				wx.ICON_ERROR,
 			)
 			return False
-		missingPackages = [
-			package for package in requiredPackages if package.key not in self.installer.getInstalledByKey()
-		]
-		isRuntimeMissing = not self.installer.runtime.isInstalled()
-		if not missingPackages and not isRuntimeMissing:
+		installedByKey = self.installer.getInstalledByKey()
+		missingPackages = [package for package in requiredPackages if package.key not in installedByKey]
+		# A package already installed says whether this direction needs the BPE extras. A missing one
+		# cannot: the index does not name its tokenizer, so the installer fetches them once it knows.
+		needsBpeSupport = any(
+			installedByKey[package.key].usesBpe
+			for package in requiredPackages
+			if package.key in installedByKey
+		)
+		runtimeBytes = self.installer.runtime.getMissingDownloadSize(withBpeSupport=needsBpeSupport)
+		if not missingPackages and runtimeBytes == 0:
 			return True
-		return self._runMissingModelRequest(missingPackages, isRuntimeMissing)
+		return self._runMissingModelRequest(missingPackages, runtimeBytes)
 
-	def _runMissingModelRequest(self, packages: list[ArgosPackage], isRuntimeMissing: bool) -> bool:
+	def _runMissingModelRequest(self, packages: list[ArgosPackage], runtimeBytes: int) -> bool:
 		"""Run, or join, the prompt and install for the same set of missing packages."""
 		cues.stopPeriodicCue()
 		key = tuple(sorted(package.key for package in packages))
@@ -158,7 +164,7 @@ class ArgosService:
 				raise request.error
 			return request.shouldContinue
 		try:
-			if not self._promptForMissingModels(packages, isRuntimeMissing, request):
+			if not self._promptForMissingModels(packages, runtimeBytes, request):
 				request.shouldContinue = False
 			else:
 				request.shouldContinue = self._installPackagesWithUi(packages)
@@ -190,11 +196,11 @@ class ArgosService:
 	def _promptForMissingModels(
 		self,
 		packages: list[ArgosPackage],
-		isRuntimeMissing: bool,
+		runtimeBytes: int,
 		request: _ActiveMissingModelRequest,
 	) -> bool:
 		"""Ask whether to download what this translation needs."""
-		message = self._buildMissingModelMessage(packages, isRuntimeMissing)
+		message = self._buildMissingModelMessage(packages, runtimeBytes)
 
 		def showDialog() -> gui.message.ReturnCode:
 			dialog = gui.message.MessageDialog(
@@ -216,12 +222,11 @@ class ArgosService:
 			request.dialogReady.set()
 		return answer == gui.message.ReturnCode.YES
 
-	def _buildMissingModelMessage(self, packages: list[ArgosPackage], isRuntimeMissing: bool) -> str:
+	def _buildMissingModelMessage(self, packages: list[ArgosPackage], runtimeBytes: int) -> str:
 		"""Describe what has to be downloaded before this translation can run."""
 		lines: list[str] = []
 		totalBytes = 0
-		if isRuntimeMissing:
-			runtimeBytes = self.installer.runtime.downloadSize
+		if runtimeBytes > 0:
 			totalBytes += runtimeBytes
 			lines.append(
 				_("  - the Argos translation runtime ({size})").format(

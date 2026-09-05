@@ -29,6 +29,8 @@ from polyglot.argosManager.installer import ArgosInstaller  # noqa: E402
 from polyglot.argosManager.translator import (  # noqa: E402
 	MAX_SENTENCE_LENGTH,
 	ArgosTranslator,
+	BpeTokenizer,
+	SentencePieceTokenizer,
 	splitSentences,
 )
 
@@ -80,11 +82,17 @@ class RouteTestCase(unittest.TestCase):
 	def tearDown(self) -> None:
 		self._tempDir.cleanup()
 
-	def installFakePackage(self, fromCode: str, toCode: str, version: str = "1.9") -> None:
+	def installFakePackage(
+		self,
+		fromCode: str,
+		toCode: str,
+		version: str = "1.9",
+		tokenizerFileName: str = "sentencepiece.model",
+	) -> None:
 		"""Write a package directory shaped like an installed one, without a real model."""
 		path = self.installer.packagesDir / f"translate-{fromCode}_{toCode}-{version.replace('.', '_')}"
 		(path / "model").mkdir(parents=True)
-		_unused = (path / "sentencepiece.model").write_text("not a real tokenizer")
+		_unused = (path / tokenizerFileName).write_text("not a real tokenizer")
 		_unused = (path / "metadata.json").write_text(
 			json.dumps(
 				{
@@ -135,6 +143,103 @@ class RouteTestCase(unittest.TestCase):
 	def test_hasNoLoadedModelsBeforeTranslating(self) -> None:
 		self.assertFalse(self.translator.hasLoadedModels)
 		self.assertEqual(self.translator.unloadModels(), 0)
+
+	def test_routesThroughAPackageTokenizedWithBpe(self) -> None:
+		self.installFakePackage("es", "en", tokenizerFileName="bpe.model")
+		route = self.translator.findRoute("es", "en")
+		self.assertEqual([package.key for package in route], ["translate-es_en"])
+		self.assertTrue(route[0].usesBpe)
+
+
+class _FakeMosesRule:
+	"""Stands in for one of the Moses classes, which live in the downloaded extras."""
+
+	def __init__(self, language: str) -> None:
+		self.language = language
+
+	def normalize(self, sentence: str) -> str:
+		return sentence.replace("’", "'")
+
+	def tokenize(self, sentence: str) -> list[str]:
+		return sentence.replace(".", " .").split()
+
+	def detokenize(self, words: list[str]) -> str:
+		return " ".join(words).replace(" .", ".")
+
+
+class _FakeBpe:
+	"""Stands in for subword-nmt, splitting anything long into two marked subwords."""
+
+	def __init__(self, merges: object) -> None:
+		self.merges = merges.read()
+
+	def segment_tokens(self, tokens: list[str]) -> list[str]:
+		segmented: list[str] = []
+		for token in tokens:
+			if len(token) > 4:
+				segmented.extend([token[:2] + "@@", token[2:]])
+			else:
+				segmented.append(token)
+		return segmented
+
+
+class TokenizerTestCase(unittest.TestCase):
+	"""A package is tokenized with whichever of the two tokenizers its own files carry."""
+
+	def setUp(self) -> None:
+		self._tempDir = tempfile.TemporaryDirectory()
+		self.installer = ArgosInstaller(polyglotRoot=Path(self._tempDir.name))
+		self.translator = ArgosTranslator(self.installer)
+
+	def tearDown(self) -> None:
+		self._tempDir.cleanup()
+
+	def installPackage(self, tokenizerFileName: str) -> object:
+		"""Write an installed package directory carrying one of the two tokenizers."""
+		path = self.installer.packagesDir / "translate-es_en-1_9"
+		(path / "model").mkdir(parents=True)
+		_unused = (path / tokenizerFileName).write_text("not a real tokenizer", encoding="utf-8")
+		_unused = (path / "metadata.json").write_text(
+			json.dumps({"package_version": "1.9", "from_code": "es", "to_code": "en"}),
+		)
+		installed = self.installer.readInstalledPackage(path)
+		assert installed is not None
+		return installed
+
+	def test_tokenizesAndDetokenizesWithTheMosesAndBpeRules(self) -> None:
+		package = self.installPackage("bpe.model")
+		tokenizer = BpeTokenizer(package, _FakeMosesRule, _FakeMosesRule, _FakeMosesRule, _FakeBpe)
+		self.assertEqual(tokenizer.encode("hola mundo."), ["hola", "mu@@", "ndo", "."])
+		# The separator is what marks a subword as continuing, so it joins rather than spaces out.
+		self.assertEqual(tokenizer.decode(["he@@", "llo", "wo@@", "rld", "."]), "hello world.")
+
+	def test_buildsTheTokenizerAPackageCallsFor(self) -> None:
+		bpePackage = self.installPackage("bpe.model")
+		loadCalls: list[str] = []
+
+		def fakeLoadBpe() -> tuple[object, object, object, object]:
+			loadCalls.append("bpe")
+			return _FakeMosesRule, _FakeMosesRule, _FakeMosesRule, _FakeBpe
+
+		self.installer.runtime.loadBpe = fakeLoadBpe  # type: ignore[method-assign]
+		tokenizer = self.translator._createTokenizer(bpePackage, None)
+		self.assertIsInstance(tokenizer, BpeTokenizer)
+		self.assertEqual(loadCalls, ["bpe"])
+
+	def test_doesNotAskForTheExtrasForASentencePiecePackage(self) -> None:
+		package = self.installPackage("sentencepiece.model")
+
+		class FakeSentencePiece:
+			@staticmethod
+			def SentencePieceProcessor(model_file: str) -> object:  # noqa: N802
+				return model_file
+
+		def failingLoadBpe() -> tuple[object, object, object, object]:
+			raise AssertionError("a SentencePiece package must not need the BPE extras")
+
+		self.installer.runtime.loadBpe = failingLoadBpe  # type: ignore[method-assign]
+		tokenizer = self.translator._createTokenizer(package, FakeSentencePiece)
+		self.assertIsInstance(tokenizer, SentencePieceTokenizer)
 
 
 if __name__ == "__main__":

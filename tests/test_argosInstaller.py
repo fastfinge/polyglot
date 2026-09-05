@@ -47,7 +47,13 @@ def makeEntry(fromCode: str, toCode: str, version: str = "1.9") -> dict[str, obj
 	}
 
 
-def writePackageArchive(path: Path, fromCode: str, toCode: str, version: str = "1.9") -> None:
+def writePackageArchive(
+	path: Path,
+	fromCode: str,
+	toCode: str,
+	version: str = "1.9",
+	tokenizerFileName: str = "sentencepiece.model",
+) -> None:
 	"""Write an archive shaped like a real Argos package."""
 	directoryName = f"translate-{fromCode}_{toCode}-{version.replace('.', '_')}"
 	metadata = {
@@ -61,7 +67,7 @@ def writePackageArchive(path: Path, fromCode: str, toCode: str, version: str = "
 	path.parent.mkdir(parents=True, exist_ok=True)
 	with zipfile.ZipFile(path, "w") as archive:
 		archive.writestr(f"{directoryName}/metadata.json", json.dumps(metadata))
-		archive.writestr(f"{directoryName}/sentencepiece.model", "not a real tokenizer")
+		archive.writestr(f"{directoryName}/{tokenizerFileName}", "not a real tokenizer")
 		archive.writestr(f"{directoryName}/model/model.bin", "not a real model")
 		archive.writestr(f"{directoryName}/model/config.json", "{}")
 
@@ -78,6 +84,7 @@ class ArgosInstallerTestCase(unittest.TestCase):
 			json.dumps([makeEntry("en", "fr"), makeEntry("fr", "en"), makeEntry("en", "de")]),
 		)
 		self.progressMessages: list[str] = []
+		self.runtimeInstallCalls: list[bool] = []
 
 	def tearDown(self) -> None:
 		self._tempDir.cleanup()
@@ -94,8 +101,11 @@ class ArgosInstallerTestCase(unittest.TestCase):
 			destination.parent.mkdir(parents=True, exist_ok=True)
 			_unused = destination.write_bytes(source.read_bytes())
 
+		def fakeRuntimeInstall(progress: object, withBpeSupport: bool = False) -> None:
+			self.runtimeInstallCalls.append(withBpeSupport)
+
 		with patch.object(installerModule, "downloadFile", fakeDownload):
-			with patch.object(self.installer.runtime, "install", lambda progress: None):
+			with patch.object(self.installer.runtime, "install", fakeRuntimeInstall):
 				self.installer.applySelection(
 					self.catalog,
 					set(keys),
@@ -103,10 +113,16 @@ class ArgosInstallerTestCase(unittest.TestCase):
 					keysToUpdate or set(),
 				)
 
-	def writeArchive(self, fromCode: str, toCode: str, version: str = "1.9") -> None:
+	def writeArchive(
+		self,
+		fromCode: str,
+		toCode: str,
+		version: str = "1.9",
+		tokenizerFileName: str = "sentencepiece.model",
+	) -> None:
 		"""Write one package archive where a fake download will find it."""
 		name = f"translate-{fromCode}_{toCode}-{version.replace('.', '_')}.argosmodel"
-		writePackageArchive(self.archiveDir / name, fromCode, toCode, version)
+		writePackageArchive(self.archiveDir / name, fromCode, toCode, version, tokenizerFileName)
 
 	def test_installsAndReportsAPackage(self) -> None:
 		self.writeArchive("en", "fr")
@@ -115,6 +131,24 @@ class ArgosInstallerTestCase(unittest.TestCase):
 		self.assertEqual([package.key for package in installed], ["translate-en_fr"])
 		self.assertEqual(installed[0].packageVersion, "1.9")
 		self.assertTrue((installed[0].path / "model" / "model.bin").is_file())
+
+	def test_installsABpePackageAndAsksForItsExtras(self) -> None:
+		self.writeArchive("es", "en", tokenizerFileName="bpe.model")
+		self.catalog = ArgosCatalog.deserialize(json.dumps([makeEntry("es", "en")]))
+		self.installFromArchives("translate-es_en")
+		installed = self.installer.getInstalledByKey()["translate-es_en"]
+		self.assertTrue(installed.usesBpe)
+		self.assertEqual(installed.tokenizerPath.name, "bpe.model")
+		self.assertTrue(self.installer.needsBpeSupport())
+		self.assertIn(True, self.runtimeInstallCalls)
+
+	def test_leavesTheExtrasAloneForASentencePiecePackage(self) -> None:
+		self.writeArchive("en", "fr")
+		self.installFromArchives("translate-en_fr")
+		installed = self.installer.getInstalledByKey()["translate-en_fr"]
+		self.assertFalse(installed.usesBpe)
+		self.assertFalse(self.installer.needsBpeSupport())
+		self.assertNotIn(True, self.runtimeInstallCalls)
 
 	def test_removesAPackageThatIsNoLongerSelected(self) -> None:
 		self.writeArchive("en", "fr")
@@ -214,6 +248,21 @@ class RuntimeCatalogTestCase(unittest.TestCase):
 				self.assertTrue(component.url.startswith("https://"))
 				self.assertIn("win_amd64", component.fileName)
 
+	def test_pinsTheExtrasBpePackagesNeed(self) -> None:
+		catalog = RuntimeCatalog.loadBundled()
+		for pythonTag in catalog.byPythonTag:
+			components = catalog.getBpeComponents(pythonTag)
+			names = {component.name for component in components}
+			self.assertEqual(names, {"regex", "cloudpickle", "joblib", "tqdm", "sacremoses", "subword-nmt"})
+			for component in components:
+				self.assertEqual(len(component.sha256), 64)
+				self.assertGreater(component.size, 0)
+				self.assertTrue(component.url.startswith("https://files.pythonhosted.org/"))
+			# The compiled one has to match the Python build; the rest are pure Python.
+			regex = next(component for component in components if component.name == "regex")
+			self.assertIn(pythonTag, regex.fileName)
+			self.assertIn("win_amd64", regex.fileName)
+
 	def test_coversThePythonNvdaRunsWhereItCan(self) -> None:
 		catalog = RuntimeCatalog.loadBundled()
 		# The Python builds NVDA 2026.1 and its likely successor use.
@@ -230,6 +279,62 @@ class RuntimeCatalogTestCase(unittest.TestCase):
 					self.assertFalse(runtime.isHostSupported)
 					with self.assertRaises(RuntimeError):
 						runtime.install(lambda update: None)
+
+	def test_addsTheBpeExtrasWithoutReplacingTheRuntime(self) -> None:
+		with tempfile.TemporaryDirectory() as tempDir:
+			runtime = ArgosInstaller(polyglotRoot=Path(tempDir)).runtime
+			installedNames: list[str] = []
+
+			def fakeInstallComponent(component: object, progress: object) -> None:
+				installedNames.append(getattr(component, "name", ""))
+
+			with (
+				patch("polyglot.argosManager.runtime.getPythonTag", lambda: "cp313"),
+				patch("polyglot.argosManager.runtime.isSixtyFourBit", lambda: True),
+				patch.object(runtime, "_installComponent", fakeInstallComponent),
+			):
+				runtime.install(lambda update: None)
+				self.assertEqual(installedNames, ["ctranslate2", "sentencepiece"])
+				self.assertTrue(runtime.isInstalled())
+				self.assertFalse(runtime.isBpeInstalled())
+
+				# A BPE package arriving later adds the extras next to the runtime it already has.
+				installedNames.clear()
+				runtime.install(lambda update: None, withBpeSupport=True)
+				self.assertNotIn("ctranslate2", installedNames)
+				self.assertIn("sacremoses", installedNames)
+				self.assertIn("subword-nmt", installedNames)
+				self.assertTrue(runtime.isInstalled())
+				self.assertTrue(runtime.isBpeInstalled())
+
+				installedNames.clear()
+				runtime.install(lambda update: None, withBpeSupport=True)
+				self.assertEqual(installedNames, [])
+
+	def test_replacesTheWholeRuntimeWhenAComponentIsOutdated(self) -> None:
+		with tempfile.TemporaryDirectory() as tempDir:
+			runtime = ArgosInstaller(polyglotRoot=Path(tempDir)).runtime
+			installedNames: list[str] = []
+
+			def fakeInstallComponent(component: object, progress: object) -> None:
+				installedNames.append(getattr(component, "name", ""))
+
+			with (
+				patch("polyglot.argosManager.runtime.getPythonTag", lambda: "cp313"),
+				patch("polyglot.argosManager.runtime.isSixtyFourBit", lambda: True),
+				patch.object(runtime, "_installComponent", fakeInstallComponent),
+			):
+				runtime.install(lambda update: None, withBpeSupport=True)
+				runtime.markerPath.write_text(
+					json.dumps({"pythonTag": "cp313", "components": {"sacremoses": "0.0.1"}}),
+					encoding="utf-8",
+				)
+				installedNames.clear()
+				runtime.install(lambda update: None, withBpeSupport=True)
+				# Components share one directory, so the stale one takes the rest down with it.
+				self.assertIn("ctranslate2", installedNames)
+				self.assertIn("sacremoses", installedNames)
+				self.assertTrue(runtime.isBpeInstalled())
 
 	def test_reportsAnEmptyRuntimeAsNotInstalled(self) -> None:
 		with tempfile.TemporaryDirectory() as tempDir:

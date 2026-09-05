@@ -5,7 +5,9 @@
 """Install, update, and remove Argos Translate model packages.
 
 An Argos package is a zip archive holding one language direction: a CTranslate2 model, the
-SentencePiece model it is tokenized with, and a ``metadata.json`` naming the direction and version.
+tokenizer it was trained with, and a ``metadata.json`` naming the direction and version. Most
+packages carry a SentencePiece model; the ones built from OPUS-MT carry BPE merges instead, and
+those need the extras in :meth:`ArgosRuntime.install` on top of the runtime every package needs.
 Packages are installed under the user's local application data, next to the runtime, so they survive
 add-on updates and are never written into the add-on's own folder.
 """
@@ -48,6 +50,11 @@ ARGOS_OPERATION_LOCK = threading.Lock()
 #: How long to wait when asking a download server only for a package's size.
 _SIZE_REQUEST_TIMEOUT = 20
 
+#: The tokenizer a package carries, in the order Argos Translate itself looks for them.
+SENTENCEPIECE_TOKENIZER = "sentencepiece.model"
+BPE_TOKENIZER = "bpe.model"
+TOKENIZER_FILE_NAMES = (SENTENCEPIECE_TOKENIZER, BPE_TOKENIZER)
+
 
 @dataclass(frozen=True)
 class InstalledPackage:
@@ -58,6 +65,7 @@ class InstalledPackage:
 	fromCode: str
 	toCode: str
 	packageVersion: str
+	tokenizerFileName: str = SENTENCEPIECE_TOKENIZER
 
 	@property
 	def displayName(self) -> str:
@@ -66,6 +74,16 @@ class InstalledPackage:
 			source=languageName(self.fromCode),
 			target=languageName(self.toCode),
 		)
+
+	@property
+	def usesBpe(self) -> bool:
+		"""Return whether this package is tokenized with BPE merges rather than SentencePiece."""
+		return self.tokenizerFileName == BPE_TOKENIZER
+
+	@property
+	def tokenizerPath(self) -> Path:
+		"""Return the tokenizer file this package is tokenized with."""
+		return self.path / self.tokenizerFileName
 
 
 class ArgosInstaller:
@@ -115,7 +133,11 @@ class ArgosInstaller:
 		metadataPath = path / "metadata.json"
 		if not path.is_dir() or not metadataPath.is_file():
 			return None
-		if not (path / "sentencepiece.model").is_file() or not (path / "model").is_dir():
+		tokenizerFileName = next(
+			(name for name in TOKENIZER_FILE_NAMES if (path / name).is_file()),
+			"",
+		)
+		if not tokenizerFileName or not (path / "model").is_dir():
 			return None
 		try:
 			metadata = json.loads(metadataPath.read_text(encoding="utf-8-sig"))
@@ -134,6 +156,7 @@ class ArgosInstaller:
 			fromCode=fromCode,
 			toCode=toCode,
 			packageVersion=str(metadata.get("package_version") or ""),
+			tokenizerFileName=tokenizerFileName,
 		)
 
 	def getInstalledByKey(self) -> dict[str, InstalledPackage]:
@@ -143,6 +166,10 @@ class ArgosInstaller:
 	def isPackageInstalled(self, package: ArgosPackage) -> bool:
 		"""Return whether a package from the index is installed, at any version."""
 		return package.key in self.getInstalledByKey()
+
+	def needsBpeSupport(self) -> bool:
+		"""Return whether any installed package is tokenized with BPE merges."""
+		return any(package.usesBpe for package in self.getInstalledPackages())
 
 	def isPackageOutdated(self, package: ArgosPackage, installed: InstalledPackage | None) -> bool:
 		"""Return whether an installed package is older than the one the index offers."""
@@ -180,7 +207,7 @@ class ArgosInstaller:
 		keysToReinstall = [key for key in sorted(keysToUpdate) if key in installedByKey]
 		keysToRemove = [key for key in sorted(installedByKey) if key not in selectedKeys]
 		if keysToInstall or keysToReinstall:
-			self.runtime.install(progress)
+			self.runtime.install(progress, withBpeSupport=self.needsBpeSupport())
 		for key in keysToInstall + keysToReinstall:
 			package = catalog.byKey.get(key)
 			if package is None:
@@ -201,7 +228,7 @@ class ArgosInstaller:
 	) -> None:
 		"""Install the runtime and the given packages, leaving everything else alone."""
 		self.packagesDir.mkdir(parents=True, exist_ok=True)
-		self.runtime.install(progress)
+		self.runtime.install(progress, withBpeSupport=self.needsBpeSupport())
 		installedByKey = self.getInstalledByKey()
 		for package in packages:
 			if package.key in installedByKey:
@@ -227,7 +254,11 @@ class ArgosInstaller:
 			existing = self.getInstalledByKey().get(package.key)
 			if existing is not None:
 				_unused = deleteDirectoryIfExists(existing.path)
-			self.extractPackage(archivePath, package, progress)
+			installed = self.extractPackage(archivePath, package, progress)
+			# The index does not say which tokenizer a package carries, so the extras a BPE package
+			# needs can only be fetched once its archive has been opened.
+			if installed.usesBpe:
+				self.runtime.install(progress, withBpeSupport=True)
 		except Exception:
 			self.tryCleanupPackage(package)
 			raise
@@ -247,9 +278,10 @@ class ArgosInstaller:
 		archivePath: Path,
 		package: ArgosPackage,
 		progress: ProgressCallback,
-	) -> None:
+	) -> InstalledPackage:
 		"""Extract a package archive into the packages directory, rejecting unsafe entries.
 
+		:return: The package as it now sits on disk.
 		:raises RuntimeError: If the archive points outside the packages directory, or holds no
 			package Polyglot can use.
 		"""
@@ -277,12 +309,14 @@ class ArgosInstaller:
 						int(index * 100 / total) if total else 100,
 					),
 				)
-		if installedPath is None or self.readInstalledPackage(installedPath) is None:
+		installed = self.readInstalledPackage(installedPath) if installedPath is not None else None
+		if installed is None:
 			raise RuntimeError(
 				_("{package} does not hold a model Polyglot can use.").format(
 					package=pairDisplayName(package),
 				),
 			)
+		return installed
 
 	def removeInstalledPackage(self, installed: InstalledPackage, progress: ProgressCallback) -> None:
 		"""Remove one installed package from disk."""

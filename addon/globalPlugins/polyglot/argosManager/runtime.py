@@ -4,11 +4,16 @@
 
 """The native libraries Argos Translate models are run with.
 
-Argos models are CTranslate2 models tokenized with SentencePiece. Both libraries are compiled
-extensions, published only for 64-bit Windows, so they can be loaded into NVDA itself from
-NVDA 2026.1 onwards and not before. They are far too large to ship inside an add-on, so Polyglot
-downloads them from PyPI the first time they are needed, checking each download against a hash
-pinned in ``resources/runtime.json`` rather than trusting whatever the network returns.
+Argos models are CTranslate2 models, tokenized with SentencePiece in most packages and with
+Moses rules and BPE merges in the rest. The libraries behind them are compiled extensions,
+published only for 64-bit Windows, so they can be loaded into NVDA itself from NVDA 2026.1 onwards
+and not before. They are far too large to ship inside an add-on, so Polyglot downloads them from
+PyPI the first time they are needed, checking each download against a hash pinned in
+``resources/runtime.json`` rather than trusting whatever the network returns.
+
+The runtime comes in two parts. The core, CTranslate2 and SentencePiece, is what every package
+needs. The BPE extras, ``sacremoses`` and ``subword-nmt`` with the libraries they import, are
+another 1.5 MB fetched only once a package that carries a ``bpe.model`` is installed.
 
 Nothing here imports the libraries at module level: importing them locks their DLLs for as long as
 NVDA runs, which would stop the model manager from ever removing or updating them.
@@ -88,6 +93,7 @@ class RuntimeCatalog:
 
 	generatedAt: str = ""
 	byPythonTag: dict[str, tuple[RuntimeComponent, ...]] = field(default_factory=dict)
+	bpeByPythonTag: dict[str, tuple[RuntimeComponent, ...]] = field(default_factory=dict)
 
 	@classmethod
 	def loadBundled(cls) -> "RuntimeCatalog":
@@ -99,27 +105,42 @@ class RuntimeCatalog:
 		if not isinstance(rawData, dict):
 			raise RuntimeError(_("The Argos runtime catalog is invalid."))
 		byPythonTag: dict[str, tuple[RuntimeComponent, ...]] = {}
+		bpeByPythonTag: dict[str, tuple[RuntimeComponent, ...]] = {}
 		rawRuntimes = rawData.get("runtimes")
 		for entry in rawRuntimes if isinstance(rawRuntimes, list) else []:
 			if not isinstance(entry, dict):
 				continue
 			pythonTag = getString(entry, "pythonTag")
-			rawComponents = entry.get("components")
-			components = tuple(
-				component
-				for component in (
-					RuntimeComponent.fromJson(item)
-					for item in (rawComponents if isinstance(rawComponents, list) else [])
-				)
-				if component is not None
-			)
-			if pythonTag and components:
-				byPythonTag[pythonTag] = components
-		return cls(generatedAt=getString(rawData, "generatedAt"), byPythonTag=byPythonTag)
+			components = _readComponents(entry.get("components"))
+			if not pythonTag or not components:
+				continue
+			byPythonTag[pythonTag] = components
+			bpeByPythonTag[pythonTag] = _readComponents(entry.get("bpeComponents"))
+		return cls(
+			generatedAt=getString(rawData, "generatedAt"),
+			byPythonTag=byPythonTag,
+			bpeByPythonTag=bpeByPythonTag,
+		)
 
 	def getComponents(self, pythonTag: str) -> tuple[RuntimeComponent, ...]:
 		"""Return the components for one Python build, or an empty tuple when it is not covered."""
 		return self.byPythonTag.get(pythonTag, ())
+
+	def getBpeComponents(self, pythonTag: str) -> tuple[RuntimeComponent, ...]:
+		"""Return the BPE extras for one Python build, or an empty tuple when it is not covered."""
+		return self.bpeByPythonTag.get(pythonTag, ())
+
+
+def _readComponents(rawComponents: Any) -> tuple[RuntimeComponent, ...]:
+	"""Read one list of catalog entries, dropping any that is unusable."""
+	return tuple(
+		component
+		for component in (
+			RuntimeComponent.fromJson(item)
+			for item in (rawComponents if isinstance(rawComponents, list) else [])
+		)
+		if component is not None
+	)
 
 
 def getPythonTag() -> str:
@@ -168,6 +189,11 @@ class ArgosRuntime:
 		return self.catalog.getComponents(getPythonTag())
 
 	@property
+	def bpeComponents(self) -> tuple[RuntimeComponent, ...]:
+		"""Return the extras BPE-tokenized packages need, for the Python build NVDA is running."""
+		return self.catalog.getBpeComponents(getPythonTag())
+
+	@property
 	def isHostSupported(self) -> bool:
 		"""Return whether this NVDA can load the Argos runtime at all."""
 		return sys.platform == "win32" and isSixtyFourBit() and bool(self.components)
@@ -202,6 +228,13 @@ class ArgosRuntime:
 		installed = self.getInstalledVersions()
 		return all(installed.get(component.name) == component.version for component in self.components)
 
+	def isBpeInstalled(self) -> bool:
+		"""Return whether the BPE extras are installed at the pinned version."""
+		if not self.bpeComponents:
+			return False
+		installed = self.getInstalledVersions()
+		return all(installed.get(component.name) == component.version for component in self.bpeComponents)
+
 	def isAnythingInstalled(self) -> bool:
 		"""Return whether any runtime files are present, including an outdated runtime."""
 		return self.libDir.is_dir() and any(self.libDir.iterdir())
@@ -216,14 +249,17 @@ class ArgosRuntime:
 			str(name): str(version) for name, version in rawComponents.items() if isinstance(version, str)
 		}
 
-	def install(self, progress: ProgressCallback) -> None:
+	def install(self, progress: ProgressCallback, withBpeSupport: bool = False) -> None:
 		"""Download and install every component that is not present at the pinned version.
 
+		:param withBpeSupport: Also install the extras a BPE-tokenized package needs.
 		:raises RuntimeError: If the runtime cannot run on this NVDA.
 		"""
 		if not self.isHostSupported:
 			raise RuntimeError(self.unsupportedHostMessage)
-		if self.isInstalled():
+		needed = self.components + (self.bpeComponents if withBpeSupport else ())
+		isReplacingEverything, missing = self._planInstall(withBpeSupport)
+		if not missing:
 			progress(InstallProgress(_("The Argos runtime is already installed."), 100))
 			return
 		if self.isLoaded:
@@ -233,23 +269,51 @@ class ArgosRuntime:
 					"Restart NVDA and try again.",
 				),
 			)
-		# An incomplete or outdated runtime is replaced rather than merged into.
-		_unused = deleteDirectoryIfExists(self.libDir)
+		if isReplacingEverything:
+			_unused = deleteDirectoryIfExists(self.libDir)
 		self.libDir.mkdir(parents=True, exist_ok=True)
 		try:
-			for component in self.components:
+			for component in missing:
 				self._installComponent(component, progress)
 		except Exception:
-			self.tryCleanup()
+			# A runtime that was already working is left alone: the marker still describes it, and
+			# the half-extracted extras are written over by the next attempt.
+			if isReplacingEverything:
+				self.tryCleanup()
 			raise
-		writeJsonObject(
-			self.markerPath,
-			{
-				"pythonTag": getPythonTag(),
-				"components": {component.name: component.version for component in self.components},
-			},
-		)
+		self._writeMarker(needed)
 		progress(InstallProgress(_("The Argos runtime is ready."), 100))
+
+	def _planInstall(self, withBpeSupport: bool) -> tuple[bool, list[RuntimeComponent]]:
+		"""Work out what an install would do, without doing any of it.
+
+		Every component shares one directory, so the files an outdated one left behind cannot be told
+		apart from the new one's: a component at the wrong version replaces the whole runtime. Extras
+		added to a runtime that is already at the pinned version only need extracting next to it,
+		which is what saves re-downloading CTranslate2 to install a BPE-tokenized package.
+
+		:return: Whether the whole runtime is being replaced, and the components to download.
+		"""
+		needed = self.components + (self.bpeComponents if withBpeSupport else ())
+		installedVersions = self.getInstalledVersions()
+		isOutdated = any(
+			component.name in installedVersions and installedVersions[component.name] != component.version
+			for component in needed
+		)
+		if isOutdated or not self.isInstalled():
+			return True, list(needed)
+		return False, [component for component in needed if component.name not in installedVersions]
+
+	def getMissingDownloadSize(self, withBpeSupport: bool = False) -> int:
+		"""Return the bytes an install would download, leaving out what is already in place."""
+		_unused, components = self._planInstall(withBpeSupport)
+		return sum(component.size for component in components)
+
+	def _writeMarker(self, components: tuple[RuntimeComponent, ...]) -> None:
+		"""Record the components just installed, keeping what the marker already names."""
+		versions = self.getInstalledVersions()
+		versions.update({component.name: component.version for component in components})
+		writeJsonObject(self.markerPath, {"pythonTag": getPythonTag(), "components": versions})
 
 	def _installComponent(self, component: RuntimeComponent, progress: ProgressCallback) -> None:
 		"""Download, verify, and extract one component."""
@@ -330,10 +394,7 @@ class ArgosRuntime:
 			raise RuntimeError(self.unsupportedHostMessage)
 		if not self.isInstalled():
 			raise RuntimeError(_("The Argos runtime is not installed."))
-		libPath = str(self.libDir)
-		if libPath not in sys.path:
-			# Appended, so nothing here can shadow a module NVDA or another add-on provides.
-			sys.path.append(libPath)
+		self._addToImportPath()
 		try:
 			import ctranslate2
 			import sentencepiece
@@ -342,6 +403,38 @@ class ArgosRuntime:
 				_("The Argos runtime could not be loaded: {error}").format(error=error),
 			) from error
 		return ctranslate2, sentencepiece
+
+	def loadBpe(self) -> tuple[Any, Any, Any, Any]:
+		"""Import the Moses and BPE libraries a BPE-tokenized package is tokenized with.
+
+		:return: The ``MosesPunctNormalizer``, ``MosesTokenizer``, and ``MosesDetokenizer`` classes,
+			and the ``BPE`` class that applies a package's merges.
+		:raises RuntimeError: If the extras are not installed.
+		"""
+		if not self.isBpeInstalled():
+			raise RuntimeError(
+				_(
+					"The tokenizer this Argos model needs is not installed. Open the Argos model "
+					"manager and install the model again.",
+				),
+			)
+		self._addToImportPath()
+		try:
+			from sacremoses.normalize import MosesPunctNormalizer
+			from sacremoses.tokenize import MosesDetokenizer, MosesTokenizer
+			from subword_nmt.apply_bpe import BPE
+		except ImportError as error:
+			raise RuntimeError(
+				_("The Argos runtime could not be loaded: {error}").format(error=error),
+			) from error
+		return MosesPunctNormalizer, MosesTokenizer, MosesDetokenizer, BPE
+
+	def _addToImportPath(self) -> None:
+		"""Put the installed runtime where NVDA's own import machinery will find it."""
+		libPath = str(self.libDir)
+		if libPath not in sys.path:
+			# Appended, so nothing here can shadow a module NVDA or another add-on provides.
+			sys.path.append(libPath)
 
 
 def extractWheel(wheelPath: Path, destination: Path, progress: ProgressCallback) -> None:

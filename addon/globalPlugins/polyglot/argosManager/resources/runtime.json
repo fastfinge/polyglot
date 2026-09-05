@@ -1,6 +1,6 @@
 {
-	"schemaVersion": 1,
-	"generatedAt": "2026-09-04T22:58:09Z",
+	"schemaVersion": 2,
+	"generatedAt": "2026-09-05T10:20:00Z",
 	"platform": "win_amd64",
 	"runtimes": [
 		{
@@ -22,6 +22,56 @@
 					"sha256": "74f0ee601047c0c12a783088b51be4e6214a62ecd9e02278c477433cd16e0ed9",
 					"size": 1247987
 				}
+			],
+			"bpeComponents": [
+				{
+					"name": "regex",
+					"version": "2026.9.3",
+					"fileName": "regex-2026.9.3-cp313-cp313-win_amd64.whl",
+					"url": "https://files.pythonhosted.org/packages/6d/25/6d20a309c2e4b554cc33579dd55b0bb50d0c2ace7ce6f084be2327c330fc/regex-2026.9.3-cp313-cp313-win_amd64.whl",
+					"sha256": "185c1ae881856208dda05708b6c908aff76878e59c998c8548d365c1bbcaf1bd",
+					"size": 277741
+				},
+				{
+					"name": "cloudpickle",
+					"version": "3.1.2",
+					"fileName": "cloudpickle-3.1.2-py3-none-any.whl",
+					"url": "https://files.pythonhosted.org/packages/88/39/799be3f2f0f38cc727ee3b4f1445fe6d5e4133064ec2e4115069418a5bb6/cloudpickle-3.1.2-py3-none-any.whl",
+					"sha256": "9acb47f6afd73f60dc1df93bb801b472f05ff42fa6c84167d25cb206be1fbf4a",
+					"size": 22228
+				},
+				{
+					"name": "joblib",
+					"version": "1.6.0",
+					"fileName": "joblib-1.6.0-py3-none-any.whl",
+					"url": "https://files.pythonhosted.org/packages/18/53/84099323c2ec4be98d935f63c033ac4151ee83836ca1050ede3b3aadf155/joblib-1.6.0-py3-none-any.whl",
+					"sha256": "3dbbf9f6e4b592a2357b854608e980fe6390d131d7a82f011a377ef2ebef7aba",
+					"size": 306115
+				},
+				{
+					"name": "tqdm",
+					"version": "4.70.0",
+					"fileName": "tqdm-4.70.0-py3-none-any.whl",
+					"url": "https://files.pythonhosted.org/packages/f9/1c/01bfd571a64e7f270e6bab5e33777debe0edc56759233ce84f27dec92d14/tqdm-4.70.0-py3-none-any.whl",
+					"sha256": "7f585706bfddbdebf89daac705b2dfcc16890130727d3197ca62c732b4310953",
+					"size": 80184
+				},
+				{
+					"name": "sacremoses",
+					"version": "0.2.0",
+					"fileName": "sacremoses-0.2.0-py3-none-any.whl",
+					"url": "https://files.pythonhosted.org/packages/f6/b7/c00aa54e29f8d79ba8ec22e7c48a1f02fa1b7c55bd1e4429edf7c6ecb231/sacremoses-0.2.0-py3-none-any.whl",
+					"sha256": "d413d118486b3a449f829566b3759a4b33bbc56b12496369316b52708585f594",
+					"size": 867756
+				},
+				{
+					"name": "subword-nmt",
+					"version": "0.3.8",
+					"fileName": "subword_nmt-0.3.8-py3-none-any.whl",
+					"url": "https://files.pythonhosted.org/packages/1b/9a/488ecac22d78eb429928b9ee4f6b6c692e116ca4bd43ef42a475698def32/subword_nmt-0.3.8-py3-none-any.whl",
+					"sha256": "d22526b557752f35ac15e8ea384ea7773e50a51d966b8752d023d16cb87eac36",
+					"size": 27271
+				}
 			]
 		},
 		{
@@ -42,6 +92,56 @@
 					"url": "https://files.pythonhosted.org/packages/33/fe/4906f12c458274edd96387e4baaad7c6f064a2b7c11a1cc2401c8a7bd483/sentencepiece-0.2.2-cp314-cp314-win_amd64.whl",
 					"sha256": "63250cfab8b80a1ef82a614eb2b3cadfec2c405f870cedc139d08e2f063eb708",
 					"size": 1356144
+				}
+			],
+			"bpeComponents": [
+				{
+					"name": "regex",
+					"version": "2026.9.3",
+					"fileName": "regex-2026.9.3-cp314-cp314-win_amd64.whl",
+					"url": "https://files.pythonhosted.org/packages/d0/fe/ecb15616ae7aa4892299b9ca7c20ef0dd6e5c833643b7ed46e27ff5fcccd/regex-2026.9.3-cp314-cp314-win_amd64.whl",
+					"sha256": "445623b1337e971ccc571d3642aeb3f2fec77e60b6ee193dd7688168471d1846",
+					"size": 280812
+				},
+				{
+					"name": "cloudpickle",
+					"version": "3.1.2",
+					"fileName": "cloudpickle-3.1.2-py3-none-any.whl",
+					"url": "https://files.pythonhosted.org/packages/88/39/799be3f2f0f38cc727ee3b4f1445fe6d5e4133064ec2e4115069418a5bb6/cloudpickle-3.1.2-py3-none-any.whl",
+					"sha256": "9acb47f6afd73f60dc1df93bb801b472f05ff42fa6c84167d25cb206be1fbf4a",
+					"size": 22228
+				},
+				{
+					"name": "joblib",
+					"version": "1.6.0",
+					"fileName": "joblib-1.6.0-py3-none-any.whl",
+					"url": "https://files.pythonhosted.org/packages/18/53/84099323c2ec4be98d935f63c033ac4151ee83836ca1050ede3b3aadf155/joblib-1.6.0-py3-none-any.whl",
+					"sha256": "3dbbf9f6e4b592a2357b854608e980fe6390d131d7a82f011a377ef2ebef7aba",
+					"size": 306115
+				},
+				{
+					"name": "tqdm",
+					"version": "4.70.0",
+					"fileName": "tqdm-4.70.0-py3-none-any.whl",
+					"url": "https://files.pythonhosted.org/packages/f9/1c/01bfd571a64e7f270e6bab5e33777debe0edc56759233ce84f27dec92d14/tqdm-4.70.0-py3-none-any.whl",
+					"sha256": "7f585706bfddbdebf89daac705b2dfcc16890130727d3197ca62c732b4310953",
+					"size": 80184
+				},
+				{
+					"name": "sacremoses",
+					"version": "0.2.0",
+					"fileName": "sacremoses-0.2.0-py3-none-any.whl",
+					"url": "https://files.pythonhosted.org/packages/f6/b7/c00aa54e29f8d79ba8ec22e7c48a1f02fa1b7c55bd1e4429edf7c6ecb231/sacremoses-0.2.0-py3-none-any.whl",
+					"sha256": "d413d118486b3a449f829566b3759a4b33bbc56b12496369316b52708585f594",
+					"size": 867756
+				},
+				{
+					"name": "subword-nmt",
+					"version": "0.3.8",
+					"fileName": "subword_nmt-0.3.8-py3-none-any.whl",
+					"url": "https://files.pythonhosted.org/packages/1b/9a/488ecac22d78eb429928b9ee4f6b6c692e116ca4bd43ef42a475698def32/subword_nmt-0.3.8-py3-none-any.whl",
+					"sha256": "d22526b557752f35ac15e8ea384ea7773e50a51d966b8752d023d16cb87eac36",
+					"size": 27271
 				}
 			]
 		}
