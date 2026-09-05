@@ -4,11 +4,17 @@
 
 This fork exists due to deep and insurmountable disagreements between myself and the original addon developer regarding how API Keys must be handled. This fork stores API Keys in the Windows Credential Manager. The original addon does not. As well, this addon removes the shared API keys shipped with the original addon. First, they belong to cary-rowen, and I have no right to use or distribute them. Second, when performing translations through a shared API key, in most cases, the owner of the key can see all text translated with the key.
 
-As I do not have the right to use or access the infrastructure of NVDACN, it's possible this engine will also be removed in future. Otherwise, the addons are mostly drop-in replacements for one another, and I intend to keep polyglot-secure mostly in sync with upstream.
+I do not have the right to use or access the infrastructure of NVDACN, so the engines that route through it are gone as well: `Tencent Translate (Polyglot)`, `Volcengine (Polyglot)`, `VIVO Translate`, and `Google Translate (Polyglot)`. Every other engine is unchanged, so the add-ons are mostly drop-in replacements for one another, and I intend to keep Polyglot-secure mostly in sync with upstream.
 
-If none of the above means anything to you: polyglot is more convenient, polyglot-secure is more secure. Take your pick based on that.
+If none of the above means anything to you: Polyglot is more convenient, Polyglot-secure is more secure. Take your pick based on that.
 
-Polyglot is a fast, extensible translation add-on for NVDA with support for multiple engines. It can translate selected text, clipboard text, and the last text spoken by NVDA, and can also automatically translate NVDA's speech output.
+Inside NVDA the add-on still calls itself Polyglot: the settings panel, the Tools-menu entries, and the
+names it stores credentials under are unchanged. That is deliberate, so that switching from Polyglot brings
+your settings and your stored keys with you. The other side of it is that the two add-ons share one set of
+settings and one set of stored keys, so do not run both at once: removing either one deletes the settings
+and keys that both were using. Install one, or the other.
+
+Polyglot-secure is a fast, extensible translation add-on for NVDA with support for multiple engines. It can translate selected text, clipboard text, and the last text spoken by NVDA, and can also automatically translate NVDA's speech output.
 
 The add-on is built around a dynamic engine architecture. Translation engines declare their own capabilities and configuration schema, and the settings UI is generated from that schema at runtime. That keeps the core plugin small while making it straightforward to add new services.
 
@@ -28,16 +34,16 @@ The add-on is built around a dynamic engine architecture. Translation engines de
 
 The preferred installation path is the NVDA Add-on Store. You can also install manually:
 
-1. Download the latest `.nvda-addon` package from the [Releases page](https://github.com/cary-rowen/polyglot/releases).
+1. Download the latest `.nvda-addon` package from the [Releases page](https://github.com/fastfinge/polyglot-secure/releases).
 2. Open the downloaded file.
 3. Confirm installation in NVDA.
 4. Restart NVDA when prompted.
 
 ### Uninstalling
 
-Removing Polyglot removes everything it keeps outside its own folder: its settings in every NVDA configuration profile, and every API key, token, and password it stored in the Windows Credential Locker. The clean-up runs the next time NVDA starts, when NVDA finishes removing the add-on.
+Removing Polyglot-secure removes everything it keeps outside its own folder: its settings in every NVDA configuration profile, and every API key, token, and password it stored in the Windows Credential Locker. The clean-up runs the next time NVDA starts, when NVDA finishes removing the add-on.
 
-Updating Polyglot keeps your settings and your stored keys; only a removal deletes them.
+Updating Polyglot-secure keeps your settings and your stored keys; only a removal deletes them.
 
 ## Quick Start
 
@@ -133,6 +139,9 @@ Current dictionary size:
 
 ### API Key Storage
 
+Polyglot-secure ships no credentials of its own. Every engine that needs an API key, token, or password
+needs one of yours, so nothing you translate passes through a key that someone else can read the traffic of.
+
 API keys, tokens, and passwords are never written to `nvda.ini`. They are kept in the Windows Credential Locker, where Windows encrypts them for the signed-in account. This means they do not appear in NVDA's log at debug level, are not copied into portable copies of NVDA, and are not readable by other add-ons through NVDA's configuration.
 
 A credential can also come from an environment variable, which is useful for shared or managed machines where nothing should be stored at all. The variable name is `POLYGLOT_` followed by the engine ID and the setting name in upper case, for example `POLYGLOT_DEEPL_APIKEY`, `POLYGLOT_OPENROUTER_APIKEY`, or `POLYGLOT_TENCENT_SECRETKEY`. A variable describes the whole machine, so it applies to every configuration profile: when one is set, it takes precedence over anything stored, and the matching settings field is disabled and labelled with the variable name.
@@ -187,14 +196,15 @@ If an engine reports detected source language, Polyglot also exposes:
 Some engines expose additional controls:
 
 - `Ollama 1` and `Ollama 2` provide two separate saved profiles for different local or remote Ollama setups.
+  Both default to `http://localhost:11434/api/generate`, so point them at your own server if it runs elsewhere.
 - `OpenRouter` exposes API URL, API key, model preset, custom model name, prompt template, and custom prompts.
   The default preset is a translation-specialized model, which responds faster and costs less than a
   general-purpose model. Such models reply with the translated text only, so only the prompt templates they
   can follow are offered; pick a general-purpose preset if you need the structured JSON template and its
   source-language detection.
 - `Ollama` engines expose API URL, model name, optional API key, prompt template, and custom prompts.
-- `Google Translate (Polyglot)` exposes a configurable endpoint URL and API key field.
-- `Google Translate (key-free)` offers an optional mirror-server toggle.
+- `Google Translate (key-free)` offers an optional mirror-server toggle. The mirror is run by NVDACN and
+  is off unless you turn it on; it needs no credentials, and with it off the engine talks to Google directly.
 
 ## Chrome AI Offline Translation
 
@@ -204,17 +214,24 @@ Polyglot can use Chrome's built-in Translator API for offline translation. Trans
 
 - Google Chrome must be installed.
 - Chrome 138 or later is recommended.
-- The first use of a language direction requires the local translation model to be prepared. Polyglot can download the model through its model manager, or you can let Chrome download it.
+- The first use of a language direction requires the local translation model to be prepared. Chrome downloads it.
 
 ### How To Use
 
 Select `Chrome AI (Offline)` in Polyglot settings, then choose the source and target languages. Chrome AI requires an explicit source language; `Auto-detect` is not available for this engine, so Polyglot can check the required model before starting Chrome.
 
-On first use, if the required model is not installed, Polyglot asks how to proceed. Choose Yes to download and install the model with Polyglot's model manager; use this if Chrome's model download service is slow, blocked, or unreliable on your network. Choose No to let Chrome download the model. Choose Cancel to cancel the current translation. After the model is ready, translation continues automatically.
+On first use, Chrome downloads the model for the language direction you asked for, and translation continues once it is ready.
 
 ### Network And Models
 
-Translation runs locally. Models can be installed by Polyglot's model manager or downloaded by Chrome. If Chrome's model download service is slow or unavailable on your network, choose Yes in the prompt, or open the Polyglot ChromeAI model manager from NVDA's Tools menu to install or remove offline models in advance.
+Translation runs locally. Chrome downloads the models it needs.
+
+Upstream Polyglot also shipped a catalog of pre-built models hosted by NVDACN, so its model manager could
+install them directly when Chrome's own download service was slow or blocked. Polyglot-secure ships no such
+catalog, because that infrastructure is not mine to use. `Polyglot ChromeAI model manager` in NVDA's Tools
+menu therefore lists nothing until you give it a catalog of your own: open `Advanced`, enter a catalog URL,
+and press `Load catalog`. The URL can also be set for the whole machine with the `POLYGLOT_MODEL_CATALOG_URL`
+environment variable. Without one, Chrome handles model downloads and the model manager has nothing to do.
 
 ### Privacy And Data
 
@@ -234,7 +251,7 @@ When NVDA exits, Polyglot closes the Chrome instance it started.
 
 - Supported languages and language pairs are determined by Chrome's Translator API.
 - Chrome AI requires an explicit source language; `Auto-detect` is not available for this engine.
-- First use requires the model to be prepared; model downloads may be affected by network conditions.
+- First use requires Chrome to download the model, which may be affected by network conditions.
 - If the Translator API is unavailable, update Chrome or make sure the related Chrome feature is enabled.
 
 ## Argos Translate Offline Translation
@@ -295,25 +312,21 @@ The repository currently includes the following engines:
 | `Chrome AI (Offline)` | None | Uses Chrome's built-in Translator API with local models; select the source language explicitly. |
 | `DeepL` | DeepL API key | Standard vendor API integration. |
 | `DeepL Web (key-free)` | None | Uses DeepL's unofficial anonymous Web endpoint; limited to 1,500 characters per request. |
-| `Google Translate (key-free)` | None | Supports an optional mirror endpoint toggle. |
-| `Google Translate (Polyglot)` | Configurable API key and endpoint | Ships with default endpoint values in code; availability depends on service status. |
+| `Google Translate (key-free)` | None | Talks to Google directly, with an optional toggle for an NVDACN-run mirror. |
 | `Microsoft Translator (key-free)` | None | Uses the Edge `translatetext` endpoint. |
 | `Niutrans` | Niutrans API key | Standard vendor API integration. |
 | `Ollama 1` | Ollama URL, model name, optional key | First saved Ollama profile. |
 | `Ollama 2` | Ollama URL, model name, optional key | Second saved Ollama profile. |
 | `OpenRouter` | OpenRouter API key | Supports model presets and editable prompt templates. |
 | `Tencent Translate` | Tencent secret ID and secret key | Standard vendor API integration. |
-| `Tencent Translate (Polyglot)` | NVDACN username and password | Polyglot-backed Tencent route. |
-| `VIVO Translate` | NVDACN username and password | Limited language set, no auto-detect source language. |
-| `Volcengine (Polyglot)` | NVDACN username and password | Polyglot-backed Volcengine route. |
 | `Yandex Translate` | None | Public-style endpoint, no detected-language reporting. |
 
 ## Contributing
 
 Contributions are welcome across code, documentation, localization, testing, and engine integrations.
 
-- Issues: [GitHub Issues](https://github.com/cary-rowen/polyglot/issues)
-- Releases: [GitHub Releases](https://github.com/cary-rowen/polyglot/releases)
+- Issues: [GitHub Issues](https://github.com/fastfinge/polyglot-secure/issues)
+- Releases: [GitHub Releases](https://github.com/fastfinge/polyglot-secure/releases)
 
 When adding a new engine:
 
@@ -325,7 +338,9 @@ When adding a new engine:
 
 ## License
 
-Copyright (C) 2025-2026 cary-rowen.
+Copyright (C) 2025-2026 cary-rowen, and contributors to this fork.
+
+Polyglot-secure is a fork of [Polyglot](https://github.com/cary-rowen/polyglot) by cary-rowen.
 
 This project is licensed under the GNU General Public License version 3 or later
-(`GPL-3.0-or-later`). See the repository's [COPYING.txt](https://github.com/cary-rowen/polyglot/blob/master/COPYING.txt).
+(`GPL-3.0-or-later`). See the repository's [COPYING.txt](https://github.com/fastfinge/polyglot-secure/blob/main/COPYING.txt).

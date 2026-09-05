@@ -1,4 +1,12 @@
-# Polyglot cho NVDA
+# Polyglot-secure cho NVDA
+
+> **Về bản fork này.** Polyglot-secure là một bản fork của
+> [Polyglot](https://github.com/cary-rowen/polyglot) do cary-rowen phát triển. Bản fork này lưu khóa API
+> trong Windows Credential Manager và không đi kèm khóa API dùng chung nào. Các bộ dịch chạy qua hạ tầng
+> của NVDACN — `Tencent Translate (Polyglot)`, `Volcengine (Polyglot)`, `VIVO Translate` và
+> `Google Translate (Polyglot)` — đã bị loại bỏ. Bản dịch này có thể chậm hơn so với readme tiếng Anh;
+> xem [readme tiếng Anh](https://github.com/fastfinge/polyglot-secure/blob/main/readme.md) để biết đầy đủ
+> các khác biệt.
 
 Polyglot là một add-on toàn cục dành cho NVDA, tập trung vào khả năng dịch thuật đa ngôn ngữ nhanh chóng và linh hoạt. Add-on này có thể dịch văn bản đang được chọn, nội dung trong bộ nhớ tạm, đoạn văn bản được NVDA đọc gần nhất, và cũng có thể chặn nội dung giọng đọc để dịch tự động trực tiếp.
 
@@ -19,7 +27,7 @@ Add-on được xây dựng trên cấu trúc bộ dịch động. Các bộ d�
 
 Cách cài đặt được khuyến nghị là thông qua Cửa hàng Add-on của NVDA (NVDA Add-on Store). Bạn cũng có thể cài đặt thủ công bằng cách:
 
-1. Tải xuống gói `.nvda-addon` mới nhất từ [Trang phát hành](https://github.com/cary-rowen/polyglot/releases).
+1. Tải xuống gói `.nvda-addon` mới nhất từ [Trang phát hành](https://github.com/fastfinge/polyglot-secure/releases).
 2. Mở tệp vừa tải xuống.
 3. Xác nhận cài đặt trong NVDA.
 4. Khởi động lại NVDA khi được yêu cầu.
@@ -107,7 +115,6 @@ Một số bộ dịch sẽ hiển thị thêm các trình điều khiển bổ 
 - `Ollama 1` và `Ollama 2` cung cấp hai cấu hình lưu trữ riêng biệt cho các thiết lập Ollama cục bộ hoặc từ xa khác nhau.
 - `OpenRouter` hiển thị các trường API URL, khóa API, mô hình đặt trước, tên mô hình tùy chỉnh, mẫu lời nhắc và các lời nhắc tùy chỉnh.
 - Các bộ dịch `Ollama` hiển thị API URL, tên mô hình, khóa API tùy chọn, mẫu lời nhắc và các lời nhắc tùy chỉnh.
-- `Google Translate (Polyglot)` hiển thị một trường API URL endpoint và trường khóa API có thể cấu hình.
 - `Google Translate (key-free)` cung cấp một nút công tắc bật/tắt máy chủ dự phòng tùy chọn.
 
 ## Dịch ngoại tuyến bằng Chrome AI
@@ -163,24 +170,20 @@ Kho lưu trữ hiện tại bao gồm các bộ dịch sau:
 | `DeepL` | DeepL API key | Tích hợp API chuẩn của nhà cung cấp. |
 | `DeepL Web (key-free)` | Không có | Sử dụng endpoint Web ẩn danh không chính thức của DeepL; giới hạn 1.500 ký tự mỗi yêu cầu. |
 | `Google Translate (key-free)` | Không có | Hỗ trợ nút bật/tắt chuyển đổi sang máy chủ dự phòng tùy chọn. |
-| `Google Translate (Polyglot)` | Khóa API và endpoint có thể cấu hình | Đi kèm với các giá trị endpoint mặc định trong mã nguồn; tính khả dụng tùy thuộc vào trạng thái dịch vụ. |
 | `Microsoft Translator (key-free)` | Không có | Tự động lấy mã token tạm thời. |
 | `Niutrans` | Niutrans API key | Tích hợp API chuẩn của nhà cung cấp. |
 | `Ollama 1` | Ollama URL, tên mô hình, khóa tùy chọn | Cấu hình hồ sơ Ollama đã lưu thứ nhất. |
 | `Ollama 2` | Ollama URL, tên mô hình, khóa tùy chọn | Cấu hình hồ sơ Ollama đã lưu thứ hai. |
 | `OpenRouter` | OpenRouter API key | Hỗ trợ các mô hình đặt trước và mẫu lời nhắc có thể chỉnh sửa. |
 | `Tencent Translate` | Tencent secret ID và secret key | Tích hợp API chuẩn của nhà cung cấp. |
-| `Tencent Translate (Polyglot)` | Tên người dùng và mật khẩu NVDACN | Tuyến đường Tencent được hỗ trợ bởi Polyglot. |
-| `VIVO Translate` | Tên người dùng và mật khẩu NVDACN | Tập hợp ngôn ngữ hạn chế, không có tính năng tự động phát hiện ngôn ngữ nguồn. |
-| `Volcengine (Polyglot)` | Tên người dùng và mật khẩu NVDACN | Tuyến đường Volcengine được hỗ trợ bởi Polyglot. |
 | `Yandex Translate` | Không có | Endpoint dạng công cộng, không có báo cáo ngôn ngữ phát hiện được. |
 
 ## Đóng góp phát triển
 
 Mọi đóng góp luôn được chào đón từ mã nguồn, tài liệu, bản dịch ngôn ngữ, kiểm thử cho đến tích hợp các bộ dịch mới.
 
-- Báo cáo lỗi: [GitHub Issues](https://github.com/cary-rowen/polyglot/issues)
-- Các bản phát hành: [GitHub Releases](https://github.com/cary-rowen/polyglot/releases)
+- Báo cáo lỗi: [GitHub Issues](https://github.com/fastfinge/polyglot-secure/issues)
+- Các bản phát hành: [GitHub Releases](https://github.com/fastfinge/polyglot-secure/releases)
 
 Khi thêm một bộ dịch mới:
 
@@ -195,4 +198,4 @@ Khi thêm một bộ dịch mới:
 Bản quyền (C) 2025-2026 cary-rowen.
 
 Dự án này được cấp phép theo Giấy phép Công cộng GNU phiên bản 3 hoặc bất kỳ phiên bản nào sau đó
-(`GPL-3.0-or-later`). Giấy phép được kèm theo gói tiện ích; xem thêm [COPYING.txt](https://github.com/cary-rowen/polyglot/blob/master/COPYING.txt) trong kho mã nguồn.
+(`GPL-3.0-or-later`). Giấy phép được kèm theo gói tiện ích; xem thêm [COPYING.txt](https://github.com/fastfinge/polyglot-secure/blob/main/COPYING.txt) trong kho mã nguồn.

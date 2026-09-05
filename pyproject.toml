@@ -3,11 +3,11 @@ requires = ["setuptools~=80.9", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "polyglot"
+name = "polyglot-secure"
 dynamic = ["version"]
-description = "NVDA translation add-on with multiple engines"
+description = "NVDA translation add-on with multiple engines, storing credentials in the Windows Credential Locker"
 maintainers = [
-	{name = "cary-rowen", email = "cary-rowen@outlook.com"},
+	{name = "Fastfinge", email = "fastfinge1987@gmail.com"},
 ]
 requires-python = ">=3.13,<3.14"
 classifiers = [
@@ -39,7 +39,7 @@ dependencies = [
 	"pyright[nodejs]==1.1.407",
 ]
 [project.urls]
-Repository = "https://github.com/cary-rowen/polyglot"
+Repository = "https://github.com/fastfinge/polyglot-secure"
 
 [tool.ruff]
 line-length = 110

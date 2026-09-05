@@ -37,7 +37,9 @@ addon_info = AddonInfo(
 	addon_version="0.0.1",
 	# Brief changelog for this version
 	# Translators: what's new content for the add-on version to be shown in the add-on store
-	addon_changelog=_("""First release. """),
+	addon_changelog=_("""First release of the Polyglot-secure fork.
+API keys are stored in the Windows Credential Locker instead of nvda.ini.
+The shared API keys and the engines that route through NVDACN infrastructure have been removed."""),
 	# Author(s)
 	addon_author="Fastfinge and cary-rowen <cary-rowen@outlook.com>",
 	# URL for the add-on documentation support

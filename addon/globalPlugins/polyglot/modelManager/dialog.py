@@ -21,7 +21,6 @@ from gui.guiHelper import wxCallOnMain
 from logHandler import log
 
 from .catalog import (
-	DEFAULT_CATALOG_URL,
 	ModelCatalog,
 	ModelPackage,
 	normalizeCatalogUrl,
@@ -189,12 +188,8 @@ class ModelManagerDialog(nvdaControls.DPIScaledDialog):
 			self.advancedPanel,
 			value=resolveInitialCatalogUrl(self.settings.catalogUrl),
 		)
-		self.defaultCatalogButton = wx.Button(self.advancedPanel, label=_("Restore default"))
-		self.defaultCatalogButton.Bind(wx.EVT_BUTTON, self.onDefaultCatalog)
 		urlRow.Add(urlLabel, 0, wx.ALIGN_CENTER_VERTICAL | wx.RIGHT, 8)
 		urlRow.Add(self.catalogUrlBox, 1, wx.ALIGN_CENTER_VERTICAL)
-		urlRow.AddSpacer(8)
-		urlRow.Add(self.defaultCatalogButton)
 		panelSizer.Add(urlRow, 0, wx.EXPAND)
 
 		self.catalogLabel = wx.StaticText(self.advancedPanel, label=_("Catalog: not loaded"))
@@ -233,11 +228,6 @@ class ModelManagerDialog(nvdaControls.DPIScaledDialog):
 	def onToggleAdvanced(self, evt: wx.CommandEvent) -> None:
 		"""Show or hide advanced settings."""
 		self.setAdvancedVisible(not self.isAdvancedVisible)
-
-	def onDefaultCatalog(self, evt: wx.CommandEvent) -> None:
-		"""Reset the catalog URL to the default channel and reload."""
-		self.catalogUrlBox.SetValue(DEFAULT_CATALOG_URL)
-		self.loadCatalog()
 
 	def onReloadCatalog(self, evt: wx.CommandEvent) -> None:
 		"""Reload the catalog from the current advanced URL."""
@@ -541,7 +531,6 @@ class ModelManagerDialog(nvdaControls.DPIScaledDialog):
 		for control in (
 			self.advancedButton,
 			self.catalogUrlBox,
-			self.defaultCatalogButton,
 			self.reloadButton,
 			self.openTargetButton,
 			self.clearCacheButton,

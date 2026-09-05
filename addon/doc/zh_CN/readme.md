@@ -1,4 +1,11 @@
-# Polyglot for NVDA
+# Polyglot-secure for NVDA
+
+> **关于此分支。** Polyglot-secure 是 cary-rowen 所开发的
+> [Polyglot](https://github.com/cary-rowen/polyglot) 的一个分支。本分支把 API 密钥保存在 Windows
+> 凭据管理器中，并且不再随插件附带任何共享 API 密钥。依赖 NVDACN 基础设施的引擎——
+> `Tencent Translate (Polyglot)`、`Volcengine (Polyglot)`、`VIVO Translate` 和
+> `Google Translate (Polyglot)`——已被移除。本翻译可能落后于英文文档，完整的差异说明请参阅
+> [英文 readme](https://github.com/fastfinge/polyglot-secure/blob/main/readme.md)。
 
 Polyglot 是一个面向 NVDA 的翻译插件，重点在于快速、多引擎、可扩展。它可以翻译选中文本、剪贴板文本和 NVDA 最后一次朗读的内容，也可以对 NVDA 朗读的内容执行自动翻译。
 
@@ -20,7 +27,7 @@ Polyglot 是一个面向 NVDA 的翻译插件，重点在于快速、多引擎�
 
 推荐直接通过 NVDA 插件商店安装。也可以手动安装：
 
-1. 从 [Releases 页面](https://github.com/cary-rowen/polyglot/releases) 下载最新的 `.nvda-addon` 安装包。
+1. 从 [Releases 页面](https://github.com/fastfinge/polyglot-secure/releases) 下载最新的 `.nvda-addon` 安装包。
 2. 打开下载好的文件。
 3. 在 NVDA 中确认安装。
 4. 按提示重启 NVDA。
@@ -135,7 +142,6 @@ Polyglot 是一个面向 NVDA 的翻译插件，重点在于快速、多引擎�
 - `OpenRouter` 提供 API 地址、API 密钥、模型预设、自定义模型名称、提示词模板、自定义系统提示词和用户提示词。
   默认预设为翻译专用模型，相较通用模型响应更快、成本更低。这类模型只返回译文，因此只提供它们能够遵循的提示词模板；如果需要包含源语言检测的结构化 JSON 模板，请选择通用模型预设。
 - `Ollama` 引擎提供 API 地址、模型名称、API 密钥（可选）、提示词模板和自定义提示词。
-- `Google Translate (Polyglot)` 提供可配置的端点 URL 和 API 密钥字段。
 - `Google Translate (key-free)` 提供可选的镜像服务器开关。
 
 ## Chrome AI 离线翻译
@@ -146,17 +152,19 @@ Polyglot 可以使用 Chrome 内置的 Translator API 进行离线翻译。翻�
 
 - 已安装 Google Chrome。
 - 建议使用 Chrome 138 或更高版本。
-- 首次使用某个语言方向时，需要准备对应的本机翻译模型。Polyglot 可以通过模型管理器下载模型，也可以让 Chrome 自行下载。
+- 首次使用某个语言方向时，需要准备对应的本机翻译模型，由 Chrome 自行下载。
 
 ### 使用方式
 
 在 Polyglot 设置中选择 `Chrome AI（离线）`，并设置源语言和目标语言。Chrome AI 需要明确指定源语言；此引擎不提供“自动检测”，这样 Polyglot 可以在启动 Chrome 前检查所需模型。
 
-首次翻译时，如果所需模型尚未安装，Polyglot 会弹出询问对话框。选择“是”会使用 Polyglot 模型管理器下载并安装模型；如果你的网络访问 Chrome 模型下载服务较慢、被阻断或不稳定，建议选择此项。选择“否”会让 Chrome 下载模型；选择“取消”会取消本次翻译。模型准备好后，翻译会自动继续。
+首次翻译时，Chrome 会自行下载所需语言方向的模型，模型准备好后翻译会自动继续。
 
 ### 网络与模型
 
-翻译在本机完成。模型可以由 Polyglot 模型管理器安装，也可以由 Chrome 下载。如果你的网络访问 Chrome 模型下载服务较慢或不可用，可以在询问对话框中选择“是”，也可以从 NVDA 的“工具”菜单打开 Polyglot ChromeAI 模型管理器，提前安装或移除需要的离线模型。
+翻译在本机完成，所需模型由 Chrome 下载。
+
+上游 Polyglot 还附带一份由 NVDACN 托管的预编译模型目录，以便在 Chrome 的模型下载服务较慢或被阻断时直接安装。Polyglot-secure 不附带该目录，因为那不是本分支有权使用的基础设施。因此，NVDA“工具”菜单中的“Polyglot ChromeAI 模型管理器”在你提供自己的目录之前不会列出任何内容：展开“高级”，填入目录 URL，然后按“加载目录”。也可以通过 `POLYGLOT_MODEL_CATALOG_URL` 环境变量为整台计算机设置该 URL。如果不设置，模型由 Chrome 下载，模型管理器则无事可做。
 
 ### 隐私与数据
 
@@ -191,24 +199,20 @@ NVDA 退出时，Polyglot 会关闭由插件启动的 Chrome 实例。
 | `DeepL` | DeepL API 密钥 | 标准厂商 API 接入。 |
 | `DeepL Web (key-free)` | 无 | 使用 DeepL 非官方匿名 Web 端点；每次请求最多 1,500 个字符。 |
 | `Google Translate (key-free)` | 无 | 可选启用镜像接口。 |
-| `Google Translate (Polyglot)` | 可配置 API 密钥和端点 URL | 代码内带默认接口值，实际可用性取决于服务状态。 |
 | `Microsoft Translator (key-free)` | 无 | 使用 Edge `translatetext` 端点。 |
 | `Niutrans` | 小牛翻译 API 密钥 | 标准厂商 API 接入。 |
 | `Ollama 1` | Ollama 地址、模型名、可选密钥 | 第一个独立 Ollama 配置槽。 |
 | `Ollama 2` | Ollama 地址、模型名、可选密钥 | 第二个独立 Ollama 配置槽。 |
 | `OpenRouter` | OpenRouter API 密钥 | 支持模型预设和可编辑提示词模板。 |
 | `Tencent Translate` | 腾讯 secret ID 和 secret key | 标准厂商 API 接入。 |
-| `Tencent Translate (Polyglot)` | NVDACN 用户名和密码 | 使用 Polyglot/NVDACN 路由的腾讯翻译。 |
-| `VIVO Translate` | NVDACN 用户名和密码 | 支持语言较少，不支持源语言自动检测。 |
-| `Volcengine (Polyglot)` | NVDACN 用户名和密码 | 使用 Polyglot/NVDACN 路由的火山翻译。 |
 | `Yandex Translate` | 无 | 使用公开接口风格，不报告检测语言。 |
 
 ## 参与贡献
 
 欢迎贡献代码、文档、翻译、测试和新的引擎接入。
 
-- 问题跟踪：[GitHub Issues](https://github.com/cary-rowen/polyglot/issues)
-- 版本发布：[GitHub Releases](https://github.com/cary-rowen/polyglot/releases)
+- 问题跟踪：[GitHub Issues](https://github.com/fastfinge/polyglot-secure/issues)
+- 版本发布：[GitHub Releases](https://github.com/fastfinge/polyglot-secure/releases)
 
 如果你要新增一个翻译引擎：
 
@@ -223,4 +227,4 @@ NVDA 退出时，Polyglot 会关闭由插件启动的 Chrome 实例。
 版权所有 (C) 2025-2026 cary-rowen。
 
 本项目使用 GNU General Public License 第 3 版或任何后续版本（`GPL-3.0-or-later`）授权。
-许可证正文随插件包提供，也可查看仓库中的 [COPYING.txt](https://github.com/cary-rowen/polyglot/blob/master/COPYING.txt)。
+许可证正文随插件包提供，也可查看仓库中的 [COPYING.txt](https://github.com/fastfinge/polyglot-secure/blob/main/COPYING.txt)。

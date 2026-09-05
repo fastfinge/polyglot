@@ -1,13 +1,14 @@
 # Local dictionary licensing and provenance
 
-Polyglot ships the compiled `dictionary.pickle`. Its reviewable source files
+Polyglot-secure ships the compiled `dictionary.pickle`. Its reviewable source files
 are kept in `tools/resource` in the source repository.
 
 Copyright (C) 2025-2026 cary-rowen. The selection, filtering, corrections,
 new entries, build tooling, and compiled dictionary are distributed under the
 GNU General Public License version 3 or later (`GPL-3.0-or-later`). See
 `COPYING.txt` at the root of the add-on package. The corresponding source is
-available from <https://github.com/cary-rowen/polyglot>.
+available from <https://github.com/fastfinge/polyglot-secure>, a fork of
+<https://github.com/cary-rowen/polyglot>.
 
 The dictionary incorporates material under these original licenses:
 

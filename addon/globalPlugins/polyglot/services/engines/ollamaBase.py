@@ -80,7 +80,7 @@ class OllamaBaseEngine(BaseHttpEngine):
 					"id": "apiUrl",
 					"label": _("API URL"),
 					"type": "text",
-					"default": "http://family.zxrjy.net:11434/api/generate",
+					"default": "http://localhost:11434/api/generate",
 				},
 				{"id": "modelName", "label": _("Model Name"), "type": "text", "default": "gemma3:4b"},
 				{"id": "apiKey", "label": _("API Key (optional)"), "type": "password", "default": ""},

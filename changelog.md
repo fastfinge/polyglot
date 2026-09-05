@@ -1,5 +1,19 @@
 ### Polyglot-secure 0.0.1
 
+This is the first release of Polyglot-secure, a fork of Polyglot. It stores every API key, token, and
+password in the Windows Credential Locker instead of `nvda.ini`, and it ships no shared credentials and no
+routes through infrastructure the fork has no right to use.
+
+- Removed the shared API key that upstream shipped for `Google Translate (Polyglot)`, along with that
+  engine: it existed only to reach an NVDACN-hosted mirror with that key. `Google Translate (key-free)` is
+  unaffected and still offers its optional mirror toggle.
+- Removed the engines that authenticate against NVDACN: `Tencent Translate (Polyglot)`,
+  `Volcengine (Polyglot)`, and `VIVO Translate`.
+- The ChromeAI model manager no longer ships or defaults to the NVDACN-hosted model catalog. Chrome
+  downloads its own models, as it always could; to pre-install models, supply your own catalog URL in the
+  model manager's advanced panel or in the `POLYGLOT_MODEL_CATALOG_URL` environment variable.
+- `Ollama 1` and `Ollama 2` now default to `http://localhost:11434/api/generate` rather than a shared
+  third-party Ollama server. Existing saved URLs are untouched.
 - Added the `Argos Translate (Offline)` engine, which translates inside NVDA with models you download through the new `Polyglot Argos model manager` in NVDA's Tools menu. Nothing is sent to a translation service. The manager installs, updates, and removes one model per language direction, and Polyglot offers to download a missing model the first time you translate a direction. Directions with no direct model are translated through English. The engine needs the 64-bit NVDA of 2026.1 or later; on earlier releases it reports itself as unavailable.
 - API keys, tokens, and passwords now follow NVDA's configuration profile rules: each profile can hold its own key, a profile without one uses the key from the profile below it, and the profile activated last wins. Keys are saved to the profile NVDA is editing, and clearing a field returns that profile to the inherited key.
 - Renaming a configuration profile now moves its stored keys with it, and deleting a profile removes them.

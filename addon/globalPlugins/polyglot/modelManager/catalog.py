@@ -21,7 +21,10 @@ from .settings import getString
 
 addonHandler.initTranslation()
 
-DEFAULT_CATALOG_URL = "https://dl.nvdacn.com/Polyglot/catalog.json"
+#: Polyglot-secure ships no model catalog and defaults to none: upstream's was hosted by NVDACN, whose
+#: infrastructure this fork has no right to use. With no catalog the model manager lists nothing and
+#: Chrome downloads its own models, as it always could. A catalog URL can be entered in the model
+#: manager's advanced panel or set for the whole machine in this environment variable.
 _CATALOG_URL_ENV = "POLYGLOT_MODEL_CATALOG_URL"
 _BASE_LANGUAGE = "en"
 
@@ -233,7 +236,14 @@ class ModelCatalog:
 
 def normalizeCatalogUrl(inputUrl: str | None) -> str:
 	"""Normalize a catalog URL and append catalog.json for directory URLs."""
-	catalogUrl = (inputUrl or DEFAULT_CATALOG_URL).strip() or DEFAULT_CATALOG_URL
+	catalogUrl = (inputUrl or "").strip()
+	if not catalogUrl:
+		raise RuntimeError(
+			_(
+				"No model catalog URL is configured. Enter the URL of a ChromeAI model catalog, "
+				"or leave it empty and let Chrome download models itself.",
+			),
+		)
 	parsed = urlparse(catalogUrl)
 	if parsed.scheme not in ("http", "https") or not parsed.netloc:
 		raise RuntimeError(_("Catalog URL must be an HTTP or HTTPS URL."))
@@ -243,13 +253,13 @@ def normalizeCatalogUrl(inputUrl: str | None) -> str:
 
 
 def resolveInitialCatalogUrl(savedCatalogUrl: str = "") -> str:
-	"""Resolve the catalog URL from environment, saved settings, or default."""
-	for value in (os.environ.get(_CATALOG_URL_ENV), savedCatalogUrl, DEFAULT_CATALOG_URL):
+	"""Resolve the catalog URL from the environment or saved settings, or "" when neither is set."""
+	for value in (os.environ.get(_CATALOG_URL_ENV), savedCatalogUrl):
 		try:
 			return normalizeCatalogUrl(value)
 		except RuntimeError:
 			continue
-	return DEFAULT_CATALOG_URL
+	return ""
 
 
 def normalizeLanguageCode(code: str) -> str:
